@@ -1,2 +1,3 @@
 # 21Duck
-A web forum based on react and django-rest-framework
+
+A web forum based on react, antd and django-rest-framework

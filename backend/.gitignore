@@ -1,0 +1,6 @@
+static
+nohup.out
+uwsgi.ini
+uwsgi.log
+nginx.conf
+nginx.log
