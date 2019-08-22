@@ -4,3 +4,6 @@ uwsgi.ini
 uwsgi.log
 nginx.conf
 nginx.log
+.idea/
+**/__pycache__
+backend/dump.rd
