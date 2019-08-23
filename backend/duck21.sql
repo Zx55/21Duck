@@ -37,8 +37,9 @@ create table reposting(
     reposting_thumb_num int not null
 )
 
+
 create table notify(
-    notify_id int primary key,
+    notify_id int primary key auto_increment,
     notify_user_id int not null,
     notify_content varchar(16384),
     notify_time datetime not null,
