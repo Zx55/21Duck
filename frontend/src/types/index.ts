@@ -33,12 +33,15 @@ export interface IPost {
     postTitle: string,
     postContent: string,
     postCategory: string,
+    postThumbup: number,
 };
 
 export interface IRepost {
     replyId: number,
     postId: number,
+    repostUserId: number,
     repostContent: string,
+    repostThumbup: number,
 };
 
 export interface IState {
