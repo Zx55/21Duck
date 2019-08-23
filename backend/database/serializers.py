@@ -12,10 +12,10 @@ class UserSerializer(PartialUpdateSerializerMixin, ModelSerializer):
 class PostingSerializer(PartialUpdateSerializerMixin, ModelSerializer):
     class Meta:
         model = Posting
-        exclude = ['posting_id']
+        #exclude = ['posting_id']
+        fields = '__all__'
 
 class RepostingSerializer(PartialUpdateSerializerMixin, ModelSerializer):
     class Meta:
         model = Reposting
         fields = '__all__'
-
