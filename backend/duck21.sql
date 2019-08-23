@@ -1,14 +1,18 @@
 use study_forum;
 
+
 create table user(
     user_id int primary key,
-    password varchar(64) not null,
+    password varchar(256) not null,
     nickname varchar(64) not null,
     age int,
     school varchar(128),
     head varchar(128),
     profile varchar(256),
-    status varchar(256)
+    identify int not null,
+    blocktime int not null,
+    scores int not null default 0,
+    register varchar(256)
 )
 
 create table posting(
