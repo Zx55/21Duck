@@ -4,8 +4,9 @@ import { History } from 'history';
 
 import { Menu, Input, Icon } from 'antd';
 
-import './Navigator.css';
 import { ClickParam } from 'antd/lib/menu';
+
+import './Navigator.css';
 
 const { Item, SubMenu } = Menu;
 const { Search } = Input;
@@ -48,19 +49,6 @@ export default (props: NavigatorProps) => {
             <Item key='campus'>
                 <Link to='/campus'>校园周边</Link>
             </Item>
-            <Search
-                className='navigator-search'
-                placeholder='search'
-                onSearch={(e: string) => console.log(e)}
-            />
-            <Item
-                className='notify'
-                key='notify'
-                onClick={(e: ClickParam) => console.log('bell')}
-            >
-                <Icon type='bell' />
-                通知
-            </Item>
             <SubMenu
                 className='user-menu'
                 title={
@@ -73,6 +61,19 @@ export default (props: NavigatorProps) => {
                 <Item key='login'>登录</Item>
                 <Item key='register'>注册</Item>
             </SubMenu>
+            <Item
+                className='notify'
+                key='notify'
+                onClick={(e: ClickParam) => console.log('bell')}
+            >
+                <Icon type='bell' />
+                通知
+            </Item>
+            <Search
+                className='navigator-search'
+                placeholder='search'
+                onSearch={(e: string) => console.log(e)}
+            />
         </Menu>
     );
 };

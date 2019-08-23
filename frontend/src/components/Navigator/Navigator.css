@@ -1,14 +1,20 @@
-.navigator-search {
-    margin-left: 50%;
-}
-
 .ant-menu-item .anticon, .ant-menu-submenu-title .anticon {
     font-size: 17px;
     margin-right: 8px;
 }
 
+.ant-menu-submenu.ant-menu-submenu-horizontal.user-menu {
+    float: right;
+}
+
 .ant-menu-item.notify {
     padding-left: 10px;
     padding-right: 10px;
-    margin-left: 25px;
+    margin-left: 20px;
+    float: right;
+}
+
+.navigator-search {
+    float: right;
+    line-height: 64px;
 }
