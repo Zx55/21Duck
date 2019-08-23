@@ -2,7 +2,7 @@ import React from 'react';
 
 
 export default () => (
-    <div>
+    <div className='campus-root'>
         Campus
     </div>
 );

@@ -1,0 +1,6 @@
+.user-head {
+    width: 32px;
+    position: absolute;
+    clip: rect(0px 32px 32px 0px);
+    border-radius: 16px;
+}
