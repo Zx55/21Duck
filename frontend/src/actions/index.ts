@@ -1,7 +1,7 @@
-import ActionTypes from '../types/ActionTypes';
+import { ActionTypes, IAction } from '../types';
 
 
-export function loginAsync(userId: String, userPw: String) {
+export function loginAsync(userId: string, userPw: string): IAction {
     return {
         type: ActionTypes.LOGIN_ASYNC,
         payload: {
@@ -11,7 +11,7 @@ export function loginAsync(userId: String, userPw: String) {
     }
 };
 
-export function registerAsync(userId: String, userPw: String) {
+export function registerAsync(userId: string, userPw: string): IAction {
     return {
         type: ActionTypes.REGISTER_ASYNC,
         payload: {
@@ -21,7 +21,7 @@ export function registerAsync(userId: String, userPw: String) {
     }
 };
 
-export function logout() {
+export function logout(): IAction {
     return {
         type: ActionTypes.LOGOUT,
         payload: {}

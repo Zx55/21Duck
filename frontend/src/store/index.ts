@@ -5,11 +5,11 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import reducer from '../reducers';
 import saga from '../sagas';
 
-import State from '../types/State';
-import Store from '../types/Store';
+import { IState } from '../types';
+import { IStore } from '../types';
 
 
-export default (preLoadedState: DeepPartial<State>): Store => {
+export default (preLoadedState: DeepPartial<IState>): IStore => {
     const sagaMiddleware = createSagaMiddleware();
     const enhancer = process.env.NODE_ENV === 'development'
         ? composeWithDevTools(
@@ -19,4 +19,4 @@ export default (preLoadedState: DeepPartial<State>): Store => {
     sagaMiddleware.run(saga);
 
     return store;
-}
+};
