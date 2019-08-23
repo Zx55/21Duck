@@ -1,8 +1,8 @@
-import post from './posting';
-import repost from './reposting';
+import API from './modelAPI';
+import { IPost, IRepost } from '../types';
 
 
 export default {
-    post,
-    repost
+    post: new API<IPost>('posting'),
+    repost: new API<IRepost>('reposting'),
 };
