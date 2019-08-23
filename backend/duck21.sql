@@ -12,7 +12,7 @@ create table user(
     identify int not null,
     blocktime int not null,
     scores int not null default 0,
-    register varchar(256)
+    register int
 )
 
 create table posting(
