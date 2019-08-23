@@ -1,0 +1,10 @@
+.loading {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.loading-icon {
+    font-size: 30px;
+    margin-bottom: 5px;
+}
