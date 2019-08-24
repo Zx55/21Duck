@@ -11,8 +11,12 @@
     width: 250px;
 }
 
+.app-header {
+    padding: 0 3%;
+}
+
 .app-content {
-    padding: 0 5%;
+    padding: 3 3%;
 }
 
 .app-footer {
