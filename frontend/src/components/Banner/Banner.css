@@ -1,0 +1,102 @@
+.switch-banner-wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 450px;
+    transition: background 1s;
+  }
+  
+  .switch-banner {
+    margin: 40px auto;
+    width: 90%;
+    height: 370px;
+    background: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .switch-banner-img-wrapper,
+  .switch-banner-text-wrapper {
+    width: 50%;
+    display: inline-block;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .switch-banner-pic,
+  .switch-banner-map {
+    position: absolute;
+  }
+  
+  .switch-banner-pic {
+    width: 220px;
+    height: 330px;
+    left: 0; top: 45%; right: 0; bottom: 0;
+    margin: auto;
+  }
+  
+  .switch-banner-map {
+    width: 250px;
+    height: 330px;
+    left: 0; top: 20%; right: 0; bottom: 0;
+    margin: auto;
+  }
+  .switch-banner-map.map2{
+    width: 200px;
+    left: 50px;
+  }
+  
+  .switch-banner-text-wrapper .banner-anim-elem {
+    padding: 40px;
+  }
+  
+  .switch-banner-text-wrapper h1 {
+    font-size: 18px;
+    margin: 5px auto;
+  }
+  
+  .switch-banner-text-wrapper em {
+    height: 2px;
+    width: 60px;
+    border-radius: 2px;
+    display: block;
+  }
+  
+  .switch-banner-text-wrapper p {
+    font-size: 12px;
+    margin-top: 10px;
+  }
+  
+  .switch-banner-wrapper .anticon{
+    position: absolute;
+    font-size: 24px;
+    top: 50%;
+    margin-top: -12px;
+    cursor: pointer;
+  }
+  
+  .switch-banner-wrapper .anticon-left{
+    left: 5px;
+    z-index: 999;
+  }
+  
+  .switch-banner-wrapper .anticon-right{
+    right: 5px;
+  }
+  @media screen and (max-width: 414px) {
+    .switch-banner {
+      transform: scale(.6) translateX(12px);
+      transform-origin: left center;
+    }
+  }
+  @media screen and (max-width: 375px) {
+    .switch-banner {
+      transform: scale(.55) translateX(7px);
+    }
+  }
+  @media screen and (max-width: 320px) {
+    .switch-banner {
+      transform: scale(.46) translateX(12px);
+    }
+  }
