@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import host from './host';
 
-import { ParamList } from '../types';
+import { Param, ParamList } from '../types';
 
 export default class API<T> {
     private baseUrl: string = 'http://' + host + ':8000/api/';
@@ -18,10 +18,12 @@ export default class API<T> {
     private listUrl = (params?: ParamList): string => {
         if (params) {
             let paramString: string = '?';
-            params.forEach((param) =>
-                paramString += param.key + '=' + param.value
-            );
-            console.log(this.baseUrl + this.name + '/' + paramString);
+            params.forEach((param: Param, index: number): void => {
+                if (index > 0) {
+                    paramString += '&';
+                }
+                paramString += param.key + '=' + param.value;
+            });
             return this.baseUrl + this.name + '/' + paramString;
         }
         return this.baseUrl + this.name + '/';

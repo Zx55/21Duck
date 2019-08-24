@@ -1,12 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 
 import BannerAnim from 'rc-banner-anim';
 import QueueAnim from 'rc-queue-anim';
 import { TweenOneGroup } from 'rc-tween-one';
-import Icon from 'antd/lib/icon';
-import PropTypes from 'prop-types';
+import { Icon } from 'antd';
 
 import './Banner.css';
+
 
 const Element = BannerAnim.Element;
 
@@ -21,34 +21,21 @@ const textData = {
     title: 'Motorcycle',
 };
 
-/*
-export interface data {
-    title: string;
-    content: string;
-    pic: string;
-    map: string;
-    color: string;
-    background: string;
-}*/
-
-let dataArray = [
-    {
+let dataArray = [{
         pic: 'https://zos.alipayobjects.com/rmsportal/ogXcvssYXpECqKG.png',
         map: 'https://zos.alipayobjects.com/rmsportal/HfBaRfhTkeXFwHJ.png',
         color: '#FFF43D',
         background: '#F6B429',
         content: '',
         title: '',
-    },
-    {
+    }, {
         pic: 'https://zos.alipayobjects.com/rmsportal/iCVhrDRFOAJnJgy.png',
         map: 'https://zos.alipayobjects.com/rmsportal/XRfQxYENhzbfZXt.png',
         color: '#FF4058',
         background: '#FC1E4F',
         content: '',
         title: '',
-    },
-    {
+    }, {
         pic: 'https://zos.alipayobjects.com/rmsportal/zMswSbPBiQKvARY.png',
         map: 'https://zos.alipayobjects.com/rmsportal/syuaaBOvttVcNks.png',
         color: '#9FDA7F',
@@ -66,13 +53,15 @@ export interface BannerProps {
 export default (props: BannerProps) => {
     const [showInt, setShowInt] = useState(0);
     const [delay, setDelay] = useState(0);
-    const [imgAnim, setImgAnim] = useState(
-        [
-            { translateX: [0, 300], opacity: [1, 0] },
-            { translateX: [0, -300], opacity: [1, 0] },
-        ]
-    );
-    
+    const [imgAnim, setImgAnim] = useState([{
+            translateX: [0, 300],
+            opacity: [1, 0]
+        }, {
+            translateX: [0, -300],
+            opacity: [1, 0]
+        },
+    ]);
+
     let oneEnter = false;
     let bannerImg: any;
     let bannerText: any;
@@ -84,38 +73,46 @@ export default (props: BannerProps) => {
         }
     };
 
-    const onLeft = () => {
+    const onLeft = (): void => {
+        const imgAnim = [{
+            translateX: [0, -300],
+            opacity: [1, 0]
+        }, {
+            translateX: [0, 300],
+            opacity: [1, 0]
+        },];
+
         let tempShowInt = showInt;
         tempShowInt -= 1;
-        const imgAnim = [
-            { translateX: [0, -300], opacity: [1, 0] },
-            { translateX: [0, 300], opacity: [1, 0] },
-        ];
         if (tempShowInt <= 0) {
             setShowInt(0);
         }
+
         setImgAnim(imgAnim);
         setShowInt(tempShowInt);
         bannerImg.prev();
         bannerText.prev();
-        //console.log(showInt);
     };
 
-    const onRight = () => {
+    const onRight = (): void => {
+        const imgAnim = [{
+            translateX: [0, 300],
+            opacity: [1, 0]
+        }, {
+            translateX: [0, -300],
+            opacity: [1, 0]
+        },];
+
         let tempShowInt = showInt;
-        const imgAnim = [
-            { translateX: [0, 300], opacity: [1, 0] },
-            { translateX: [0, -300], opacity: [1, 0] },
-        ];
-        tempShowInt += 1; //放在imgAnim下面
+        tempShowInt += 1;
         if (tempShowInt > dataArray.length - 1) {
             setShowInt(dataArray.length - 1);
         }
+
         setImgAnim(imgAnim);
         setShowInt(tempShowInt);
         bannerImg.next();
         bannerText.next();
-        //console.log(showInt);
     };
 
     const getDuration = (e: { key: string; }) => {
@@ -142,10 +139,10 @@ export default (props: BannerProps) => {
                 key="img-wrapper"
             >
                 <div className={`${props.className}-map map${i}`} key="map">
-                    <img src={item.map} width="100%" />
+                    <img src={item.map} width="100%" alt='' />
                 </div>
                 <div className={`${props.className}-pic pic${i}`} key="pic">
-                    <img src={item.pic} width="100%" />
+                    <img src={item.pic} width="100%" alt='' />
                 </div>
             </QueueAnim>
         </Element>));
@@ -161,42 +158,44 @@ export default (props: BannerProps) => {
         </Element>);
     });
 
-    return (<div
-        className={`${props.className}-wrapper`}
-        style={{ background: dataArray[showInt].background }}
-    >
-        <div className={props.className}>
-            <BannerAnim
-                prefixCls={`${props.className}-img-wrapper`}
-                sync
-                type="across"
-                duration={1000}
-                ease="easeInOutExpo"
-                arrow={false}
-                thumb={false}
-                ref={(c: any) => { bannerImg = c; }}
-                onChange={onChange}
-                dragPlay={false}
-            >
-                {imgChildren}
-            </BannerAnim>
-            <BannerAnim
-                prefixCls={`${props.className}-text-wrapper`}
-                sync
-                type="across"
-                duration={1000}
-                arrow={false}
-                thumb={false}
-                ease="easeInOutExpo"
-                ref={(c: any) => { bannerText = c; }}
-                dragPlay={false}
-            >
-                {textChildren}
-            </BannerAnim>
-            <TweenOneGroup enter={{ opacity: 0, type: 'from' }} leave={{ opacity: 0 }}>
-                {showInt && <Icon type="left" key="left" onClick={onLeft} />}
-                {showInt < dataArray.length - 1 && <Icon type="right" key="right" onClick={onRight} />}
-            </TweenOneGroup>
+    return (
+        <div
+            className={`${props.className}-wrapper`}
+            style={{ background: dataArray[showInt].background }}
+        >
+            <div className={props.className}>
+                <BannerAnim
+                    prefixCls={`${props.className}-img-wrapper`}
+                    sync
+                    type="across"
+                    duration={1000}
+                    ease="easeInOutExpo"
+                    arrow={false}
+                    thumb={false}
+                    ref={(c: any) => { bannerImg = c; }}
+                    onChange={onChange}
+                    dragPlay={false}
+                >
+                    {imgChildren}
+                </BannerAnim>
+                <BannerAnim
+                    prefixCls={`${props.className}-text-wrapper`}
+                    sync
+                    type="across"
+                    duration={1000}
+                    arrow={false}
+                    thumb={false}
+                    ease="easeInOutExpo"
+                    ref={(c: any) => { bannerText = c; }}
+                    dragPlay={false}
+                >
+                    {textChildren}
+                </BannerAnim>
+                <TweenOneGroup enter={{ opacity: 0, type: 'from' }} leave={{ opacity: 0 }}>
+                    {showInt && <Icon type="left" key="left" onClick={onLeft} />}
+                    {showInt < dataArray.length - 1 && <Icon type="right" key="right" onClick={onRight} />}
+                </TweenOneGroup>
+            </div>
         </div>
-    </div>);
+    );
 };
