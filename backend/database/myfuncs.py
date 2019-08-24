@@ -1,7 +1,7 @@
 from datetime import datetime
 import pytz
 
-def calculate_related_time(tar_time):
+def calculate_relative_time(tar_time):
     now = datetime.now().replace(tzinfo=pytz.timezone('UTC'))
     diff_sec = (now - tar_time).total_seconds()
     if diff_sec <= 60:
