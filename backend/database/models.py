@@ -10,13 +10,13 @@ from datetime import datetime
 
 
 class Administration(models.Model):
-    category = models.ForeignKey('Category', models.DO_NOTHING)
     user = models.ForeignKey('User', models.DO_NOTHING)
+    category = models.ForeignKey('Category', models.DO_NOTHING)
+    administration_id = models.AutoField(primary_key=True)
 
     class Meta:
         managed = False
         db_table = 'administration'
-        unique_together = (('category', 'user'),)
 
 
 class Category(models.Model):
@@ -24,7 +24,7 @@ class Category(models.Model):
     category_content = models.CharField(max_length=16384)
     posting_num = models.IntegerField()
     reposting_num = models.IntegerField()
-    new_reply_time = models.DateTimeField()
+    new_reply_time = models.DateTimeField(default=datetime.now())
 
     class Meta:
         managed = False
@@ -36,7 +36,7 @@ class Notify(models.Model):
     notify_user = models.ForeignKey('User', models.DO_NOTHING)
     notify_content = models.CharField(max_length=16384, blank=True, null=True)
     notify_time = models.DateTimeField(default=datetime.now())
-    notify_status = models.IntegerField(default=0)
+    notify_status = models.IntegerField()
 
     class Meta:
         managed = False
@@ -64,9 +64,9 @@ class Reposting(models.Model):
     reply_id = models.IntegerField()
     main_posting = models.ForeignKey(Posting, models.DO_NOTHING)
     reposting_user = models.ForeignKey('User', models.DO_NOTHING)
-    reposting_time = models.DateTimeField()
+    reposting_time = models.DateTimeField(blank=True, null=True)
     reposting_content = models.CharField(max_length=16384)
-    reposting_thumb_num = models.IntegerField()
+    reposting_thumb_num = models.IntegerField(default=0)
 
     class Meta:
         managed = False

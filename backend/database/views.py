@@ -9,9 +9,8 @@ class UserViewSet(CacheResponseMixin, ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-
 class PostingViewSet(CacheResponseMixin, ModelViewSet):
-    queryset = None
+    queryset = Posting.objects.all()
     serializer_class = PostingSerializer
 
 
@@ -19,11 +18,18 @@ class PostingViewSet(CacheResponseMixin, ModelViewSet):
     def list(self, request, *args, **kwargs):
         if request.method == 'GET':
             page = request.GET.get('page')
-            if page:
+            category = request.GET.get('category')
+            EACH_PAGE = 15    #numbers for each page
+
+            if page and category:
                 page = int(page)
-                self.queryset = Posting.objects.all().order_by("-reply_time")[page * 15 : (page + 1) * 15]
+                category = int(category)
+                if category != 0:
+                    self.queryset = Posting.objects.filter(category_id=category).order_by("-reply_time")[page * EACH_PAGE : (page + 1) * EACH_PAGE]
+                else:
+                    self.queryset = Posting.objects.all().order_by("-reply_time")[page * EACH_PAGE : (page + 1) * EACH_PAGE]
             else:
-                self.queryset = Posting.objects.all()
+                return Response(False)
 
             queryset = self.filter_queryset(self.get_queryset())
 
@@ -35,8 +41,11 @@ class PostingViewSet(CacheResponseMixin, ModelViewSet):
             serializer = self.get_serializer(queryset, many=True)
             return Response(serializer.data)
 
-
 class RepostingViewSet(CacheResponseMixin, ModelViewSet):
     queryset = Reposting.objects.all()
-    serializer_class = PostingSerializer
+    serializer_class = RepostingSerializer
+
+class CategoryViewSet(CacheResponseMixin, ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
 
