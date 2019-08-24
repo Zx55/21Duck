@@ -15,9 +15,8 @@ class PostingViewSet(CacheResponseMixin, ModelViewSet):
     queryset = None
     serializer_class = PostingSerializer
 
-    #todo based on pages return 15 records.
-    #todo total number
 
+    # 15pages for each showing
     def list(self, request, *args, **kwargs):
         if request.method == 'GET':
             page = request.GET.get('page')

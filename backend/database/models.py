@@ -9,12 +9,34 @@ from django.db import models
 from datetime import datetime
 
 
+class Administration(models.Model):
+    category = models.ForeignKey('Category', models.DO_NOTHING)
+    user = models.ForeignKey('User', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'administration'
+        unique_together = (('category', 'user'),)
+
+
+class Category(models.Model):
+    category_id = models.IntegerField(primary_key=True)
+    category_content = models.CharField(max_length=16384)
+    posting_num = models.IntegerField()
+    reposting_num = models.IntegerField()
+    new_reply_time = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'category'
+
+
 class Notify(models.Model):
     notify_id = models.AutoField(primary_key=True)
     notify_user = models.ForeignKey('User', models.DO_NOTHING)
     notify_content = models.CharField(max_length=16384, blank=True, null=True)
-    notify_time = models.DateTimeField(datetime.now())
-    notify_status = models.IntegerField()
+    notify_time = models.DateTimeField(default=datetime.now())
+    notify_status = models.IntegerField(default=0)
 
     class Meta:
         managed = False
@@ -29,7 +51,7 @@ class Posting(models.Model):
     reply_num = models.IntegerField(default=0)
     theme = models.CharField(max_length=256)
     posting_content = models.CharField(max_length=16384)
-    category = models.CharField(max_length=256)
+    category_id = models.IntegerField()
     posting_thumb_num = models.IntegerField()
 
     class Meta:
@@ -42,7 +64,7 @@ class Reposting(models.Model):
     reply_id = models.IntegerField()
     main_posting = models.ForeignKey(Posting, models.DO_NOTHING)
     reposting_user = models.ForeignKey('User', models.DO_NOTHING)
-    repostring_time = models.DateTimeField(datetime.now())
+    reposting_time = models.DateTimeField()
     reposting_content = models.CharField(max_length=16384)
     reposting_thumb_num = models.IntegerField()
 
