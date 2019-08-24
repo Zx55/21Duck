@@ -9,7 +9,7 @@ export interface PostFooterProps {
 
 export default (props: PostFooterProps) => (
     <div className='post-footer'>
-        <div className='interaction-bar'>
+        <span className='interaction-bar'>
             <Button
                 name='like'
                 icon='like'
@@ -34,14 +34,14 @@ export default (props: PostFooterProps) => (
                 text='举报'
                 onClick={(e) => console.log('report')}
             />
-        </div>
-        <div className='read-more-bar'>
+        </span>
+        <span className='read-more-bar'>
             <Button
                 name='read-more'
                 icon='select'
                 text='更多'
                 onClick={(e) => console.log('more')}
             />
-        </div>
+        </span>
     </div>
 )
