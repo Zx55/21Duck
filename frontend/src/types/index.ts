@@ -47,7 +47,7 @@ export interface IRepost {
 
 // 接受后端接口
 export interface PostItem {
-    posting_num: number;                    // totalPostN
+    posting_num: number;                    // totalPost
     posting_id: number;                     // postId
     posting_user: number;                   // userId
     user_nickname: string;                  // userNickname
