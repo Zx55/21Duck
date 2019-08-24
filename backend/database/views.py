@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework_extensions.cache.mixins import CacheResponseMixin
 from rest_framework.response import Response
-
+import collections
 
 from .serializers import *
 
@@ -23,7 +23,7 @@ class PostingViewSet(CacheResponseMixin, ModelViewSet):
             page = request.GET.get('page')
             if page:
                 page = int(page)
-                self.queryset = Posting.objects.all().order_by("-reply_time")[page*15:(page+1)*15]
+                self.queryset = Posting.objects.all().order_by("-reply_time")[page * 15 : (page + 1) * 15]
             else:
                 self.queryset = Posting.objects.all()
 
@@ -36,7 +36,6 @@ class PostingViewSet(CacheResponseMixin, ModelViewSet):
 
             serializer = self.get_serializer(queryset, many=True)
             return Response(serializer.data)
-
 
 
 class RepostingViewSet(CacheResponseMixin, ModelViewSet):
