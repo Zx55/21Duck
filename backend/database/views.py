@@ -1,3 +1,5 @@
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.viewsets import ModelViewSet
 from rest_framework_extensions.cache.mixins import CacheResponseMixin
 from rest_framework.response import Response
@@ -49,3 +51,12 @@ class CategoryViewSet(CacheResponseMixin, ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
+@csrf_exempt
+def login(request):
+    if request.method == 'POST':
+        user = request.POST.get('username')
+        pwd = request.POST.get('password')
+        if User.objects.filter(user_id=user, password=pwd):
+            return JsonResponse({'success':True})
+        else:
+            return JsonResponse({'success':False})
