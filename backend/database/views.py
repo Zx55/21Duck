@@ -1,7 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework_extensions.cache.mixins import CacheResponseMixin
 from rest_framework.response import Response
-import collections
 
 from .serializers import *
 

@@ -20,7 +20,7 @@ class PostingSerializer(PartialUpdateSerializerMixin, ModelSerializer):
 
     class Meta:
         model = Posting
-        fields = ['posting_num', 'posting_user', 'user_nickname','related_posting_time', 'related_reply_time', 'reply_num',
+        fields = ['posting_id', 'posting_num', 'posting_user', 'user_nickname','related_posting_time', 'related_reply_time', 'reply_num',
                   'theme', 'posting_content', 'category_id', 'posting_thumb_num']
 
     def get_posting_num(self, obj):
