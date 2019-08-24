@@ -4,10 +4,13 @@ import PostHeader from './PostHeader';
 import PostContent from './PostContent';
 import PostFooter from './PostFooter';
 
+import './Post.css';
+
 
 export interface PostProps {
     userHead: string;
     userNickName: string;
+    postTitle: string;
     postCreatedTime: string;
     content: string;
     like: number;
@@ -18,6 +21,7 @@ export default (props: PostProps) => (
         <PostHeader
             userHead={props.userHead}
             userNickName={props.userNickName}
+            postTitle={props.postTitle}
             postCreatedTime={props.postCreatedTime}
         />
         <PostContent content={props.content} />

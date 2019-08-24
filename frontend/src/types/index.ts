@@ -49,3 +49,10 @@ export interface IState {
 };
 
 export type IStore = S<IState>;
+
+export interface Param {
+    key: string;
+    value: string;
+};
+
+export type ParamList = Array<Param>;
