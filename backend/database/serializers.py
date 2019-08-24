@@ -16,10 +16,11 @@ class PostingSerializer(PartialUpdateSerializerMixin, ModelSerializer):
     posting_num = serializers.SerializerMethodField(label='posting_number')
     related_posting_time = serializers.SerializerMethodField(label='related_posting_time')
     related_reply_time = serializers.SerializerMethodField(label='related_reply_time')
+    user_nickname = serializers.SerializerMethodField(label='user_nickname')
 
     class Meta:
         model = Posting
-        fields = ['posting_num', 'posting_user', 'related_posting_time', 'related_reply_time', 'reply_num',
+        fields = ['posting_num', 'posting_user', 'user_nickname','related_posting_time', 'related_reply_time', 'reply_num',
                   'theme', 'posting_content', 'category_id', 'posting_thumb_num']
 
     def get_posting_num(self, obj):
@@ -30,6 +31,9 @@ class PostingSerializer(PartialUpdateSerializerMixin, ModelSerializer):
 
     def get_related_reply_time(self, obj):
         return calculate_related_time(obj.reply_time)
+
+    def get_user_nickname(self, obj):
+        return obj.posting_user.nickname
 
 
 """
