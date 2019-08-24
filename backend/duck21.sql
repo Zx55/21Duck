@@ -59,10 +59,11 @@ create table category(
 )
 
 create table administration(
+    administration_id int primary key,
     category_id int not null,
     user_id int not null,
-    primary key (category_id,user_id)
 )
+
 
 #foreign key
 alter table posting add foreign key (posting_user_id) references user(user_id);
@@ -123,6 +124,8 @@ create trigger deleteposting after delete
 
 
 #测试
+select * from user;
+
 select * from reposting;
 
 select * from posting;
@@ -141,3 +144,6 @@ values (1,'校园周边',123,59,now());
 
 
 select * from category join posting on category.category_id=posting.category_id;
+
+
+update user set head = 'https://b-ssl.duitang.com/uploads/item/201805/31/20180531220859_wufxi.jpg';
