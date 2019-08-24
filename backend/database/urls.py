@@ -1,3 +1,4 @@
+from django.urls import path
 from rest_framework.routers import DefaultRouter
 
 from . import views
@@ -11,3 +12,6 @@ router.register('reposting', views.RepostingViewSet, base_name='reposting')
 router.register('category', views.CategoryViewSet, base_name='category')
 
 urlpatterns = router.urls
+urlpatterns += [
+    path('login',views.login)
+]
