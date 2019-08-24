@@ -1,6 +1,7 @@
 .app {
     font-family: sans-serif;
     font-size: 14px;
+    height: 100%;
 }
 
 .navigator {
@@ -17,6 +18,7 @@
 
 .app-content {
     padding: 3 3%;
+    height: 100%;
 }
 
 .app-footer {
@@ -31,9 +33,26 @@
 .app-content.ant-layout-content {
     padding-left: 15%;
     padding-right: 15%;
+    height: 100%;
 }
 
 ul {
     padding-inline-start: 15px;
     list-style: none;
+}
+
+html,body{
+    height: 100%;
+}
+
+#root{
+    min-height: 100%;
+}
+
+.app.ant-layout{
+    min-height: 100vh;
+}
+
+.problem-root{
+    height: 100%;
 }
