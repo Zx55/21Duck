@@ -58,7 +58,9 @@ export default (props: NavigatorProps) => {
                     </span>
                 }
             >
-                <Item key='login'>登录</Item>
+                <Item key='login'>
+                    <Link to='/login'>登录</Link>
+                </Item>
                 <Item key='register'>注册</Item>
             </SubMenu>
             <Item

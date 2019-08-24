@@ -2,6 +2,7 @@ import React, {lazy, Suspense } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Loading from '../../components/Loading';
+import NormalForm from '../Login';
 
 const Explore = lazy(() => import('../explore'));
 const Chat = lazy(() => import('../chat'));
@@ -19,6 +20,7 @@ export default () => (
             <Route path='/problems' exact component={Problems} />
             <Route path='/courses' exact component={Courses} />
             <Route path='/campus' exact component={Campus} />
+            <Route path='/login' exact component={NormalForm} />
         </Switch>
     </Suspense>
 );
