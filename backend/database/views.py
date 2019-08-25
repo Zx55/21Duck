@@ -88,9 +88,9 @@ def login(request):
                 'user_head' : return_user.head,
                 'user_id' : user,
                 'identify' : return_user.identify,
-                'scores' : none_filter(return_user.scores),
-                'register' : none_filter(return_user.register),
-                'blocktime' : none_filter(return_user.blocktime)
+                'scores' : return_user.scores,
+                'register' : return_user.register,
+                'blocktime' : return_user.blocktime
             }
             return JsonResponse(return_json)
         else:
