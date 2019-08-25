@@ -2,7 +2,7 @@ import React from 'react';
 
 import Banner from '../../components/Banner'
 
-import './explore.css'
+import './Explore.css'
 
 export interface BannerProps {
     className: string;

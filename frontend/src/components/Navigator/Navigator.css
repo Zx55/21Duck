@@ -7,6 +7,10 @@
     float: right;
 }
 
+.ant-menu-item.user {
+    float: right;
+}
+
 .ant-menu-item.notify {
     padding-left: 10px;
     padding-right: 10px;

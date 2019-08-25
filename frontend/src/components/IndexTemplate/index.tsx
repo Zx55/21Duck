@@ -7,7 +7,7 @@ import Loading from '../../components/Loading';
 import { Pagination } from 'antd';
 
 import { PostItem } from '../../types';
-import { ParamList } from '../../types';
+import { Param } from '../../types';
 
 import './Template.css';
 
@@ -26,10 +26,9 @@ export default (props: IndexTemplateProps) => {
     const getPosts = (page: string): void => {
         setLoading(true);
 
-        const params: ParamList = [{
-            key: 'page',
-            value: page,
-        }]/*, {
+        const params: Param = {
+            page: page,
+        };/*, {
             key: 'category',
             value: props.category,
         }];*/

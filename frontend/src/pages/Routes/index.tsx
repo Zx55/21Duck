@@ -2,13 +2,13 @@ import React, {lazy, Suspense } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Loading from '../../components/Loading';
-import NormalForm from '../Login';
+import Login from '../Login';
 
-const Explore = lazy(() => import('../explore'));
-const Chat = lazy(() => import('../chat'));
-const Problems = lazy(() => import('../problems'));
-const Courses = lazy(() => import('../courses'));
-const Campus = lazy(() => import('../campus'));
+const Explore = lazy(() => import('../Explore'));
+const Chat = lazy(() => import('../Chat'));
+const Problems = lazy(() => import('../Problems'));
+const Courses = lazy(() => import('../Courses'));
+const Campus = lazy(() => import('../Campus'));
 
 
 export default () => (
@@ -20,7 +20,7 @@ export default () => (
             <Route path='/problems' exact component={Problems} />
             <Route path='/courses' exact component={Courses} />
             <Route path='/campus' exact component={Campus} />
-            <Route path='/login' exact component={NormalForm} />
+            <Route path='/login' exact component={Login} />
         </Switch>
     </Suspense>
 );
