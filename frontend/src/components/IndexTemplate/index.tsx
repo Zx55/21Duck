@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import api from '../../api';
-import PostList from '../../components/PostList';
+import MainFrame from './MainFrame';
 import Loading from '../../components/Loading';
 
 import { Pagination } from 'antd';
@@ -51,7 +51,7 @@ export default (props: IndexTemplateProps) => {
     return (
         <div className={`${props.name}-root`}>
             <div>{props.name}</div>
-            {loading ? <Loading /> : <PostList posts={posts} />}
+            {loading ? <Loading /> : <MainFrame posts={posts}/>}
             <Pagination
                 className={`${props.name}-pagination`}
                 current={current}

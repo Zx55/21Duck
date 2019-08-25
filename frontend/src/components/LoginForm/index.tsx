@@ -1,11 +1,12 @@
 import React, { FormEvent } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 
 import { loginAsync } from '../../actions';
 
+import { RouteComponentProps } from 'react-router-dom';
 import { WrappedFormUtils } from 'antd/lib/form/Form';
 
 import './LoginForm.css';

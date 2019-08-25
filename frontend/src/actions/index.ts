@@ -11,17 +11,20 @@ export function loginAsync(userId: string, userPw: string,
             userPw,
             history,
         }
-    }
+    };
 };
 
-export function registerAsync(userId: string, userPw: string): IAction {
+export function registerAsync(userId: string, userNickname: string,
+    userPw: string, history: History): IAction {
     return {
         type: ActionTypes.REGISTER_ASYNC,
         payload: {
             userId,
-            userPw
+            userNickname,
+            userPw,
+            history,
         }
-    }
+    };
 };
 
 export function logout(): IAction {

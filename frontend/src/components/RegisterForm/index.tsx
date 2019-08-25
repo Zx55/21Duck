@@ -1,22 +1,41 @@
 import React, { useState, FormEvent, FocusEvent } from 'react';
-import { Form, Input, Tooltip, Icon, Button } from 'antd';
+import { useDispatch } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
+
+import { Form, Input, Icon, Button } from 'antd';
+
+import { registerAsync } from '../../actions';
+
+import { RouteComponentProps } from 'react-router-dom';
 import { WrappedFormUtils } from 'antd/lib/form/Form';
 
 import './RegisterForm.css';
-import { Link } from 'react-router-dom';
 
-export interface RegisterFormProps {
+export interface RegisterFormProps extends RouteComponentProps {
     form: WrappedFormUtils;
 };
 
+export interface RegisterValue {
+    username: string;
+    nickname: string;
+    password: string;
+    confirm: string;
+}
+
 const RegisterForm = (props: RegisterFormProps) => {
     const [confirmDirty, setConfirmDirty] = useState(false);
+    const dispatch = useDispatch();
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        props.form.validateFieldsAndScroll((err: any, values: string) => {
+        props.form.validateFieldsAndScroll((err: any, values: RegisterValue) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                dispatch(registerAsync(
+                    values.username,
+                    values.nickname,
+                    values.password,
+                    props.history,
+                ));
             }
         });
     };
@@ -69,12 +88,10 @@ const RegisterForm = (props: RegisterFormProps) => {
             </Form.Item>
             <Form.Item hasFeedback>
                 {getFieldDecorator('password', {
-                    rules: [
-                        {
+                    rules: [{
                             required: true,
                             message: '请输入密码!',
-                        },
-                        {
+                        }, {
                             validator: validateToNextPassword,
                         },
                     ],
@@ -88,12 +105,10 @@ const RegisterForm = (props: RegisterFormProps) => {
             </Form.Item>
             <Form.Item hasFeedback>
                 {getFieldDecorator('confirm', {
-                    rules: [
-                        {
+                    rules: [{
                             required: true,
                             message: '请确认密码!',
-                        },
-                        {
+                        }, {
                             validator: compareToFirstPassword,
                         },
                     ],
@@ -119,4 +134,6 @@ const RegisterForm = (props: RegisterFormProps) => {
     )
 }
 
-export default Form.create({ name: 'register' })(RegisterForm);
+export default Form.create({ name: 'register' })(
+    withRouter(RegisterForm)
+);
