@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 
 import { Modal, Button, Form, Input, Icon } from 'antd';
 
 import './PostCreator.css';
+
 
 export default () => {
     const [creatorVisible, setCreatorVisible] = useState(false);
@@ -12,7 +12,14 @@ export default () => {
 
     return (
         <div>
-            <Button className='post-button' type='primary' icon='plus' shape='round' size='large' onClick={() => setCreatorVisible(true)}>
+            <Button
+                className='post-button'
+                type='primary'
+                icon='plus'
+                shape='round'
+                size='large'
+                onClick={() => setCreatorVisible(true)}
+            >
                 发布新帖
             </Button>
             <Modal
@@ -35,5 +42,5 @@ export default () => {
                 </Form>
             </Modal>
         </div>
-    )
-}
+    );
+};

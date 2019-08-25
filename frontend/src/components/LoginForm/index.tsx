@@ -30,7 +30,7 @@ const LoginForm = (props: LoginFormProps) => {
         e.preventDefault();
 
         props.form.validateFields((err: any, values: LoginValue) => {
-            if(verifycodevalue==values.verifycode){
+            if (verifycodevalue === values.verifycode){
                 if (!err) {
                     dispatch(loginAsync(
                         values.username,
@@ -38,7 +38,7 @@ const LoginForm = (props: LoginFormProps) => {
                         props.history,
                     ));
                 }
-            }else{
+            } else {
                 alert("验证码错误");
             }
         });

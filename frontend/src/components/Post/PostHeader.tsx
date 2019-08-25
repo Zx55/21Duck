@@ -9,7 +9,6 @@ export interface PostHeaderProps {
 };
 
 export default (props: PostHeaderProps) => {
-    console.log(props.userHead);
     return (
         <div className='post-header'>
             <div className='post-title'>{props.postTitle}</div>

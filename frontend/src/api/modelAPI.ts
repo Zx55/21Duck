@@ -19,7 +19,6 @@ export default class API<T> {
     private listUrl = (params?: Param): string => {
         if (params) {
             const paramString = '?' + qs.stringify(params);
-            console.log(this.baseUrl + this.name + '/' + paramString);
             return this.baseUrl + this.name + '/' + paramString;
         }
         return this.baseUrl + this.name + '/';

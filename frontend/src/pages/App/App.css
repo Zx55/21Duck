@@ -44,3 +44,7 @@ ul {
     padding-inline-start: 15px;
     list-style: none;
 }
+
+::-webkit-scrollbar {
+    display:none;
+}
