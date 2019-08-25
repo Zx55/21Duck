@@ -15,7 +15,6 @@ class PostingViewSet(CacheResponseMixin, ModelViewSet):
     queryset = Posting.objects.all()
     serializer_class = PostingSerializer
 
-
     # 15pages for each showing
     def list(self, request, *args, **kwargs):
         if request.method == 'GET':
@@ -47,11 +46,36 @@ class RepostingViewSet(CacheResponseMixin, ModelViewSet):
     queryset = Reposting.objects.all()
     serializer_class = RepostingSerializer
 
+    def list(self, request, *args, **kwargs):
+        if request.method == 'GET':
+            page = request.GET.get('page')
+            posting_id = request.GET.get('posting_id')
+            if page and posting_id:
+                page = int(page)
+                posting_id = int(posting_id)
+                if page == 0:
+                    EACH_PAGE = 14
+                else:
+                    EACH_PAGE = 15
+                self.queryset = Reposting.objects.filter(main_posting=posting_id).order_by("-reposting_time")[page * EACH_PAGE : (page + 1) * EACH_PAGE]
+            else:
+                return Response(False)
+
+            queryset = self.filter_queryset(self.get_queryset())
+
+            page = self.paginate_queryset(queryset)
+            if page is not None:
+                serializer = self.get_serializer(page, many=True)
+                return self.get_paginated_response(serializer.data)
+
+            serializer = self.get_serializer(queryset, many=True)
+            return Response(serializer.data)
+
 class CategoryViewSet(CacheResponseMixin, ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
-
+@csrf_exempt
 def login(request):
     if request.method == 'POST':
         user = request.POST.get('username')
