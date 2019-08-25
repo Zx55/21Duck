@@ -28,10 +28,8 @@ export default (props: IndexTemplateProps) => {
 
         const params: Param = {
             page: page,
-        };/*, {
-            key: 'category',
-            value: props.category,
-        }];*/
+            category: props.category,
+        };
 
         api.post.list(params).then((response) => {
             const posts: Array<PostItem> = response.data;

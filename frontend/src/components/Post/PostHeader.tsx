@@ -8,17 +8,20 @@ export interface PostHeaderProps {
     postCreatedTime: string;
 };
 
-export default (props: PostHeaderProps) => (
-    <div className='post-header'>
-        <div className='post-title'>{props.postTitle}</div>
-        <img
-            className='user-head'
-            src={props.userHead}
-            alt=''
-        />
-        <span className='user-nickname'>{props.userNickName}</span>
-        <span className='post-created-time'>
-            {props.postCreatedTime}
-        </span>
-    </div>
-)
+export default (props: PostHeaderProps) => {
+    console.log(props.userHead);
+    return (
+        <div className='post-header'>
+            <div className='post-title'>{props.postTitle}</div>
+            <img
+                className='user-head'
+                src={props.userHead}
+                alt=''
+            />
+            <span className='user-nickname'>{props.userNickName}</span>
+            <span className='post-created-time'>
+                {props.postCreatedTime}
+            </span>
+        </div>
+    );
+};
