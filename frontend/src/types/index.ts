@@ -19,16 +19,6 @@ export interface IAction {
 };
 
 // 发送后端接口
-export class IUser {
-    public userId: number = -1;
-    public nickName: string = '';
-    public userHead: string = '';
-    public identity: number = 0;
-    public blocktime: number = 0;
-    public scores: number = 0;
-    public register: number = 0;
-};
-
 export interface IPost {
     userId: number;
     postTitle: string;
@@ -58,6 +48,55 @@ export interface PostItem {
     posting_content: string;                // postContent
     posting_thumb_num: number;              // postLike
 }
+
+export class IUser {
+    public userId: string = '';
+    public nickName: string = '';
+    public userHead: string = '';
+    public identity: number = 0;
+    public blocktime: number = 0;
+    public scores: number = 0;
+    public register: number = 0;
+
+    public constructor(userId?: string, nickName?: string, userHead?: string,
+        identity?: number, blocktime?: number, scores?: number, register?: number) {
+        if (userId) {
+            this.userId = userId;
+        } else {
+            this.userId = '';
+        }
+        if (nickName) {
+            this.nickName = nickName;
+        } else {
+            this.nickName = '';
+        }
+        if (userHead) {
+            this.userHead = userHead;
+        } else {
+            this.userHead = '';
+        }
+        if (identity) {
+            this.identity = identity;
+        } else {
+            this.identity = 0;
+        }
+        if (blocktime) {
+            this.blocktime = blocktime;
+        } else {
+            this.blocktime = 0;
+        }
+        if (scores) {
+            this.scores = scores;
+        } else {
+            this.scores = 0;
+        }
+        if (register) {
+            this.register = register;
+        } else {
+            this.register = 0;
+        }
+    }
+};
 
 export interface IState {
     user: IUser;

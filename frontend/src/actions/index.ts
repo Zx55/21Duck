@@ -1,7 +1,7 @@
 import { ActionTypes, IAction } from '../types';
 
 
-export function loginAsync(userId: number, userPw: string): IAction {
+export function loginAsync(userId: string, userPw: string): IAction {
     return {
         type: ActionTypes.LOGIN_ASYNC,
         payload: {
@@ -11,7 +11,7 @@ export function loginAsync(userId: number, userPw: string): IAction {
     }
 };
 
-export function registerAsync(userId: number, userPw: string): IAction {
+export function registerAsync(userId: string, userPw: string): IAction {
     return {
         type: ActionTypes.REGISTER_ASYNC,
         payload: {

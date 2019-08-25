@@ -1,7 +1,10 @@
 import React, { FormEvent } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
+
+import { loginAsync } from '../../actions';
 
 import { WrappedFormUtils } from 'antd/lib/form/Form';
 
@@ -15,15 +18,17 @@ export interface LoginFormProps {
 export interface LoginValue {
     username: string;
     password: string;
-    remember: boolean;
 };
 
 const LoginForm = (props: LoginFormProps) => {
-    //这里可以放验证码
+    const dispatch = useDispatch();
+
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         props.form.validateFields((err: any, values: LoginValue) => {
             if (!err) {
-                // TODO: communicate with server
+                alert('dispatch')
+                dispatch(loginAsync(values.username, values.password));
             }
         });
     }
