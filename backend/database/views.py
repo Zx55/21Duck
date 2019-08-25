@@ -81,7 +81,15 @@ def login(request):
         user = request.POST.get('username')
         pwd = request.POST.get('password')
         if User.objects.filter(user_id=user, password=encrypt_md5(pwd)):
-            return JsonResponse({'success':True})
+            return_user = User.objects.filter(user_id=user)[0]
+            return_json = {
+                'success' : True,
+                'user_nickname' : return_user.nickname,
+                'user_head' : return_user.head,
+                'user_id' : int(user),
+                'identify' : return_user.identify
+            }
+            return JsonResponse(return_json)
         else:
             return JsonResponse({'success':False})
     else:
