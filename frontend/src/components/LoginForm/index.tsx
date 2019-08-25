@@ -1,6 +1,6 @@
 import React, { FormEvent } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 
@@ -11,7 +11,7 @@ import { WrappedFormUtils } from 'antd/lib/form/Form';
 import './LoginForm.css';
 
 
-export interface LoginFormProps {
+export interface LoginFormProps extends RouteComponentProps {
     form: WrappedFormUtils;
 }
 
@@ -25,10 +25,14 @@ const LoginForm = (props: LoginFormProps) => {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
         props.form.validateFields((err: any, values: LoginValue) => {
             if (!err) {
-                alert('dispatch')
-                dispatch(loginAsync(values.username, values.password));
+                dispatch(loginAsync(
+                    values.username,
+                    values.password,
+                    props.history,
+                ));
             }
         });
     }
@@ -80,4 +84,6 @@ const LoginForm = (props: LoginFormProps) => {
     );
 }
 
-export default Form.create({ name: 'normal_login' })(LoginForm);
+export default Form.create({ name: 'normal_login' })(
+    withRouter(LoginForm)
+);

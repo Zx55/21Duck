@@ -5,34 +5,37 @@ import api from '../api';
 import { IAction, ActionTypes } from '../types';
 
 
-export interface loginData {
+export interface LoginData {
     username: string,
     password: string,
 };
 
 function* login(action: IAction) {
-    const { userId, userPw } = action.payload;
-    const data: loginData = {
+    const { userId, userPw, history } = action.payload;
+    const data: LoginData = {
         username: userId,
         password: userPw,
     };
 
     try {
-        const response = yield call(api.login, data);
-        if (response.data.success) {
-            console.log(response.data);
+        const response = (yield call(api.login, data)).data;
+
+        if (response.success) {
             yield put({
                 type: ActionTypes.LOGIN,
                 payload: {
-                    userId: response.data.user_id,
-                    nickName: response.data.user_nickname,
-                    userHead: response.data.user_head,
-                    identity: response.data.identity,
-                    blocktime: response.data.blocktime,
-                    scores: response.data.scores,
-                    register: response.data.register,
+                    userId: response.user_id,
+                    nickName: response.user_nickname,
+                    userHead: response.user_head,
+                    identity: response.identity,
+                    blocktime: response.blocktime,
+                    scores: response.scores,
+                    register: response.register,
                 }
             });
+
+            // navigator to explore page if login successfully.
+            history.push('/explore');
         }
         else {
             console.log('login fail');

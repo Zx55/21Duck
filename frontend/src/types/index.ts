@@ -1,4 +1,5 @@
 import { Store as S } from 'redux';
+import { PersistPartial } from 'redux-persist';
 
 
 export enum ActionTypes {
@@ -98,9 +99,9 @@ export class IUser {
     }
 };
 
-export interface IState {
+export type IState = {
     user: IUser;
-};
+} & PersistPartial;
 
 export type IStore = S<IState>;
 

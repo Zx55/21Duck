@@ -87,7 +87,7 @@ def login(request):
                 'user_nickname' : return_user.nickname,
                 'user_head' : return_user.head,
                 'user_id' : user,
-                'identify' : return_user.identify,
+                'identity' : return_user.identify,
                 'scores' : none_filter(return_user.scores),
                 'register' : none_filter(return_user.register),
                 'blocktime' : none_filter(return_user.blocktime)
