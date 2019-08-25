@@ -1,5 +1,6 @@
 from datetime import datetime
 import pytz
+import hashlib
 
 def calculate_relative_time(tar_time):
     now = datetime.now().replace(tzinfo=pytz.timezone('UTC'))
@@ -17,3 +18,9 @@ def calculate_relative_time(tar_time):
     else:
         res = str(int(diff_sec / 31536000)) + ' 年之前'
     return res
+
+
+def encrypt_md5(s):
+    m = hashlib.md5()
+    m.update(s.encode(encoding='utf-8'))
+    return m.hexdigest()
