@@ -56,7 +56,29 @@ def login(request):
     if request.method == 'POST':
         user = request.POST.get('username')
         pwd = request.POST.get('password')
-        if User.objects.filter(user_id=user, password=pwd):
+        if User.objects.filter(user_id=user, password=encrypt_md5(pwd)):
             return JsonResponse({'success':True})
         else:
             return JsonResponse({'success':False})
+    else:
+        return JsonResponse({'Error':'Request method error'})
+
+@csrf_exempt
+def register(request):
+    if request.method == 'POST':
+        user = request.POST.get('username')
+        pwd = request.POST.get('password')
+        nickname = request.POST.get('nickname')
+        head = 'https://b-ssl.duitang.com/uploads/item/201805/31/20180531220859_wufxi.jpg'
+        identify = 1
+        blocktime = 0
+        scores = 0
+        if User.objects.filter(user_id=user):
+            return JsonResponse({'register_status':'Username already exists'})
+        else:
+            User.objects.create(user_id=user,password=encrypt_md5(pwd),
+                                head=head,nickname=nickname,identify=identify,
+                                blocktime=blocktime,scores=scores)
+            return JsonResponse({'register_status':'success'})
+    else:
+        return JsonResponse({'Error':'Request method error'})
