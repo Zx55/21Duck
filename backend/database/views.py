@@ -51,7 +51,7 @@ class CategoryViewSet(CacheResponseMixin, ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
-
+@csrf_exempt
 def login(request):
     if request.method == 'POST':
         user = request.POST.get('username')

@@ -1,0 +1,10 @@
+.login-root0 {
+    position: 'fixed';
+    top: '0';
+    left: '0';
+    width: '100vw';
+    height: '100vh';
+    background-image: url(https://github.com/zhangZhiHao1996/image-store/blob/master/react-admin-master/bg1.jpg?raw=true);
+    background-size: '100% 100%';
+    transition: 'all .5s';
+}

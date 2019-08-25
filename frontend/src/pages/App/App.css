@@ -1,0 +1,46 @@
+.app {
+    font-family: sans-serif;
+    font-size: 14px;
+    height: 100%;
+}
+
+.navigator {
+    line-height: 64px;
+}
+
+.navigator-search {
+    width: 250px;
+}
+
+.app-header {
+    padding: 0 3%;
+}
+
+.app-content {
+    padding: 3 3%;
+    height: 100%;
+}
+
+.app-footer {
+    text-align: center;
+}
+
+.app-header.ant-layout-header {
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+.app-content.ant-layout-content {
+    padding-left: 15%;
+    padding-right: 15%;
+    height: 100%;
+}
+
+.app.ant-layout{
+    min-height: 100vh;
+}
+
+ul {
+    padding-inline-start: 15px;
+    list-style: none;
+}
