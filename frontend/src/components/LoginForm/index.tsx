@@ -1,29 +1,38 @@
 import React, { FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
+
+import { loginAsync } from '../../actions';
 
 import { WrappedFormUtils } from 'antd/lib/form/Form';
 
 import './LoginForm.css';
 
 
-export interface LoginFormProps {
+export interface LoginFormProps extends RouteComponentProps {
     form: WrappedFormUtils;
 }
 
 export interface LoginValue {
     username: string;
     password: string;
-    remember: boolean;
 };
 
 const LoginForm = (props: LoginFormProps) => {
-    //这里可以放验证码
+    const dispatch = useDispatch();
+
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
         props.form.validateFields((err: any, values: LoginValue) => {
             if (!err) {
-                // TODO: communicate with server
+                dispatch(loginAsync(
+                    values.username,
+                    values.password,
+                    props.history,
+                ));
             }
         });
     }
@@ -34,11 +43,11 @@ const LoginForm = (props: LoginFormProps) => {
         <Form onSubmit={handleSubmit} className="login-form">
             <Form.Item>
                 {getFieldDecorator('username', {
-                    rules: [{ required: true, message: '请输入用户名' }],
+                    rules: [{ required: true, message: '请输入手机号' }],
                 })(
                     <Input
-                        prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                        placeholder="用户名"
+                        prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        placeholder="手机号"
                     />,
                 )}
             </Form.Item>
@@ -75,4 +84,6 @@ const LoginForm = (props: LoginFormProps) => {
     );
 }
 
-export default Form.create({ name: 'normal_login' })(LoginForm);
+export default Form.create({ name: 'normal_login' })(
+    withRouter(LoginForm)
+);

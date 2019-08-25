@@ -26,7 +26,7 @@ class PostingSerializer(PartialUpdateSerializerMixin, ModelSerializer):
                   'theme', 'posting_content', 'category_id', 'posting_thumb_num']
 
     def get_posting_num(self, obj):
-        return Posting.objects.count()
+        return Posting.objects.filter(category_id=obj.category_id).count()
 
     def get_relative_posting_time(self, obj):
         return calculate_relative_time(obj.posting_time)
@@ -41,9 +41,36 @@ class PostingSerializer(PartialUpdateSerializerMixin, ModelSerializer):
         return obj.posting_user.head
 
 class RepostingSerializer(PartialUpdateSerializerMixin, ModelSerializer):
+    reposting_num = serializers.SerializerMethodField(label='reposting_number')
+    relative_reposting_time = serializers.SerializerMethodField(label='relative_reposting_time')
+    user_nickname = serializers.SerializerMethodField(label='user_nickname')
+    user_head = serializers.SerializerMethodField(label='user_head')
+    reply_posting = serializers.SerializerMethodField(label='reply_posting')
+
     class Meta:
         model = Reposting
-        fields = '__all__'
+        fields = ['reposting_id', 'reposting_user', 'relative_reposting_time',
+                  'reposting_content', 'reposting_thumb_num', 'reposting_num',
+                  'user_nickname', 'user_head', 'reply_posting']
+
+    def get_reposting_num(self, obj):
+        return Posting.objects.filter(posting_id=obj.main_posting.posting_id)[0].reply_num
+
+    def get_relative_reposting_time(self, obj):
+        return calculate_relative_time(obj.reposting_time)
+
+    def get_user_nickname(self, obj):
+        return obj.reposting_user.nickname
+
+    def get_user_head(self, obj):
+        return obj.reposting_user.head
+
+    def get_reply_posting(self, obj):
+        if obj.reply_id == -1:
+            return None
+        else:
+            reply_posting = Reposting.objects.filter(reposting_id=obj.reply_id)[0]
+            return reply_posting.reposting_user.nickname, reply_posting.reposting_content
 
 class CategorySerializer(PartialUpdateSerializerMixin, ModelSerializer):
     relative_new_reply_time = serializers.SerializerMethodField(label='relative_new_reply_time')

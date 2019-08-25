@@ -1,20 +1,12 @@
-.login-form {
+.register-form {
     background: white;
     max-width: 300px;
     padding: 40px 30px 20px 30px;
-    margin: 19% auto;
+    margin: 15% auto;
     box-shadow: 1px 1px 5px #bbbbbb;
     border-radius: 1ch;
 }
 
-.login-form-forgot {
-    float: right;
-}
-
-.login-form-button {
-    width: 100%;
-}
-
 .register-button {
-    float: right;
+    width: 100%;
 }

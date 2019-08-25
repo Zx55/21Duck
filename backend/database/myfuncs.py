@@ -19,7 +19,6 @@ def calculate_relative_time(tar_time):
         res = str(int(diff_sec / 31536000)) + ' 年之前'
     return res
 
-
 def encrypt_md5(s):
     m = hashlib.md5()
     m.update(s.encode(encoding='utf-8'))

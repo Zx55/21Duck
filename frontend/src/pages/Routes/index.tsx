@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Loading from '../../components/Loading';
 import Login from '../Login';
+import Register from '../Register';
 
 const Explore = lazy(() => import('../Explore'));
 const Chat = lazy(() => import('../Chat'));
@@ -21,6 +22,7 @@ export default () => (
             <Route path='/courses' exact component={Courses} />
             <Route path='/campus' exact component={Campus} />
             <Route path='/login' exact component={Login} />
+            <Route path='/register' exact component={Register} />
         </Switch>
     </Suspense>
 );
