@@ -62,6 +62,9 @@ ROOT_URLCONF = 'backend.urls'
 CORS_ORIGIN_ALLOW_ALL = True
 
 
+# CSRF token
+CSRF_COOKIE_NAME = "XSRF-TOKEN"
+
 # Cache
 USE_CACHE = True
 
