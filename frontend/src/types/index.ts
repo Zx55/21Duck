@@ -5,6 +5,7 @@ import { PersistPartial } from 'redux-persist';
 export enum ActionTypes {
     LOGIN = 'LOGIN',
     LOGIN_ASYNC = 'LOGIN_ASYNC',
+    LOGIN_SUCCESS = 'LOGIN_SUCCESS',
     REGISTER = 'REGISTER',
     REGISTER_ASYNC = 'REGISTER_ASYNC',
     LOGOUT = 'LOGOUT',

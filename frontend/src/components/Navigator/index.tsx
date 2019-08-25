@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { History } from 'history';
 
 import { Menu, Input, Icon } from 'antd';
 
+import { getUser } from '../../selectors';
+import { logout } from '../../actions';
+
 import { ClickParam } from 'antd/lib/menu';
+import { IUser } from '../../types';
 
 import './Navigator.css';
 
-const { Item/*, SubMenu*/ } = Menu;
+const { Item, SubMenu } = Menu;
 const { Search } = Input;
 
 
@@ -18,12 +23,18 @@ export interface NavigatorProps {
 
 export default (props: NavigatorProps) => {
     const [menuKey, setKey] = useState(props.history.location.pathname.slice(1));
+    const user: IUser = useSelector(getUser);
+    const dispatch = useDispatch();
 
     const handleClick = (e: ClickParam) => {
         if (e.key !== 'notify') {
             setKey(e.key);
         }
     }
+
+    useEffect(() => {
+        console.log(user);
+    });
 
     return (
         <Menu
@@ -49,31 +60,33 @@ export default (props: NavigatorProps) => {
             <Item key='campus'>
                 <Link to='/campus'>校园周边</Link>
             </Item>
-            {/*
-            用户登录后条件渲染下拉菜单
-            <SubMenu
-                className='user-menu'
-                title={
-                    <span>
+            {user.identity === 0 ? (
+                <Item
+                    className='user'
+                    key='user'
+                >
+                    <Link to='/login'>
                         <Icon type='user' />
-                        用户
-                    </span>
-                }
-            >
-                <Item key='login'>
-                    <Link to='/login'>登录</Link>
+                        登录
+                    </Link>
                 </Item>
-                <Item key='register'>注册</Item>
-            </SubMenu>*/}
-            <Item
-                className='user'
-                key='user'
-            >
-                <Link to='/login'>
-                    <Icon type='user' />
-                    登录
-                </Link>
-            </Item>
+            ) : (
+                <SubMenu
+                    className='user-menu'
+                    title={
+                        <span>
+                            <Icon type='user' />
+                            用户
+                        </span>
+                    }
+                >
+                    <Item key='logout' onClick={() => {
+                        dispatch(logout());
+                    }}>
+                        注销
+                    </Item>
+                </SubMenu>
+            )}
             <Item
                 className='notify'
                 key='notify'

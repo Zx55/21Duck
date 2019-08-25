@@ -10,7 +10,7 @@ export interface LoginData {
     password: string,
 };
 
-function* login(action: IAction) {
+function* loginAsync(action: IAction) {
     const { userId, userPw, history } = action.payload;
     const data: LoginData = {
         username: userId,
@@ -21,6 +21,7 @@ function* login(action: IAction) {
         const response = (yield call(api.login, data)).data;
 
         if (response.success) {
+            console.log(response);
             yield put({
                 type: ActionTypes.LOGIN,
                 payload: {
@@ -33,9 +34,7 @@ function* login(action: IAction) {
                     register: response.register,
                 }
             });
-
-            // navigator to explore page if login successfully.
-            history.push('/explore');
+            setTimeout(() => history.push('/explore'), 3000);
         }
         else {
             console.log('login fail');
@@ -46,5 +45,5 @@ function* login(action: IAction) {
 }
 
 export default function*() {
-    yield takeEvery(ActionTypes.LOGIN_ASYNC, login);
+    yield takeEvery(ActionTypes.LOGIN_ASYNC, loginAsync);
 };
