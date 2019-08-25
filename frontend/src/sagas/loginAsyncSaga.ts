@@ -37,7 +37,7 @@ function* loginAsync(action: IAction) {
             setTimeout(() => history.push('/explore'), 3000);
         }
         else {
-            console.log('login fail');
+            alert('登录失败');
         }
     } catch (err) {
         console.log(err);

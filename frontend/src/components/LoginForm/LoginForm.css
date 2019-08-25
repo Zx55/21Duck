@@ -18,3 +18,21 @@
 .register-button {
     float: right;
 }
+
+#verify-text{
+    width: 45%;
+    float: left;
+}
+
+#verify-form{
+    width: 100%;
+}
+
+#verify-vcode{
+    padding-left: 50%;
+    padding-top: 4px;
+}
+
+#register-form-bottom{
+    clear: both;
+}
