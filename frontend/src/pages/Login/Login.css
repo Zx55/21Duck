@@ -1,18 +1,4 @@
-.login-form {
-    max-width: 300px;
-    margin: 0 auto;
-    padding: 5% 0;
-}
-
-.login-form-forgot {
-    float: right;
-}
-
-.login-form-button {
-    width: 100%;
-}
-
-.backgroundBox {
+.login-root0 {
     position: 'fixed';
     top: '0';
     left: '0';
@@ -21,8 +7,4 @@
     background-image: url(https://github.com/zhangZhiHao1996/image-store/blob/master/react-admin-master/bg1.jpg?raw=true);
     background-size: '100% 100%';
     transition: 'all .5s';
-}
-
-.backgroundBox0 {
-    background-image: '';
 }

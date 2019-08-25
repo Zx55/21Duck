@@ -66,8 +66,5 @@ export interface IState {
 export type IStore = S<IState>;
 
 export interface Param {
-    key: string;
-    value: string;
+    [key: string]: string;
 };
-
-export type ParamList = Array<Param>;

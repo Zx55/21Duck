@@ -8,7 +8,7 @@ import { ClickParam } from 'antd/lib/menu';
 
 import './Navigator.css';
 
-const { Item, SubMenu } = Menu;
+const { Item/*, SubMenu*/ } = Menu;
 const { Search } = Input;
 
 
@@ -49,6 +49,8 @@ export default (props: NavigatorProps) => {
             <Item key='campus'>
                 <Link to='/campus'>校园周边</Link>
             </Item>
+            {/*
+            用户登录后条件渲染下拉菜单
             <SubMenu
                 className='user-menu'
                 title={
@@ -62,7 +64,16 @@ export default (props: NavigatorProps) => {
                     <Link to='/login'>登录</Link>
                 </Item>
                 <Item key='register'>注册</Item>
-            </SubMenu>
+            </SubMenu>*/}
+            <Item
+                className='user'
+                key='user'
+            >
+                <Link to='/login'>
+                    <Icon type='user' />
+                    登录
+                </Link>
+            </Item>
             <Item
                 className='notify'
                 key='notify'

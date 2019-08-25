@@ -36,23 +36,11 @@
     height: 100%;
 }
 
-ul {
-    padding-inline-start: 15px;
-    list-style: none;
-}
-
-html,body{
-    height: 100%;
-}
-
-#root{
-    min-height: 100%;
-}
-
 .app.ant-layout{
     min-height: 100vh;
 }
 
-.problem-root{
-    height: 100%;
+ul {
+    padding-inline-start: 15px;
+    list-style: none;
 }

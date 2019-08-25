@@ -1,8 +1,9 @@
 import axios from 'axios';
+import qs from 'qs';
 
 import host from './host';
 
-import { Param, ParamList } from '../types';
+import { Param } from '../types';
 
 export default class API<T> {
     private baseUrl: string = 'http://' + host + ':8000/api/';
@@ -15,21 +16,16 @@ export default class API<T> {
     private detailUrl = (id: number): string =>
         this.baseUrl + this.name + '/' + id + '/';
 
-    private listUrl = (params?: ParamList): string => {
+    private listUrl = (params?: Param): string => {
         if (params) {
-            let paramString: string = '?';
-            params.forEach((param: Param, index: number): void => {
-                if (index > 0) {
-                    paramString += '&';
-                }
-                paramString += param.key + '=' + param.value;
-            });
+            const paramString = '?' + qs.stringify(params);
+            console.log(this.baseUrl + this.name + '/' + paramString);
             return this.baseUrl + this.name + '/' + paramString;
         }
         return this.baseUrl + this.name + '/';
     }
 
-    public list = (params?: ParamList) => axios.get(this.listUrl(params));
+    public list = (params?: Param) => axios.get(this.listUrl(params));
     public retreive = (id: number) => axios.get(this.detailUrl(id));
     public create = (data: T) => axios.post(this.listUrl(), data);
     public update = (id: number, data: T) => axios.put(this.detailUrl(id), data);
