@@ -1,17 +1,20 @@
 import { ActionTypes, IAction } from '../types';
+import { History } from 'history';
 
 
-export function loginAsync(userId: number, userPw: string): IAction {
+export function loginAsync(userId: string, userPw: string,
+    history: History): IAction {
     return {
         type: ActionTypes.LOGIN_ASYNC,
         payload: {
             userId,
-            userPw
+            userPw,
+            history,
         }
     }
 };
 
-export function registerAsync(userId: number, userPw: string): IAction {
+export function registerAsync(userId: string, userPw: string): IAction {
     return {
         type: ActionTypes.REGISTER_ASYNC,
         payload: {

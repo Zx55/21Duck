@@ -87,10 +87,17 @@ def login(request):
                 'user_nickname' : return_user.nickname,
                 'user_head' : return_user.head,
                 'user_id' : user,
+<<<<<<< HEAD
                 'identify' : return_user.identify,
                 'scores' : return_user.scores,
                 'register' : return_user.register,
                 'blocktime' : return_user.blocktime
+=======
+                'identity' : return_user.identify,
+                'scores' : none_filter(return_user.scores),
+                'register' : none_filter(return_user.register),
+                'blocktime' : none_filter(return_user.blocktime)
+>>>>>>> 118dfff4a947e6e06e5623a2e044f43b8bd465ce
             }
             return JsonResponse(return_json)
         else:

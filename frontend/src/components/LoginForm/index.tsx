@@ -1,29 +1,38 @@
 import React, { FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
+
+import { loginAsync } from '../../actions';
 
 import { WrappedFormUtils } from 'antd/lib/form/Form';
 
 import './LoginForm.css';
 
 
-export interface LoginFormProps {
+export interface LoginFormProps extends RouteComponentProps {
     form: WrappedFormUtils;
 }
 
 export interface LoginValue {
     username: string;
     password: string;
-    remember: boolean;
 };
 
 const LoginForm = (props: LoginFormProps) => {
-    //这里可以放验证码
+    const dispatch = useDispatch();
+
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
         props.form.validateFields((err: any, values: LoginValue) => {
             if (!err) {
-                // TODO: communicate with server
+                dispatch(loginAsync(
+                    values.username,
+                    values.password,
+                    props.history,
+                ));
             }
         });
     }
@@ -75,4 +84,6 @@ const LoginForm = (props: LoginFormProps) => {
     );
 }
 
-export default Form.create({ name: 'normal_login' })(LoginForm);
+export default Form.create({ name: 'normal_login' })(
+    withRouter(LoginForm)
+);
