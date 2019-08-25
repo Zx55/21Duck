@@ -86,8 +86,11 @@ def login(request):
                 'success' : True,
                 'user_nickname' : return_user.nickname,
                 'user_head' : return_user.head,
-                'user_id' : int(user),
-                'identify' : return_user.identify
+                'user_id' : user,
+                'identify' : return_user.identify,
+                'scores' : none_filter(return_user.scores),
+                'register' : none_filter(return_user.register),
+                'blocktime' : none_filter(return_user.blocktime)
             }
             return JsonResponse(return_json)
         else:
