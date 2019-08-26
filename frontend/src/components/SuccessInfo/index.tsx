@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
+import { Card } from 'antd';
+
 import { IUser } from '../../types';
+
+import './SuccessInfo.css';
 
 
 export interface SuccessInfoProps {
@@ -17,9 +21,9 @@ export default (props: SuccessInfoProps) => {
     }, []);
 
     return (
-        <div className='success-info'>
+        <Card className='success-info'>
             {props.prefix}，{props.user.nickName} <br/>
             {clock}秒后自动跳转
-        </div>
+        </Card>
     );
 };

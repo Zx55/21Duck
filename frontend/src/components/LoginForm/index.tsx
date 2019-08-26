@@ -24,18 +24,20 @@ export interface LoginValue {
 
 const LoginForm = (props: LoginFormProps) => {
     const dispatch = useDispatch();
-    const [verifycodevalue , setverifycodeValue] = useState('');
+    const [verifycodevalue, setverifycodeValue] = useState('');
 
     const compareToVerifyCode = (rule: any, value: any, callback: { (arg0: string): void; (): void; }) => {
         const form = props.form;
-        if (form.getFieldValue('verifycode').length === 4 
-            && verifycodevalue !== form.getFieldValue('verifycode')) {
+        const code: string = form.getFieldValue('verifycode');
+        if (code.length !== 0 && (code.length !== 4 ||
+            (code.length === 4 && verifycodevalue !== code))
+        ) {
             callback('验证码错误!');
         } else {
             callback();
         }
     };
-    
+
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -68,7 +70,7 @@ const LoginForm = (props: LoginFormProps) => {
             </Form.Item>
             <Form.Item>
                 {getFieldDecorator('password', {
-                        rules: [{ required: true, message: '请输入密码' }],
+                    rules: [{ required: true, message: '请输入密码' }],
                 })(
                     <Input
                         prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -81,10 +83,10 @@ const LoginForm = (props: LoginFormProps) => {
                 <div id="verify-text">
                     <Form.Item>
                         {getFieldDecorator('verifycode', {
-                                rules: [{ required: true, message: '请输入验证码' },
-                                {
-                                    validator: compareToVerifyCode,
-                                },],
+                            rules: [{ required: true, message: '请输入验证码' },
+                            {
+                                validator: compareToVerifyCode,
+                            },],
                         })(
                             <Input
                                 prefix={<Icon type="check-circle" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -94,10 +96,10 @@ const LoginForm = (props: LoginFormProps) => {
                     </Form.Item>
                 </div>
                 <div id="verify-vcode">
-                    <Vcode width={110} height={32} onChange={(v:any) => {
-                    console.log('当前的验证码值：', v)
-                    setverifycodeValue(v);
-                }}></Vcode>
+                    <Vcode width={110} height={32} onChange={(v: any) => {
+                        console.log('当前的验证码值：', v)
+                        setverifycodeValue(v);
+                    }}></Vcode>
                 </div>
             </div>
             <div id="register-form-bottom">

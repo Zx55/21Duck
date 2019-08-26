@@ -52,12 +52,14 @@ const RegisterForm = (props: RegisterFormProps) => {
         callback();
     };
 
-    const [verifycodevalue , setverifycodeValue] = useState('');
+    const [verifycodevalue, setverifycodeValue] = useState('');
 
     const compareToVerifyCode = (rule: any, value: any, callback: { (arg0: string): void; (): void; }) => {
         const form = props.form;
-        if (form.getFieldValue('verifycode').length === 4 
-            && verifycodevalue !== form.getFieldValue('verifycode')) {
+        const code: string = form.getFieldValue('verifycode');
+        if (code.length !== 0 && (code.length !== 4 ||
+            (code.length === 4 && verifycodevalue !== code))
+        ) {
             callback('验证码错误!');
         } else {
             callback();
@@ -82,9 +84,10 @@ const RegisterForm = (props: RegisterFormProps) => {
         <Form onSubmit={handleSubmit} className='register-form'>
             <Form.Item>
                 {getFieldDecorator('username', {
-                    rules: [{ required: true, message: '请输入正确手机号!', whitespace: true,
-                    pattern: new RegExp("^(1[3-9])\\d{9}$") 
-                }],
+                    rules: [{
+                        required: true, message: '请输入正确手机号!', whitespace: true,
+                        pattern: new RegExp("^(1[3-9])\\d{9}$")
+                    }],
                 })(
                     <Input
                         prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -105,11 +108,11 @@ const RegisterForm = (props: RegisterFormProps) => {
             <Form.Item hasFeedback>
                 {getFieldDecorator('password', {
                     rules: [{
-                            required: true,
-                            message: '请输入密码!',
-                        }, {
-                            validator: validateToNextPassword,
-                        },
+                        required: true,
+                        message: '请输入密码!',
+                    }, {
+                        validator: validateToNextPassword,
+                    },
                     ],
                 })(
                     <Input.Password
@@ -122,11 +125,11 @@ const RegisterForm = (props: RegisterFormProps) => {
             <Form.Item hasFeedback>
                 {getFieldDecorator('confirm', {
                     rules: [{
-                            required: true,
-                            message: '请确认密码!',
-                        }, {
-                            validator: compareToFirstPassword,
-                        },
+                        required: true,
+                        message: '请确认密码!',
+                    }, {
+                        validator: compareToFirstPassword,
+                    },
                     ],
                 })(
                     <Input.Password
@@ -141,10 +144,10 @@ const RegisterForm = (props: RegisterFormProps) => {
                 <div id="verify-text">
                     <Form.Item>
                         {getFieldDecorator('verifycode', {
-                                rules: [{ required: true, message: '请输入验证码' },
-                                {
-                                    validator: compareToVerifyCode,
-                                },],
+                            rules: [{ required: true, message: '请输入验证码' },
+                            {
+                                validator: compareToVerifyCode,
+                            },],
                         })(
                             <Input
                                 prefix={<Icon type="check-circle" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -154,10 +157,10 @@ const RegisterForm = (props: RegisterFormProps) => {
                     </Form.Item>
                 </div>
                 <div id="verify-vcode">
-                    <Vcode width={110} height={32} onChange={(v:any) => {
-                    console.log('当前的验证码值：', v)
-                    setverifycodeValue(v);
-                }}></Vcode>
+                    <Vcode width={110} height={32} onChange={(v: any) => {
+                        console.log('当前的验证码值：', v)
+                        setverifycodeValue(v);
+                    }}></Vcode>
                 </div>
             </div>
             <Form.Item>
