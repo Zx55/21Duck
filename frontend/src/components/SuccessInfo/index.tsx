@@ -12,7 +12,7 @@ export default (props: SuccessInfoProps) => {
     const [clock, setClock] = useState(3);
 
     useEffect(() => {
-        const timeout = setInterval(() => setClock(clock - 1), 1000);
+        const timeout = setInterval(() => setClock(c => c - 1), 1000);
         setTimeout(() => clearInterval(timeout), 3100);
     }, []);
 
