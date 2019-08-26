@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import { Modal, Button, Form, Input, Icon } from 'antd';
 
@@ -11,7 +12,16 @@ const { TextArea } = Input;
 
 export default () => {
     const [creatorVisible, setCreatorVisible] = useState(false);
+    const [redirect, setRedirect] = useState(false);
     const user = useUser();
+
+    const handleClick = () => {
+        if (user.identity === 0) {
+            setRedirect(true);
+        } else {
+            setCreatorVisible(true);
+        }
+    }
 
     return (
         <div>
@@ -21,7 +31,7 @@ export default () => {
                 icon='plus'
                 shape='round'
                 size='large'
-                onClick={() => setCreatorVisible(true)}
+                onClick={handleClick}
             >
                 发布新帖
             </Button>
@@ -44,6 +54,7 @@ export default () => {
                     </Form.Item>
                 </Form>
             </Modal>
+            {redirect ? <Redirect to='/login' /> : null}
         </div>
     );
 };
