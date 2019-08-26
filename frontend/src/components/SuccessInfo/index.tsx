@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { Card } from 'antd';
+import { Card, Result, Icon, Button } from 'antd';
 
 import { IUser } from '../../types';
 
@@ -21,9 +21,27 @@ export default (props: SuccessInfoProps) => {
     }, []);
 
     return (
-        <Card className='success-info'>
-            {props.prefix}，{props.user.nickName} <br/>
-            {clock}秒后自动跳转
-        </Card>
+        <Result className="success-info"
+            status="success"
+            icon={<Icon type="smile" theme="twoTone" />}
+            title={`${props.prefix}，${props.user.nickName}`}
+            subTitle={`${clock}秒后自动跳转`}
+            extra={[
+                <div className="success-operation">
+                    <Button type="primary" key="center" style={{ marginRight: 15 }}>
+                        个人中心
+                    </Button>
+                    <Button key="return">
+                        返回首页
+                    </Button>
+                </div>
+
+            ]}
+        />
     );
 };
+
+/*
+{props.prefix}，{props.user.nickName} <br/>
+            {clock}秒后自动跳转
+            */

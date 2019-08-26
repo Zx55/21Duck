@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { Modal, Button, Form, Input, Icon, notification } from 'antd';
+import { Modal, Button, Form, Input, Icon, message } from 'antd';
 
 import { useUser } from '../../hooks';
 
@@ -14,20 +14,16 @@ export default () => {
     const [creatorVisible, setCreatorVisible] = useState(false);
     const [redirect, setRedirect] = useState(false);
     const user = useUser();
-    
-    const openNotificationWithWarning = () => {
-        notification['warning']({
-            message: "您没有权限发帖",
-            description:
-              "游客请先登录或注册",
-            duration: 3
-        });
-      };
-    
+
+    const warning = () => {
+        message.config({ top: 75 });
+        message.warning("游客请先登录或注册");
+    };
+
 
     const handleClick = () => {
         if (user.identity === 0) {
-            openNotificationWithWarning();
+            warning();
             setRedirect(true);
         } else {
             setCreatorVisible(true);
