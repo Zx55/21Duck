@@ -14,26 +14,23 @@
 
 .app-header {
     padding: 0 3%;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    padding-left: 15%;
+    padding-right: 15%;
 }
 
 .app-content {
+    margin-top: 64px;
     padding: 3 3%;
     height: 100%;
+    padding-left: 15%;
+    padding-right: 15%;
 }
 
 .app-footer {
     text-align: center;
-}
-
-.app-header.ant-layout-header {
-    padding-left: 15%;
-    padding-right: 15%;
-}
-
-.app-content.ant-layout-content {
-    padding-left: 15%;
-    padding-right: 15%;
-    height: 100%;
 }
 
 .app.ant-layout{
