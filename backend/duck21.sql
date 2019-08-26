@@ -25,7 +25,8 @@ create table posting(
     theme varchar(256) not null,
     posting_content varchar(16384) not null,
     category_id int not null,
-    posting_thumb_num int not null
+    posting_thumb_num int not null,
+    max_floor int not null default 0
 )
 
 
@@ -37,7 +38,8 @@ create table reposting(
     reposting_user_id varchar(20) not null,
     reposting_time datetime not null,
     reposting_content varchar(16384) not null ,
-    reposting_thumb_num int not null
+    reposting_thumb_num int not null,
+    floor int not null default 1
 )
 
 
@@ -73,17 +75,29 @@ alter table notify add foreign key (notify_user_id) references user(user_id);
 alter table administration add foreign key (category_id) references category(category_id);
 alter table administration add foreign key (user_id) references user(user_id);
 
+alter table posting change max_floor max_floor int not null default 0;
+alter table reposting change floor floor int not null default 1;
 #triggers
 
+#drop trigger insertreposting;
 
 create trigger insertreposting after insert
     on reposting for each row
     begin
         update posting set reply_time=now() where posting_id = new.main_posting_id;
         update posting set reply_num=reply_num+1 where posting_id = new.main_posting_id;
+        update posting set max_floor=max_floor+1 where posting_id = new.main_posting_id;
         update category join posting on category.category_id=posting.category_id
         set category.reposting_num = category.reposting_num+1
         where new.main_posting_id=posting_id;
+    end;
+
+create trigger addrepostingfloor before insert
+    on reposting for each row
+    begin
+        declare f int default 0;
+        select max_floor+1 from posting where posting.posting_id=new.main_posting_id into f;
+        set new.floor=f;
     end;
 
 
@@ -123,6 +137,7 @@ create trigger deleteposting after delete
     end;
 
 
+
 #测试
 select * from user;
 
@@ -133,7 +148,7 @@ select * from posting;
 select * from category;
 
 insert into reposting (reply_id, main_posting_id, reposting_user_id, reposting_time, reposting_content, reposting_thumb_num)
-values (1,3,123456,now(),'你 打 字 没 空 格 啊 11452',0);
+values (-1,1,123456,now(),'人杰地灵czrczrzx5',0);
 
 delete from reposting where main_posting_id=3;
 
@@ -141,6 +156,8 @@ update reposting set reposting_content='空 格',reposting_time=now() where main
 
 insert into category (category_id, category_content, posting_num, reposting_num, new_reply_time)
 values (1,'校园周边',123,59,now());
+
+update posting set posting.max_floor = 100;
 
 
 select * from category join posting on category.category_id=posting.category_id;
