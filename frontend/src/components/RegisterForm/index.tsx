@@ -9,6 +9,8 @@ import { registerAsync } from '../../actions';
 import { RouteComponentProps } from 'react-router-dom';
 import { WrappedFormUtils } from 'antd/lib/form/Form';
 
+import Vcode from '../VerifyCode'
+
 import './RegisterForm.css';
 
 export interface RegisterFormProps extends RouteComponentProps {
@@ -48,6 +50,17 @@ const RegisterForm = (props: RegisterFormProps) => {
             form.validateFields(['confirm'], { force: true });
         }
         callback();
+    };
+
+    const [verifycodevalue , setverifycodeValue] = useState('');
+
+    const compareToVerifyCode = (rule: any, value: any, callback: { (arg0: string): void; (): void; }) => {
+        const form = props.form;
+        if (form.getFieldValue('verifycode').length==4 && verifycodevalue !== form.getFieldValue('verifycode')) {
+            callback('验证码错误!');
+        } else {
+            callback();
+        }
     };
 
     const compareToFirstPassword = (rule: any, value: any, callback: { (arg0: string): void; (): void; }) => {
@@ -121,6 +134,29 @@ const RegisterForm = (props: RegisterFormProps) => {
                     />
                 )}
             </Form.Item>
+            <div id="verify-form">
+                <div id="verify-text">
+                    <Form.Item>
+                        {getFieldDecorator('verifycode', {
+                                rules: [{ required: true, message: '请输入验证码' },
+                                {
+                                    validator: compareToVerifyCode,
+                                },],
+                        })(
+                            <Input
+                                prefix={<Icon type="check-circle" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                placeholder="验证码"
+                            />,
+                        )}
+                    </Form.Item>
+                </div>
+                <div id="verify-vcode">
+                    <Vcode width={110} height={32} onChange={(v:any) => {
+                    console.log('当前的验证码值：', v)
+                    setverifycodeValue(v);
+                }}></Vcode>
+                </div>
+            </div>
             <Form.Item>
                 <Button className="register-button" type="primary" htmlType="submit">
                     注册
