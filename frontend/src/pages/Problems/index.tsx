@@ -6,5 +6,7 @@ import './Problems.css';
 
 
 export default () => (
-    <Template name='problem' category='2' />
+    <div>
+        <Template name='problem' category='2' />
+    </div>
 );

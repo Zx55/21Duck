@@ -38,7 +38,7 @@ const LoginForm = (props: LoginFormProps) => {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        
+
         const form = props.form;
         const code: string = form.getFieldValue('verifycode');
         if(code !== verifycodevalue){
@@ -56,8 +56,6 @@ const LoginForm = (props: LoginFormProps) => {
             }
         });
     }
-
-
 
     const { getFieldDecorator } = props.form;
 

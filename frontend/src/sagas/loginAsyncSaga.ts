@@ -21,7 +21,6 @@ function* loginAsync(action: IAction) {
         const response = (yield call(api.login, data)).data;
 
         if (response.success) {
-            console.log(response);
             yield put({
                 type: ActionTypes.LOGIN,
                 payload: {

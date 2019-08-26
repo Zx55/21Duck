@@ -13,29 +13,21 @@ const Campus = lazy(() => import('../Campus'));
 const PostDetail = lazy(() => import('../../components/PostDetail'));
 
 
-interface PageRouteProps {
-    name: string;
-    component: React.LazyExoticComponent<() => JSX.Element>;
-};
-
-const PageRoute = (props: PageRouteProps) => (
-    <div>
-        <Route exact path={`/${props.name}`} component={props.component} />
-        <Route exact path={`/${props.name}/:postId`} component={PostDetail} />
-    </div>
-);
-
 export default () => (
     <Suspense fallback={<Loading />}>
         <Switch>
             <Redirect from='/' to='/explore' exact />
-            <Route path='/explore' exact component={Explore} />
-            <PageRoute name='chat' component={Chat} />
-            <PageRoute name='problems' component={Problems} />
-            <PageRoute name='courses' component={Courses} />
-            <PageRoute name='campus' component={Campus} />
-            <Route path='/login' exact component={Login} />
-            <Route path='/register' exact component={Register} />
+            <Route exact path='/explore' component={Explore} />
+            <Route exact path='/chat' component={Chat} />
+            <Route exact path='/chat/:postId' component={PostDetail} />
+            <Route exact path='/problems' component={Problems} />
+            <Route exact path='/problems/:postId' component={PostDetail} />
+            <Route exact path='/courses' component={Courses} />
+            <Route exact path='/courses/:postId' component={PostDetail} />
+            <Route exact path='/campus' component={Campus} />
+            <Route exact path='/campus/:postId' component={PostDetail} />
+            <Route exact path='/login' component={Login} />
+            <Route exact path='/register' component={Register} />
         </Switch>
     </Suspense>
 );
