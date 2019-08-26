@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Button, Pagination } from 'antd';
+import { Pagination, BackTop } from 'antd';
 
 import PostList from '../PostList';
 import PostCreator from '../../components/PostCreator';
@@ -12,15 +12,12 @@ export interface MainFrameProps {
     name: string;
     posts: Array<PostItem>;
     postNum: number;
+    loading: boolean;
     getPosts: (page: string) => void;
 };
 
 export default (props: MainFrameProps) => {
     const [current, setCurrent] = useState(1);
-
-    const handleBackToTop = () => {
-        window.scrollTo(0, 0);
-    }
 
     const handlePageChange = (page: number): void => {
         setCurrent(page);
@@ -29,7 +26,7 @@ export default (props: MainFrameProps) => {
 
     return (
         <div className='template-main-frame'>
-            <PostList posts={props.posts} />
+            <PostList posts={props.posts} loading={props.loading} />
             <Pagination
                 className={`${props.name}-pagination`}
                 current={current}
@@ -41,15 +38,7 @@ export default (props: MainFrameProps) => {
                 onChange={(page: number) => handlePageChange(page)}
             />
             <PostCreator />
-            <Button
-                className='go-to-top-button'
-                icon='vertical-align-top'
-                shape='round'
-                size='large'
-                onClick={handleBackToTop}
-            >
-                回到顶部
-            </Button>
+            <BackTop className='go-to-top-button' />
         </div>
     );
 };

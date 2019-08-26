@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 import api from '../../api';
 import MainFrame from './MainFrame';
-import Loading from '../../components/Loading';
 
 import { PostItem } from '../../types';
 import { Param } from '../../types';
@@ -16,7 +15,12 @@ export interface IndexTemplateProps {
 };
 
 export default (props: IndexTemplateProps) => {
-    const [posts, setPosts] = useState(new Array<PostItem>());
+    let initPosts = new Array<PostItem>();
+    for (let i = 0; i < 15; ++i) {
+        initPosts.push(new PostItem());
+    }
+
+    const [posts, setPosts] = useState(initPosts);
     const [postNum, setPostNum] = useState(0);
     const [loading, setLoading] = useState(true);
 
@@ -43,13 +47,13 @@ export default (props: IndexTemplateProps) => {
     return (
         <div className={`${props.name}-root`}>
             <div>{props.name}</div>
-            {loading ? <Loading /> :
-                <MainFrame
-                    name={props.name}
-                    posts={posts}
-                    postNum={postNum}
-                    getPosts={getPosts}
-                />}
+            <MainFrame
+                name={props.name}
+                posts={posts}
+                postNum={postNum}
+                getPosts={getPosts}
+                loading={loading}
+            />
         </div>
     );
 };

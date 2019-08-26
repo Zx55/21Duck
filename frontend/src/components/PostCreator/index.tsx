@@ -36,12 +36,10 @@ export default () => {
                 className='post-button'
                 type='primary'
                 icon='plus'
-                shape='round'
+                shape='circle'
                 size='large'
                 onClick={() => handleClick()}
-            >
-                发布新帖
-            </Button>
+            />
             <Modal
                 title="发布新帖"
                 centered

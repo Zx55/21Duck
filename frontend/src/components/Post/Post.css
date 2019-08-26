@@ -1,46 +1,27 @@
 .post {
     background: white;
     box-shadow: 1px 1px 5px #bbbbbb;
-    padding: 10px 20px 10px 20px;
     margin: 10px 0 10px 0;
     width: 60%;
-}
-
-.post-header {
-    padding-top: 5px;
-    padding-bottom: 8px;
-}
-
-.post-title {
-    margin-left: 5px;
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 3px;
-}
-
-.user-head {
-    width: 28px;
-    clip: rect(0px 28px 28px 0px);
-    border-radius: 16px;
-    margin-left: 5px;
+    border-radius: 0.8ch;
 }
 
 .user-nickname {
-    line-height: 28px;
-    margin-left: 10px;
+    color: rgba(0.6, 0.6, 0.6, 0.5);
 }
 
 .post-created-time {
     float: right;
-    line-height: 28px;
+    color: rgba(0.6, 0.6, 0.6, 0.5);
 }
 
 .post-content {
-    padding: 5px 0px 0px 5px;
+    padding-top: 12px;
+    padding-left: 48px;
 }
 
 .post-footer {
-    padding-bottom: 5px;
+    padding-left: 45px;
 }
 
 .like-button {
