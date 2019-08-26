@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { Modal, Button, Form, Input, Icon, message } from 'antd';
+import { Modal, Button, Input, Icon, message } from 'antd';
 
 import { useUser } from '../../hooks';
 
 import './PostCreator.css';
 
 import Editor from '../Editor'
-
-const { TextArea } = Input;
 
 
 export default () => {

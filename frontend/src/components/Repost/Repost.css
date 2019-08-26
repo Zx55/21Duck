@@ -1,0 +1,47 @@
+.repost {
+    background: white;
+    box-shadow: 1px 1px 5px #bbbbbb;
+    margin: 10px 0 10px 0;
+    width: 60%;
+    border-radius: 0.8ch;
+}
+
+.ant-comment-content-detail {
+    padding-top: 4px;
+}
+
+.ant-comment-inner {
+    padding: 0;
+}
+
+.ant-comment-actions {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.repost-like {
+    margin-right: 6px;
+}
+
+.anticon.anticon-like.repost-like-button {
+    margin-right: 3px;
+    font-size: 14px;
+}
+
+.repost-action-text {
+    font-size: 14px;
+}
+
+.repost-report {
+    margin-right: 2px;
+}
+
+.anticon.anticon-exclamation-circle.repost-report-button {
+    margin-right: 3px;
+    font-size: 14px;
+}
+
+.anticon.anticon-message.repost-reply-button {
+    margin-right: 3px;
+    font-size: 14px;
+}

@@ -12,7 +12,7 @@ export interface RegisterData {
 };
 
 function* registerAsync(action: IAction) {
-    const { userId, userNickname, userPw, history } = action.payload;
+    const { userId, userNickname, userPw } = action.payload;
     const data: RegisterData = {
         username: userId,
         nickname: userNickname,
@@ -35,7 +35,6 @@ function* registerAsync(action: IAction) {
                     register: 0,
                 }
             });
-            setTimeout(() => history.push('/explore'), 3000);
         }
         else {
             alert('该手机号已经被注册');

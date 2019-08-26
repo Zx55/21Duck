@@ -11,7 +11,7 @@ export interface LoginData {
 };
 
 function* loginAsync(action: IAction) {
-    const { userId, userPw, history } = action.payload;
+    const { userId, userPw } = action.payload;
     const data: LoginData = {
         username: userId,
         password: userPw,
@@ -33,7 +33,6 @@ function* loginAsync(action: IAction) {
                     register: response.register,
                 }
             });
-            setTimeout(() => history.push('/explore'), 3000);
         }
         else {
             alert('登录失败');

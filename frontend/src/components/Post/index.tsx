@@ -1,5 +1,5 @@
 import React from 'react';
-import Markdown from 'react-markdown';
+import marked from 'marked';
 
 import { Card, Avatar, Skeleton } from 'antd';
 
@@ -17,30 +17,33 @@ export interface PostProps {
     loading: boolean;
 };
 
-export default (props: PostProps) => {
-    const avatar = props.post.user_head === '' ?
-        <Avatar src={props.post.user_head} /> : <Avatar icon='user' />;
-
-    return (
-        <Card className='post'>
-            <Skeleton
-                loading={props.loading}
-                active
-                avatar
-            >
-                <Meta
-                    avatar={avatar}
-                    title={props.post.theme}
-                />
-                <span className='user-nickname'>
-                    {props.post.user_nickname}
-                </span>
-                <span className='post-created-time'>
-                    {props.post.relative_posting_time}
-                </span>
-                <Markdown className='post-content' source={props.post.posting_content} />
-                <PostFooter like={props.post.posting_thumb_num} />
-            </Skeleton>
-        </Card>
-    );
-};
+export default (props: PostProps) => (
+    <Card className='post'>
+        <Skeleton
+            loading={props.loading}
+            active
+            avatar
+        >
+            <Meta
+                avatar={<Avatar src={props.post.user_head} />}
+                title={props.post.theme}
+            />
+            <span className='user-nickname'>
+                {props.post.user_nickname}
+            </span>
+            <span className='post-created-time'>
+                {props.post.relative_posting_time}
+            </span>
+            <div
+                className='post-content'
+                dangerouslySetInnerHTML={{
+                    __html: marked(props.post.posting_content)
+                }}
+            />
+            <PostFooter
+                postId={props.post.posting_id}
+                like={props.post.posting_thumb_num}
+            />
+        </Skeleton>
+    </Card>
+);

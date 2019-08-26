@@ -1,6 +1,6 @@
 import React, { FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Form, Icon, Input, Button, Checkbox, message } from 'antd';
 
@@ -51,7 +51,6 @@ const LoginForm = (props: LoginFormProps) => {
                 dispatch(loginAsync(
                     values.username,
                     values.password,
-                    props.history,
                 ));
             }
         });
@@ -129,6 +128,4 @@ const LoginForm = (props: LoginFormProps) => {
     );
 }
 
-export default Form.create({ name: 'normal_login' })(
-    withRouter(LoginForm)
-);
+export default Form.create({ name: 'normal_login' })(LoginForm);

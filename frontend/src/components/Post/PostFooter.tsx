@@ -1,13 +1,17 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 import Button from '../Button';
 
+import { RouteComponentProps } from 'react-router-dom';
 
-export interface PostFooterProps {
+
+export interface PostFooterProps extends RouteComponentProps {
+    postId: number;
     like: number;
 };
 
-export default (props: PostFooterProps) => (
+export default withRouter((props: PostFooterProps) => (
     <div className='post-footer'>
         <span className='interaction-bar'>
             <Button
@@ -40,8 +44,8 @@ export default (props: PostFooterProps) => (
                 name='read-more'
                 icon='select'
                 text='更多'
-                onClick={(e) => console.log('more')}
+                onClick={(e) => props.history.push(`${props.match.path}/${props.postId}`)}
             />
         </span>
     </div>
-)
+));

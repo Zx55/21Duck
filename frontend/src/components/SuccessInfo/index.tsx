@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Result, Icon, Button } from 'antd';
 
@@ -32,7 +33,7 @@ export default (props: SuccessInfoProps) => {
                         个人中心
                     </Button>
                     <Button key="return">
-                        返回首页
+                        <Link to='/explore'>返回首页</Link>
                     </Button>
                 </div>
 
@@ -40,8 +41,3 @@ export default (props: SuccessInfoProps) => {
         />
     );
 };
-
-/*
-{props.prefix}，{props.user.nickName} <br/>
-            {clock}秒后自动跳转
-            */

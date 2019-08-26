@@ -1,6 +1,6 @@
 import React, { useState, FormEvent, FocusEvent } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Form, Input, Icon, Button, message } from 'antd';
 
@@ -31,7 +31,7 @@ const RegisterForm = (props: RegisterFormProps) => {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        
+
         const form = props.form;
         const code: string = form.getFieldValue('verifycode');
         if(code !== verifycodevalue){
@@ -46,7 +46,6 @@ const RegisterForm = (props: RegisterFormProps) => {
                     values.username,
                     values.nickname,
                     values.password,
-                    props.history,
                 ));
             }
         });
@@ -183,6 +182,4 @@ const RegisterForm = (props: RegisterFormProps) => {
     )
 }
 
-export default Form.create({ name: 'register' })(
-    withRouter(RegisterForm)
-);
+export default Form.create({ name: 'register' })(RegisterForm);

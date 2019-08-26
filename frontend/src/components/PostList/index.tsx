@@ -28,22 +28,3 @@ export default (props: PostListProps) => {
         />
     );
 };
-
-
-/**
- *
- * <RcQueueAnim
-            className='post-list'
-            type={['right', 'alpha']}
-            ease={['easeOutQuart', 'easeInOutQuart']}
-            component='ul'
-            leaveReverse
-        >
-            {props.posts && props.posts.length ? props.posts.map((post: PostItem) =>
-                <li key={`post-${post.posting_id}`}>
-                    <Post post={post} loading={false} />
-                </li>
-            ) : <Loading />}
-        </RcQueueAnim>
-    );
- */

@@ -45,11 +45,23 @@ export class PostItem {
     user_nickname: string = '';                  // userNickname
     user_head: string = '';                      // userHead
     theme: string = '';                          // postTitle
-    relative_posting_time: string = '';           // latestPostEditedTime
-    relative_reply_time: string = ''              // latestRepostedTime
+    relative_posting_time: string = '';          // latestPostEditedTime
+    relative_reply_time: string = ''             // latestRepostedTime
     posting_content: string = '';                // postContent
     posting_thumb_num: number = -1;              // postLike
 }
+
+export class RepostItem {
+    reposting_num: number = 15;                 // TotalRepost
+    reposting_id: number = -1;                  // repostId
+    reposting_user: string = '';                // userId
+    user_nickname: string = '';                 // userNickname
+    user_head: string = '';                     // userHead
+    reposting_content: string = '';             // repostContent
+    relative_reposting_time: string = '';       // latestRepostedTime
+    reposting_thumb_num: number = -1;           // repostLike
+    reply_posting: null | Array<string> = [];   // replyPointer
+};
 
 export class IUser {
     public userId: string = '';
