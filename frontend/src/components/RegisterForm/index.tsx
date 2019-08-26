@@ -81,7 +81,9 @@ const RegisterForm = (props: RegisterFormProps) => {
         <Form onSubmit={handleSubmit} className='register-form'>
             <Form.Item>
                 {getFieldDecorator('username', {
-                    rules: [{ required: true, message: '请输入手机号!', whitespace: true }],
+                    rules: [{ required: true, message: '请输入正确手机号!', whitespace: true,
+                    pattern: new RegExp("^(1[3-9])\\d{9}$") 
+                }],
                 })(
                     <Input
                         prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
