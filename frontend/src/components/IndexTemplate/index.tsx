@@ -4,8 +4,6 @@ import api from '../../api';
 import MainFrame from './MainFrame';
 import Loading from '../../components/Loading';
 
-import { Pagination } from 'antd';
-
 import { PostItem } from '../../types';
 import { Param } from '../../types';
 
@@ -21,7 +19,6 @@ export default (props: IndexTemplateProps) => {
     const [posts, setPosts] = useState(new Array<PostItem>());
     const [postNum, setPostNum] = useState(0);
     const [loading, setLoading] = useState(true);
-    const [current, setCurrent] = useState(1);
 
     const getPosts = (page: string): void => {
         setLoading(true);
@@ -43,25 +40,16 @@ export default (props: IndexTemplateProps) => {
         getPosts('0');
     }, []);
 
-    const handlePageChange = (page: number): void => {
-        setCurrent(page);
-        getPosts((page - 1).toString());
-    }
-
     return (
         <div className={`${props.name}-root`}>
             <div>{props.name}</div>
-            {loading ? <Loading /> : <MainFrame posts={posts}/>}
-            <Pagination
-                className={`${props.name}-pagination`}
-                current={current}
-                defaultPageSize={15}
-                size='small'
-                hideOnSinglePage
-                total={postNum}
-                showQuickJumper
-                onChange={(page: number) => handlePageChange(page)}
-            />
+            {loading ? <Loading /> :
+                <MainFrame
+                    name={props.name}
+                    posts={posts}
+                    postNum={postNum}
+                    getPosts={getPosts}
+                />}
         </div>
     );
 };
