@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { Card, Result, Icon, Button } from 'antd';
+import { Result, Icon, Button } from 'antd';
 
 import { IUser } from '../../types';
 

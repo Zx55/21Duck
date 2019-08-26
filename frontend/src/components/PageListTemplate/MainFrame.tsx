@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Pagination, BackTop } from 'antd';
 
 import PostList from '../PostList';
-import PostCreator from '../../components/PostCreator';
+import PostCreator from '../PostCreator';
 
 import { PostItem } from '../../types';
 

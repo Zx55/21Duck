@@ -9,12 +9,12 @@ import { Param } from '../../types';
 import './Template.css';
 
 
-export interface IndexTemplateProps {
+export interface PageListTemplateProps {
     name: string;
     category: string;
 };
 
-export default (props: IndexTemplateProps) => {
+export default (props: PageListTemplateProps) => {
     let initPosts = new Array<PostItem>();
     for (let i = 0; i < 15; ++i) {
         initPosts.push(new PostItem());

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Template from '../../components/IndexTemplate';
+import Template from '../PageListTemplate';
 import './PostDetail.css';
 import PostHeader from '../Post/PostHeader';
 import PostContent from '../Post/PostContent';

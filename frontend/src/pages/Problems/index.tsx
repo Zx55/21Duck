@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Template from '../../components/IndexTemplate';
+import Template from '../../components/PageListTemplate';
 
 import './Problems.css';
 
