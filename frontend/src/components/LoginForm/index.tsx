@@ -26,23 +26,30 @@ const LoginForm = (props: LoginFormProps) => {
     const dispatch = useDispatch();
     const [verifycodevalue , setverifycodeValue] = useState('');
 
+    const compareToVerifyCode = (rule: any, value: any, callback: { (arg0: string): void; (): void; }) => {
+        const form = props.form;
+        if (form.getFieldValue('verifycode').length==4 && verifycodevalue !== form.getFieldValue('verifycode')) {
+            callback('验证码错误!');
+        } else {
+            callback();
+        }
+    };
+    
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         props.form.validateFields((err: any, values: LoginValue) => {
-            if (verifycodevalue === values.verifycode){
-                if (!err) {
-                    dispatch(loginAsync(
-                        values.username,
-                        values.password,
-                        props.history,
-                    ));
-                }
-            } else {
-                alert("验证码错误");
+            if (!err) {
+                dispatch(loginAsync(
+                    values.username,
+                    values.password,
+                    props.history,
+                ));
             }
         });
     }
+
+
 
     const { getFieldDecorator } = props.form;
 
@@ -73,7 +80,10 @@ const LoginForm = (props: LoginFormProps) => {
                 <div id="verify-text">
                     <Form.Item>
                         {getFieldDecorator('verifycode', {
-                                rules: [{ required: true, message: '请输入验证码' }],
+                                rules: [{ required: true, message: '请输入验证码' },
+                                {
+                                    validator: compareToVerifyCode,
+                                },],
                         })(
                             <Input
                                 prefix={<Icon type="check-circle" style={{ color: 'rgba(0,0,0,.25)' }} />}
