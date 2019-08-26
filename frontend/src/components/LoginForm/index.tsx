@@ -28,7 +28,8 @@ const LoginForm = (props: LoginFormProps) => {
 
     const compareToVerifyCode = (rule: any, value: any, callback: { (arg0: string): void; (): void; }) => {
         const form = props.form;
-        if (form.getFieldValue('verifycode').length==4 && verifycodevalue !== form.getFieldValue('verifycode')) {
+        if (form.getFieldValue('verifycode').length === 4 
+            && verifycodevalue !== form.getFieldValue('verifycode')) {
             callback('验证码错误!');
         } else {
             callback();

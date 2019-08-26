@@ -1,0 +1,105 @@
+#title {
+    background: white;
+    box-shadow: 1px 1px 5px #bbbbbb;
+    padding: 10px 20px 10px 20px;
+    margin: 10px 0 10px 0;
+    width: 100%;
+}
+
+.post-header {
+    padding-top: 5px;
+    padding-bottom: 8px;
+}
+
+.post-title {
+    margin-left: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.user-head {
+    width: 28px;
+    clip: rect(0px 28px 28px 0px);
+    border-radius: 16px;
+    margin-left: 5px;
+}
+
+.user-nickname {
+    line-height: 28px;
+    margin-left: 10px;
+}
+
+.post-created-time {
+    float: right;
+    line-height: 28px;
+}
+
+.post-content {
+    padding: 5px 0px 0px 5px;
+}
+
+.post-footer {
+    padding-bottom: 5px;
+}
+
+.like-button {
+    margin-right: 8px;
+}
+
+.like-button:hover {
+    cursor: pointer;
+    color: #0099FF;
+}
+
+.anticon.anticon-like.like-button-icon.button-component-icon {
+    margin-right: 3px;
+}
+
+.share-button {
+    margin-right: 8px;
+}
+
+.share-button:hover {
+    cursor: pointer;
+    color: #0099FF;
+}
+
+.anticon.anticon-export.share-button-icon.button-component-icon {
+    margin-right: 3px;
+}
+
+.favorite-button {
+    margin-right: 8px;
+}
+
+.favorite-button:hover {
+    cursor: pointer;
+    color: #0099FF;
+}
+
+.anticon.anticon-star.favorite-button-icon.button-component-icon {
+    margin-right: 3px;
+}
+
+.anticon.anticon-exclamation-circle.report-button-icon.button-component-icon {
+    margin-right: 3px;
+}
+
+.report-button:hover {
+    cursor: pointer;
+    color: #0099FF;
+}
+
+.read-more-button {
+    float: right;
+}
+
+.read-more-button:hover {
+    cursor: pointer;
+    color: #0099FF;
+}
+
+.anticon.anticon-select.read-more-button-icon.button-component-icon {
+    margin-right: 4px;
+}
