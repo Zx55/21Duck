@@ -61,7 +61,7 @@ create table category(
 create table administration(
     administration_id int primary key,
     category_id int not null,
-    user_id int not null,
+    user_id int not null
 )
 
 
