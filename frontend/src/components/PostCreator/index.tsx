@@ -7,6 +7,8 @@ import { useUser } from '../../hooks';
 
 import './PostCreator.css';
 
+import Editor from '../Editor'
+
 const { TextArea } = Input;
 
 
@@ -42,22 +44,26 @@ export default () => {
             />
             <Modal
                 title="发布新帖"
+                width="80%"
                 centered
                 visible={creatorVisible}
                 onOk={() => setCreatorVisible(false)}
                 onCancel={() => setCreatorVisible(false)}
             >
-                <Form className='box'>
-                    <Form.Item>
+                <div className='box'>
+                    <div className='title'>
+                        <div className='title-word'>标题</div>
                         <Input
                             prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />}
                             placeholder="请输入标题"
                         />
-                    </Form.Item>
-                    <Form.Item>
-                        <TextArea rows={4} placeholder="请输入正文" />
-                    </Form.Item>
-                </Form>
+                    </div>
+                    <div className='editor'>
+                        <div id="editor">
+                            <Editor></Editor>
+                        </div>
+                    </div>
+                </div>
             </Modal>
             {redirect ? <Redirect to='/login' /> : null}
         </div>

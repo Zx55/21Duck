@@ -1,3 +1,30 @@
+.ant-modal-body{
+    padding: 5px 10px 0 10px;
+}
+
 .box {
-    margin: 20px 10px 0 10px;
+    margin: 0px 10px 0 10px;
+}
+
+.title{
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    margin-bottom: 15px;
+}
+
+.title-word{
+    padding-bottom: 5px;
+}
+
+.editor{
+    margin-top: 10px;
+    border:1px solid rgba(100, 100, 100, 0.2);
+    padding: 5px;
+    border-radius: 5px; 
+}
+
+.minimap.slider-mouseover{
+    
 }
