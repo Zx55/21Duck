@@ -2,7 +2,7 @@ import React, { useState, FormEvent, FocusEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 
-import { Form, Input, Icon, Button } from 'antd';
+import { Form, Input, Icon, Button, message } from 'antd';
 
 import { registerAsync } from '../../actions';
 
@@ -27,8 +27,18 @@ export interface RegisterValue {
 const RegisterForm = (props: RegisterFormProps) => {
     const [confirmDirty, setConfirmDirty] = useState(false);
     const dispatch = useDispatch();
+    const [verifycodevalue, setverifycodeValue] = useState('');
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        
+        const form = props.form;
+        const code: string = form.getFieldValue('verifycode');
+        if(code !== verifycodevalue){
+            message.config({top: 75});
+            message.error('验证码错误');
+            return;
+        }
         e.preventDefault();
         props.form.validateFieldsAndScroll((err: any, values: RegisterValue) => {
             if (!err) {
@@ -52,14 +62,11 @@ const RegisterForm = (props: RegisterFormProps) => {
         callback();
     };
 
-    const [verifycodevalue, setverifycodeValue] = useState('');
 
     const compareToVerifyCode = (rule: any, value: any, callback: { (arg0: string): void; (): void; }) => {
         const form = props.form;
         const code: string = form.getFieldValue('verifycode');
-        if (code.length !== 0 && (code.length !== 4 ||
-            (code.length === 4 && verifycodevalue !== code))
-        ) {
+        if (code.length === 4 && verifycodevalue !== code){
             callback('验证码错误!');
         } else {
             callback();
@@ -157,7 +164,7 @@ const RegisterForm = (props: RegisterFormProps) => {
                     </Form.Item>
                 </div>
                 <div id="verify-vcode">
-                    <Vcode width={110} height={32} onChange={(v: any) => {
+                    <Vcode width={115} height={32} onChange={(v: any) => {
                         console.log('当前的验证码值：', v)
                         setverifycodeValue(v);
                     }}></Vcode>

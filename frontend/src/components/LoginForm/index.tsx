@@ -2,7 +2,7 @@ import React, { FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Icon, Input, Button, Checkbox, message } from 'antd';
 
 import { loginAsync } from '../../actions';
 
@@ -29,9 +29,7 @@ const LoginForm = (props: LoginFormProps) => {
     const compareToVerifyCode = (rule: any, value: any, callback: { (arg0: string): void; (): void; }) => {
         const form = props.form;
         const code: string = form.getFieldValue('verifycode');
-        if (code.length !== 0 && (code.length !== 4 ||
-            (code.length === 4 && verifycodevalue !== code))
-        ) {
+        if (code.length === 4 && verifycodevalue !== code){
             callback('验证码错误!');
         } else {
             callback();
@@ -40,7 +38,14 @@ const LoginForm = (props: LoginFormProps) => {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
+        
+        const form = props.form;
+        const code: string = form.getFieldValue('verifycode');
+        if(code !== verifycodevalue){
+            message.config({top: 75});
+            message.error('验证码错误');
+            return;
+        }
         props.form.validateFields((err: any, values: LoginValue) => {
             if (!err) {
                 dispatch(loginAsync(
@@ -96,7 +101,7 @@ const LoginForm = (props: LoginFormProps) => {
                     </Form.Item>
                 </div>
                 <div id="verify-vcode">
-                    <Vcode width={110} height={32} onChange={(v: any) => {
+                    <Vcode width={115} height={32} onChange={(v: any) => {
                         console.log('当前的验证码值：', v)
                         setverifycodeValue(v);
                     }}></Vcode>
