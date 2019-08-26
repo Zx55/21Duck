@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 
 import { Modal, Button, Form, Input, Icon } from 'antd';
 
+import { useUser } from '../../hooks';
+
 import './PostCreator.css';
+
+const { TextArea } = Input;
 
 
 export default () => {
     const [creatorVisible, setCreatorVisible] = useState(false);
-
-    const { TextArea } = Input;
+    const user = useUser();
 
     return (
         <div>

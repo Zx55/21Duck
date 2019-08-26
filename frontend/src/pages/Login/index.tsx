@@ -1,15 +1,14 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
-import { getUser } from '../../selectors';
 import LoginForm from '../../components/LoginForm';
 import SuccessInfo from './SuccessInfo';
+import { useUser } from '../../hooks';
 
 import './Login.css';
 
 
 export default () => {
-    const user = useSelector(getUser);
+    const user = useUser();
 
     return (
         <div className='login-root'>

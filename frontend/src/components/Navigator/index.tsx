@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { History } from 'history';
 
 import { Menu, Input, Icon } from 'antd';
 
-import { getUser } from '../../selectors';
 import { logout } from '../../actions';
 
 import { ClickParam } from 'antd/lib/menu';
-import { IUser } from '../../types';
+import { useUser } from '../../hooks';
 
 import './Navigator.css';
 
@@ -23,7 +22,7 @@ export interface NavigatorProps {
 
 export default (props: NavigatorProps) => {
     const [menuKey, setKey] = useState(props.history.location.pathname.slice(1));
-    const user: IUser = useSelector(getUser);
+    const user = useUser();
     const dispatch = useDispatch();
 
     const handleClick = (e: ClickParam) => {
@@ -67,22 +66,22 @@ export default (props: NavigatorProps) => {
                     </Link>
                 </Item>
             ) : (
-                <SubMenu
-                    className='user-menu'
-                    title={
-                        <span>
-                            <Icon type='user' />
-                            用户
+                    <SubMenu
+                        className='user-menu'
+                        title={
+                            <span>
+                                <Icon type='user' />
+                                用户
                         </span>
-                    }
-                >
-                    <Item key='logout' onClick={() => {
-                        dispatch(logout());
-                    }}>
-                        注销
+                        }
+                    >
+                        <Item key='logout' onClick={() => {
+                            dispatch(logout());
+                        }}>
+                            注销
                     </Item>
-                </SubMenu>
-            )}
+                    </SubMenu>
+                )}
             <Item
                 className='notify'
                 key='notify'

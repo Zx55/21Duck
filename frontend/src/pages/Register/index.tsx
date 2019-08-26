@@ -1,15 +1,14 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 import RegisterForm from '../../components/RegisterForm';
 import SuccessInfo from './SuccessInfo';
-import { getUser } from '../../selectors';
+import { useUser } from '../../hooks';
 
 import './Register.css';
 
 
 export default () => {
-    const user = useSelector(getUser);
+    const user = useUser();
 
     return (
         <div className='register-root'>
