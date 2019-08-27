@@ -4,10 +4,9 @@ import { Redirect } from 'react-router-dom';
 import { Modal, Button, Input, Icon, message } from 'antd';
 
 import { useUser } from '../../hooks';
+import Editor from '../Editor'
 
 import './PostCreator.css';
-
-import Editor from '../Editor'
 
 
 export default () => {
@@ -19,7 +18,6 @@ export default () => {
         message.config({ top: 75 });
         message.warning("游客请先登录或注册");
     };
-
 
     const handleClick = () => {
         if (user.identity === 0) {

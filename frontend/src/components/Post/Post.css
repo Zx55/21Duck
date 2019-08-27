@@ -7,11 +7,13 @@
 }
 
 .user-nickname {
+    font-size: 12px;
     color: rgba(0.6, 0.6, 0.6, 0.5);
 }
 
 .post-created-time {
-    float: right;
+    font-size: 12px;
+    padding-left: 15px;
     color: rgba(0.6, 0.6, 0.6, 0.5);
 }
 
