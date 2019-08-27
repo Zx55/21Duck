@@ -46,12 +46,13 @@ class RepostingSerializer(PartialUpdateSerializerMixin, ModelSerializer):
     user_nickname = serializers.SerializerMethodField(label='user_nickname')
     user_head = serializers.SerializerMethodField(label='user_head')
     reply_posting = serializers.SerializerMethodField(label='reply_posting')
+    floor = serializers.SerializerMethodField(label='floor')
 
     class Meta:
         model = Reposting
         fields = ['reposting_id', 'reposting_user', 'relative_reposting_time',
                   'reposting_content', 'reposting_thumb_num', 'reposting_num',
-                  'user_nickname', 'user_head', 'reply_posting']
+                  'user_nickname', 'user_head', 'reply_posting', 'floor']
 
     def get_reposting_num(self, obj):
         return Posting.objects.filter(posting_id=obj.main_posting.posting_id)[0].reply_num
@@ -71,6 +72,9 @@ class RepostingSerializer(PartialUpdateSerializerMixin, ModelSerializer):
         else:
             reply_posting = Reposting.objects.filter(reposting_id=obj.reply_id)[0]
             return reply_posting.reposting_user.nickname, reply_posting.reposting_content
+
+    def get_floor(self, obj):
+        return obj.floor
 
 class CategorySerializer(PartialUpdateSerializerMixin, ModelSerializer):
     relative_new_reply_time = serializers.SerializerMethodField(label='relative_new_reply_time')

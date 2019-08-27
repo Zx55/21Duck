@@ -50,14 +50,15 @@ class RepostingViewSet(CacheResponseMixin, ModelViewSet):
         if request.method == 'GET':
             page = request.GET.get('page')
             posting_id = request.GET.get('posting_id')
-            if page and posting_id:
-                page = int(page)
-                posting_id = int(posting_id)
-                if page == 0:
-                    EACH_PAGE = 14
+            category_id = request.GET.get('category_id')
+            if page and posting_id and category_id:
+                if Posting.objects.get(posting_id=posting_id).category_id != int(category_id):
+                    return Response(False)
                 else:
                     EACH_PAGE = 15
-                self.queryset = Reposting.objects.filter(main_posting=posting_id).order_by("-reposting_time")[page * EACH_PAGE : (page + 1) * EACH_PAGE]
+                    page = int(page)
+                    posting_id = int(posting_id)
+                    self.queryset = Reposting.objects.filter(main_posting=posting_id).order_by("-reposting_time")[page * EACH_PAGE : (page + 1) * EACH_PAGE]
             else:
                 return Response(False)
 
@@ -69,6 +70,7 @@ class RepostingViewSet(CacheResponseMixin, ModelViewSet):
                 return self.get_paginated_response(serializer.data)
 
             serializer = self.get_serializer(queryset, many=True)
+
             return Response(serializer.data)
 
 class CategoryViewSet(CacheResponseMixin, ModelViewSet):
@@ -105,7 +107,7 @@ def register(request):
         user = request.POST.get('username')
         pwd = request.POST.get('password')
         nickname = request.POST.get('nickname')
-        head = 'https://b-ssl.duitang.com/uploads/item/201805/31/20180531220859_wufxi.jpg'
+        head = ''
         identify = 1
         blocktime = 0
         scores = 0

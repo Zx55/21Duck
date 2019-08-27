@@ -52,6 +52,7 @@ class Posting(models.Model):
     posting_content = models.CharField(max_length=16384)
     category_id = models.IntegerField()
     posting_thumb_num = models.IntegerField()
+    max_floor = models.IntegerField()
 
     class Meta:
         managed = False
@@ -66,6 +67,7 @@ class Reposting(models.Model):
     reposting_time = models.DateTimeField(blank=True, null=True)
     reposting_content = models.CharField(max_length=16384)
     reposting_thumb_num = models.IntegerField()
+    floor = models.IntegerField()
 
     class Meta:
         managed = False
