@@ -4,13 +4,13 @@ import { List } from 'antd';
 
 import Repost from '../Repost';
 
-import { RepostItem } from '../../types';
+import { IRepost } from '../../types';
 
 import './RepostList.css';
 
 
 export interface RepostListProps {
-    reposts: Array<RepostItem>;
+    reposts: Array<IRepost>;
     loading: boolean;
 };
 

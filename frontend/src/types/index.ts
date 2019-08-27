@@ -20,8 +20,8 @@ export interface IAction {
     payload: IPayload;
 };
 
-// 发送后端接口
-export interface IPost {
+// 请求后端的接口
+export interface IRequestPost {
     userId: number;
     postTitle: string;
     postContent: string;
@@ -29,7 +29,7 @@ export interface IPost {
     postThumbup: number;
 };
 
-export interface IRepost {
+export interface IRequestRepost {
     replyId: number;
     postId: number;
     repostUserId: number;
@@ -37,8 +37,8 @@ export interface IRepost {
     repostThumbup: number;
 };
 
-// 接受后端接口
-export class PostItem {
+// 接受后端相应的接口
+export class IPost {
     posting_num: number = 15;                   // totalPost
     posting_id: number = -1;                    // postId
     posting_user: string = '';                  // userId
@@ -53,7 +53,7 @@ export class PostItem {
     category_id: number = -1;                   // postCategory
 }
 
-export class RepostItem {
+export class IRepost {
     reposting_num: number = 15;                 // TotalRepost
     reposting_id: number = -1;                  // repostId
     reposting_user: string = '';                // userId
@@ -63,6 +63,11 @@ export class RepostItem {
     relative_reposting_time: string = '';       // latestRepostedTime
     reposting_thumb_num: number = -1;           // repostLike
     reply_posting: null | Array<string> = [];   // replyPointer
+    floor: number = -1;                         // repostFloor
+};
+
+export interface INotFound {
+    detail: string;
 };
 
 export class IUser {

@@ -9,6 +9,7 @@ import { RouteComponentProps } from 'react-router-dom';
 export interface PostFooterProps extends RouteComponentProps {
     postId: number;
     like: number;
+    detail: boolean;
 };
 
 export default withRouter((props: PostFooterProps) => (
@@ -39,13 +40,15 @@ export default withRouter((props: PostFooterProps) => (
                 onClick={(e) => console.log('report')}
             />
         </span>
-        <span className='read-more-bar'>
-            <Button
-                name='read-more'
-                icon='select'
-                text='更多'
-                onClick={(e) => props.history.push(`${props.match.path}/${props.postId}`)}
-            />
-        </span>
+        {props.detail ? null :
+            <span className='read-more-bar'>
+                <Button
+                    name='read-more'
+                    icon='select'
+                    text='更多'
+                    onClick={(e) => props.history.push(`${props.match.path}/${props.postId}`)}
+                />
+            </span>
+        }
     </div>
 ));

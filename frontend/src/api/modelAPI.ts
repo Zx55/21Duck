@@ -13,8 +13,13 @@ export default class API<T> {
         this.name = name;
     }
 
-    private detailUrl = (id: number): string =>
-        this.baseUrl + this.name + '/' + id + '/';
+    private detailUrl = (id: string, params?: Param): string => {
+        if (params) {
+            const paramString = '?' + qs.stringify(params);
+            return this.baseUrl + this.name + '/' + id + '/' + paramString;
+        }
+        return this.baseUrl + this.name + '/' + id + '/';
+    };
 
     private listUrl = (params?: Param): string => {
         if (params) {
@@ -25,8 +30,9 @@ export default class API<T> {
     }
 
     public list = (params?: Param) => axios.get(this.listUrl(params));
-    public retreive = (id: number) => axios.get(this.detailUrl(id));
+    public retreive = (id: string, params?: Param) =>
+        axios.get(this.detailUrl(id, params));
     public create = (data: T) => axios.post(this.listUrl(), data);
-    public update = (id: number, data: T) => axios.put(this.detailUrl(id), data);
-    public remove = (id: number) => axios.delete(this.detailUrl(id));
+    public update = (id: string, data: T) => axios.put(this.detailUrl(id), data);
+    public remove = (id: string) => axios.delete(this.detailUrl(id));
 };

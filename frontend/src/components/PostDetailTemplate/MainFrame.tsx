@@ -6,16 +6,16 @@ import Post from '../Post';
 import RepostList from '../RepostList';
 import PostCreator from '../PostCreator';
 
-import { PostItem } from '../../types';
-import { RepostItem } from '../../types';
+import { IPost, IRepost } from '../../types';
 
 
 export interface MainFrameProps {
     name: string;
-    post: PostItem;
-    reposts: Array<RepostItem>;
+    post: IPost;
+    reposts: Array<IRepost>;
     repostNum: number;
-    loading: boolean;
+    postLoading: boolean;
+    repostsLoading: boolean;
     getReposts: (page: string) => void;
 };
 
@@ -33,13 +33,14 @@ export default (props: MainFrameProps) => {
             <div className='detail-post-wrapper'>
                 <Post
                     post={props.post}
-                    loading={props.loading}
+                    loading={props.postLoading}
+                    detail={true}
                 />
             </div>
             <div className='detail-repost-wrapper'>
                 <RepostList
                     reposts={props.reposts}
-                    loading={props.loading}
+                    loading={props.repostsLoading}
                 />
                 <Pagination
                     className={`${props.name}-pagination`}

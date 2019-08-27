@@ -5,12 +5,12 @@ import { Pagination, BackTop } from 'antd';
 import PostList from '../PostList';
 import PostCreator from '../PostCreator';
 
-import { PostItem } from '../../types';
+import { IPost } from '../../types';
 
 
 export interface MainFrameProps {
     name: string;
-    posts: Array<PostItem>;
+    posts: Array<IPost>;
     postNum: number;
     loading: boolean;
     getPosts: (page: string) => void;

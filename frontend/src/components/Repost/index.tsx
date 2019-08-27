@@ -3,13 +3,13 @@ import marked from 'marked';
 
 import { Card, Skeleton, Comment, Tooltip, Icon, Avatar } from 'antd';
 
-import { RepostItem } from '../../types';
+import { IRepost } from '../../types';
 
 import './Repost.css';
 
 
 export interface PostProps {
-    repost: RepostItem;
+    repost: IRepost;
     loading: boolean;
 };
 

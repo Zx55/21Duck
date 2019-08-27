@@ -4,13 +4,13 @@ import { List } from 'antd';
 
 import Post from '../Post';
 
-import { PostItem } from '../../types';
+import { IPost } from '../../types';
 
 import './PostList.css';
 
 
 export interface PostListProps {
-    posts: Array<PostItem>;
+    posts: Array<IPost>;
     loading: boolean;
 };
 
@@ -22,7 +22,11 @@ export default (props: PostListProps) => {
             dataSource={props.posts}
             renderItem={(post) => (
                 <li>
-                    <Post post={post} loading={props.loading} />
+                    <Post
+                        post={post}
+                        loading={props.loading}
+                        detail={false}
+                    />
                 </li>
             )}
         />

@@ -5,7 +5,7 @@ import { Card, Avatar, Skeleton } from 'antd';
 
 import PostFooter from './PostFooter';
 
-import { PostItem } from '../../types';
+import { IPost } from '../../types';
 
 import './Post.css';
 
@@ -13,8 +13,9 @@ const { Meta } = Card;
 
 
 export interface PostProps {
-    post: PostItem;
+    post: IPost;
     loading: boolean;
+    detail: boolean;
 };
 
 export default (props: PostProps) => (
@@ -43,6 +44,7 @@ export default (props: PostProps) => (
             <PostFooter
                 postId={props.post.posting_id}
                 like={props.post.posting_thumb_num}
+                detail={props.detail}
             />
         </Skeleton>
     </Card>

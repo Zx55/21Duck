@@ -3,8 +3,7 @@ import React, { useState, useEffect } from 'react';
 import api from '../../api';
 import MainFrame from './MainFrame';
 
-import { PostItem } from '../../types';
-import { Param } from '../../types';
+import { IPost, Param } from '../../types';
 
 import './Template.css';
 
@@ -15,9 +14,9 @@ export interface PageListTemplateProps {
 };
 
 export default (props: PageListTemplateProps) => {
-    let initPosts = new Array<PostItem>();
+    let initPosts = new Array<IPost>();
     for (let i = 0; i < 15; ++i) {
-        initPosts.push(new PostItem());
+        initPosts.push(new IPost());
     }
 
     const [posts, setPosts] = useState(initPosts);
@@ -33,7 +32,7 @@ export default (props: PageListTemplateProps) => {
         };
 
         api.post.list(params).then((response) => {
-            const posts: Array<PostItem> = response.data;
+            const posts: Array<IPost> = response.data;
             setPostNum(posts[0].posting_num);
             setPosts(posts);
             setLoading(false);
@@ -46,7 +45,6 @@ export default (props: PageListTemplateProps) => {
 
     return (
         <div className={`${props.name}-root`}>
-            <div>{props.name}</div>
             <MainFrame
                 name={props.name}
                 posts={posts}

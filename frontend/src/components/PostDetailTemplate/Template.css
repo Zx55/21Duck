@@ -10,3 +10,15 @@
 .detail-repost-wrapper {
     padding-top: 13%;
 }
+
+.post-button {
+    position: fixed;
+    left: 90%;
+    top: 90%;
+}
+
+.go-to-top-button {
+    position: fixed;
+    left: 90%;
+    top: 84%;
+}

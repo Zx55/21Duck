@@ -2,12 +2,12 @@ import API from './modelAPI';
 import login from './login';
 import register from './register';
 
-import { IPost, IRepost } from '../types';
+import { IRequestPost, IRequestRepost } from '../types';
 
 
 export default {
-    post: new API<IPost>('posting'),
-    repost: new API<IRepost>('reposting'),
+    post: new API<IRequestPost>('posting'),
+    repost: new API<IRequestRepost>('reposting'),
     login: login,
     register: register,
 };
