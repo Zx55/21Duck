@@ -36,7 +36,7 @@ const Editor=() => {
             </div>
             <div className="preview-square">
                 <div
-                    className='post-content'
+                    className='preview-content'
                     dangerouslySetInnerHTML={{
                         __html: marked(content)
                     }}
