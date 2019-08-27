@@ -1,8 +1,9 @@
 import React from 'react';
 
+import NotFound from '../../components/NotFound';
 
 export default () => (
     <div>
-        Hello
+        <NotFound prefix='回到上一页'/>
     </div>
 );
