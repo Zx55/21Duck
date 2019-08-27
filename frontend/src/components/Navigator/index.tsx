@@ -69,17 +69,21 @@ export default (props: NavigatorProps) => {
                     <SubMenu
                         className='user-menu'
                         title={
-                            <span>
-                                <Icon type='user' />
+                            <span >
+                                <Icon type='user'   />
                                 用户
                         </span>
                         }
                     >
+                        <Item key='user-center'>
+                            <Link to='/user'>个人中心</Link>
+                        </Item>
                         <Item key='logout' onClick={() => {
                             dispatch(logout());
                         }}>
                             注销
-                    </Item>
+                        </Item>
+                        
                     </SubMenu>
                 )}
             <Item
