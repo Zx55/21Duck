@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MonacoEditor from 'react-monaco-editor';
+import './Editor.css'
+import marked from 'marked'
+import * as monacoEditor from 'monaco-editor/esm/vs/editor/editor.api';
+
 
 const Editor=() => {
-
-    const[code, setCode] = useState("这里输入正文");
-    const[theme,setTheme]= useState("vs-light");
-
-    const onChange = (newValue: any) => {
-        console.log("onChange", newValue); // eslint-disable-line no-console
+    const[theme,setTheme] = useState("vs-light");
+    const[content,setContent] = useState('// type your code... \n');
+    
+    const onChange=(newValue: string) => {
+        setContent(newValue);
     };
-
+  
     const options = {
         selectOnLineNumbers: true,
         roundedSelection: false,
@@ -21,16 +24,26 @@ const Editor=() => {
 
     return (
         <div id="editor">
-            <MonacoEditor
-                width="50%"
-                height="600"
-                value={code}
-                options={options}
-                theme={theme}
-                onChange={(e)=>onChange(e)}
-            />
+            <div className="editor-square">
+                <MonacoEditor
+                    width="100%"
+                    height="600"
+                    value={content}
+                    options={options}
+                    theme={theme}
+                    onChange={onChange}
+                />
+            </div>
+            <div className="preview-square">
+                <div
+                    className='preview-content'
+                    dangerouslySetInnerHTML={{
+                        __html: marked(content)
+                    }}
+                />
+            </div>
         </div>
     );
-};
+}
 
 export default Editor;

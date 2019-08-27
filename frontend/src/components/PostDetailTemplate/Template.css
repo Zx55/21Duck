@@ -20,5 +20,15 @@
 .go-to-top-button {
     position: fixed;
     left: 90%;
+    top: 78%;
+}
+
+.return-button {
+    position: fixed;
+    left: 90%;
     top: 84%;
+}
+
+.ant-list-pagination {
+    margin-right: 30%;
 }

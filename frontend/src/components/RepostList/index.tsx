@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { List } from 'antd';
 
@@ -12,9 +12,18 @@ import './RepostList.css';
 export interface RepostListProps {
     reposts: Array<IRepost>;
     loading: boolean;
+    repostNum: number;
+    getReposts: (page: string) => void;
 };
 
 export default (props: RepostListProps) => {
+    const [current, setCurrent] = useState(1);
+
+    const handlePageChange = (page: number): void => {
+        setCurrent(page);
+        props.getReposts((page - 1).toString());
+    };
+
     return (
         <List
             className='repost-list'
@@ -28,6 +37,16 @@ export default (props: RepostListProps) => {
                     />
                 </li>
             )}
+            pagination={{
+                current: current,
+                defaultPageSize: 15,
+                size: 'small',
+                total: props.repostNum,
+                hideOnSinglePage: true,
+                showQuickJumper: true,
+                onChange: (page) => handlePageChange(page),
+                position: 'bottom'
+            }}
         />
     );
 };

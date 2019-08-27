@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { withRouter } from 'react-router-dom';
 
-import { Pagination, BackTop } from 'antd';
+import { Button, BackTop } from 'antd';
 
 import Post from '../Post';
 import RepostList from '../RepostList';
 import PostCreator from '../PostCreator';
 
+import { RouteComponentProps } from 'react-router-dom';
 import { IPost, IRepost } from '../../types';
 
 
-export interface MainFrameProps {
+export interface MainFrameProps extends RouteComponentProps {
     name: string;
     post: IPost;
     reposts: Array<IRepost>;
@@ -19,15 +21,7 @@ export interface MainFrameProps {
     getReposts: (page: string) => void;
 };
 
-export default (props: MainFrameProps) => {
-    const [current, setCurrent] = useState(1);
-
-    const handlePageChange = (page: number): void => {
-        setCurrent(page);
-        props.getReposts((page - 1).toString());
-    }
-
-    // Todo: 如果这边reposts返回false，渲染404页面
+export default withRouter((props: MainFrameProps) => {
     return (
         <div className='detail-template-main-frame'>
             <div className='detail-post-wrapper'>
@@ -41,20 +35,21 @@ export default (props: MainFrameProps) => {
                 <RepostList
                     reposts={props.reposts}
                     loading={props.repostsLoading}
-                />
-                <Pagination
-                    className={`${props.name}-pagination`}
-                    current={current}
-                    defaultPageSize={15}
-                    size='small'
-                    hideOnSinglePage
-                    total={props.repostNum}
-                    showQuickJumper
-                    onChange={(page: number) => handlePageChange(page)}
+                    repostNum={props.repostNum}
+                    getReposts={props.getReposts}
                 />
             </div>
             <PostCreator />
+            <Button
+                className='return-button'
+                icon='arrow-left'
+                shape='circle'
+                size='large'
+                onClick={() =>
+                    props.history.replace(props.match.path.replace('/:postId', ''))
+                }
+            />
             <BackTop className='go-to-top-button' />
         </div>
     );
-};
+});

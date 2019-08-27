@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { Pagination, BackTop } from 'antd';
+import { BackTop } from 'antd';
 
 import PostList from '../PostList';
 import PostCreator from '../PostCreator';
@@ -17,25 +17,13 @@ export interface MainFrameProps {
 };
 
 export default (props: MainFrameProps) => {
-    const [current, setCurrent] = useState(1);
-
-    const handlePageChange = (page: number): void => {
-        setCurrent(page);
-        props.getPosts((page - 1).toString());
-    }
-
     return (
         <div className='list-template-main-frame'>
-            <PostList posts={props.posts} loading={props.loading} />
-            <Pagination
-                className={`${props.name}-pagination`}
-                current={current}
-                defaultPageSize={15}
-                size='small'
-                hideOnSinglePage
-                total={props.postNum}
-                showQuickJumper
-                onChange={(page: number) => handlePageChange(page)}
+            <PostList
+                posts={props.posts}
+                loading={props.loading}
+                postNum={props.postNum}
+                getPosts={props.getPosts}
             />
             <PostCreator />
             <BackTop className='go-to-top-button' />

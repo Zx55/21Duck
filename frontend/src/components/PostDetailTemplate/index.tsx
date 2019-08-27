@@ -33,6 +33,7 @@ export default withRouter((props: PageDetailTemplate) => {
     const [postLoading, setPostLoading] = useState(false);
     const [reposts, setReposts] = useState(initReposts);
     const [repostsLoading, setRepostsLoading] = useState(true);
+    // FIXME: repostNum 返回的数量错误
     const [repostNum, setRepostNum] = useState(0);
     const [page404, setPage404] = useState(false);
 
@@ -45,7 +46,6 @@ export default withRouter((props: PageDetailTemplate) => {
 
         api.post.retreive(postId, param).then((response) => {
             const post: IPost | INotFound | boolean = response.data;
-            console.log(post);
 
             if ((post as boolean) === false
                 || (post as PostNotFound).detail === 'Not found') {
