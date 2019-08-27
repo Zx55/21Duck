@@ -57,9 +57,7 @@ export default () => {
                         />
                     </div>
                     <div className='editor'>
-                        <div id="editor">
-                            <Editor></Editor>
-                        </div>
+                        <Editor></Editor>
                     </div>
                 </div>
             </Modal>

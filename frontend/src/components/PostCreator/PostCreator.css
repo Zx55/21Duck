@@ -1,5 +1,6 @@
 .ant-modal-body{
     padding: 5px 10px 0 10px;
+    height: 100%;
 }
 
 .box {
@@ -20,11 +21,21 @@
 
 .editor{
     margin-top: 10px;
-    border:1px solid rgba(100, 100, 100, 0.2);
+    border-left:1px solid rgba(100, 100, 100, 0.2);
+    border-right:1px solid rgba(100, 100, 100, 0.2);
+    border-top:1px solid rgba(100, 100, 100, 0.2);
     padding: 5px;
-    border-radius: 5px; 
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width: 100%;
+    height: 620px;
 }
 
+.editor-square{
+    width: 100%;
+}
+
+
 .minimap.slider-mouseover{
-    
+    border-left:1px solid rgba(100, 100, 100, 0.2);
 }

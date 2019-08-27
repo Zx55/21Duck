@@ -1,0 +1,15 @@
+#editor{
+    width: 100%;
+}
+
+.editor-square{
+    width: 50%;
+    float: left;
+}
+
+.preview-square{
+    border-left:1px solid rgba(100, 100, 100, 0.2); 
+    width: 50%;
+    height: 600px;
+    float: left;
+}
