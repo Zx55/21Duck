@@ -59,7 +59,8 @@ class RepostingSerializer(PartialUpdateSerializerMixin, ModelSerializer):
         model = Reposting
         fields = ['reposting_id', 'reposting_user', 'relative_reposting_time',
                   'reposting_content', 'reposting_thumb_num', 'reposting_num',
-                  'user_nickname', 'user_head', 'reply_posting', 'floor', 'formated_reposting_time']
+                  'user_nickname', 'user_head', 'reply_posting', 'floor',
+                  'formated_reposting_time']
 
     def get_formated_reposting_time(self, obj):
         return obj.reposting_time.strftime("%Y-%m-%d %H:%M:%S")

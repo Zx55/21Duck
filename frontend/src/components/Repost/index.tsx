@@ -87,6 +87,11 @@ export default (props: PostProps) => {
                             }}
                         />
                     }
+                    datetime={
+                        <Tooltip title={props.repost.formated_reposting_time}>
+                            <span>{props.repost.relative_reposting_time}</span>
+                        </Tooltip>
+                    }
                 />
             </Skeleton>
         </Card>
