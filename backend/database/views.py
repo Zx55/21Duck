@@ -42,6 +42,16 @@ class PostingViewSet(CacheResponseMixin, ModelViewSet):
             serializer = self.get_serializer(queryset, many=True)
             return Response(serializer.data)
 
+    def retrieve(self, request, *args, **kwargs):
+        category_id = request.GET.get('category_id')
+        instance = self.get_object()
+
+        if instance.category_id == int(category_id):
+            serializer = self.get_serializer(instance)
+            return Response(serializer.data)
+        else:
+            return Response(False)
+
 class RepostingViewSet(CacheResponseMixin, ModelViewSet):
     queryset = Reposting.objects.all()
     serializer_class = RepostingSerializer
