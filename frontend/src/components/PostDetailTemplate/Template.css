@@ -1,0 +1,12 @@
+.detail-post-wrapper {
+    position: absolute;
+    width: 100%;
+}
+
+.ant-card.post.ant-card-bordered {
+    margin-right: 0;
+}
+
+.detail-repost-wrapper {
+    padding-top: 13%;
+}

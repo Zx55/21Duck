@@ -39,16 +39,18 @@ export interface IRepost {
 
 // 接受后端接口
 export class PostItem {
-    posting_num: number = 15;                    // totalPost
-    posting_id: number = -1;                     // postId
-    posting_user: number = -1;                   // userId
-    user_nickname: string = '';                  // userNickname
-    user_head: string = '';                      // userHead
-    theme: string = '';                          // postTitle
-    relative_posting_time: string = '';          // latestPostEditedTime
-    relative_reply_time: string = ''             // latestRepostedTime
-    posting_content: string = '';                // postContent
-    posting_thumb_num: number = -1;              // postLike
+    posting_num: number = 15;                   // totalPost
+    posting_id: number = -1;                    // postId
+    posting_user: string = '';                  // userId
+    user_nickname: string = '';                 // userNickname
+    user_head: string = '';                     // userHead
+    theme: string = '';                         // postTitle
+    relative_posting_time: string = '';         // latestPostEditedTime
+    relative_reply_time: string = ''            // latestRepostedTime
+    posting_content: string = '';               // postContent
+    posting_thumb_num: number = -1;             // postLike
+    reply_num: number = -1;                     // postReplyNum
+    category_id: number = -1;                   // postCategory
 }
 
 export class RepostItem {

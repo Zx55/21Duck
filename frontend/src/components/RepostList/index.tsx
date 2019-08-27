@@ -9,15 +9,15 @@ import { RepostItem } from '../../types';
 import './RepostList.css';
 
 
-export interface PostListProps {
+export interface RepostListProps {
     reposts: Array<RepostItem>;
     loading: boolean;
 };
 
-export default (props: PostListProps) => {
+export default (props: RepostListProps) => {
     return (
         <List
-            className='post-list'
+            className='repost-list'
             itemLayout='horizontal'
             dataSource={props.reposts}
             renderItem={(repost) => (
