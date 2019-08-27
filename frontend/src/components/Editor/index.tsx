@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import MonacoEditor from 'react-monaco-editor';
 import './Editor.css'
 import marked from 'marked'
-import * as monacoEditor from 'monaco-editor/esm/vs/editor/editor.api';
-
+import hljs from 'highlight.js'
+import 'highlight.js/styles/github.css';
 
 const Editor=() => {
     const[theme,setTheme] = useState("vs-light");
@@ -22,11 +22,25 @@ const Editor=() => {
         fontSize: 16,
     };
 
+    marked.setOptions({
+        highlight: function(code) {
+          return hljs.highlightAuto(code).value;
+        },
+        pedantic: false,
+        gfm: true,
+        tables: true,
+        breaks: false,
+        sanitize: false,
+        smartLists: true,
+        smartypants: false,
+        xhtml: false
+      }); 
+
     return (
         <div id="editor">
             <div className="editor-square">
                 <MonacoEditor
-                    width="100%"
+
                     height="600"
                     value={content}
                     options={options}

@@ -4,9 +4,13 @@
     width: 100%;
 }
 
+.ant-modal-content{
+    min-width: 800px;
+}
+
+
 .box {
     margin: 0px 10px 0 10px;
-    width: 100%;
 }
 
 .title{

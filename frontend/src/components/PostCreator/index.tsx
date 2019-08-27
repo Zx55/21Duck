@@ -40,7 +40,7 @@ export default () => {
             />
             <Modal
                 title="发布新帖"
-                width="80%"
+                width="90%"
                 centered
                 visible={creatorVisible}
                 onOk={() => setCreatorVisible(false)}
