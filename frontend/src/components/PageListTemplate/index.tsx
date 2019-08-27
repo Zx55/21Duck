@@ -28,7 +28,7 @@ export default (props: PageListTemplateProps) => {
 
         const params: Param = {
             page: page,
-            category: props.category,
+            category_id: props.category,
         };
 
         api.post.list(params).then((response) => {
@@ -36,6 +36,7 @@ export default (props: PageListTemplateProps) => {
             setPostNum(posts[0].posting_num);
             setPosts(posts);
             setLoading(false);
+
         }).catch(err => console.log(err));
     };
 
