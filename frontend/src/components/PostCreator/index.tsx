@@ -8,8 +8,13 @@ import Editor from '../Editor'
 
 import './PostCreator.css';
 
+export interface PostCreaterProps {
+    type: string, 
+    withTitle: number
+};
 
-export default () => {
+
+export default (props: PostCreaterProps) => {
     const [creatorVisible, setCreatorVisible] = useState(false);
     const [redirect, setRedirect] = useState(false);
     const user = useUser();
@@ -27,39 +32,71 @@ export default () => {
             setCreatorVisible(true);
         }
     }
+    if(props.withTitle === 1){
+        return (
+            <div>
+                <Button
+                    className='post-button'
+                    type='primary'
+                    icon='plus'
+                    shape='circle'
+                    size='large'
+                    onClick={() => handleClick()}
+                />
+                <Modal
+                    title={props.type}
+                    width="90%"
+                    centered
+                    visible={creatorVisible}
+                    onOk={() => setCreatorVisible(false)}
+                    onCancel={() => setCreatorVisible(false)}
+                >
+                    <div className='box'>
+                        <div className='title'>
+                            <div className='title-word'>标题</div>
+                            <Input
+                                prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                placeholder="请输入标题"
+                            />
+                        </div>
+                        <div className='editor'>
+                            <Editor></Editor>
+                        </div>
+                    </div>
+                </Modal>
+                {redirect ? <Redirect to='/login' /> : null}
+            </div>
+        );
+    }
 
-    return (
-        <div>
-            <Button
-                className='post-button'
-                type='primary'
-                icon='plus'
-                shape='circle'
-                size='large'
-                onClick={() => handleClick()}
-            />
-            <Modal
-                title="发布新帖"
-                width="90%"
-                centered
-                visible={creatorVisible}
-                onOk={() => setCreatorVisible(false)}
-                onCancel={() => setCreatorVisible(false)}
-            >
-                <div className='box'>
-                    <div className='title'>
-                        <div className='title-word'>标题</div>
-                        <Input
-                            prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            placeholder="请输入标题"
-                        />
+    else{
+        return (
+            <div>
+                <Button
+                    className='post-button'
+                    type='primary'
+                    icon='plus'
+                    shape='circle'
+                    size='large'
+                    onClick={() => handleClick()}
+                />
+                <Modal
+                    title={props.type}
+                    width="90%"
+                    centered
+                    visible={creatorVisible}
+                    onOk={() => setCreatorVisible(false)}
+                    onCancel={() => setCreatorVisible(false)}
+                >
+                    <div className='box'>
+                        <div className='editor'>
+                            <Editor></Editor>
+                        </div>
                     </div>
-                    <div className='editor'>
-                        <Editor></Editor>
-                    </div>
-                </div>
-            </Modal>
-            {redirect ? <Redirect to='/login' /> : null}
-        </div>
-    );
+                </Modal>
+                {redirect ? <Redirect to='/login' /> : null}
+            </div>
+        );
+    }
+    
 };
