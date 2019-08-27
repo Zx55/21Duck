@@ -1,5 +1,6 @@
 #editor{
     width: 100%;
+    height: 610px;
 }
 
 .editor-square{
@@ -18,9 +19,6 @@
     overflow:scroll;
 }
 
-.preview-content{
-    overflow:scroll;
-}
 
 ul{
     list-style: outside;
