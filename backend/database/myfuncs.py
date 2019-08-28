@@ -3,7 +3,7 @@ import pytz
 import hashlib
 
 def calculate_relative_time(tar_time):
-    now = datetime.now().replace(tzinfo=pytz.timezone('UTC'))
+    now = datetime.now().replace(tzinfo=pytz.timezone('Asia/Shanhai'))
     diff_sec = (now - tar_time).total_seconds()
     if diff_sec <= 60:
         res = '刚刚'
