@@ -1,7 +1,7 @@
 .login-form {
     background: white;
     max-width: 300px;
-    padding: 40px 30px 20px 30px;
+    padding: 10px 30px 30px 30px;
     margin: 19% auto;
     box-shadow: 1px 1px 5px #bbbbbb;
     border-radius: 1ch;
@@ -17,6 +17,11 @@
 
 .register-button {
     float: right;
+}
+.ducklogo{
+    padding: 20px 5px 40px 0px;
+    margin: 0 auto;
+    text-align: center
 }
 
 #verify-text{

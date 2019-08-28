@@ -35,6 +35,7 @@ export default (props: SuccessInfoProps) => {
             title={`${props.prefix}，${props.user.nickName}`}
             subTitle={`${timer}秒后自动跳转`}
             extra={[
+               
                 <div className="success-operation">
                     <Button
                         type="primary"
@@ -48,6 +49,7 @@ export default (props: SuccessInfoProps) => {
                         <Link to='/explore'>返回首页</Link>
                     </Button>
                 </div>
+                
             ]}
         />
     );

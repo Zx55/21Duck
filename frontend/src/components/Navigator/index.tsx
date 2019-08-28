@@ -40,6 +40,11 @@ export default (props: NavigatorProps) => {
             selectedKeys={[menuKey]}
             onClick={handleClick}
         >
+            <Item key='duck'>
+               
+            <span><img alt="logo" src="./duckv2.ico" className='logo'/></span>
+            <span className="duck21">21Duck</span>
+            </Item>
             <Item key='explore'>
                 <Link to='/explore'>首页</Link>
             </Item>
