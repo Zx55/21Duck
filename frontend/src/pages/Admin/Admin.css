@@ -1,5 +1,23 @@
+.panel{
+    margin-bottom: 8px;
+    height: 800px;
+}
+
 .left-navigator{
     position: fixed;
     left: 0;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px; 
+    background: white;
+    height: 88%;
 }
+
+.right-table{
+    margin: 10px 15px 30px 30px;
+    left: 190px;
+    position: fixed;
+    width: 81.5%;
+}
+
 
