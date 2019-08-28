@@ -4,6 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Loading from '../../components/Loading';
 import Login from '../Login';
 import Register from '../Register';
+import NotFound from '../../components/NotFound';
 
 const Explore = lazy(() => import('../Explore'));
 const Chat = lazy(() => import('../Chat'));
@@ -39,6 +40,7 @@ export default () => (
             <Route exact path='/register' component={Register} />
             <Route exact path='/user' component={User} />
             <Route exact path='/admin' component={Admin} />
+            <Route component={NotFound} />
         </Switch>
     </Suspense>
 );

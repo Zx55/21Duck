@@ -18,9 +18,7 @@ export interface PageDetailTemplate extends RouteComponentProps {
 
 type RepostItems = Array<IRepost>;
 
-interface PostNotFound {
-    detail: string;
-}
+const isNumber = (s: string): boolean => /^\d+$/.test(s);
 
 export default withRouter((props: PageDetailTemplate) => {
     let initReposts = new Array<IRepost>();
@@ -48,7 +46,7 @@ export default withRouter((props: PageDetailTemplate) => {
             const post: IPost | INotFound | boolean = response.data;
 
             if ((post as boolean) === false
-                || (post as PostNotFound).detail === 'Not found') {
+                || (post as INotFound).detail === 'Not found') {
                 setPage404(true);
             } else {
                 setPost(post as IPost);
@@ -87,7 +85,7 @@ export default withRouter((props: PageDetailTemplate) => {
 
     return (
         <div className={`${props.name}-detail-root`}>
-            {page404
+            {(!isNumber(postId) || page404)
                 ? <NotFound
                     prefix='返回上一页'
                     onClick={() => props.history.goBack()}

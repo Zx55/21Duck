@@ -79,7 +79,7 @@ export default withRouter((props: PostCreaterProps) => {
                     reposting_content: content,
                 };
 
-                api.repost.create(data).catch((response) => {
+                api.repost.create(data).then((response) => {
                     if (response.status === 201) {
                         console.log(response);
                         setLoading(false);

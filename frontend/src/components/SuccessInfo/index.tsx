@@ -15,16 +15,16 @@ export interface SuccessInfoProps {
 };
 
 export default (props: SuccessInfoProps) => {
-    const [clock, setClock] = useState(3);
+    const [timer, setTimer] = useState(3);
 
     useEffect(() => {
-        const timeout = setInterval(() => setClock(c => c - 1), 1000);
+        const timeout = setInterval(() => setTimer(t => t - 1), 1000);
         setTimeout(() => clearInterval(timeout), 3100);
     }, []);
 
     const onClick = () => {
         if (props.clock) {
-            clearTimeout(clock);
+            clearTimeout(props.clock);
         }
     };
 
@@ -33,17 +33,21 @@ export default (props: SuccessInfoProps) => {
             status="success"
             icon={<Icon type="smile" theme="twoTone" />}
             title={`${props.prefix}，${props.user.nickName}`}
-            subTitle={`${clock}秒后自动跳转`}
+            subTitle={`${timer}秒后自动跳转`}
             extra={[
                 <div className="success-operation">
-                    <Button type="primary" key="center" style={{ marginRight: 15 }}>
+                    <Button
+                        type="primary"
+                        key="center"
+                        style={{ marginRight: 15 }}
+                        onClick={onClick}
+                    >
                         <Link to='/User'>个人中心</Link>
                     </Button>
                     <Button key="return" onClick={onClick}>
                         <Link to='/explore'>返回首页</Link>
                     </Button>
                 </div>
-
             ]}
         />
     );
