@@ -49,13 +49,13 @@
     width: 100%;
 }
 
-#side-bar {
+.normal-side-bar {
     position: absolute;
     top: 374px;
     left: 64%;
 }
 
-#side-card {
+.normal-side-card {
     width: 392px;
     border-radius: 0.8ch;
     margin: 10px;

@@ -1,4 +1,5 @@
 import React from 'react';
+import cx from 'classnames';
 
 import { Card, Affix } from 'antd';
 
@@ -7,14 +8,17 @@ import './SideBar.css';
 
 export interface SideBarProps {
     loading: boolean;
+    userCenter: boolean;
 }
 
 export default (props: SideBarProps) => {
     return (
-        <div id='side-bar'>
+        <div className={cx(props.userCenter 
+            ? 'user-center-side-bar' : 'normal-side-bar')}>
             <Affix offsetTop={65}>
                 <Card
-                    id='side-card'
+                    className={cx(props.userCenter 
+                        ? 'user-center-side-card' : 'normal-side-card')}
                     title="Default size card"
                     loading={props.loading}
                 >
@@ -23,7 +27,8 @@ export default (props: SideBarProps) => {
                     <p>Card content</p>
                 </Card>
                 <Card
-                    id='side-card'
+                    className={cx(props.userCenter 
+                        ? 'user-center-side-card' : 'normal-side-card')}
                     title="Default size card"
                     loading={props.loading}
                 >

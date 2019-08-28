@@ -5,7 +5,7 @@ import MainFrame from './MainFrame';
 
 import { IPost, Param } from '../../types';
 
-import './Template.css';
+import './UserTemplate.css';
 
 
 export interface BannerItem {
@@ -37,10 +37,11 @@ export default (props: PageListTemplateProps) => {
 
     const [posts, setPosts] = useState(initPosts);
     const [postNum, setPostNum] = useState(0);
-    const [loading, setLoading] = useState(true);
+    const [postsLoading, setPostsLoading] = useState(true);
+    const [sideLoading, setSideLoading] = useState(true);
 
     const getPosts = (page: string): void => {
-        setLoading(true);
+        setPostsLoading(true);
 
         const params: Param = {
             page: page,
@@ -51,7 +52,7 @@ export default (props: PageListTemplateProps) => {
             const posts: Array<IPost> = response.data;
             setPostNum(posts[0].posting_num);
             setPosts(posts);
-            setLoading(false);
+            setPostsLoading(false);
 
         }).catch(err => console.log(err));
     };
@@ -75,7 +76,8 @@ export default (props: PageListTemplateProps) => {
                 posts={posts}
                 postNum={postNum}
                 getPosts={getPosts}
-                loading={loading}
+                postsLoading={postsLoading}
+                sideLoading={sideLoading}
             />
         </div>
     );

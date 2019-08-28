@@ -49,8 +49,13 @@
     width: 100%;
 }
 
-#side-bar {
+.user-center-side-bar {
     position: absolute;
-    top: 374px;
-    left: 64%;
+    top: 60px;
+    left: 70%;
+}
+
+.user-center-side-card {
+    width: 290px;
+    box-shadow: 1px 1px 5px #bbbbbb;
 }
