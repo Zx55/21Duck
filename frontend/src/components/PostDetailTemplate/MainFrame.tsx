@@ -1,12 +1,11 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
-
-import { Button, BackTop } from 'antd';
+import React, { useState } from 'react';
+import { withRouter, Redirect } from 'react-router-dom';
 
 import Post from '../Post';
 import RepostList from '../RepostList';
 import PostCreator from '../PostCreator';
 import SideBar from '../SideBar';
+import SideButtons from './SideButtons';
 
 import { RouteComponentProps } from 'react-router-dom';
 import { IPost, IRepost } from '../../types';
@@ -23,6 +22,9 @@ export interface MainFrameProps extends RouteComponentProps {
 };
 
 export default withRouter((props: MainFrameProps) => {
+    const [visible, setVisible] = useState(false);
+    const [redirect, setRedirect] = useState(false);
+
     return (
         <div className='detail-template-main-frame'>
             <div className='detail-post-wrapper'>
@@ -40,18 +42,21 @@ export default withRouter((props: MainFrameProps) => {
                     getReposts={props.getReposts}
                 />
             </div>
-            <PostCreator type="回夝主帖" withTitle={0}/>
+            <PostCreator
+                type="回复主帖"
+                withTitle={0}
+                visible={visible}
+                setVisible={setVisible}
+            />
+            {redirect && <Redirect to='/login' />}
             <SideBar />
-            <Button
-                className='return-button'
-                icon='arrow-left'
-                shape='circle'
-                size='large'
-                onClick={() =>
+            <SideButtons
+                setVisible={setVisible}
+                setRedirect={setRedirect}
+                onReturnClick={() =>
                     props.history.replace(props.match.path.replace('/:postId', ''))
                 }
             />
-            <BackTop className='go-to-top-button' />
         </div>
     );
 });

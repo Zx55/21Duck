@@ -1,10 +1,10 @@
-import React from 'react';
-
-import { BackTop } from 'antd';
+import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import PostList from '../PostList';
 import PostCreator from '../PostCreator';
 import SideBar from '../SideBar';
+import SideButtons from './SideButtons';
 
 import { IPost } from '../../types';
 
@@ -18,6 +18,9 @@ export interface MainFrameProps {
 };
 
 export default (props: MainFrameProps) => {
+    const [visible, setVisible] = useState(false);
+    const [redirect, setRedirect] = useState(false);
+
     return (
         <div className='list-template-main-frame'>
             <PostList
@@ -26,9 +29,19 @@ export default (props: MainFrameProps) => {
                 postNum={props.postNum}
                 getPosts={props.getPosts}
             />
-            <PostCreator type="发布新帖" withTitle={1}/>
+            <PostCreator
+                type="????"
+                withTitle={1}
+                visible={visible}
+                setVisible={setVisible}
+            />
+            {redirect && <Redirect to='/login' />}
+            <SideButtons
+                setVisible={setVisible}
+                setRedirect={setRedirect}
+            />
             <SideBar />
-            <BackTop className='go-to-top-button' />
+
         </div>
     );
 };
