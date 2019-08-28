@@ -25,7 +25,7 @@ class PostingSerializer(PartialUpdateSerializerMixin, ModelSerializer):
     class Meta:
         model = Posting
         fields = ['posting_id', 'user_head','posting_num', 'posting_user', 'user_nickname',
-                  'relative_posting_time', 'relative_reply_time', 'reply_num',
+                  'reply_num', 'relative_posting_time', 'relative_reply_time',
                   'theme', 'posting_content', 'category_id', 'posting_thumb_num', 'formated_posting_time']
 
     def get_formated_posting_time(self, obj):
@@ -52,7 +52,6 @@ class RepostingSerializer(PartialUpdateSerializerMixin, ModelSerializer):
     user_nickname = serializers.SerializerMethodField(label='user_nickname')
     user_head = serializers.SerializerMethodField(label='user_head')
     reply_posting = serializers.SerializerMethodField(label='reply_posting')
-    floor = serializers.SerializerMethodField(label='floor')
     formated_reposting_time = serializers.SerializerMethodField(label='formated_reposting_time')
 
     class Meta:
@@ -60,7 +59,7 @@ class RepostingSerializer(PartialUpdateSerializerMixin, ModelSerializer):
         fields = ['reposting_id', 'reposting_user', 'relative_reposting_time',
                   'reposting_content', 'reposting_thumb_num', 'reposting_num',
                   'user_nickname', 'user_head', 'reply_posting', 'floor',
-                  'formated_reposting_time']
+                  'formated_reposting_time', 'main_posting']
 
     def get_formated_reposting_time(self, obj):
         return obj.reposting_time.strftime("%Y-%m-%d %H:%M:%S")
@@ -83,9 +82,6 @@ class RepostingSerializer(PartialUpdateSerializerMixin, ModelSerializer):
         else:
             reply_posting = Reposting.objects.filter(reposting_id=obj.reply_id)[0]
             return reply_posting.reposting_user.nickname, reply_posting.reposting_content
-
-    def get_floor(self, obj):
-        return obj.floor
 
 class CategorySerializer(PartialUpdateSerializerMixin, ModelSerializer):
     relative_new_reply_time = serializers.SerializerMethodField(label='relative_new_reply_time')
