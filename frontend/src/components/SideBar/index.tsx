@@ -17,7 +17,8 @@ export default (props: SideBarProps) => {
             ? 'user-center-side-bar' : 'normal-side-bar')}>
             <Affix offsetTop={65}>
                 <Card
-                    id='side-card'
+                    className={cx(props.userCenter 
+                        ? 'user-center-side-card' : 'normal-side-card')}
                     title="Default size card"
                     loading={props.loading}
                 >
@@ -26,7 +27,8 @@ export default (props: SideBarProps) => {
                     <p>Card content</p>
                 </Card>
                 <Card
-                    id='side-card'
+                    className={cx(props.userCenter 
+                        ? 'user-center-side-card' : 'normal-side-card')}
                     title="Default size card"
                     loading={props.loading}
                 >
