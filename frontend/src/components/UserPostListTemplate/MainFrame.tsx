@@ -4,7 +4,7 @@ import { BackTop } from 'antd';
 
 import UserPostList from '../UserPostList';
 
-import SideBar from '../SideBar';
+
 
 import { IPost } from '../../types';
 
@@ -26,7 +26,6 @@ export default (props: MainFrameProps) => {
                 postNum={props.postNum}
                 getPosts={props.getPosts}
             />
-            <SideBar />
             <BackTop className='go-to-top-button' />
         </div>
     );
