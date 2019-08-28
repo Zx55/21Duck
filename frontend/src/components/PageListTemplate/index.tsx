@@ -54,7 +54,6 @@ export default (props: PageListTemplateProps) => {
             setPostNum(posts[0].posting_num);
             setPosts(posts);
             setPostsLoading(false);
-
         }).catch(err => console.log(err));
     };
 
@@ -85,6 +84,7 @@ export default (props: PageListTemplateProps) => {
                 getPosts={getPosts}
                 postsLoading={postsLoading}
                 sideLoading={sideLoading}
+                category={props.category}
             />
         </div>
     );

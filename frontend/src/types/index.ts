@@ -22,19 +22,18 @@ export interface IAction {
 
 // 请求后端的接口
 export interface IRequestPost {
-    posting_user_id: string;
+    posting_user: string;
     theme: string;
     posting_content: string;
-    category_id: string;
-    posting_thumb_num?: number;
+    category_id: number;
 };
 
 export interface IRequestRepost {
-    reply_id: number;
-    main_posting_id: number;
-    reposting_user: number;
+    reposting_user: string;
+    main_posting: number;
     reposting_content: string;
     reposting_thumb_num?: number;
+    reply_id?: number;
 };
 
 // 接受后端相应的接口

@@ -1,25 +1,98 @@
 import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
 
-import { Modal, Input, Icon } from 'antd';
+import { Modal, Input, Icon, message } from 'antd';
 
-import Editor from '../Editor'
+import Editor from '../Editor';
+import api from '../../api';
+import { useUser } from '../../hooks';
+
+import { RouteComponentProps } from 'react-router-dom';
+import { IRequestPost, IRequestRepost } from '../../types';
 
 import './PostCreator.css';
 
-export interface PostCreaterProps {
+export interface PostCreaterProps extends RouteComponentProps {
     header: string;
     title: boolean;
     visible: boolean;
     setVisible: (visible: boolean) => void;
     repostId?: number;
+    categoryId?: number;
 };
 
-export default (props: PostCreaterProps) => {
+export default withRouter((props: PostCreaterProps) => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const [loading, setLoading] = useState(false);
+    const user = useUser();
+
+    const showErr = (msg: string) => {
+        message.config({ top: 75 });
+        message.error(msg);
+    };
+
+    const showSuccess = (msg: string) => {
+        message.config({ top: 75 });
+        message.success(msg);
+    }
 
     const onOkClick = () => {
-        props.setVisible(false);
+        if (props.title && title === '') {
+            showErr('标题不能为空');
+        } else if (content === '') {
+            showErr('内容不能为空');
+        } else {
+            setLoading(true);
+
+            if (props.categoryId) {
+                const data: IRequestPost = {
+                    posting_user: user.userId,
+                    theme: title,
+                    posting_content: content,
+                    category_id: props.categoryId,
+                };
+
+                api.post.create(data).then((response) => {
+                    if (response.status === 201) {
+                        console.log(response);
+                        setLoading(false);
+                        props.setVisible(false);
+                        showSuccess('主题帖发布成功');
+                        props.history.push(props.match.url + '/' + response.data.posting_id);
+                    }
+                }).catch((err) => {
+                    setLoading(false);
+                    props.setVisible(false);
+                    showErr('发帖失败');
+                    console.log(err);
+                })
+            } else {
+                const data: IRequestRepost = props.repostId ? {
+                    reposting_user: user.userId,
+                    main_posting: 1,
+                    reposting_content: content,
+                    reply_id: props.repostId,
+                } : {
+                    reposting_user: user.userId,
+                    main_posting: 1,
+                    reposting_content: content,
+                };
+
+                api.repost.create(data).catch((response) => {
+                    if (response.status === 201) {
+                        console.log(response);
+                        setLoading(false);
+                        props.setVisible(false);
+                        showSuccess('回复成功');
+                    }
+                }).catch((err) => {
+                    setLoading(false);
+                    props.setVisible(false);
+                    showErr('回复失败');
+                })
+            }
+        }
     };
 
     const onCancelClick = () => {
@@ -38,6 +111,7 @@ export default (props: PostCreaterProps) => {
                 onCancel={onCancelClick}
                 okText="发布"
                 cancelText="取消"
+                confirmLoading={loading}
             >
                 <div className='box'>
                     {props.title && (
@@ -58,4 +132,4 @@ export default (props: PostCreaterProps) => {
             </Modal>
         </div>
     );
-};
+});

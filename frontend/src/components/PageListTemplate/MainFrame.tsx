@@ -16,6 +16,7 @@ export interface MainFrameProps {
     postsLoading: boolean;
     sideLoading: boolean;
     getPosts: (page: string) => void;
+    category: string;
 };
 
 export default (props: MainFrameProps) => {
@@ -31,10 +32,11 @@ export default (props: MainFrameProps) => {
                 getPosts={props.getPosts}
             />
             <PostCreator
-                header="????"
+                header="发布主题帖"
                 title={true}
                 visible={visible}
                 setVisible={setVisible}
+                categoryId={Number.parseInt(props.category)}
             />
             {redirect && <Redirect to='/login' />}
             <SideButtons
