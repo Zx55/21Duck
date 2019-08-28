@@ -46,7 +46,7 @@ export default withRouter((props: MainFrameProps) => {
                 />
             </div>
             <PostCreator
-                header={"回帖"}
+                header={"å›žå¸–"}
                 title={false}
                 visible={visible}
                 setVisible={setVisible}
@@ -55,7 +55,9 @@ export default withRouter((props: MainFrameProps) => {
             {redirect && <Redirect to='/login' />}
             <SideBar
                 loading={props.sideLoading}
-                userCenter={false} />
+                userCenter={false}
+                offsetTop={65}
+            />
             <SideButtons
                 setVisible={setVisible}
                 setRedirect={setRedirect}

@@ -9,13 +9,14 @@ import './SideBar.css';
 export interface SideBarProps {
     loading: boolean;
     userCenter: boolean;
+    offsetTop: number;
 }
 
 export default (props: SideBarProps) => {
     return (
         <div className={cx(props.userCenter
             ? 'user-center-side-bar' : 'normal-side-bar')}>
-            <Affix offsetTop={65}>
+            <Affix offsetTop={props.offsetTop}>
                 <Card
                     className={cx(props.userCenter
                         ? 'user-center-side-card' : 'normal-side-card')}

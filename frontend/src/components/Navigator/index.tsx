@@ -41,12 +41,12 @@ export default (props: NavigatorProps) => {
             onClick={handleClick}
         >
             <Item key='duck'>
-               
-            <span><img alt="logo" src="./duckv2.ico" className='logo'/></span>
-            <span className="duck21">21Duck</span>
-            </Item>
-            <Item key='explore'>
-                <Link to='/explore'>首页</Link>
+                <Link to='/explore'>
+                    <span>
+                        <img className='logo' src='./duckv2.ico' alt='' />
+                    </span>
+                    <span className="duck21">21Duck</span>
+                </Link>
             </Item>
             <Item key='chat'>
                 <Link to='/chat'>闲聊栈</Link>
@@ -75,7 +75,7 @@ export default (props: NavigatorProps) => {
                         className='user-menu'
                         title={
                             <span >
-                                <Icon type='user'   />
+                                <Icon type='user' />
                                 用户
                         </span>
                         }

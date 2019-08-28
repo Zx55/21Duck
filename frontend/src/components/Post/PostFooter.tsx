@@ -10,6 +10,7 @@ export interface PostFooterProps extends RouteComponentProps {
     postId: number;
     like: number;
     detail: boolean;
+    replyNum: number;
 };
 
 export default withRouter((props: PostFooterProps) => (
@@ -40,6 +41,7 @@ export default withRouter((props: PostFooterProps) => (
                 onClick={(e) => console.log('report')}
             />
         </span>
+        <span className='post-reply-num'>{props.replyNum} 条回复</span>
         {props.detail ? null :
             <span className='read-more-bar'>
                 <Button

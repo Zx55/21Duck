@@ -4,14 +4,14 @@
 
 .ant-carousel .slick-slide {
     text-align: center;
-    height: 300px;
+    height: 30vh;
     overflow: hidden;
     margin-top: 10px;
 }
 
 .ant-carousel .slick-slide img {
     position: absolute;
-    top: -70%;
+    top: -20vh;
     width: 100%;
     height: auto;
 }
@@ -23,7 +23,7 @@
 .ant-carousel .slick-slide h3 {
     position: absolute;
     color: #fff;
-    padding-top: 85px;
+    padding-top: 10vh;
     font-size: 28px;
     width: 100%;
 }
@@ -32,25 +32,29 @@
     position: absolute;
     left: 0;
     color: #fff;
-    padding-top: 150px;
+    padding-top: 16vh;
     font-size: 18px;
     width: 100%;
 }
 
-.ant-list-items {
+.post-list-wrapper {
     width: 70%;
+    float: left;
+}
+
+.ant-list-pagination {
+    margin-right: 0;
 }
 
 .normal-side-bar {
-    position: absolute;
-    top: 374px;
-    left: 64%;
+    float: left;
+    width: 30%;
+    padding-left: 10px;
 }
 
 .normal-side-card {
-    width: 392px;
     border-radius: 0.8ch;
-    margin: 10px;
+    margin: 10px 0;
     box-shadow: 1px 1px 5px #bbbbbb;
 }
 

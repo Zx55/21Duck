@@ -1,21 +1,21 @@
-.ant-list-items {
+.detail-repost-wrapper {
     width: 70%;
+    float: left;
 }
 
 .ant-list-pagination {
-    margin-right: 30%;
+    margin-right: 0;
 }
 
 .normal-side-bar {
-    position: absolute;
-    top: 238px;
-    left: 64%;
+    float: left;
+    width: 30%;
+    padding-left: 10px;
 }
 
 .normal-side-card {
-    width: 392px;
     border-radius: 0.8ch;
-    margin: 10px;
+    margin: 10px 0;
     box-shadow: 1px 1px 5px #bbbbbb;
 }
 

@@ -46,12 +46,14 @@ export default (props: MainFrameProps) => {
                     }
                     key="1"
                 >
-                    <UserPostList
-                        posts={props.posts}
-                        loading={props.postsLoading}
-                        postNum={props.postNum}
-                        getPosts={props.getPosts}
-                    />
+                    <div className='user-center-list-wrapper'>
+                        <UserPostList
+                            posts={props.posts}
+                            loading={props.postsLoading}
+                            postNum={props.postNum}
+                            getPosts={props.getPosts}
+                        />
+                    </div>
                 </TabPane>
                 <TabPane
                     tab={
@@ -72,8 +74,10 @@ export default (props: MainFrameProps) => {
             </Tabs>
             <SideBar
                 loading={props.sideLoading}
-                userCenter={true} />
-            <BackTop className='go-to-top-button' />
+                userCenter={true}
+                offsetTop={75}
+            />
+            <BackTop className='user-center-go-to-top-button' />
         </div>
     );
 };

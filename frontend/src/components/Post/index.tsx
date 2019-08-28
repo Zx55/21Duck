@@ -50,6 +50,7 @@ export default (props: PostProps) => (
                 postId={props.post.posting_id}
                 like={props.post.posting_thumb_num}
                 detail={props.detail}
+                replyNum={props.post.reply_num}
             />
         </Skeleton>
     </Card>

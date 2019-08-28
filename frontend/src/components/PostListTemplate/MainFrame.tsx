@@ -24,12 +24,14 @@ export default (props: MainFrameProps) => {
 
     return (
         <div className='list-template-main-frame'>
-            <PostList
-                posts={props.posts}
-                loading={props.postsLoading}
-                postNum={props.postNum}
-                getPosts={props.getPosts}
-            />
+            <div className='post-list-wrapper'>
+                <PostList
+                    posts={props.posts}
+                    loading={props.postsLoading}
+                    postNum={props.postNum}
+                    getPosts={props.getPosts}
+                />
+            </div>
             <PostCreator
                 header="发布主题帖"
                 title={true}
@@ -45,6 +47,7 @@ export default (props: MainFrameProps) => {
             <SideBar
                 loading={props.sideLoading}
                 userCenter={false}
+                offsetTop={65}
             />
         </div>
     );
