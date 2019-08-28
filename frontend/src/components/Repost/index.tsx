@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import marked from 'marked';
 
-import { Card, Skeleton, Comment, Tooltip, Icon, Avatar } from 'antd';
+import { Card, Skeleton, Comment, Tooltip, Icon, Avatar, Mentions } from 'antd';
 
 import { IRepost } from '../../types';
 
@@ -81,11 +81,18 @@ export default (props: PostProps) => {
                         <Avatar src={props.repost.user_head} alt=''/>
                     }
                     content={
-                        <div
-                            dangerouslySetInnerHTML={{
-                                __html: marked(props.repost.reposting_content)
-                            }}
-                        />
+                        <div>
+                            {props.repost.reply_posting === null ? null :
+                                <Mentions
+                                    readOnly
+                                    placeholder={`引用 @${props.repost.reply_posting[0]} 的回复: ${props.repost.reply_posting[1]}`}
+                                />}
+                            <div
+                                dangerouslySetInnerHTML={{
+                                    __html: marked(props.repost.reposting_content)
+                                }}
+                            />
+                        </div>
                     }
                     datetime={
                         <Tooltip title={props.repost.formated_reposting_time}>

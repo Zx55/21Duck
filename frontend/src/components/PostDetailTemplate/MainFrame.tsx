@@ -39,7 +39,7 @@ export default withRouter((props: MainFrameProps) => {
                     getReposts={props.getReposts}
                 />
             </div>
-            <PostCreator type="发布回帖" withTitle={0}/>
+            <PostCreator type="回复主帖" withTitle={0}/>
             <Button
                 className='return-button'
                 icon='arrow-left'

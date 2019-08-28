@@ -1,5 +1,6 @@
 import React from 'react';
 import marked from 'marked';
+import cx from 'classnames';
 
 import { Card, Avatar, Skeleton, Tooltip } from 'antd';
 
@@ -19,7 +20,7 @@ export interface PostProps {
 };
 
 export default (props: PostProps) => (
-    <Card className='post'>
+    <Card className={cx('post', props.detail && 'post-detail')}>
         <Skeleton
             loading={props.loading}
             active

@@ -1,21 +1,23 @@
 import React from 'react';
 
-import './SideBar.css';
 import { Card } from 'antd';
+
+import './SideBar.css';
+
 
 export default () => {
     return (
-        <div>
-            <Card id='ad' title="Default size card">
+        <div id='side-bar'>
+            <Card id='side-card' title="Default size card">
                 <p>Card content</p>
                 <p>Card content</p>
                 <p>Card content</p>
             </Card>
-            <Card id='ad' title="Default size card">
+            <Card id='side-card' title="Default size card">
                 <p>Card content</p>
                 <p>Card content</p>
                 <p>Card content</p>
             </Card>
         </div>
     )
-}
+};

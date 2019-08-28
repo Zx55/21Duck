@@ -2,7 +2,6 @@
     background: white;
     box-shadow: 1px 1px 5px #bbbbbb;
     margin: 10px 0 10px 0;
-    width: 70%;
     border-radius: 0.8ch;
 }
 
@@ -12,6 +11,15 @@
 
 .ant-comment-inner {
     padding: 0;
+}
+
+.ant-mentions {
+    border: 0;
+    padding: 4px 0;
+}
+
+.ant-mentions textarea {
+    padding: 4px 0;
 }
 
 .ant-comment-actions {
