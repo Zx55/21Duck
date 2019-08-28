@@ -1,9 +1,8 @@
 from datetime import datetime
-import pytz
 import hashlib
 
 def calculate_relative_time(tar_time):
-    now = datetime.now().replace(tzinfo=pytz.timezone('Asia/Shanhai'))
+    now = datetime.now()
     diff_sec = (now - tar_time).total_seconds()
     if diff_sec <= 60:
         res = '刚刚'
