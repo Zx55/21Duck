@@ -1,11 +1,11 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
-
-import { Button, BackTop } from 'antd';
+import React, { useState } from 'react';
+import { withRouter, Redirect } from 'react-router-dom';
 
 import Post from '../Post';
 import RepostList from '../RepostList';
 import PostCreator from '../PostCreator';
+import SideBar from '../SideBar';
+import SideButtons from './SideButtons';
 
 import { RouteComponentProps } from 'react-router-dom';
 import { IPost, IRepost } from '../../types';
@@ -18,10 +18,15 @@ export interface MainFrameProps extends RouteComponentProps {
     repostNum: number;
     postLoading: boolean;
     repostsLoading: boolean;
+    sideLoading: boolean;
     getReposts: (page: string) => void;
 };
 
 export default withRouter((props: MainFrameProps) => {
+    const [visible, setVisible] = useState(false);
+    const [redirect, setRedirect] = useState(false);
+    const [replyRepostId, setId] = useState(-1);
+
     return (
         <div className='detail-template-main-frame'>
             <div className='detail-post-wrapper'>
@@ -37,19 +42,26 @@ export default withRouter((props: MainFrameProps) => {
                     loading={props.repostsLoading}
                     repostNum={props.repostNum}
                     getReposts={props.getReposts}
+                    setReplyRepostId={setId}
+                    setVisible={setVisible}
                 />
             </div>
-            <PostCreator type="回复主帖" withTitle={0}/>
-            <Button
-                className='return-button'
-                icon='arrow-left'
-                shape='circle'
-                size='large'
-                onClick={() =>
+            <PostCreator
+                header={"回帖"}
+                title={false}
+                visible={visible}
+                setVisible={setVisible}
+                repostId={replyRepostId}
+            />
+            {redirect && <Redirect to='/login' />}
+            <SideBar loading={props.sideLoading} />
+            <SideButtons
+                setVisible={setVisible}
+                setRedirect={setRedirect}
+                onReturnClick={() =>
                     props.history.replace(props.match.path.replace('/:postId', ''))
                 }
             />
-            <BackTop className='go-to-top-button' />
         </div>
     );
 });

@@ -78,12 +78,14 @@ export default (props: NavigatorProps) => {
                         <Item key='user-center'>
                             <Link to='/user'>个人中心</Link>
                         </Item>
+                        {user.identity === 2 ? <Item key='admin-board'>
+                            <Link to='/admin'>管理面板</Link>
+                        </Item> : null}
                         <Item key='logout' onClick={() => {
                             dispatch(logout());
                         }}>
                             注销
                         </Item>
-                        
                     </SubMenu>
                 )}
             <Item

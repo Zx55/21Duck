@@ -11,6 +11,7 @@ import './SuccessInfo.css';
 export interface SuccessInfoProps {
     user: IUser;
     prefix: string;
+    clock?: NodeJS.Timeout;
 };
 
 export default (props: SuccessInfoProps) => {
@@ -21,6 +22,12 @@ export default (props: SuccessInfoProps) => {
         setTimeout(() => clearInterval(timeout), 3100);
     }, []);
 
+    const onClick = () => {
+        if (props.clock) {
+            clearTimeout(clock);
+        }
+    };
+
     return (
         <Result className="success-info"
             status="success"
@@ -30,9 +37,9 @@ export default (props: SuccessInfoProps) => {
             extra={[
                 <div className="success-operation">
                     <Button type="primary" key="center" style={{ marginRight: 15 }}>
-                        个人中心
+                        <Link to='/User'>个人中心</Link>
                     </Button>
-                    <Button key="return">
+                    <Button key="return" onClick={onClick}>
                         <Link to='/explore'>返回首页</Link>
                     </Button>
                 </div>

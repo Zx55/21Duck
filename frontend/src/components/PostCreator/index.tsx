@@ -1,102 +1,61 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
 
-import { Modal, Button, Input, Icon, message } from 'antd';
+import { Modal, Input, Icon } from 'antd';
 
-import { useUser } from '../../hooks';
 import Editor from '../Editor'
 
 import './PostCreator.css';
 
 export interface PostCreaterProps {
-    type: string, 
-    withTitle: number
+    header: string;
+    title: boolean;
+    visible: boolean;
+    setVisible: (visible: boolean) => void;
+    repostId?: number;
 };
 
-
 export default (props: PostCreaterProps) => {
-    const [creatorVisible, setCreatorVisible] = useState(false);
-    const [redirect, setRedirect] = useState(false);
-    const user = useUser();
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
 
-    const warning = () => {
-        message.config({ top: 75 });
-        message.warning("游客请先登录或注册");
+    const onOkClick = () => {
+        props.setVisible(false);
     };
 
-    const handleClick = () => {
-        if (user.identity === 0) {
-            warning();
-            setRedirect(true);
-        } else {
-            setCreatorVisible(true);
-        }
-    }
-    if(props.withTitle === 1){
-        return (
-            <div>
-                <Button
-                    className='post-button'
-                    type='primary'
-                    icon='plus'
-                    shape='circle'
-                    size='large'
-                    onClick={() => handleClick()}
-                />
-                <Modal
-                    title={props.type}
-                    width="90%"
-                    centered
-                    visible={creatorVisible}
-                    onOk={() => setCreatorVisible(false)}
-                    onCancel={() => setCreatorVisible(false)}
-                >
-                    <div className='box'>
+    const onCancelClick = () => {
+        props.setVisible(false);
+        setContent('');
+    };
+
+    return (
+        <div>
+            <Modal
+                title={props.header}
+                width="90%"
+                centered
+                visible={props.visible}
+                onOk={onOkClick}
+                onCancel={onCancelClick}
+                okText="发布"
+                cancelText="取消"
+            >
+                <div className='box'>
+                    {props.title && (
                         <div className='title'>
                             <div className='title-word'>标题</div>
                             <Input
                                 prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />}
                                 placeholder="请输入标题"
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
                             />
                         </div>
-                        <div className='editor'>
-                            <Editor></Editor>
-                        </div>
-                    </div>
-                </Modal>
-                {redirect ? <Redirect to='/login' /> : null}
-            </div>
-        );
-    }
-
-    else{
-        return (
-            <div>
-                <Button
-                    className='post-button'
-                    type='primary'
-                    icon='plus'
-                    shape='circle'
-                    size='large'
-                    onClick={() => handleClick()}
-                />
-                <Modal
-                    title={props.type}
-                    width="90%"
-                    centered
-                    visible={creatorVisible}
-                    onOk={() => setCreatorVisible(false)}
-                    onCancel={() => setCreatorVisible(false)}
-                >
-                    <div className='box'>
-                        <div className='editor'>
-                            <Editor></Editor>
-                        </div>
-                    </div>
-                </Modal>
-                {redirect ? <Redirect to='/login' /> : null}
-            </div>
-        );
-    }
-    
+                    )}
+                </div>
+                <div className='editor'>
+                    <Editor content={content} setContent={setContent} />
+                </div>
+            </Modal>
+        </div>
+    );
 };

@@ -30,11 +30,11 @@ export default withRouter((props: PageDetailTemplate) => {
 
     const postId = (props.match.params as { postId: string }).postId;
     const [post, setPost] = useState(new IPost());
-    const [postLoading, setPostLoading] = useState(false);
+    const [postLoading, setPostLoading] = useState(true);
     const [reposts, setReposts] = useState(initReposts);
     const [repostsLoading, setRepostsLoading] = useState(true);
-    // FIXME: repostNum 返回的数量错误
     const [repostNum, setRepostNum] = useState(0);
+    const [sideLoading, setSideLoading] = useState(true);
     const [page404, setPage404] = useState(false);
 
     const getPost = (): void => {
@@ -100,6 +100,7 @@ export default withRouter((props: PageDetailTemplate) => {
                     getReposts={getReposts}
                     postLoading={postLoading}
                     repostsLoading={repostsLoading}
+                    sideLoading={sideLoading}
                 />
             }
         </div>

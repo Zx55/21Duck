@@ -23,3 +23,9 @@
 .ant-list-items {
     width: 70%;
 }
+
+#side-bar {
+    position: absolute;
+    top: 238px;
+    left: 64%;
+}

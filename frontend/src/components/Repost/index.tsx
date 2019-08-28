@@ -11,6 +11,8 @@ import './Repost.css';
 export interface PostProps {
     repost: IRepost;
     loading: boolean;
+    setReplyRepostId: (id: number) => void;
+    setVisible: (visible: boolean) => void;
 };
 
 export default (props: PostProps) => {
@@ -32,7 +34,8 @@ export default (props: PostProps) => {
     };
 
     const replyToRepost = () => {
-        console.log('reply1');
+        props.setReplyRepostId(props.repost.reposting_id);
+        props.setVisible(true);
     };
 
     const actions = [
@@ -58,7 +61,10 @@ export default (props: PostProps) => {
             />
             <span className='repost-action-text'>举报</span>
         </span>,
-        <span key='repost-reply' onClick={replyToRepost}>
+        <span
+            key='repost-reply'
+            onClick={replyToRepost}
+        >
             <Icon
                 className='repost-reply-button'
                 type='message'
