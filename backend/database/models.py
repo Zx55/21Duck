@@ -47,8 +47,8 @@ class Notify(models.Model):
 class Posting(models.Model):
     posting_id = models.AutoField(primary_key=True)
     posting_user = models.ForeignKey('User', models.DO_NOTHING)
-    posting_time = models.DateTimeField(default=datetime.now().replace(tzinfo=pytz.timezone('Asia/Shanghai')))
-    reply_time = models.DateTimeField(default=datetime.now().replace(tzinfo=pytz.timezone('Asia/Shanghai')))
+    posting_time = models.DateTimeField(default=datetime.now().replace(tzinfo=pytz.timezone('UTC')))
+    reply_time = models.DateTimeField(default=datetime.now().replace(tzinfo=pytz.timezone('UTC')))
     reply_num = models.IntegerField(default=0)
     theme = models.CharField(max_length=256)
     posting_content = models.CharField(max_length=16384)
@@ -67,7 +67,7 @@ class Reposting(models.Model):
     main_posting = models.ForeignKey('Posting', models.DO_NOTHING)
     reposting_user = models.ForeignKey('User', models.DO_NOTHING)
     reposting_time = models.DateTimeField(blank=True, null=True,
-                                          default=datetime.now().replace(tzinfo=pytz.timezone('Asia/Shanghai')))
+                                          default=datetime.now().replace(tzinfo=pytz.timezone('UTC')))
     reposting_content = models.CharField(max_length=16384)
     reposting_thumb_num = models.IntegerField(default=0)
     floor = models.IntegerField(default=0)
