@@ -18,12 +18,14 @@ export interface MainFrameProps extends RouteComponentProps {
     repostNum: number;
     postLoading: boolean;
     repostsLoading: boolean;
+    sideLoading: boolean;
     getReposts: (page: string) => void;
 };
 
 export default withRouter((props: MainFrameProps) => {
     const [visible, setVisible] = useState(false);
     const [redirect, setRedirect] = useState(false);
+    const [replyRepostId, setId] = useState(-1);
 
     return (
         <div className='detail-template-main-frame'>
@@ -40,16 +42,19 @@ export default withRouter((props: MainFrameProps) => {
                     loading={props.repostsLoading}
                     repostNum={props.repostNum}
                     getReposts={props.getReposts}
+                    setReplyRepostId={setId}
+                    setVisible={setVisible}
                 />
             </div>
             <PostCreator
-                type="回复主帖"
-                withTitle={0}
+                header={"回帖"}
+                title={false}
                 visible={visible}
                 setVisible={setVisible}
+                repostId={replyRepostId}
             />
             {redirect && <Redirect to='/login' />}
-            <SideBar />
+            <SideBar loading={props.sideLoading} />
             <SideButtons
                 setVisible={setVisible}
                 setRedirect={setRedirect}

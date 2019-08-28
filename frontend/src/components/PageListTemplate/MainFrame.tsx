@@ -13,7 +13,8 @@ export interface MainFrameProps {
     name: string;
     posts: Array<IPost>;
     postNum: number;
-    loading: boolean;
+    postsLoading: boolean;
+    sideLoading: boolean;
     getPosts: (page: string) => void;
 };
 
@@ -25,13 +26,13 @@ export default (props: MainFrameProps) => {
         <div className='list-template-main-frame'>
             <PostList
                 posts={props.posts}
-                loading={props.loading}
+                loading={props.postsLoading}
                 postNum={props.postNum}
                 getPosts={props.getPosts}
             />
             <PostCreator
-                type="????"
-                withTitle={1}
+                header="????"
+                title={true}
                 visible={visible}
                 setVisible={setVisible}
             />
@@ -40,7 +41,7 @@ export default (props: MainFrameProps) => {
                 setVisible={setVisible}
                 setRedirect={setRedirect}
             />
-            <SideBar />
+            <SideBar loading={props.sideLoading} />
 
         </div>
     );

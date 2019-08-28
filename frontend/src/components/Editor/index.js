@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
-import Editor from 'for-editor';
+import React from 'react';
+import ForEditor from 'for-editor';
 
-const MyEditor=() => {
-    const[content,setContent] = useState('');
 
-    const handleChange=(value) => {
-        setContent(value)
-    }
-
-    return <Editor value={content} preview={true} subfield={true} onChange={value => handleChange(value)} />
-}
-
-export default MyEditor;
+export default ({ content, setContent }) => (
+    <ForEditor
+        value={content}
+        preview={true}
+        subfield={true}
+        onChange={(content) => setContent(content)}
+    />
+);

@@ -14,8 +14,14 @@ export default withRouter((props: RouteComponentProps) => {
     const user = useUser();
 
     const userRegisterSuccess = () => {
-        setTimeout(() => props.history.push('/explore'), 3000);
-        return <SuccessInfo user={user} prefix='注册成功' />;
+        const clock = setTimeout(() => props.history.push('/explore'), 3000);
+        return (
+            <SuccessInfo
+                user={user}
+                prefix='注册成功'
+                clock={clock}
+            />
+        );
     };
 
     return (

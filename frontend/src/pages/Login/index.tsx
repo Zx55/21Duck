@@ -16,8 +16,14 @@ export default withRouter((props: LoginProps) => {
     const user = useUser();
 
     const userLoginSuccess = () => {
-        setTimeout(() => props.history.push('/explore'), 3000);
-        return <SuccessInfo user={user} prefix='欢迎回来' />;
+        const clock = setTimeout(() => props.history.push('/explore'), 3000);
+        return (
+            <SuccessInfo
+                user={user}
+                prefix='欢迎回来'
+                clock={clock}
+            />
+        );
     }
 
     return (
