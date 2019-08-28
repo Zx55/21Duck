@@ -54,7 +54,9 @@ export default withRouter((props: MainFrameProps) => {
                 repostId={replyRepostId}
             />
             {redirect && <Redirect to='/login' />}
-            <SideBar loading={props.sideLoading} />
+            <SideBar
+                loading={props.sideLoading}
+                userCenter={false} />
             <SideButtons
                 setVisible={setVisible}
                 setRedirect={setRedirect}

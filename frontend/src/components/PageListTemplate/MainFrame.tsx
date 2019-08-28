@@ -43,8 +43,10 @@ export default (props: MainFrameProps) => {
                 setVisible={setVisible}
                 setRedirect={setRedirect}
             />
-            <SideBar loading={props.sideLoading} />
-
+            <SideBar
+                loading={props.sideLoading}
+                userCenter={false}
+            />
         </div>
     );
 };
