@@ -1,10 +1,5 @@
-#side-bar {
-    float: right;
-    left: 64%;
-}
-
 #side-card {
-    width: 202%;
+    width: 392px;
     border-radius: 0.8ch;
     margin: 10px;
     box-shadow: 1px 1px 5px #bbbbbb;

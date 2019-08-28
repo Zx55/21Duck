@@ -58,7 +58,10 @@ export default (props: PostProps) => {
             />
             <span className='repost-action-text'>举报</span>
         </span>,
-        <span key='repost-reply' onClick={replyToRepost}>
+        <span
+            key='repost-reply'
+            onClick={replyToRepost}
+        >
             <Icon
                 className='repost-reply-button'
                 type='message'

@@ -9,7 +9,7 @@ import Editor from '../Editor'
 import './PostCreator.css';
 
 export interface PostCreaterProps {
-    type: string, 
+    type: string,
     withTitle: number
 };
 
@@ -32,26 +32,26 @@ export default (props: PostCreaterProps) => {
             setCreatorVisible(true);
         }
     }
-    if(props.withTitle === 1){
-        return (
-            <div>
-                <Button
-                    className='post-button'
-                    type='primary'
-                    icon='plus'
-                    shape='circle'
-                    size='large'
-                    onClick={() => handleClick()}
-                />
-                <Modal
-                    title={props.type}
-                    width="90%"
-                    centered
-                    visible={creatorVisible}
-                    onOk={() => setCreatorVisible(false)}
-                    onCancel={() => setCreatorVisible(false)}
-                >
-                    <div className='box'>
+    return (
+        <div>
+            <Button
+                className='post-button'
+                type='primary'
+                icon='plus'
+                shape='circle'
+                size='large'
+                onClick={() => handleClick()}
+            />
+            <Modal
+                title={props.type}
+                width="90%"
+                centered
+                visible={creatorVisible}
+                onOk={() => setCreatorVisible(false)}
+                onCancel={() => setCreatorVisible(false)}
+            >
+                <div className='box'>
+                    {props.withTitle === 1 ? (
                         <div className='title'>
                             <div className='title-word'>标题</div>
                             <Input
@@ -59,44 +59,13 @@ export default (props: PostCreaterProps) => {
                                 placeholder="请输入标题"
                             />
                         </div>
-                        <div className='editor'>
-                            <Editor></Editor>
-                        </div>
+                    ) : null }
                     </div>
-                </Modal>
-                {redirect ? <Redirect to='/login' /> : null}
-            </div>
-        );
-    }
-
-    else{
-        return (
-            <div>
-                <Button
-                    className='post-button'
-                    type='primary'
-                    icon='plus'
-                    shape='circle'
-                    size='large'
-                    onClick={() => handleClick()}
-                />
-                <Modal
-                    title={props.type}
-                    width="90%"
-                    centered
-                    visible={creatorVisible}
-                    onOk={() => setCreatorVisible(false)}
-                    onCancel={() => setCreatorVisible(false)}
-                >
-                    <div className='box'>
-                        <div className='editor'>
-                            <Editor></Editor>
-                        </div>
+                    <div className='editor'>
+                        <Editor />
                     </div>
-                </Modal>
-                {redirect ? <Redirect to='/login' /> : null}
-            </div>
-        );
-    }
-    
+            </Modal>
+            {redirect ? <Redirect to='/login' /> : null}
+        </div>
+    );
 };

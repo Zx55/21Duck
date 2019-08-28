@@ -6,6 +6,7 @@ import { Button, BackTop } from 'antd';
 import Post from '../Post';
 import RepostList from '../RepostList';
 import PostCreator from '../PostCreator';
+import SideBar from '../SideBar';
 
 import { RouteComponentProps } from 'react-router-dom';
 import { IPost, IRepost } from '../../types';
@@ -39,7 +40,8 @@ export default withRouter((props: MainFrameProps) => {
                     getReposts={props.getReposts}
                 />
             </div>
-            <PostCreator type="回复主帖" withTitle={0}/>
+            <PostCreator type="回夝主帖" withTitle={0}/>
+            <SideBar />
             <Button
                 className='return-button'
                 icon='arrow-left'

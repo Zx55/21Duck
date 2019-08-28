@@ -10,6 +10,10 @@
     top: 84%;
 }
 
+.ant-list-items {
+    width: 70%;
+}
+
 .ant-carousel .slick-slide {
     text-align: center;
     height: 300px;
@@ -43,4 +47,10 @@
     padding-top: 150px;
     font-size: 18px;
     width: 100%;
+}
+
+#side-bar {
+    position: absolute;
+    top: 374px;
+    left: 64%;
 }
