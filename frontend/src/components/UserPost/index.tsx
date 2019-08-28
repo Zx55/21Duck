@@ -1,8 +1,7 @@
 import React from 'react';
-import marked from 'marked';
 import cx from 'classnames';
 
-import { Card, Avatar, Skeleton, Tooltip } from 'antd';
+import { Card, Skeleton, Tooltip } from 'antd';
 
 import { IPost } from '../../types';
 

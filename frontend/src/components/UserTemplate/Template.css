@@ -1,0 +1,29 @@
+.antd-card-cover {
+    height: 10px;
+}
+
+.user-center-side-bar {
+    position: absolute;
+    top: 490px;
+    left: 65%;
+    width: 360px;
+    box-shadow: 1px 1px 3px #bbbbbb
+}
+
+#user-card {
+    margin:10px auto;
+}
+
+.user-template-root {
+    min-height: 100vh;
+}
+
+.ant-list-items {
+    width: 70%;
+}
+
+.go-to-top-button {
+    position: fixed;
+    left: 90%;
+    top: 84%;
+}
