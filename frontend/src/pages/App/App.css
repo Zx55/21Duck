@@ -5,7 +5,7 @@
 }
 
 .navigator {
-    line-height: 64px;
+    line-height: 63px;
 }
 
 .navigator-search {
@@ -19,6 +19,11 @@
     width: 100%;
     padding-left: 15%;
     padding-right: 15%;
+}
+
+.ant-layout-header {
+    background: white;
+    box-shadow: -2px -1px 3px #bbbbbb;
 }
 
 .app-content {

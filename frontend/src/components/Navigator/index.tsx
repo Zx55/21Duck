@@ -34,7 +34,7 @@ export default (props: NavigatorProps) => {
     return (
         <Menu
             className='navigator'
-            theme='dark'
+            theme='light'
             mode='horizontal'
             defaultSelectedKeys={['explore']}
             selectedKeys={[menuKey]}

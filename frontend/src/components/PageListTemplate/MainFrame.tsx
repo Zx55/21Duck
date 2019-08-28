@@ -25,7 +25,7 @@ export default (props: MainFrameProps) => {
                 postNum={props.postNum}
                 getPosts={props.getPosts}
             />
-            <PostCreator />
+            <PostCreator type="发布新帖" withTitle={1}/>
             <BackTop className='go-to-top-button' />
         </div>
     );

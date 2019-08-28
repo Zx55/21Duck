@@ -2,6 +2,7 @@ import collections
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 from rest_framework_extensions.serializers import PartialUpdateSerializerMixin
+import datetime
 
 from .models import *
 from .myfuncs import *
@@ -16,14 +17,19 @@ class PostingSerializer(PartialUpdateSerializerMixin, ModelSerializer):
     posting_num = serializers.SerializerMethodField(label='posting_number')
     relative_posting_time = serializers.SerializerMethodField(label='relative_posting_time')
     relative_reply_time = serializers.SerializerMethodField(label='relative_reply_time')
+    formated_posting_time = serializers.SerializerMethodField(label='formated_posting_time')
     user_nickname = serializers.SerializerMethodField(label='user_nickname')
     user_head = serializers.SerializerMethodField(label='user_head')
+
 
     class Meta:
         model = Posting
         fields = ['posting_id', 'user_head','posting_num', 'posting_user', 'user_nickname',
                   'relative_posting_time', 'relative_reply_time', 'reply_num',
-                  'theme', 'posting_content', 'category_id', 'posting_thumb_num']
+                  'theme', 'posting_content', 'category_id', 'posting_thumb_num', 'formated_posting_time']
+
+    def get_formated_posting_time(self, obj):
+        return obj.posting_time.strftime("%Y-%m-%d %H:%M:%S")
 
     def get_posting_num(self, obj):
         return Posting.objects.filter(category_id=obj.category_id).count()
@@ -47,12 +53,17 @@ class RepostingSerializer(PartialUpdateSerializerMixin, ModelSerializer):
     user_head = serializers.SerializerMethodField(label='user_head')
     reply_posting = serializers.SerializerMethodField(label='reply_posting')
     floor = serializers.SerializerMethodField(label='floor')
+    formated_reposting_time = serializers.SerializerMethodField(label='formated_reposting_time')
 
     class Meta:
         model = Reposting
         fields = ['reposting_id', 'reposting_user', 'relative_reposting_time',
                   'reposting_content', 'reposting_thumb_num', 'reposting_num',
-                  'user_nickname', 'user_head', 'reply_posting', 'floor']
+                  'user_nickname', 'user_head', 'reply_posting', 'floor',
+                  'formated_reposting_time']
+
+    def get_formated_reposting_time(self, obj):
+        return obj.reposting_time.strftime("%Y-%m-%d %H:%M:%S")
 
     def get_reposting_num(self, obj):
         return Posting.objects.filter(posting_id=obj.main_posting.posting_id)[0].reply_num

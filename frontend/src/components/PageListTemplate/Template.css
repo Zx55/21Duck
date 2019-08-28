@@ -9,3 +9,38 @@
     left: 90%;
     top: 84%;
 }
+
+.ant-carousel .slick-slide {
+    text-align: center;
+    height: 300px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.ant-carousel .slick-slide img {
+    position: absolute;
+    top: -70%;
+    width: 100%;
+    height: auto;
+}
+
+.ant-carousel .slick-slide:hover {
+    cursor: pointer;
+}
+
+.ant-carousel .slick-slide h3 {
+    position: absolute;
+    color: #fff;
+    padding-top: 85px;
+    font-size: 28px;
+    width: 100%;
+}
+
+.ant-carousel .slick-slide span {
+    position: absolute;
+    left: 0;
+    color: #fff;
+    padding-top: 150px;
+    font-size: 18px;
+    width: 100%;
+}

@@ -19,7 +19,7 @@ class PostingViewSet(CacheResponseMixin, ModelViewSet):
     def list(self, request, *args, **kwargs):
         if request.method == 'GET':
             page = request.GET.get('page')
-            category = request.GET.get('category')
+            category = request.GET.get('category_id')
             EACH_PAGE = 15    #numbers for each page
 
             if page and category:

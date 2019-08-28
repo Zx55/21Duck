@@ -1,7 +1,7 @@
 import React from 'react';
 import marked from 'marked';
 
-import { Card, Avatar, Skeleton } from 'antd';
+import { Card, Avatar, Skeleton, Tooltip } from 'antd';
 
 import PostFooter from './PostFooter';
 
@@ -32,9 +32,9 @@ export default (props: PostProps) => (
             <span className='user-nickname'>
                 {props.post.user_nickname}
             </span>
-            <span className='post-created-time'>
+            <Tooltip className='post-created-time' title={props.post.formated_posting_time}>
                 {props.post.relative_posting_time}
-            </span>
+            </Tooltip>
             <div
                 className='post-content'
                 dangerouslySetInnerHTML={{
