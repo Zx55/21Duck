@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import marked from 'marked';
 import cx from 'classnames';
 
@@ -34,7 +35,10 @@ export default (props: PostProps) => (
                 {props.post.user_nickname}
             </span>
             <Tooltip className='post-created-time' title={props.post.formated_posting_time}>
-                {props.post.relative_posting_time}
+                <span>
+                    {moment(props.post.formated_posting_time,
+                        'YYYY-MM-DD HH:mm:ss').fromNow()}
+                </span>
             </Tooltip>
             <div
                 className='post-content'

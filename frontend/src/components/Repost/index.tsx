@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import moment from 'moment';
 import marked from 'marked';
 
 import { Card, Skeleton, Comment, Tooltip, Icon, Avatar, Mentions } from 'antd';
@@ -102,7 +103,10 @@ export default (props: PostProps) => {
                     }
                     datetime={
                         <Tooltip title={props.repost.formated_reposting_time}>
-                            <span>{props.repost.relative_reposting_time}</span>
+                            <span>
+                                {moment(props.repost.formated_reposting_time,
+                                    'YYYY-MM-DD HH:mm:ss').fromNow()}
+                            </span>
                         </Tooltip>
                     }
                 />

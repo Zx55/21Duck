@@ -8,6 +8,7 @@
     "classnames": "^2.2.6",
     "for-editor": "^0.3.2",
     "marked": "^0.7.0",
+    "moment": "^2.24.0",
     "qs": "^6.8.0",
     "rc-banner-anim": "^2.3.0",
     "rc-queue-anim": "^1.7.0",

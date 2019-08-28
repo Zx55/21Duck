@@ -1,5 +1,6 @@
 import React from 'react';
 
-export default () => (
-    <div>Campus</div>
-);
+import Template from '../../components/PostListTemplate';
+
+
+export default () => <Template category='4' />;

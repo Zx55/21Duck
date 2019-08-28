@@ -1,17 +1,5 @@
-.post-button {
-    position: fixed;
-    left: 90%;
-    top: 90%;
-}
-
-.go-to-top-button {
-    position: fixed;
-    left: 90%;
-    top: 84%;
-}
-
-.ant-list-items {
-    width: 70%;
+.list-page-root {
+    min-height: 100vh;
 }
 
 .ant-carousel .slick-slide {
@@ -49,6 +37,10 @@
     width: 100%;
 }
 
+.ant-list-items {
+    width: 70%;
+}
+
 .normal-side-bar {
     position: absolute;
     top: 374px;
@@ -60,4 +52,16 @@
     border-radius: 0.8ch;
     margin: 10px;
     box-shadow: 1px 1px 5px #bbbbbb;
+}
+
+.go-to-top-button {
+    position: fixed;
+    left: 90%;
+    top: 84%;
+}
+
+.post-button {
+    position: fixed;
+    left: 90%;
+    top: 90%;
 }

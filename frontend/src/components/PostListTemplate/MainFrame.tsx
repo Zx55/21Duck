@@ -10,7 +10,6 @@ import { IPost } from '../../types';
 
 
 export interface MainFrameProps {
-    name: string;
     posts: Array<IPost>;
     postNum: number;
     postsLoading: boolean;

@@ -1,12 +1,6 @@
 import React from 'react';
 
-import Template from '../../components/PageListTemplate';
-
-import './Problems.css';
+import Template from '../../components/PostListTemplate';
 
 
-export default () => (
-    <div>
-        <Template name='problem' category='2' />
-    </div>
-);
+export default () => <Template category='2' />;

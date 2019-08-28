@@ -12,7 +12,6 @@ import { IPost, IRepost } from '../../types';
 
 
 export interface MainFrameProps extends RouteComponentProps {
-    name: string;
     post: IPost;
     reposts: Array<IRepost>;
     repostNum: number;

@@ -1,7 +1,22 @@
-.post-button {
-    position: fixed;
-    left: 90%;
-    top: 90%;
+.ant-list-items {
+    width: 70%;
+}
+
+.ant-list-pagination {
+    margin-right: 30%;
+}
+
+.normal-side-bar {
+    position: absolute;
+    top: 238px;
+    left: 64%;
+}
+
+.normal-side-card {
+    width: 392px;
+    border-radius: 0.8ch;
+    margin: 10px;
+    box-shadow: 1px 1px 5px #bbbbbb;
 }
 
 .go-to-top-button {
@@ -16,23 +31,8 @@
     top: 84%;
 }
 
-.ant-list-pagination {
-    margin-right: 30%;
-}
-
-.ant-list-items {
-    width: 70%;
-}
-
-.normal-side-bar {
-    position: absolute;
-    top: 238px;
-    left: 64%;
-}
-
-.normal-side-card {
-    width: 392px;
-    border-radius: 0.8ch;
-    margin: 10px;
-    box-shadow: 1px 1px 5px #bbbbbb;
+.post-button {
+    position: fixed;
+    left: 90%;
+    top: 90%;
 }

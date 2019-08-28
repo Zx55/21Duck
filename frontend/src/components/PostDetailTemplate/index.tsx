@@ -12,7 +12,6 @@ import './Template.css';
 
 
 export interface PageDetailTemplate extends RouteComponentProps {
-    name: string;
     category: string;
 }
 
@@ -84,14 +83,13 @@ export default withRouter((props: PageDetailTemplate) => {
     }, []);
 
     return (
-        <div className={`${props.name}-detail-root`}>
+        <div className={`detail-page-root`}>
             {(!isNumber(postId) || page404)
                 ? <NotFound
                     prefix='返回上一页'
                     onClick={() => props.history.goBack()}
                 />
                 : <MainFrame
-                    name={props.name}
                     post={post}
                     reposts={reposts}
                     repostNum={repostNum}

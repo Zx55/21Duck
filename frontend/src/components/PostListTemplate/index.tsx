@@ -26,7 +26,6 @@ const items: BannerItem[] = [{
 }];
 
 export interface PageListTemplateProps {
-    name: string;
     category: string;
 };
 
@@ -70,7 +69,7 @@ export default (props: PageListTemplateProps) => {
     );
 
     return (
-        <div className={`${props.name}-root`}>
+        <div className='list-page-root'>
             <Carousel
                 autoplay
                 effect='fade'
@@ -78,7 +77,6 @@ export default (props: PageListTemplateProps) => {
                 {items.map((item: BannerItem) => renderBanner(item))}
             </Carousel>
             <MainFrame
-                name={props.name}
                 posts={posts}
                 postNum={postNum}
                 getPosts={getPosts}

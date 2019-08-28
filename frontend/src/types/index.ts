@@ -38,15 +38,14 @@ export interface IRequestRepost {
 
 // 接受后端相应的接口
 export class IPost {
-    posting_num: number = 15;                   // totalPost
     posting_id: number = -1;                    // postId
+    posting_num: number = 15;                   // totalPost
     posting_user: string = '';                  // userId
     user_nickname: string = '';                 // userNickname
     user_head: string = '';                     // userHead
     theme: string = '';                         // postTitle
-    relative_posting_time: string = '';         // relativePostTime
     formated_posting_time: string = '';         // postTime
-    relative_reply_time: string = ''            // RepostTime
+    formated_reply_time: string = '';           // latestReplyTime
     posting_content: string = '';               // postContent
     posting_thumb_num: number = -1;             // postLike
     reply_num: number = -1;                     // postReplyNum
@@ -54,17 +53,17 @@ export class IPost {
 }
 
 export class IRepost {
-    reposting_num: number = 15;                 // TotalRepost
     reposting_id: number = -1;                  // repostId
+    reposting_num: number = 15;                 // TotalRepost
     reposting_user: string = '';                // userId
     user_nickname: string = '';                 // userNickname
     user_head: string = '';                     // userHead
     reposting_content: string = '';             // repostContent
-    relative_reposting_time: string = '';       // relativeRepostTime
-    formated_reposting_time: string = '';       // RepostTime
+    formated_reposting_time: string = '';       // repostTime
     reposting_thumb_num: number = -1;           // repostLike
     reply_posting: null | Array<string> = [];   // replyPointer
     floor: number = -1;                         // repostFloor
+    main_posting: number = -1;                  // postId
 };
 
 export interface INotFound {

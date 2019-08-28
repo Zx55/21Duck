@@ -1,8 +1,6 @@
 import React from 'react';
 
+import Template from '../../components/PostListTemplate';
 
-export default () => (
-    <div>
-        Chat
-    </div>
-);
+
+export default () => <Template category='1' />;
