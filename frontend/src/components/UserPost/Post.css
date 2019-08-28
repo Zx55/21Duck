@@ -1,0 +1,87 @@
+.post {
+    background: white;
+    box-shadow: 1px 1px 5px #bbbbbb;
+    margin: 10px 0 10px 0;
+    border-radius: 0.8ch;
+}
+
+.user-nickname {
+    font-size: 12px;
+    color: rgba(0.6, 0.6, 0.6, 0.5);
+}
+
+.post-created-time {
+    font-size: 12px;
+    padding-left: 15px;
+    color: rgba(0.6, 0.6, 0.6, 0.5);
+}
+
+.post-content {
+    padding-top: 12px;
+    padding-left: 48px;
+}
+
+.post-footer {
+    padding-left: 45px;
+}
+
+.like-button {
+    margin-right: 8px;
+}
+
+.like-button:hover {
+    cursor: pointer;
+    color: #0099FF;
+}
+
+.anticon.anticon-like.like-button-icon.button-component-icon {
+    margin-right: 3px;
+}
+
+.share-button {
+    margin-right: 8px;
+}
+
+.share-button:hover {
+    cursor: pointer;
+    color: #0099FF;
+}
+
+.anticon.anticon-export.share-button-icon.button-component-icon {
+    margin-right: 3px;
+}
+
+.favorite-button {
+    margin-right: 8px;
+}
+
+.favorite-button:hover {
+    cursor: pointer;
+    color: #0099FF;
+}
+
+.anticon.anticon-star.favorite-button-icon.button-component-icon {
+    margin-right: 3px;
+}
+
+.anticon.anticon-exclamation-circle.report-button-icon.button-component-icon {
+    margin-right: 3px;
+}
+
+.report-button:hover {
+    cursor: pointer;
+    color: #0099FF;
+}
+
+.read-more-button {
+    float: right;
+}
+
+.read-more-button:hover {
+    cursor: pointer;
+    color: #0099FF;
+}
+
+.anticon.anticon-select.read-more-button-icon.button-component-icon {
+    margin-right: 4px;
+}
