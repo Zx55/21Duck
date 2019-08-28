@@ -4,6 +4,8 @@ import api from '../api';
 
 import { IAction, ActionTypes } from '../types';
 
+import {message} from 'antd'
+
 
 export interface LoginData {
     username: string,
@@ -35,7 +37,8 @@ function* loginAsync(action: IAction) {
             });
         }
         else {
-            alert('登录失败');
+            message.config({top: 75});
+            message.error('密码或用户名错误');
         }
     } catch (err) {
         console.log(err);

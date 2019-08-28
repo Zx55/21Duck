@@ -1,3 +1,7 @@
+body{
+    overflow:scroll;
+}
+
 .app {
     font-family: sans-serif;
     font-size: 14px;
@@ -45,8 +49,4 @@
 ul {
     padding-inline-start: 15px;
     list-style: none;
-}
-
-::-webkit-scrollbar {
-    display:none;
 }
