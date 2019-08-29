@@ -56,6 +56,10 @@ export default (props: PageListTemplateProps) => {
         }).catch(err => console.log(err));
     };
 
+    const getSide = (): void => {
+
+    }
+
     useEffect(() => {
         getPosts('0');
     }, []);

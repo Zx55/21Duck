@@ -46,11 +46,12 @@ export default withRouter((props: MainFrameProps) => {
                 />
             </div>
             <PostCreator
-                header={"å›žå¸–"}
+                header={"回帖"}
                 title={false}
                 visible={visible}
                 setVisible={setVisible}
                 repostId={replyRepostId}
+                postId={props.post.posting_id}
             />
             {redirect && <Redirect to='/login' />}
             <SideBar

@@ -17,6 +17,7 @@ export interface PostCreaterProps extends RouteComponentProps {
     title: boolean;
     visible: boolean;
     setVisible: (visible: boolean) => void;
+    postId?: number;
     repostId?: number;
     categoryId?: number;
 };
@@ -42,6 +43,8 @@ export default withRouter((props: PostCreaterProps) => {
             showErr('标题不能为空');
         } else if (content === '') {
             showErr('内容不能为空');
+        } else if (content.length > 1000) {
+            showErr('发布内容太长');
         } else {
             setLoading(true);
 
@@ -67,15 +70,15 @@ export default withRouter((props: PostCreaterProps) => {
                     showErr('发帖失败');
                     console.log(err);
                 })
-            } else {
+            } else if (props.postId) {
                 const data: IRequestRepost = props.repostId ? {
                     reposting_user: user.userId,
-                    main_posting: 1,
+                    main_posting: props.postId,
                     reposting_content: content,
                     reply_id: props.repostId,
                 } : {
                     reposting_user: user.userId,
-                    main_posting: 1,
+                    main_posting: props.postId,
                     reposting_content: content,
                 };
 
@@ -91,6 +94,10 @@ export default withRouter((props: PostCreaterProps) => {
                     props.setVisible(false);
                     showErr('回复失败');
                 })
+            } else {
+                setLoading(false);
+                props.setVisible(false);
+                showErr('系统错误');
             }
         }
     };

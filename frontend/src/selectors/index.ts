@@ -10,3 +10,4 @@ export const isAdmin = (state: IState): boolean =>
     getUserIdentity(state) !== 2;
 export const isRegisterIn = (state: IState): boolean =>
     getUser(state).register === 1;
+
