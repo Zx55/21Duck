@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 
 import PostList from '../PostList';
 import PostCreator from '../PostCreator';
-import SideBar from '../SideBar';
+import SideBar, { CardItem } from '../SideBar';
 import SideButtons from './SideButtons';
 
 import { IPost } from '../../types';
@@ -13,6 +13,7 @@ export interface MainFrameProps {
     posts: Array<IPost>;
     postNum: number;
     postsLoading: boolean;
+    side: Array<CardItem>;
     sideLoading: boolean;
     getPosts: (page: string) => void;
     category: string;
@@ -48,6 +49,7 @@ export default (props: MainFrameProps) => {
                 loading={props.sideLoading}
                 userCenter={false}
                 offsetTop={65}
+                items={props.side}
             />
         </div>
     );

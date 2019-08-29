@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { withRouter } from 'react-router-dom';
 
+import { newArrayWithItems } from '../../utils';
 import api from '../../api';
 import MainFrame from './MainFrame';
 import NotFound from '../NotFound';
@@ -20,15 +21,11 @@ type RepostItems = Array<IRepost>;
 const isNumber = (s: string): boolean => /^\d+$/.test(s);
 
 export default withRouter((props: PageDetailTemplate) => {
-    let initReposts = new Array<IRepost>();
-    for (let i = 0; i < 15; ++i) {
-        initReposts.push(new IRepost());
-    }
-
     const postId = (props.match.params as { postId: string }).postId;
     const [post, setPost] = useState(new IPost());
     const [postLoading, setPostLoading] = useState(true);
-    const [reposts, setReposts] = useState(initReposts);
+    const [reposts, setReposts] =
+        useState(newArrayWithItems<IRepost>(15, new IRepost()));
     const [repostsLoading, setRepostsLoading] = useState(true);
     const [repostNum, setRepostNum] = useState(0);
     const [sideLoading, setSideLoading] = useState(true);

@@ -72,11 +72,11 @@ export default (props: MainFrameProps) => {
                     />
                 </TabPane>
             </Tabs>
-            <SideBar
+            {/*<SideBar
                 loading={props.sideLoading}
                 userCenter={true}
                 offsetTop={75}
-            />
+            />*/}
             <BackTop className='user-center-go-to-top-button' />
         </div>
     );

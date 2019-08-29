@@ -40,6 +40,7 @@ export default () => (
             <Route exact path='/register' component={Register} />
             <Route exact path='/user' component={User} />
             <Route exact path='/admin' component={Admin} />
+            <Route exact path='/loading' component={Loading} />
             <Route component={NotFound} />
         </Switch>
     </Suspense>

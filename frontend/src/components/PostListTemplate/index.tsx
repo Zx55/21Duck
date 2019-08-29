@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import marked from 'marked';
 
-import { Carousel } from 'antd';
+import { Carousel, Tooltip } from 'antd';
+
+import { getRelativeTime, newArrayWithItems } from '../../utils';
 import api from '../../api';
 import MainFrame from './MainFrame';
 
-import { IPost, Param } from '../../types';
+import { IPost, Param, ICategory } from '../../types';
+import { CardItem } from '../SideBar';
 
 import './Template.css';
 
@@ -30,14 +34,11 @@ export interface PageListTemplateProps {
 };
 
 export default (props: PageListTemplateProps) => {
-    let initPosts = new Array<IPost>();
-    for (let i = 0; i < 15; ++i) {
-        initPosts.push(new IPost());
-    }
-
-    const [posts, setPosts] = useState(initPosts);
+    const [posts, setPosts] = useState(newArrayWithItems<IPost>(15, new IPost()));
     const [postNum, setPostNum] = useState(0);
     const [postsLoading, setPostsLoading] = useState(true);
+    const [categoryInfo, setCategoryInfo] =
+        useState(newArrayWithItems<CardItem>(3, new CardItem()));
     const [sideLoading, setSideLoading] = useState(true);
 
     const getPosts = (page: string): void => {
@@ -57,11 +58,68 @@ export default (props: PageListTemplateProps) => {
     };
 
     const getSide = (): void => {
+        setSideLoading(true);
+        console.log(sideLoading);
 
-    }
+        api.category.retreive(props.category).then((response) => {
+            const data: ICategory = response.data;
+
+            let admins: string = '';
+            data.manager.forEach((admin) => admins = admins + admin.nickname + ' ');
+
+            const info: CardItem = {
+                title: '本版信息',
+                contents: [{
+                    key: <span style={{color: 'rgba(0, 0, 0, .5)' }}>今日主题帖</span>,
+                    value:
+                        <span style={{ float: 'right' }}>
+                            {data.posting_num.toString()}
+                        </span>,
+                }, {
+                    key: <span style={{color: 'rgba(0, 0, 0, .5)' }}>今日回帖</span>,
+                    value:
+                        <span style={{ float: 'right' }}>
+                            {data.reposting_num.toString()}
+                        </span>,
+                }, {
+                    key: <span style={{color: 'rgba(0, 0, 0, .5)' }}>最新回复时间</span>,
+                    value:
+                        <span style={{ float: 'right' }}>
+                            <Tooltip title={data.formated_new_reply_time}>
+                                {getRelativeTime(data.formated_new_reply_time)}
+                            </Tooltip>
+                        </span>,
+                }, {
+                    key: <span style={{color: 'rgba(0, 0, 0, .5)' }}>管理员</span>,
+                    value:
+                        <span style={{ float: 'right' }}>
+                            {admins}
+                        </span>,
+                }],
+            };
+
+            const rule: CardItem = {
+                title: '本版规则',
+                contents: [{
+                    value:
+                        <div
+                            dangerouslySetInnerHTML={{
+                                __html: marked(data.category_content)
+                            }}
+                        />
+                }]
+            };
+
+            setCategoryInfo([info, rule]);
+            setSideLoading(false);
+            console.log(sideLoading);
+            console.log('hello');
+        }).catch((err) => console.log(err));
+    };
 
     useEffect(() => {
         getPosts('0');
+        getSide();
     }, []);
 
     const renderBanner = (item: BannerItem) => (
@@ -81,12 +139,13 @@ export default (props: PageListTemplateProps) => {
                 {items.map((item: BannerItem) => renderBanner(item))}
             </Carousel>
             <MainFrame
+                category={props.category}
                 posts={posts}
                 postNum={postNum}
                 getPosts={getPosts}
                 postsLoading={postsLoading}
                 sideLoading={sideLoading}
-                category={props.category}
+                side={categoryInfo}
             />
         </div>
     );

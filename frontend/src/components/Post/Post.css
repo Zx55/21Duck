@@ -1,6 +1,5 @@
 .post {
     background: white;
-    box-shadow: 1px 1px 5px #bbbbbb;
     margin: 10px 0 10px 0;
     border-radius: 0.8ch;
 }
@@ -74,6 +73,7 @@
 }
 
 .read-more-button {
+    padding-left: 15px;
     float: right;
 }
 
@@ -87,5 +87,5 @@
 }
 
 .post-reply-num {
-    margin-left: 15px;
+    float: right;
 }

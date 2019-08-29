@@ -88,6 +88,8 @@ export default withRouter((props: PostCreaterProps) => {
                         setLoading(false);
                         props.setVisible(false);
                         showSuccess('回复成功');
+                        props.history.push('/loading');
+                        props.history.replace(props.match.url);
                     }
                 }).catch((err) => {
                     setLoading(false);

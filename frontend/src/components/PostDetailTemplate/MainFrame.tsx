@@ -54,11 +54,11 @@ export default withRouter((props: MainFrameProps) => {
                 postId={props.post.posting_id}
             />
             {redirect && <Redirect to='/login' />}
-            <SideBar
+            {/*<SideBar
                 loading={props.sideLoading}
                 userCenter={false}
                 offsetTop={65}
-            />
+            />*/}
             <SideButtons
                 setVisible={setVisible}
                 setRedirect={setRedirect}

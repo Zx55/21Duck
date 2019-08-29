@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import moment from 'moment';
 import marked from 'marked';
 
 import { Card, Skeleton, Comment, Tooltip, Icon, Avatar, Mentions } from 'antd';
+
+import { getRelativeTime } from '../../utils';
 
 import { IRepost } from '../../types';
 
@@ -75,7 +76,7 @@ export default (props: PostProps) => {
     ];
 
     return (
-        <Card className='repost'>
+        <Card className='repost' hoverable>
             <Skeleton
                 loading={props.loading}
                 active
@@ -104,8 +105,7 @@ export default (props: PostProps) => {
                     datetime={
                         <Tooltip title={props.repost.formated_reposting_time}>
                             <span>
-                                {moment(props.repost.formated_reposting_time,
-                                    'YYYY-MM-DD HH:mm:ss').fromNow()}
+                                {getRelativeTime(props.repost.formated_reposting_time)}
                             </span>
                         </Tooltip>
                     }

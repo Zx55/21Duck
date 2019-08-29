@@ -52,10 +52,13 @@
     padding-left: 10px;
 }
 
+.normal-side-card:hover {
+    cursor: default;
+}
+
 .normal-side-card {
     border-radius: 0.8ch;
     margin: 10px 0;
-    box-shadow: 1px 1px 5px #bbbbbb;
 }
 
 .go-to-top-button {
