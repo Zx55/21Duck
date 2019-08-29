@@ -1,9 +1,25 @@
-#user-data-card {
-    margin-top:10px;
-    margin: auto;
+
+.user-data-form {
+    max-width: 96%;
+    padding: 20px 30px 20px 30px;
+    margin: 7% auto;
+    border-radius: 1ch;
 }
 
-.user-information {
-    width: 300px;
-    margin: auto;
+.user-data-button {
+    width: 100%;
+}
+
+#user-data-verify-text{
+    width: 60%;
+    float: left;
+}
+
+#user-data-verify-form{
+    width: 100%;
+}
+
+#user-data-verify-vcode{
+    padding-left: 70%;
+    padding-top: 41px;
 }
