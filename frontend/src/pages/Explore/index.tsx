@@ -3,7 +3,7 @@ import React from 'react';
 import { Carousel, Card } from 'antd';
 
 import Banner from '../../components/ExploreBanner'
-
+import ExploreCardList from  '../../components/ExploreTempList'
 import './Explore.css';
 
 export interface BannerProps {
@@ -42,34 +42,14 @@ export default () => (
         </div>
         <div>
             <div className="container">
-                <Card
-                    title="Default size card"
-                    style={{ 
-                        width: 300,
-                        borderRadius: "0.8ch",
-                        margin: "10px",
-                    }}>
-                    <p>Card content</p>
-                    <p>Card content</p>
-                    <p>Card content</p>
-                </Card>
-                <Card 
-                    title="Default size card"
-                    style={{ 
-                        width: 300,
-                        borderRadius: "0.8ch",
-                        margin: "10px",
-                    }}>
-                    <p>Card content</p>
-                    <p>Card content</p>
-                    <p>Card content</p>
-                </Card>
-                <Card title="Default size card" style={{ width: 300 }}>
-                    <p>Card content</p>
-                    <p>Card content</p>
-                    <p>Card content</p>
-                </Card>
+                <div className="subtitle">闲聊栈</div>
+                <ExploreCardList  name="problem" category='2'/>
+                <div className="subtitle">AK我的oj题</div>
+                <ExploreCardList  name="problem" category='3'/>
+                <div className="subtitle">课程资源</div>
+                <ExploreCardList  name="problem" category='4'/>
             </div>
+            
         </div>
     </div >
 );
