@@ -59,7 +59,6 @@ export default (props: PageListTemplateProps) => {
 
     const getSide = (): void => {
         setSideLoading(true);
-        console.log(sideLoading);
 
         api.category.retreive(props.category).then((response) => {
             const data: ICategory = response.data;
@@ -112,8 +111,6 @@ export default (props: PageListTemplateProps) => {
 
             setCategoryInfo([info, rule]);
             setSideLoading(false);
-            console.log(sideLoading);
-            console.log('hello');
         }).catch((err) => console.log(err));
     };
 

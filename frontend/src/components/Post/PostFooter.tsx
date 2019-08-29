@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
+import CopyToClipboard from "react-copy-to-clipboard";
 
+import { message } from 'antd';
 
 import Button from '../Button';
+import host from '../../api/host';
 
 import { RouteComponentProps } from 'react-router-dom';
 
@@ -15,12 +18,21 @@ export interface PostFooterProps extends RouteComponentProps {
 };
 
 export default withRouter((props: PostFooterProps) => {
+    const [liked, setLiked] = useState(false);
+    const [likeNum, setLikeNum] = useState(props.like);
+
     const onLikeClick = () => {
-        console.log('like');
+        if (liked) {
+            setLikeNum(num => num - 1);
+        } else {
+            setLikeNum(num => num + 1);
+        }
+        setLiked(liked => !liked);
     };
 
     const onShareClick = () => {
-        console.log('share');
+        message.config({ top: 75 });
+        message.success('链接复制成功');
     };
 
     const onCollectClick = () => {
@@ -37,15 +49,20 @@ export default withRouter((props: PostFooterProps) => {
                 <Button
                     name='like'
                     icon='like'
-                    text={props.like.toString()}
+                    filled={liked ? true : false}
+                    text={likeNum.toString()}
                     onClick={onLikeClick}
                 />
-                <Button
-                    name='share'
-                    icon='export'
-                    text='分享'
-                    onClick={onShareClick}
-                />
+                <CopyToClipboard
+                    text={host + props.match.url}
+                    onCopy={onShareClick}>
+                    <Button
+                        name='share'
+                        icon='export'
+                        text='分享'
+                        onClick={() => 1}
+                    />
+                </CopyToClipboard>
                 <Button
                     name='favorite'
                     icon='star'

@@ -1,13 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import { withRouter } from 'react-router-dom';
+import marked from 'marked';
 
-import { newArrayWithItems } from '../../utils';
+import { Tooltip } from 'antd';
+
+import { newArrayWithItems, getRelativeTime } from '../../utils';
 import api from '../../api';
 import MainFrame from './MainFrame';
 import NotFound from '../NotFound';
 
 import { RouteComponentProps } from 'react-router-dom';
-import { IPost, IRepost, INotFound, Param } from '../../types';
+import { IPost, IRepost, ICategory, INotFound, Param } from '../../types';
+import { CardItem } from '../SideBar';
 
 import './Template.css';
 
@@ -28,11 +32,14 @@ export default withRouter((props: PageDetailTemplate) => {
         useState(newArrayWithItems<IRepost>(15, new IRepost()));
     const [repostsLoading, setRepostsLoading] = useState(true);
     const [repostNum, setRepostNum] = useState(0);
+    const [sideItems, setSideItems] =
+        useState(newArrayWithItems<CardItem>(3, new CardItem()));
     const [sideLoading, setSideLoading] = useState(true);
     const [page404, setPage404] = useState(false);
 
-    const getPost = (): void => {
+    const getPostAndSide = (): void => {
         setPostLoading(true);
+        setSideLoading(true);
 
         const param: Param = {
             category_id: props.category,
@@ -47,9 +54,55 @@ export default withRouter((props: PageDetailTemplate) => {
             } else {
                 setPost(post as IPost);
                 setPostLoading(false);
+
+                api.category.retreive(props.category).then((response) => {
+                    const categoryData: ICategory = response.data;
+                    console.log(post);
+
+                    const info: CardItem = {
+                        title: '本帖信息',
+                        contents: [{
+                            key:
+                                <span style={{color: 'rgba(0, 0, 0, .5)' }}>发帖人</span>,
+                            value:
+                                <span style={{ float: 'right' }}>
+                                    {(post as IPost).user_nickname}
+                                </span>,
+                        }, {
+                            key: <span style={{color: 'rgba(0, 0, 0, .5)' }}>本帖回复数</span>,
+                            value:
+                                <span style={{ float: 'right' }}>
+                                    {(post as IPost).reply_num}
+                                </span>,
+                        }, {
+                            key: <span style={{color: 'rgba(0, 0, 0, .5)' }}>最后回复时间</span>,
+                            value:
+                                <span style={{ float: 'right' }}>
+                                    <Tooltip title={(post as IPost).formated_reply_time}>
+                                        {getRelativeTime((post as IPost).formated_reply_time)}
+                                    </Tooltip>
+                                </span>,
+                        }],
+                    };
+
+                    const rule: CardItem = {
+                        title: '本版规则',
+                        contents: [{
+                            value:
+                                <div
+                                    dangerouslySetInnerHTML={{
+                                        __html: marked(categoryData.category_content)
+                                    }}
+                                />
+                        }]
+                    };
+
+                    setSideItems([info, rule]);
+                    setSideLoading(false);
+                });
             }
         }).catch((err) => console.log(err));
-    };
+    }
 
     const getReposts = (page: string): void => {
         setRepostsLoading(true);
@@ -75,7 +128,7 @@ export default withRouter((props: PageDetailTemplate) => {
     };
 
     useEffect(() => {
-        getPost();
+        getPostAndSide();
         getReposts('0');
     }, []);
 
@@ -94,6 +147,7 @@ export default withRouter((props: PageDetailTemplate) => {
                     postLoading={postLoading}
                     repostsLoading={repostsLoading}
                     sideLoading={sideLoading}
+                    sideItems={sideItems}
                 />
             }
         </div>

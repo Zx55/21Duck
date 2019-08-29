@@ -4,7 +4,7 @@ import { withRouter, Redirect } from 'react-router-dom';
 import Post from '../Post';
 import RepostList from '../RepostList';
 import PostCreator from '../PostCreator';
-import SideBar from '../SideBar';
+import SideBar, { CardItem } from '../SideBar';
 import SideButtons from './SideButtons';
 
 import { RouteComponentProps } from 'react-router-dom';
@@ -18,6 +18,7 @@ export interface MainFrameProps extends RouteComponentProps {
     postLoading: boolean;
     repostsLoading: boolean;
     sideLoading: boolean;
+    sideItems: Array<CardItem>;
     getReposts: (page: string) => void;
 };
 
@@ -54,11 +55,12 @@ export default withRouter((props: MainFrameProps) => {
                 postId={props.post.posting_id}
             />
             {redirect && <Redirect to='/login' />}
-            {/*<SideBar
+            <SideBar
                 loading={props.sideLoading}
                 userCenter={false}
                 offsetTop={65}
-            />*/}
+                items={props.sideItems}
+            />
             <SideButtons
                 setVisible={setVisible}
                 setRedirect={setRedirect}
