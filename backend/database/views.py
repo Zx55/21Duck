@@ -5,6 +5,7 @@ from rest_framework_extensions.cache.mixins import CacheResponseMixin
 from rest_framework.response import Response
 
 from .serializers import *
+from .myfuncs import *
 
 
 class UserViewSet(CacheResponseMixin, ModelViewSet):
@@ -20,6 +21,7 @@ class PostingViewSet(CacheResponseMixin, ModelViewSet):
         if request.method == 'GET':
             page = request.GET.get('page')
             category = request.GET.get('category_id')
+            user = request.GET.get('user_id')
             EACH_PAGE = 15    #numbers for each page
 
             if page and category:
@@ -29,6 +31,9 @@ class PostingViewSet(CacheResponseMixin, ModelViewSet):
                     self.queryset = Posting.objects.filter(category_id=category).order_by("-reply_time")[page * EACH_PAGE : (page + 1) * EACH_PAGE]
                 else:
                     self.queryset = Posting.objects.all().order_by("-reply_time")[page * EACH_PAGE : (page + 1) * EACH_PAGE]
+            elif page and user:
+                page = int(page)
+                self.queryset = Posting.objects.filter(posting_user=user).order_by("reply_time")[page * EACH_PAGE : (page + 1) * EACH_PAGE]
             else:
                 return Response(False)
 
