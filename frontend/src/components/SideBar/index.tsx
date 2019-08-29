@@ -18,6 +18,7 @@ export default (props: SideBarProps) => {
             ? 'user-center-side-bar' : 'normal-side-bar')}>
             <Affix offsetTop={props.offsetTop}>
                 <Card
+                    hoverable
                     className={cx(props.userCenter
                         ? 'user-center-side-card' : 'normal-side-card')}
                     title="Default size card"
@@ -28,6 +29,7 @@ export default (props: SideBarProps) => {
                     <p>Card content</p>
                 </Card>
                 <Card
+                    hoverable
                     className={cx(props.userCenter
                         ? 'user-center-side-card' : 'normal-side-card')}
                     title="Default size card"

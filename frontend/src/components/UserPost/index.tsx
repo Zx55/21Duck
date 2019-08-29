@@ -6,7 +6,9 @@ import { Card, Skeleton, Tooltip } from 'antd';
 
 import { IPost } from '../../types';
 
+
 import './UserPost.css';
+import { Link } from 'react-router-dom';
 
 const { Meta } = Card;
 
@@ -18,14 +20,18 @@ export interface PostProps {
 };
 
 export default (props: PostProps) => (
-    <Card className={cx('user-post', props.detail && 'post-detail')}>
+    <Card 
+        hoverable
+        className={cx('user-post', props.detail && 'post-detail')}>
         <Skeleton
             loading={props.loading}
             active
         >
-            <Meta
-                title={props.post.theme}
-            />
+            <div>
+                <Link to={`/problems/${props.post.posting_id}`}>
+                    {props.post.theme}
+                </Link>
+            </div>
             <span className='user-nickname'>
                 {props.post.user_nickname}
             </span>
