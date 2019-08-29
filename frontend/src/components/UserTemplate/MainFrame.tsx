@@ -4,7 +4,7 @@ import { BackTop, Tabs, Icon } from 'antd';
 
 import UserCard from './UserCard';
 import UserPostList from '../UserPostList';
-import SideBar from '../SideBar';
+import SideBar, { CardItem } from '../SideBar';
 import UserData from '../UserData';
 
 import { IPost } from '../../types';
@@ -23,8 +23,9 @@ export interface MainFrameProps {
     posts: Array<IPost>;
     postNum: number;
     postsLoading: boolean;
-    sideLoading: boolean;
     getPosts: (page: string) => void;
+    side: Array<CardItem>;
+    sideLoading: boolean;
 };
 
 export default (props: MainFrameProps) => {
@@ -36,15 +37,15 @@ export default (props: MainFrameProps) => {
                 user_nickname={userInfo.user_nickname}
                 user_profile={userInfo.user_profile}
             />
-            <Tabs defaultActiveKey="1">
+            <Tabs defaultActiveKey='1'>
                 <TabPane
                     tab={
                         <span>
-                            <Icon type="apple" />
+                            <Icon type='apple' />
                             我的主帖
                         </span>
                     }
-                    key="1"
+                    key='1'
                 >
                     <div className='user-center-list-wrapper'>
                         <UserPostList
@@ -58,11 +59,11 @@ export default (props: MainFrameProps) => {
                 <TabPane
                     tab={
                         <span>
-                            <Icon type="android" />
+                            <Icon type='android' />
                                 我的回帖
                         </span>
                     }
-                    key="2"
+                    key='2'
                 >
                     <UserPostList
                         posts={props.posts}
@@ -74,20 +75,21 @@ export default (props: MainFrameProps) => {
                 <TabPane
                     tab={
                         <span>
-                            <Icon type="windows" />
+                            <Icon type='windows' />
                                 修改资料
                         </span>
                     }
-                    key="3"
+                    key='3'
                 >
                     <UserData />
                 </TabPane>
             </Tabs>
-            {/*<SideBar
+            <SideBar
                 loading={props.sideLoading}
                 userCenter={true}
                 offsetTop={75}
-            />*/}
+                items={props.side}
+            />
             <BackTop className='user-center-go-to-top-button' />
         </div>
     );

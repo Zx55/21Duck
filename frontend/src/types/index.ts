@@ -42,7 +42,6 @@ export interface IResponseUser{
     head: string;
     identify: number;
     nickname: string;
-    password: string;
     profile: string;
     register: number;
     school: string;

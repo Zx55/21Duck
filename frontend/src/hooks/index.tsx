@@ -8,7 +8,7 @@ import { Tooltip } from 'antd';
 import api from '../api';
 import { getRelativeTime, newArrayWithItems } from '../utils';
 
-import { IUser, IPost, IRepost, ICategory, INotFound, Param } from '../types';
+import { IUser, IPost, IRepost, ICategory, INotFound, Param, IResponseUser } from '../types';
 import { CardItem } from '../components/SideBar';
 
 
@@ -77,7 +77,7 @@ const useReposts = (num: number): [
 const useCategorySide = (num: number): [
     Array<CardItem>, boolean, (category: string) => void
 ] => {
-    const [sideItem, setSideItem] =
+    const [sideItems, setSideItems] =
         useState(newArrayWithItems<CardItem>(num, new CardItem()));
     const [loading, setLoading] = useState(true);
 
@@ -90,32 +90,35 @@ const useCategorySide = (num: number): [
             let admins: string = '';
             data.manager.forEach((admin) => admins = admins + admin.nickname + ' ');
 
+            const keyStyle = { color: 'rgba(0, 0, 0, .5)' };
+            const valueStyle: React.CSSProperties = { float: 'right' };
+
             const info: CardItem = {
                 title: '本版信息',
                 contents: [{
-                    key: <span style={{color: 'rgba(0, 0, 0, .5)' }}>今日主题帖</span>,
+                    key: <span style={keyStyle}>今日主题帖</span>,
                     value:
-                        <span style={{ float: 'right' }}>
+                        <span style={valueStyle}>
                             {data.posting_num.toString()}
                         </span>,
                 }, {
-                    key: <span style={{color: 'rgba(0, 0, 0, .5)' }}>今日回帖</span>,
+                    key: <span style={keyStyle}>今日回帖</span>,
                     value:
-                        <span style={{ float: 'right' }}>
+                        <span style={valueStyle}>
                             {data.reposting_num.toString()}
                         </span>,
                 }, {
-                    key: <span style={{color: 'rgba(0, 0, 0, .5)' }}>最新回复时间</span>,
+                    key: <span style={keyStyle}>最新回复时间</span>,
                     value:
-                        <span style={{ float: 'right' }}>
+                        <span style={valueStyle}>
                             <Tooltip title={data.formated_new_reply_time}>
                                 {getRelativeTime(data.formated_new_reply_time)}
                             </Tooltip>
                         </span>,
                 }, {
-                    key: <span style={{color: 'rgba(0, 0, 0, .5)' }}>管理员</span>,
+                    key: <span style={keyStyle}>管理员</span>,
                     value:
-                        <span style={{ float: 'right' }}>
+                        <span style={valueStyle}>
                             {admins}
                         </span>,
                 }],
@@ -133,13 +136,13 @@ const useCategorySide = (num: number): [
                 }]
             };
 
-            setSideItem([info, rule]);
+            setSideItems([info, rule]);
             setLoading(false);
         }).catch((err) => console.log(err));
     };
 
     return [
-        sideItem, loading, getSide
+        sideItems, loading, getSide
     ];
 };
 
@@ -173,25 +176,28 @@ const useDetailPost = (sideNum: number): [
                 api.category.retreive(category).then((response) => {
                     const categoryData: ICategory = response.data;
 
+                    const keyStyle = { color: 'rgba(0, 0, 0, .5)' };
+                    const valueStyle: React.CSSProperties = { float: 'right' };
+
                     const info: CardItem = {
                         title: '本帖信息',
                         contents: [{
                             key:
-                                <span style={{color: 'rgba(0, 0, 0, .5)' }}>发帖人</span>,
+                                <span style={keyStyle}>发帖人</span>,
                             value:
-                                <span style={{ float: 'right' }}>
+                                <span style={valueStyle}>
                                     {postData.user_nickname}
                                 </span>,
                         }, {
-                            key: <span style={{color: 'rgba(0, 0, 0, .5)' }}>本帖回复数</span>,
+                            key: <span style={keyStyle}>本帖回复数</span>,
                             value:
-                                <span style={{ float: 'right' }}>
+                                <span style={valueStyle}>
                                     {postData.reply_num}
                                 </span>,
                         }, {
-                            key: <span style={{color: 'rgba(0, 0, 0, .5)' }}>最后回复时间</span>,
+                            key: <span style={keyStyle}>最后回复时间</span>,
                             value:
-                                <span style={{ float: 'right' }}>
+                                <span style={valueStyle}>
                                     <Tooltip title={postData.formated_reply_time}>
                                         {getRelativeTime(postData.formated_reply_time)}
                                     </Tooltip>
@@ -223,10 +229,78 @@ const useDetailPost = (sideNum: number): [
     ];
 };
 
+const useUserSide = (num: number): [
+    Array<CardItem>, boolean, (userId: string) => void
+] => {
+    const [sideItems, setSideItems] =
+        useState(newArrayWithItems<CardItem>(num, new CardItem()));
+    const [loading, setLoading] = useState(false);
+
+    const getSide = (userId: string): void => {
+        setLoading(true);
+
+        api.user.retreive(userId).then((response) => {
+            const data: IResponseUser = response.data;
+
+            const keyStyle = { color: 'rgba(0, 0, 0, .5)' };
+            const valueStyle: React.CSSProperties = { float: 'right' };
+
+            const info: CardItem = {
+                title: '个人信息',
+                contents: [{
+                    key: <span style={keyStyle}>昵称</span>,
+                    value:
+                        <span style={valueStyle}>
+                            {data.nickname}
+                        </span>,
+                }, {
+                    key: <span style={keyStyle}>年龄</span>,
+                    value:
+                        <span style={valueStyle}>
+                            {data.age}
+                        </span>,
+                }, {
+                    key: <span style={keyStyle}>学校</span>,
+                    value:
+                        <span style={valueStyle}>
+                            {data.school}
+                        </span>,
+                }, {
+                    key: <span style={keyStyle}>积分</span>,
+                    value:
+                        <span style={valueStyle}>
+                            {data.scores}
+                        </span>,
+                }],
+            };
+
+            const rule: CardItem = {
+                title: '个人简介',
+                contents: [{
+                    value:
+                        <div
+                            dangerouslySetInnerHTML={{
+                                __html: marked(data.profile)
+                            }}
+                        />
+                }]
+            };
+
+            setSideItems([info, rule]);
+            setLoading(false);
+        });
+    };
+
+    return [
+        sideItems, loading, getSide
+    ]
+};
+
 export {
     useUser,
     usePosts,
     useReposts,
     useCategorySide,
-    useDetailPost
+    useDetailPost,
+    useUserSide,
 };
