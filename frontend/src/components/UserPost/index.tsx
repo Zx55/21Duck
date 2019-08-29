@@ -20,27 +20,29 @@ export interface PostProps {
 };
 
 export default (props: PostProps) => (
-    <Card 
+    <Card
+        className={cx('user-post', props.detail && 'post-detail')}    
         hoverable
-        className={cx('user-post', props.detail && 'post-detail')}>
+        bodyStyle={{padding:"10px 20px"}}
+        >
         <Skeleton
             loading={props.loading}
             active
         >
-            <div>
-                <Link to={`/problems/${props.post.posting_id}`}>
-                    {props.post.theme}
-                </Link>
-            </div>
-            <span className='user-nickname'>
-                {props.post.user_nickname}
-            </span>
-            <Tooltip className='post-created-time' title={props.post.formated_posting_time}>
-                <span>
-                    {moment(props.post.formated_posting_time,
-                        'YYYY-MM-DD HH:mm:ss').fromNow()}
+            <Link to={`/problems/${props.post.posting_id}`}>
+                {props.post.theme}
+            </Link>
+            <span style={{ float: "right" }}>
+                <span className='user-nickname'>
+                    {props.post.user_nickname}
                 </span>
-            </Tooltip>
+                <Tooltip className='post-created-time' title={props.post.formated_posting_time}>
+                    <span>
+                        {moment(props.post.formated_posting_time,
+                            'YYYY-MM-DD HH:mm:ss').fromNow()}
+                    </span>
+                </Tooltip>
+            </span>
         </Skeleton>
     </Card>
 );
