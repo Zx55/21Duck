@@ -36,6 +36,20 @@ export interface IRequestRepost {
     reply_id?: number;
 };
 
+export interface IResponseUser{
+    age: number;
+    blocktime: number;
+    head: string;
+    identify: number;
+    nickname: string;
+    password: string;
+    profile: string;
+    register: number;
+    school: string;
+    scores: number;
+    user_id: string;
+};
+
 // 接受后端相应的接口
 export class IPost {
     posting_id: number = -1;                    // postId
