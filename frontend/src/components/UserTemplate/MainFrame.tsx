@@ -5,7 +5,7 @@ import { BackTop, Tabs, Icon } from 'antd';
 import UserCard from './UserCard';
 import UserPostList from '../UserPostList';
 import SideBar from '../SideBar';
-import ChangeUserData from '../ChangeUserData';
+import UserData from '../UserData';
 
 import { IPost } from '../../types';
 
@@ -81,7 +81,7 @@ export default (props: MainFrameProps) => {
                     }
                     key="3"
                 >
-                    <ChangeUserData />
+                    <UserData />
                 </TabPane>
             </Tabs>
             {/*<SideBar
