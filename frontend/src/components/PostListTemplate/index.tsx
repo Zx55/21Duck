@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import marked from 'marked';
+import React, { useEffect } from 'react';
 
-import { Carousel, Tooltip } from 'antd';
+import { Carousel } from 'antd';
 
-import { getRelativeTime, newArrayWithItems } from '../../utils';
-import api from '../../api';
+import { usePosts, useCategorySide } from '../../hooks';
 import MainFrame from './MainFrame';
-
-import { IPost, Param, ICategory } from '../../types';
-import { CardItem } from '../SideBar';
 
 import './Template.css';
 
@@ -34,89 +29,12 @@ export interface PageListTemplateProps {
 };
 
 export default (props: PageListTemplateProps) => {
-    const [posts, setPosts] = useState(newArrayWithItems<IPost>(15, new IPost()));
-    const [postNum, setPostNum] = useState(0);
-    const [postsLoading, setPostsLoading] = useState(true);
-    const [categoryInfo, setCategoryInfo] =
-        useState(newArrayWithItems<CardItem>(3, new CardItem()));
-    const [sideLoading, setSideLoading] = useState(true);
-
-    const getPosts = (page: string): void => {
-        setPostsLoading(true);
-
-        const params: Param = {
-            page: page,
-            category_id: props.category,
-        };
-
-        api.post.list(params).then((response) => {
-            const posts: Array<IPost> = response.data;
-            setPostNum(posts[0].posting_num);
-            setPosts(posts);
-            setPostsLoading(false);
-        }).catch(err => console.log(err));
-    };
-
-    const getSide = (): void => {
-        setSideLoading(true);
-
-        api.category.retreive(props.category).then((response) => {
-            const data: ICategory = response.data;
-
-            let admins: string = '';
-            data.manager.forEach((admin) => admins = admins + admin.nickname + ' ');
-
-            const info: CardItem = {
-                title: '本版信息',
-                contents: [{
-                    key: <span style={{color: 'rgba(0, 0, 0, .5)' }}>今日主题帖</span>,
-                    value:
-                        <span style={{ float: 'right' }}>
-                            {data.posting_num.toString()}
-                        </span>,
-                }, {
-                    key: <span style={{color: 'rgba(0, 0, 0, .5)' }}>今日回帖</span>,
-                    value:
-                        <span style={{ float: 'right' }}>
-                            {data.reposting_num.toString()}
-                        </span>,
-                }, {
-                    key: <span style={{color: 'rgba(0, 0, 0, .5)' }}>最新回复时间</span>,
-                    value:
-                        <span style={{ float: 'right' }}>
-                            <Tooltip title={data.formated_new_reply_time}>
-                                {getRelativeTime(data.formated_new_reply_time)}
-                            </Tooltip>
-                        </span>,
-                }, {
-                    key: <span style={{color: 'rgba(0, 0, 0, .5)' }}>管理员</span>,
-                    value:
-                        <span style={{ float: 'right' }}>
-                            {admins}
-                        </span>,
-                }],
-            };
-
-            const rule: CardItem = {
-                title: '本版规则',
-                contents: [{
-                    value:
-                        <div
-                            dangerouslySetInnerHTML={{
-                                __html: marked(data.category_content)
-                            }}
-                        />
-                }]
-            };
-
-            setCategoryInfo([info, rule]);
-            setSideLoading(false);
-        }).catch((err) => console.log(err));
-    };
+    const [posts, postNum, postsLoading, getPosts] = usePosts(15);
+    const [side, sideLoading, getSide] = useCategorySide(3);
 
     useEffect(() => {
-        getPosts('0');
-        getSide();
+        getPosts({ page: '0', category_id: props.category });
+        getSide(props.category);
     }, []);
 
     const renderBanner = (item: BannerItem) => (
@@ -139,10 +57,14 @@ export default (props: PageListTemplateProps) => {
                 category={props.category}
                 posts={posts}
                 postNum={postNum}
-                getPosts={getPosts}
+                getPosts={
+                    (page: string) => getPosts({ page: page,
+                        category: props.category
+                    })
+                }
                 postsLoading={postsLoading}
                 sideLoading={sideLoading}
-                side={categoryInfo}
+                side={side}
             />
         </div>
     );

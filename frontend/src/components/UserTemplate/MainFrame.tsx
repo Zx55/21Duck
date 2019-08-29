@@ -20,7 +20,6 @@ const userInfo = {
 };
 
 export interface MainFrameProps {
-    name: string;
     posts: Array<IPost>;
     postNum: number;
     postsLoading: boolean;
@@ -42,7 +41,7 @@ export default (props: MainFrameProps) => {
                     tab={
                         <span>
                             <Icon type="apple" />
-                            我的主贴
+                            我的主帖
                         </span>
                     }
                     key="1"
@@ -60,7 +59,7 @@ export default (props: MainFrameProps) => {
                     tab={
                         <span>
                             <Icon type="android" />
-                                我的回复
+                                我的回帖
                         </span>
                     }
                     key="2"

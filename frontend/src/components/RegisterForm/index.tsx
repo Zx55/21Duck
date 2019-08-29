@@ -88,19 +88,24 @@ const RegisterForm = (props: RegisterFormProps) => {
 
     return (
         <Form onSubmit={handleSubmit} className='register-form'>
-            <div  className="ducklogo" >
-                <img src="https://dpsv7g.ch.files.1drv.com/y4mKc5CDaj_ClT3q8_-pb-VeDLGL36szTIUX4X0rrtX3VdCyy-91B2kI3yVYewGR5k_Aehp8si78fLnxd-ieMVR3yzrcusYyNdFD-gOBASqIJSYB6OhWkZc_isaJAXLQFwOHNMRd6_00iUmL-QuCxg2HuQszC9wXjdoCmazs-zRO_YMrBzwVTNWD8FPxgc2PHLPaU17sn0RV6Y0-0GWzQth0w?width=660&height=248&cropmode=none" width="165" height="62" />
+            <div  className='ducklogo' >
+                <img
+                    src='https://dpsv7g.ch.files.1drv.com/y4mKc5CDaj_ClT3q8_-pb-VeDLGL36szTIUX4X0rrtX3VdCyy-91B2kI3yVYewGR5k_Aehp8si78fLnxd-ieMVR3yzrcusYyNdFD-gOBASqIJSYB6OhWkZc_isaJAXLQFwOHNMRd6_00iUmL-QuCxg2HuQszC9wXjdoCmazs-zRO_YMrBzwVTNWD8FPxgc2PHLPaU17sn0RV6Y0-0GWzQth0w?width=660&height=248&cropmode=none'
+                    width='165'
+                    height='62'
+                    alt=''
+                />
             </div>
             <Form.Item>
                 {getFieldDecorator('username', {
                     rules: [{
                         required: true, message: '请输入正确手机号!', whitespace: true,
-                        pattern: new RegExp("^(1[3-9])\\d{9}$")
+                        pattern: new RegExp('^(1[3-9])\\d{9}$')
                     }],
                 })(
                     <Input
-                        prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                        placeholder="手机号"
+                        prefix={<Icon type='phone' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        placeholder='手机号'
                     />
                 )}
             </Form.Item>
@@ -109,8 +114,8 @@ const RegisterForm = (props: RegisterFormProps) => {
                     rules: [{ required: true, message: '请输入昵称!', whitespace: true }],
                 })(
                     <Input
-                        prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                        placeholder="昵称"
+                        prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        placeholder='昵称'
                     />
                 )}
             </Form.Item>
@@ -125,9 +130,9 @@ const RegisterForm = (props: RegisterFormProps) => {
                     ],
                 })(
                     <Input.Password
-                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                        type="password"
-                        placeholder="密码"
+                        prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        type='password'
+                        placeholder='密码'
                     />
                 )}
             </Form.Item>
@@ -143,14 +148,14 @@ const RegisterForm = (props: RegisterFormProps) => {
                 })(
                     <Input.Password
                         onBlur={handleConfirmBlur}
-                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                        type="password"
-                        placeholder="确认密码"
+                        prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        type='password'
+                        placeholder='确认密码'
                     />
                 )}
             </Form.Item>
-            <div id="verify-form">
-                <div id="verify-text">
+            <div id='verify-form'>
+                <div id='verify-text'>
                     <Form.Item>
                         {getFieldDecorator('verifycode', {
                             rules: [{ required: true, message: '请输入验证码' },
@@ -159,13 +164,13 @@ const RegisterForm = (props: RegisterFormProps) => {
                             },],
                         })(
                             <Input
-                                prefix={<Icon type="check-circle" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                placeholder="验证码"
+                                prefix={<Icon type='check-circle' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                placeholder='验证码'
                             />,
                         )}
                     </Form.Item>
                 </div>
-                <div id="verify-vcode">
+                <div id='verify-vcode'>
                     <Vcode
                         width={115}
                         height={32}
@@ -174,7 +179,7 @@ const RegisterForm = (props: RegisterFormProps) => {
                 </div>
             </div>
             <Form.Item>
-                <Button className="register-button" type="primary" htmlType="submit">
+                <Button className='register-button' type='primary' htmlType='submit'>
                     注册
                 </Button>
                 <span className='register-button'>

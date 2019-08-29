@@ -4,6 +4,10 @@
     border-radius: 0.8ch;
 }
 
+.post:hover {
+    cursor: default;
+}
+
 .user-nickname {
     font-size: 12px;
     color: rgba(0.6, 0.6, 0.6, 0.5);
@@ -23,6 +27,11 @@
 .post-footer {
     padding-left: 45px;
 }
+
+.button-component-root {
+    padding-left: 5px;
+    padding-right: 5px;
+};
 
 .like-button {
     margin-right: 8px;

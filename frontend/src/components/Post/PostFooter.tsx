@@ -4,7 +4,7 @@ import CopyToClipboard from "react-copy-to-clipboard";
 
 import { message } from 'antd';
 
-import Button from '../Button';
+import MiniButton from './MiniButton';
 import host from '../../api/host';
 
 import { RouteComponentProps } from 'react-router-dom';
@@ -46,7 +46,7 @@ export default withRouter((props: PostFooterProps) => {
     return (
         <div className='post-footer'>
             <span className='interaction-bar'>
-                <Button
+                <MiniButton
                     name='like'
                     icon='like'
                     filled={liked ? true : false}
@@ -56,33 +56,33 @@ export default withRouter((props: PostFooterProps) => {
                 <CopyToClipboard
                     text={host + props.match.url}
                     onCopy={onShareClick}>
-                    <Button
+                    <MiniButton
                         name='share'
                         icon='export'
                         text='分享'
-                        onClick={() => 1}
+                        onClick={() => 0}
                     />
                 </CopyToClipboard>
-                <Button
+                <MiniButton
                     name='favorite'
                     icon='star'
                     text='收藏'
                     onClick={onCollectClick}
                 />
-                <Button
+                <MiniButton
                     name='report'
                     icon='exclamation-circle'
                     text='举报'
-                onClick={(e) => console.log('report')}
+                    onClick={onReportClick}
                 />
             </span>
             {props.detail ? null :
                 <span className='read-more-bar'>
-                    <Button
+                    <MiniButton
                         name='read-more'
                         icon='select'
                         text='更多'
-                        onClick={(e) => props.history.push(`${props.match.path}/${props.postId}`)}
+                        onClick={() => props.history.push(`${props.match.path}/${props.postId}`)}
                     />
                 </span>
             }

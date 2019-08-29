@@ -4,6 +4,10 @@
     border-radius: 0.8ch;
 }
 
+.repost:hover {
+    cursor: default;
+}
+
 .ant-comment-content-detail {
     padding-top: 4px;
 }

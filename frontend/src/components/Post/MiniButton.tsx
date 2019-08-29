@@ -3,8 +3,6 @@ import cx from 'classnames';
 
 import { Icon } from 'antd';
 
-import './Button.css';
-
 
 export interface ButtonProps {
     name: string;

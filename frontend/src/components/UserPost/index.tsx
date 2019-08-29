@@ -10,8 +10,6 @@ import { IPost } from '../../types';
 import './UserPost.css';
 import { Link } from 'react-router-dom';
 
-const { Meta } = Card;
-
 
 export interface PostProps {
     post: IPost;
@@ -21,7 +19,7 @@ export interface PostProps {
 
 export default (props: PostProps) => (
     <Card
-        className={cx('user-post', props.detail && 'post-detail')}    
+        className={cx('user-post', props.detail && 'post-detail')}
         hoverable
         bodyStyle={{padding:"10px 20px"}}
         >
