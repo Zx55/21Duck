@@ -166,10 +166,11 @@ const RegisterForm = (props: RegisterFormProps) => {
                     </Form.Item>
                 </div>
                 <div id="verify-vcode">
-                    <Vcode width={115} height={32} onChange={(v: any) => {
-                        console.log('当前的验证码值：', v)
-                        setverifycodeValue(v);
-                    }}></Vcode>
+                    <Vcode
+                        width={115}
+                        height={32}
+                        onChange={(v: any) => setverifycodeValue(v)}
+                    />
                 </div>
             </div>
             <Form.Item>
