@@ -5,6 +5,7 @@ import { BackTop, Tabs, Icon } from 'antd';
 import UserCard from './UserCard';
 import UserPostList from '../UserPostList';
 import SideBar from '../SideBar';
+import ChangeUserData from '../ChangeUserData';
 
 import { IPost } from '../../types';
 
@@ -36,7 +37,7 @@ export default (props: MainFrameProps) => {
                 user_nickname={userInfo.user_nickname}
                 user_profile={userInfo.user_profile}
             />
-            <Tabs defaultActiveKey="2">
+            <Tabs defaultActiveKey="1">
                 <TabPane
                     tab={
                         <span>
@@ -70,6 +71,17 @@ export default (props: MainFrameProps) => {
                         postNum={props.postNum}
                         getPosts={props.getPosts}
                     />
+                </TabPane>
+                <TabPane
+                    tab={
+                        <span>
+                            <Icon type="windows" />
+                                修改资料
+                        </span>
+                    }
+                    key="3"
+                >
+                    <ChangeUserData />
                 </TabPane>
             </Tabs>
             {/*<SideBar
