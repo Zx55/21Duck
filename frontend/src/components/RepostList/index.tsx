@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { List } from 'antd';
+import { List, Empty } from 'antd';
 
 import Repost from '../Repost';
 
@@ -30,6 +30,10 @@ export default (props: RepostListProps) => {
     //console.log("repost thumb:",props.thumbs);
 
     return (
+        props.reposts.length===0 ? 
+        <div className='no-post'>        
+            <Empty />
+        </div> :
         <List
             className='repost-list'
             itemLayout='horizontal'
