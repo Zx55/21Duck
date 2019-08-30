@@ -16,6 +16,13 @@ export default (state: IUser = initialState, action: IAction): IUser => {
         case ActionTypes.LOGOUT: {
             return new IUser();
         }
+        case ActionTypes.UPDATE_PROFILE: {
+            const { userNickname } = action.payload;
+            return {
+                ...state,
+                nickName: userNickname,
+            };
+        }
         default:
             return state;
     }

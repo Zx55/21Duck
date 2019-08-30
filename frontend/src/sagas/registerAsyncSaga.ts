@@ -4,7 +4,7 @@ import api from '../api';
 
 import { IAction, ActionTypes } from '../types';
 
-import {message} from 'antd'
+import { message } from 'antd'
 
 
 export interface RegisterData {
@@ -39,7 +39,7 @@ function* registerAsync(action: IAction) {
             });
         }
         else {
-            message.config({top: 75});
+            message.config({ top: 75 });
             message.error('该手机号已被注册');
         }
     } catch (err) {

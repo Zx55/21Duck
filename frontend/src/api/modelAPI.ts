@@ -52,7 +52,7 @@ export default class API<T> {
     public retreive = (id: string, params?: Param) =>
         axios.get(this.detailUrl(id, params));
     public create = (data: T) => axios.post(this.listUrl(), data);
-    public update = (id: string, data: T) => axios.put(this.detailUrl(id), data);
+    public update = (id: string, data: T) => axios.patch(this.detailUrl(id), data);
     public remove = (id: string) => axios.delete(this.detailUrl(id));
     public thumbUp = (params: PostThumbParams | RepostThumbParams) => {
         if (!this.checkThumb()) {

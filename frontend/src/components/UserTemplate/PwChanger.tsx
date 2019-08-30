@@ -21,7 +21,7 @@ export interface PwChangerValue {
     confirm: string;
 }
 
-const UserDataForm = (props: PwChangerProps) => {
+const PwChanger = (props: PwChangerProps) => {
     const [confirmDirty, setConfirmDirty] = useState(false);
     const [verifycodevalue, setverifycodeValue] = useState('');
     const [loading, setLoading] = useState(false);
@@ -37,7 +37,7 @@ const UserDataForm = (props: PwChangerProps) => {
             message.error('验证码错误');
             return;
         }
-        e.preventDefault();
+
         props.form.validateFieldsAndScroll((err: any, values: PwChangerValue) => {
             if (!err) {
                 const param = {
@@ -195,4 +195,4 @@ const UserDataForm = (props: PwChangerProps) => {
     )
 }
 
-export default Form.create({ name: 'change-password' })(UserDataForm);
+export default Form.create({ name: 'change-password' })(PwChanger);

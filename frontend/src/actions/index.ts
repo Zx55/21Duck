@@ -31,7 +31,7 @@ export function logout(): IAction {
 };
 
 export function updateProfileAsync(userId: string, userNickname: string,
-    userAge: number, userSchool: string, userHead: string, userProfile: string): IAction {
+    userAge: string, userSchool: string, userProfile: string): IAction {
     return {
         type: ActionTypes.UPDATE_PROFILE_ASYNC,
         payload: {
@@ -39,7 +39,6 @@ export function updateProfileAsync(userId: string, userNickname: string,
             userNickname,
             userAge,
             userSchool,
-            userHead,
             userProfile,
         }
     };

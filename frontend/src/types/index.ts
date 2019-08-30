@@ -39,6 +39,21 @@ export interface IRequestRepost {
     reply_id?: number;
 };
 
+export interface IRequestUser {
+    user_id?: string;
+    nickname?: string;
+    age?: number;
+    school?: string;
+    head?: string;
+    profile?: string;
+    identify?: number;
+    blocktime?: number;
+    scores?: number;
+    register?: number;
+    cover?: string;
+}
+
+// 接受后端相应的接口
 export interface IResponseUser{
     age: number;
     blocktime: number;
@@ -52,7 +67,6 @@ export interface IResponseUser{
     user_id: string;
 };
 
-// 接受后端相应的接口
 export interface IResponsePost {
     postings: Array<IPost>;
     posting_num: number;
@@ -66,7 +80,7 @@ export interface IResponseRepost {
 };
 
 export interface IResponseDetailPost {
-    posting: IPost,
+    posting: IPost;
     thumb: boolean;
 };
 
