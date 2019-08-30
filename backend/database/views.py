@@ -188,4 +188,12 @@ def agreement(request):
 @csrf_exempt
 def password(request):
     if request.method == 'POST':
-        pass
+        username = request.POST.get('username')
+        new_password = request.POST.get('new_password')
+        old_password = request.POST.get('old_password')
+
+        if User.objects.filter(user_id=username, password=encrypt_md5(old_password)):
+            User.objects.filter(user_id=username).update(password=encrypt_md5(new_password))
+            return JsonResponse({'success':True})
+        else:
+            return JsonResponse({'success':False})
