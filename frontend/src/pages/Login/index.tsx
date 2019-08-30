@@ -34,7 +34,7 @@ export default withRouter((props: LoginProps) => {
                 clock={clock}
             />
         );
-    }
+    };
 
     return (
         <div className='login-root'>

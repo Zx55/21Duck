@@ -55,7 +55,7 @@ export default withRouter((props: RouteComponentProps) => {
                         disabled={!confirm}
                         type='primary'
                         onClick={onOkClick}
-                    >确认</Button>
+                    >同意</Button>
                 ]}
             >
                 <div style={{

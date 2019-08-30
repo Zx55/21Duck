@@ -5,7 +5,7 @@ import { BackTop, Tabs, Icon, Card } from 'antd';
 import UserCard from './UserCard';
 import UserPostList from '../UserPostList';
 import SideBar, { CardItem } from '../SideBar';
-import UserProfile from '../UserProfile'
+import UserProfile from './UserProfile'
 import PwChanger from './PwChanger';
 
 import { IPost } from '../../types';
