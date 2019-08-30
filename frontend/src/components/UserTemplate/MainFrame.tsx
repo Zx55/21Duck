@@ -5,7 +5,7 @@ import { BackTop, Tabs, Icon, Card } from 'antd';
 import UserCard from './UserCard';
 import UserPostList from '../UserPostList';
 import SideBar, { CardItem } from '../SideBar';
-import UserData from '../UserData';
+import UserProfile from '../UserProfile'
 
 import { IPost } from '../../types';
 
@@ -47,7 +47,7 @@ export default (props: MainFrameProps) => {
                     }
                     key='1'
                 >
-                    <Card 
+                    <Card
                         bodyStyle={{padding:"0px 1px 10px 1px"}}
                         className='user-center-list-wrapper'>
                         <UserPostList
@@ -83,7 +83,7 @@ export default (props: MainFrameProps) => {
                     }
                     key='3'
                 >
-                    <UserData />
+                    <UserProfile />
                 </TabPane>
             </Tabs>
             <SideBar

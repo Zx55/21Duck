@@ -5,8 +5,6 @@ import { Result, Icon, Button } from 'antd';
 
 import { IUser } from '../../types';
 
-import './SuccessInfo.css';
-
 
 export interface SuccessInfoProps {
     user: IUser;

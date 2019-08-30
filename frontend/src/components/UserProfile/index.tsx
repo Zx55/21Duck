@@ -1,10 +1,7 @@
 import React, { useState, FormEvent, FocusEvent } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 
-import { Form, Input, Icon, Button, message, Card, Col, Avatar } from 'antd';
-
-import { registerAsync } from '../../actions';
+import { Form, Input, Icon, Button, message, Card, } from 'antd';
 
 import { RouteComponentProps } from 'react-router-dom';
 import { WrappedFormUtils } from 'antd/lib/form/Form';
@@ -13,6 +10,7 @@ import Vcode from '../VerifyCode';
 import UserAvatar from '../UserAvatar';
 
 import './UserDataForm.css';
+
 
 export interface UserDataFormProps extends RouteComponentProps {
     form: WrappedFormUtils;
@@ -43,11 +41,7 @@ const UserDataForm = (props: UserDataFormProps) => {
         e.preventDefault();
         props.form.validateFieldsAndScroll((err: any, values: UserDataValue) => {
             if (!err) {
-                dispatch(registerAsync(
-                    values.username,
-                    values.nickname,
-                    values.password,
-                ));
+                console.log('修改资料')
             }
         });
     };

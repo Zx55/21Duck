@@ -9,6 +9,8 @@ export enum ActionTypes {
     REGISTER = 'REGISTER',
     REGISTER_ASYNC = 'REGISTER_ASYNC',
     LOGOUT = 'LOGOUT',
+    UPDATE_PROFILE = 'UPDATE_PROFILE',
+    UPDATE_PROFILE_ASYNC = 'UPDATE_PROFILE_ASYNC',
 };
 
 export interface IPayload {

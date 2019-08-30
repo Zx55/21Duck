@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { History } from 'history';
 
-import { Menu, Input, Icon } from 'antd';
+import { Menu, Input, Icon, message } from 'antd';
 
 import { logout } from '../../actions';
 
@@ -91,6 +91,9 @@ export default (props: NavigatorProps) => {
                         </Item> : null}
                         <Item key='logout' onClick={() => {
                             dispatch(logout());
+                            message.config({ top: 75 });
+                            message.success('注销成功');
+                            setTimeout(() => props.history.replace('/login'), 100);
                         }}>
                             注销
                         </Item>

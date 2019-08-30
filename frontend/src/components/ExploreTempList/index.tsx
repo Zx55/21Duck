@@ -4,7 +4,7 @@ import { List } from 'antd';
 import api from '../../api';
 import ExploreCard  from '../ExploreTemp';
 
-import { IPost, Param } from '../../types';
+import { IPost, Param, IResponsePost } from '../../types';
 
 import './ExploreTempList.css';
 export interface UserTemplateProps {
@@ -26,9 +26,7 @@ export default (props: UserTemplateProps ) => {
     }
 
     const [posts, setPosts] = useState(initPosts);
-    const [postNum, setPostNum] = useState(0);
     const [postsLoading, setPostsLoading] = useState(true);
-    const [sideLoading, setSideLoading] = useState(true);
 
     const getPosts = (page: string): void => {
         setPostsLoading(true);
@@ -40,9 +38,9 @@ export default (props: UserTemplateProps ) => {
         };
 
         api.post.list(params).then((response) => {
-            const posts: Array<IPost> = response.data[0];
-            setPostNum(response.data[1]);
-            setPosts(posts.slice(0,4));
+            const data: IResponsePost = response.data;
+
+            setPosts(data.postings.slice(0,4));
             setPostsLoading(false);
 
         }).catch(err => console.log(err));
@@ -51,9 +49,6 @@ export default (props: UserTemplateProps ) => {
     useEffect(() => {
         getPosts('0');
     }, []);
-    const [current, setCurrent] = useState(1);
-
-
 
     return (
         <List

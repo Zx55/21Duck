@@ -29,3 +29,18 @@ export function logout(): IAction {
         payload: {}
     }
 };
+
+export function updateProfileAsync(userId: string, userNickname: string,
+    userAge: number, userSchool: string, userHead: string, userProfile: string): IAction {
+    return {
+        type: ActionTypes.UPDATE_PROFILE_ASYNC,
+        payload: {
+            userId,
+            userNickname,
+            userAge,
+            userSchool,
+            userHead,
+            userProfile,
+        }
+    };
+};

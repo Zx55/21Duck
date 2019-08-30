@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 
 import { useUser } from '../../hooks';
 import LoginForm from '../../components/LoginForm';
-import SuccessInfo from '../../components/SuccessInfo';
+import SuccessInfo from './SuccessInfo';
 
 import { RouteComponentProps } from 'react-router-dom';
 
