@@ -28,10 +28,8 @@ export default (props: PostProps) => {
         setLikeNum(props.repost.reposting_thumb_num);
         setLiked(props.thumb);
     },[props.thumb])
-    console.log('repost thumb:',props.thumb,liked,likeNum);
 
     const like = () => {
-        console.log('in:',liked,likeNum);
         if (liked) {
             const newRepost = {
                 reposting_user: props.repost.reposting_user,
@@ -59,7 +57,6 @@ export default (props: PostProps) => {
                 setLiked(!liked);
             });
         }
-        console.log('out:',liked,likeNum);
     };
 
     const report = () => {

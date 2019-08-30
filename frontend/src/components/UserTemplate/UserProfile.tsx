@@ -117,7 +117,7 @@ const UserDataForm = (props: UserDataFormProps) => {
                     )}
                 </Form.Item>
                 <Form.Item label="个人简介">
-                    {getFieldDecorator('nickname', {
+                    {getFieldDecorator('profile', {
                         rules: [{ required: false, message: '请输入个人简介!', whitespace: true }],
                     })(
                         <TextArea placeholder="在此处输入个人简介" />

@@ -1,6 +1,5 @@
 from urllib.request import urlopen
 
-import requests
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.viewsets import ModelViewSet
