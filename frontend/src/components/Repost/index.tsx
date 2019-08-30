@@ -9,26 +9,53 @@ import { IRepost } from '../../types';
 
 import './Repost.css';
 
+import api from '../../api';
+
 
 export interface PostProps {
     repost: IRepost;
     loading: boolean;
+    thumb: boolean;
     setReplyRepostId: (id: number) => void;
     setVisible: (visible: boolean) => void;
 };
 
 export default (props: PostProps) => {
-    const [liked, setLiked] = useState(false);
+    const [liked, setLiked] = useState(props.thumb);
     const [likeNum, setLikeNum] = useState(props.repost.reposting_thumb_num);
 
+    console.log('repost thumb:',props.thumb);
+
     const like = () => {
+        console.log('in:',liked,likeNum);
         if (liked) {
-            setLikeNum(likeNum - 1);
+            const newRepost = {
+                reposting_user: props.repost.reposting_user,
+                main_posting: props.repost.main_posting,
+                reposting_content: props.repost.reposting_content,
+                reposting_thumb_num: likeNum-1,
+                reply_id : props.repost.reply_posting === null ? -1:Number.parseInt(props.repost.reply_posting[2])
+            };
+            api.repost.update(props.repost.reposting_id.toString(),newRepost).then((response)=>{
+                console.log(response);
+                setLikeNum(likeNum - 1);
+                setLiked(!liked);
+            });
         } else {
-            setLikeNum(likeNum + 1);
+            const newRepost = {
+                reposting_user: props.repost.reposting_user,
+                main_posting: props.repost.main_posting,
+                reposting_content: props.repost.reposting_content,
+                reposting_thumb_num: likeNum+1,
+                reply_id : props.repost.reply_posting === null ? -1:Number.parseInt(props.repost.reply_posting[2])
+            };
+            api.repost.update(props.repost.reposting_id.toString(),newRepost).then((response)=>{
+                console.log(response);
+                setLikeNum(likeNum + 1);
+                setLiked(!liked);
+            });
         }
-        setLiked(!liked);
-        console.log('like');
+        console.log('out:',liked,likeNum);
     };
 
     const report = () => {

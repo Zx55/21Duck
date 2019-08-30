@@ -28,6 +28,7 @@ export interface IRequestPost {
     theme: string;
     posting_content: string;
     category_id: number;
+    posting_thumb_num ?: number;
 };
 
 export interface IRequestRepost {

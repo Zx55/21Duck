@@ -30,7 +30,7 @@ export interface PageListTemplateProps {
 
 export default (props: PageListTemplateProps) => {
     const user = useUser();
-    const [posts, postNum, postsLoading, getPosts] = usePosts(15);
+    const [posts, postNum, thumbs, postsLoading, getPosts] = usePosts(15);
     const [side, sideLoading, getSide] = useCategorySide(3);
 
     useEffect(() => {
@@ -72,6 +72,7 @@ export default (props: PageListTemplateProps) => {
                 postsLoading={postsLoading}
                 sideLoading={sideLoading}
                 side={side}
+                thumbs={thumbs}
             />
         </div>
     );

@@ -18,12 +18,13 @@ const useUser = (): IUser => {
 };
 
 const usePosts = (num: number): [
-    Array<IPost>, number, boolean, (param: Param) => void
+    Array<IPost>, number, Array<boolean>, boolean, (param: Param) => void
 ] => {
     const [posts, setPosts] =
         useState(newArrayWithItems<IPost>(num, new IPost()));
     const [postNum, setPostNum] = useState(num);
     const [loading, setLoading] = useState(true);
+    const [thumbs, setThumbs] = useState(new Array<boolean>());
 
     const getPosts = (params: Param): void => {
         setLoading(true);
@@ -33,43 +34,49 @@ const usePosts = (num: number): [
 
             setPosts(data.postings);
             setPostNum(data.posting_num);
+            setThumbs(data.thumbs);
             setLoading(false);
+            console.log("post after setting:",thumbs);
         }).catch((err) => console.log(err));
     }
 
     return [
-        posts, postNum, loading, getPosts
+        posts, postNum, thumbs, loading, getPosts
     ];
 };
 
 const useReposts = (num: number): [
-    Array<IRepost>, number, boolean, boolean, (params: Param) => void
+    Array<IRepost>, number, Array<boolean>, boolean, boolean, (params: Param) => void
 ] => {
     const [reposts, setReposts] =
         useState(newArrayWithItems<IRepost>(num, new IRepost()));
     const [repostNum, setRepostNum] = useState(num);
     const [loading, setLoading] = useState(true);
     const [notFound, setNotFound] = useState(false);
+    const [thumbs, setThumbs] = useState(new Array<boolean>());
 
     const getReposts = (params: Param): void => {
         setLoading(true);
 
         api.repost.list(params).then((response) => {
             const data: IResponseRepost | boolean = response.data;
-
+            //console.log("hooks:",response);
             if (data as boolean === false) {
                 setNotFound(true);
             } else {
                 const responseRepost = data as IResponseRepost;
+                //console.log("I'm in",responseRepost.thumbs);
                 setReposts(responseRepost.repostings);
                 setRepostNum(responseRepost.reposting_num);
+                setThumbs(responseRepost.thumbs);
                 setLoading(false);
+                //console.log("repost after setting:",thumbs);
             }
         }).catch(err => console.log(err));
     };
 
     return [
-        reposts, repostNum, loading, notFound, getReposts
+        reposts, repostNum, thumbs, loading, notFound, getReposts
     ];
 };
 

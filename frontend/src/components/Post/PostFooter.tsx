@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import CopyToClipboard from "react-copy-to-clipboard";
 
@@ -8,26 +8,58 @@ import MiniButton from './MiniButton';
 import host from '../../api/host';
 
 import { RouteComponentProps } from 'react-router-dom';
+import api from '../../api';
+import { useUser } from '../../hooks';
+import { IPost } from '../../types';
 
 
 export interface PostFooterProps extends RouteComponentProps {
-    postId: number;
-    like: number;
-    replyNum: number;
+    post: IPost;
     detail: boolean;
+    thumb: boolean;
 };
 
 export default withRouter((props: PostFooterProps) => {
-    const [liked, setLiked] = useState(false);
-    const [likeNum, setLikeNum] = useState(props.like);
+    const [liked, setLiked] = useState(props.thumb);
+    const [likeNum, setLikeNum] = useState(props.post.posting_thumb_num);
+    const user = useUser();
+
+    console.log("post thumb:",props.thumb);
+
+    console.log('b4:',likeNum,liked);
+    
 
     const onLikeClick = () => {
+        console.log('in:',liked,likeNum);
         if (liked) {
-            setLikeNum(num => num - 1);
+            const newPost = {
+                posting_user: user.userId,
+                theme: props.post.theme,
+                posting_content: props.post.posting_content,
+                category_id: props.post.category_id,
+                posting_thumb_num: likeNum-1
+            };
+            api.post.update(props.post.posting_id.toString(),newPost).then((response)=>{
+                console.log(response);
+                setLikeNum(likeNum - 1);
+                setLiked(!liked);
+            });
         } else {
-            setLikeNum(num => num + 1);
+            const newPost = {
+                posting_user: user.userId,
+                theme: props.post.theme,
+                posting_content: props.post.posting_content,
+                category_id: props.post.category_id,
+                posting_thumb_num: likeNum+1
+            };
+            api.post.update(props.post.posting_id.toString(),newPost).then((response)=>{
+                console.log(response);
+                setLikeNum(likeNum + 1);
+                setLiked(!liked);
+            });
         }
-        setLiked(liked => !liked);
+        console.log('out:',liked,likeNum);
+    
     };
 
     const onShareClick = () => {
@@ -82,11 +114,11 @@ export default withRouter((props: PostFooterProps) => {
                         name='read-more'
                         icon='select'
                         text='更多'
-                        onClick={() => props.history.push(`${props.match.path}/${props.postId}`)}
+                        onClick={() => props.history.push(`${props.match.path}/${props.post.posting_id}`)}
                     />
                 </span>
             }
-            <span className='post-reply-num'>{props.replyNum} 条回复</span>
+            <span className='post-reply-num'>{props.post.reply_num} 条回复</span>
         </div>
     );
 });

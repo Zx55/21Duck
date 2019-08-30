@@ -87,7 +87,7 @@ const UserTable =() => {
         }
         setDataSource(initdataSource);
         setRawData(response.data);
-        console.log("hello-user");
+        console.log("get: ",response.data);
       })
     },[])
 
@@ -111,6 +111,7 @@ const UserTable =() => {
         console.log(newData);
         api.user.update(tempRow[0]['user_id'],newData[0]).then((response) => {
           console.log(response);
+          setDataSource(tempData);
         }).catch(err => console.log(err));
       }else{
         tempData.splice(key,0,{
@@ -123,13 +124,13 @@ const UserTable =() => {
           blocktime: 0,
           status: <Badge text='正常' status='success'></Badge>
         });
+        newData[0]['blocktime'] = 0;
+        console.log(newData);
+        api.user.update(tempRow[0]['user_id'],newData[0]).then((response) => {
+          console.log(response);
+          setDataSource(tempData);
+        }).catch(err => console.log(err));
       }
-      newData[0]['blocktime'] = 0;
-      console.log(newData);
-      api.user.update(tempRow[0]['user_id'],newData[0]).then((response) => {
-        console.log(response);
-      }).catch(err => console.log(err));
-      setDataSource(tempData);
     };
     
 
@@ -203,14 +204,15 @@ const ChatTable =({myCategory_id}) => {
     const getPosts = (page,category) => {
 
         const params = {
+            user_id: '123456',
             page: page,
             category_id: category,
         };
 
         api.post.list(params).then((response) => {
             console.log(response.data);
-            setDataSource(response.data);
-            setPostNum(response.data[0]['posting_num'])
+            setDataSource(response.data['postings']);
+            setPostNum(response.data['posting_num'])
         }).catch(err => console.log(err));
     };
 
@@ -308,18 +310,18 @@ const ProblemTable =({myCategory_id}) => {
 
     const getPosts = (page,category) => {
 
-        const params = {
-            page: page,
-            category_id: category,
-        };
+      const params = {
+          user_id: '123456',
+          page: page,
+          category_id: category,
+      };
 
-        api.post.list(params).then((response) => {
-            console.log(response.data);
-            setDataSource(response.data);
-            setPostNum(response.data[0]['posting_num'])
-        }).catch(err => console.log(err));
-    };
-
+      api.post.list(params).then((response) => {
+          console.log(response.data);
+          setDataSource(response.data['postings']);
+          setPostNum(response.data['posting_num'])
+      }).catch(err => console.log(err));
+  };
     useEffect(() => {
         getPosts('0',myCategory_id);
     }, []);
@@ -414,17 +416,18 @@ const CourseTable =({myCategory_id}) => {
 
     const getPosts = (page,category) => {
 
-        const params = {
-            page: page,
-            category_id: category,
-        };
+      const params = {
+          user_id: '123456',
+          page: page,
+          category_id: category,
+      };
 
-        api.post.list(params).then((response) => {
-            console.log(response.data);
-            setDataSource(response.data);
-            setPostNum(response.data[0]['posting_num'])
-        }).catch(err => console.log(err));
-    };
+      api.post.list(params).then((response) => {
+          console.log(response.data);
+          setDataSource(response.data['postings']);
+          setPostNum(response.data['posting_num'])
+      }).catch(err => console.log(err));
+  };
 
     useEffect(() => {
         getPosts('0',myCategory_id);
@@ -521,18 +524,19 @@ const CampusTable =({myCategory_id}) => {
       const[dataSource,setDataSource] = useState([]);
   
       const getPosts = (page,category) => {
-  
-          const params = {
-              page: page,
-              category_id: category,
-          };
-  
-          api.post.list(params).then((response) => {
-              console.log(response.data);
-              setDataSource(response.data);
-              setPostNum(response.data[0]['posting_num'])
-          }).catch(err => console.log(err));
-      };
+
+        const params = {
+            user_id: '123456',
+            page: page,
+            category_id: category,
+        };
+
+        api.post.list(params).then((response) => {
+            console.log(response.data);
+            setDataSource(response.data['postings']);
+            setPostNum(response.data['posting_num'])
+        }).catch(err => console.log(err));
+    };
   
       useEffect(() => {
           getPosts('0',myCategory_id);

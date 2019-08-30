@@ -19,7 +19,7 @@ const isNumber = (s: string): boolean => /^\d+$/.test(s);
 export default withRouter((props: PageDetailTemplate) => {
     const postId = (props.match.params as { postId: string }).postId;
 
-    const [reposts, repostNum, repostsLoading, repostsNotFound, getReposts] =
+    const [reposts, repostNum, thumbs, repostsLoading, repostsNotFound, getReposts] =
         useReposts(15);
     const [post, postLoading, postNotFound, side, sideLoading, getPost] =
         useDetailPost(3);
@@ -57,6 +57,7 @@ export default withRouter((props: PageDetailTemplate) => {
                     repostsLoading={repostsLoading}
                     sideLoading={sideLoading}
                     sideItems={side}
+                    thumbs={thumbs}
                 />
             }
         </div>

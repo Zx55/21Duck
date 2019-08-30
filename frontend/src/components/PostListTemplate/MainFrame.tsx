@@ -17,6 +17,7 @@ export interface MainFrameProps {
     sideLoading: boolean;
     getPosts: (page: string) => void;
     category: string;
+    thumbs: Array<boolean>;
 };
 
 export default (props: MainFrameProps) => {
@@ -31,6 +32,7 @@ export default (props: MainFrameProps) => {
                     loading={props.postsLoading}
                     postNum={props.postNum}
                     getPosts={props.getPosts}
+                    thumbs={props.thumbs}
                 />
             </div>
             <PostCreator

@@ -18,6 +18,7 @@ export interface PostProps {
     post: IPost;
     loading: boolean;
     detail: boolean;
+    thumb: boolean;
 };
 
 export default (props: PostProps) => {
@@ -50,10 +51,9 @@ export default (props: PostProps) => {
                     }}
                 />
                 <PostFooter
-                    postId={props.post.posting_id}
-                    like={props.post.posting_thumb_num}
-                    replyNum={props.post.reply_num}
+                    post={props.post}
                     detail={props.detail}
+                    thumb={props.thumb}
                 />
             </Skeleton>
         </Card>

@@ -13,6 +13,7 @@ export interface RepostListProps {
     reposts: Array<IRepost>;
     loading: boolean;
     repostNum: number;
+    thumbs: Array<boolean>;
     getReposts: (page: string) => void;
     setReplyRepostId: (id: number) => void;
     setVisible: (visible: boolean) => void;
@@ -26,18 +27,21 @@ export default (props: RepostListProps) => {
         props.getReposts((page - 1).toString());
     };
 
+    //console.log("repost thumb:",props.thumbs);
+
     return (
         <List
             className='repost-list'
             itemLayout='horizontal'
             dataSource={props.reposts}
-            renderItem={(repost) => (
+            renderItem={(repost,index) => (
                 <li>
                     <Repost
                         repost={repost}
                         loading={props.loading}
                         setReplyRepostId={props.setReplyRepostId}
                         setVisible={props.setVisible}
+                        thumb={props.thumbs[index]}
                     />
                 </li>
             )}
