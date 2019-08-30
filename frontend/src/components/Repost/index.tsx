@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import marked from 'marked';
 
 import { Card, Skeleton, Comment, Tooltip, Icon, Avatar, Mentions } from 'antd';
@@ -24,7 +24,11 @@ export default (props: PostProps) => {
     const [liked, setLiked] = useState(props.thumb);
     const [likeNum, setLikeNum] = useState(props.repost.reposting_thumb_num);
 
-    console.log('repost thumb:',props.thumb);
+    useEffect(()=>{
+        setLikeNum(props.repost.reposting_thumb_num);
+        setLiked(props.thumb);
+    },[props.thumb])
+    console.log('repost thumb:',props.thumb,liked,likeNum);
 
     const like = () => {
         console.log('in:',liked,likeNum);

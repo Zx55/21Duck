@@ -168,6 +168,36 @@ create trigger editpostingtime before insert
         set  new.reply_time = now();
     end;
 
+
+create trigger thumbposting after insert
+    on thumb_posting for each row
+    begin
+        update posting set posting_thumb_num = posting_thumb_num+1 where posting_id=new.posting_id;
+    end;
+
+create trigger thumbreposting after insert
+    on thumb_reposting for each row
+    begin
+        update reposting set reposting_thumb_num = reposting_thumb_num+1 where reposting_id=new.reposting_id;
+    end;
+
+
+create trigger cancelthumbposting after delete
+    on thumb_posting for each row
+    begin
+        update posting set posting_thumb_num = posting_thumb_num-1 where posting_id=old.posting_id;
+    end;
+
+create trigger cancelthumbreposting after delete
+    on thumb_reposting for each row
+    begin
+        update reposting set reposting_thumb_num = reposting_thumb_num-1 where reposting_id=old.reposting_id;
+    end;
+
+
+
+
+
 #测试
 select * from user;
 

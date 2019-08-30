@@ -60,12 +60,12 @@ const useReposts = (num: number): [
 
         api.repost.list(params).then((response) => {
             const data: IResponseRepost | boolean = response.data;
-            //console.log("hooks:",response);
+            console.log("hooks:",response);
             if (data as boolean === false) {
                 setNotFound(true);
             } else {
                 const responseRepost = data as IResponseRepost;
-                //console.log("I'm in",responseRepost.thumbs);
+                console.log("I'm in",response.data);
                 setReposts(responseRepost.repostings);
                 setRepostNum(responseRepost.reposting_num);
                 setThumbs(responseRepost.thumbs);
