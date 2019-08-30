@@ -25,7 +25,7 @@ export default (props: PostProps) => (
 
     <Link to={`/${m.get(props.category)}/${props.post.posting_id}`}>
         <Card
-            className={cx('cardgroup')}
+            className={'cardgroup'}
             hoverable
             size="small"
             title={props.post.theme}
@@ -39,7 +39,7 @@ export default (props: PostProps) => (
                     {props.post.user_nickname}
                 </span>
                 <span>
-                    <Tooltip className='post-created-time' title={props.post.formated_posting_time}>
+                    <Tooltip className='post-created-time-explore' title={props.post.formated_posting_time}>
                         <p>
                             {moment(props.post.formated_posting_time,
                                 'YYYY-MM-DD HH:mm:ss').fromNow()}
