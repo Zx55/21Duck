@@ -83,7 +83,7 @@ class RepostingSerializer(PartialUpdateSerializerMixin, ModelSerializer):
             return None
         else:
             reply_posting = Reposting.objects.filter(reposting_id=obj.reply_id)[0]
-            return reply_posting.reposting_user.nickname, reply_posting.reposting_content
+            return reply_posting.reposting_user.nickname, reply_posting.reposting_content, reply_posting.reposting_id
 
 class CategorySerializer(PartialUpdateSerializerMixin, ModelSerializer):
     # relative_new_reply_time = serializers.SerializerMethodField(label='relative_new_reply_time')

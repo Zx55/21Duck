@@ -9,7 +9,7 @@ import api from '../api';
 import { getRelativeTime, newArrayWithItems } from '../utils';
 
 import { IUser, IPost, IRepost, ICategory, INotFound, Param,
-    IResponseUser, IResponsePost, IResponseRepost } from '../types';
+    IResponseUser, IResponsePost, IResponseRepost, IResponseDetailPost } from '../types';
 import { CardItem } from '../components/SideBar';
 
 
@@ -18,12 +18,13 @@ const useUser = (): IUser => {
 };
 
 const usePosts = (num: number): [
-    Array<IPost>, number, boolean, (param: Param) => void
+    Array<IPost>, number, Array<boolean>, boolean, (param: Param) => void
 ] => {
     const [posts, setPosts] =
         useState(newArrayWithItems<IPost>(num, new IPost()));
     const [postNum, setPostNum] = useState(num);
     const [loading, setLoading] = useState(true);
+    const [thumbs, setThumbs] = useState(new Array<boolean>());
 
     const getPosts = (params: Param): void => {
         setLoading(true);
@@ -33,43 +34,49 @@ const usePosts = (num: number): [
 
             setPosts(data.postings);
             setPostNum(data.posting_num);
+            setThumbs(data.thumbs);
             setLoading(false);
+            console.log("post after setting:",thumbs);
         }).catch((err) => console.log(err));
     }
 
     return [
-        posts, postNum, loading, getPosts
+        posts, postNum, thumbs, loading, getPosts
     ];
 };
 
 const useReposts = (num: number): [
-    Array<IRepost>, number, boolean, boolean, (params: Param) => void
+    Array<IRepost>, number, Array<boolean>, boolean, boolean, (params: Param) => void
 ] => {
     const [reposts, setReposts] =
         useState(newArrayWithItems<IRepost>(num, new IRepost()));
     const [repostNum, setRepostNum] = useState(num);
     const [loading, setLoading] = useState(true);
     const [notFound, setNotFound] = useState(false);
+    const [thumbs, setThumbs] = useState(new Array<boolean>());
 
     const getReposts = (params: Param): void => {
         setLoading(true);
 
         api.repost.list(params).then((response) => {
             const data: IResponseRepost | boolean = response.data;
-
+            //console.log("hooks:",response);
             if (data as boolean === false) {
                 setNotFound(true);
             } else {
                 const responseRepost = data as IResponseRepost;
+                //console.log("I'm in",responseRepost.thumbs);
                 setReposts(responseRepost.repostings);
                 setRepostNum(responseRepost.reposting_num);
+                setThumbs(responseRepost.thumbs);
                 setLoading(false);
+                //console.log("repost after setting:",thumbs);
             }
         }).catch(err => console.log(err));
     };
 
     return [
-        reposts, repostNum, loading, notFound, getReposts
+        reposts, repostNum, thumbs, loading, notFound, getReposts
     ];
 };
 
@@ -162,14 +169,16 @@ const useDetailPost = (sideNum: number): [
         setSideLoading(true);
 
         api.post.retreive(postId, { category_id: category}).then((response) => {
-            const data: IPost | INotFound | boolean = response.data;
+            const data: IResponseDetailPost | INotFound | boolean = response.data;
+            console.log(data);
 
             if ((data as boolean) === false
                 || (data as INotFound).detail === 'Not found') {
                 setNotFound(true);
             } else {
-                const postData = data as IPost;
-                setPost(postData);
+                const responseDetailPost = data as IResponseDetailPost;
+
+                setPost(responseDetailPost.posting);
                 setPostLoading(false);
 
                 api.category.retreive(category).then((response) => {
@@ -185,20 +194,20 @@ const useDetailPost = (sideNum: number): [
                                 <span style={keyStyle}>发帖人</span>,
                             value:
                                 <span style={valueStyle}>
-                                    {postData.user_nickname}
+                                    {responseDetailPost.posting.user_nickname}
                                 </span>,
                         }, {
                             key: <span style={keyStyle}>本帖回复数</span>,
                             value:
                                 <span style={valueStyle}>
-                                    {postData.reply_num}
+                                    {responseDetailPost.posting.reply_num}
                                 </span>,
                         }, {
                             key: <span style={keyStyle}>最后回复时间</span>,
                             value:
                                 <span style={valueStyle}>
-                                    <Tooltip title={postData.formated_reply_time}>
-                                        {getRelativeTime(postData.formated_reply_time)}
+                                    <Tooltip title={responseDetailPost.posting.formated_reply_time}>
+                                        {getRelativeTime(responseDetailPost.posting.formated_reply_time)}
                                     </Tooltip>
                                 </span>,
                         }],

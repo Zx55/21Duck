@@ -66,6 +66,7 @@ export default withRouter((props: RouteComponentProps) => {
                         __html: marked(content)
                     }}
                 />
+                <br />
                 <Checkbox
                     checked={confirm}
                     onChange={() => setConfirm(confirm => !confirm)}

@@ -28,6 +28,7 @@ export interface IRequestPost {
     theme: string;
     posting_content: string;
     category_id: number;
+    posting_thumb_num ?: number;
 };
 
 export interface IRequestRepost {
@@ -62,6 +63,11 @@ export interface IResponseRepost {
     repostings: Array<IRepost>;
     reposting_num: number;
     thumbs: Array<boolean>;
+};
+
+export interface IResponseDetailPost {
+    posting: IPost,
+    thumb: boolean;
 };
 
 export class IPost {

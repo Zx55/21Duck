@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 import { Upload, Icon, message } from 'antd';
 
 function getBase64(img: Blob, callback: { (imageUrl: any): any; (arg0: string | ArrayBuffer | null): void; }) {

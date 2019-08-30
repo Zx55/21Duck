@@ -6,6 +6,7 @@ import UserCard from './UserCard';
 import UserPostList from '../UserPostList';
 import SideBar, { CardItem } from '../SideBar';
 import UserProfile from '../UserProfile'
+import PwChanger from './PwChanger';
 
 import { IPost } from '../../types';
 
@@ -84,6 +85,17 @@ export default (props: MainFrameProps) => {
                     key='3'
                 >
                     <UserProfile />
+                </TabPane>
+                <TabPane
+                    tab={
+                        <span>
+                            <Icon type='security-scan' />
+                                修改密码
+                        </span>
+                    }
+                    key='4'
+                >
+                    <PwChanger />
                 </TabPane>
             </Tabs>
             <SideBar

@@ -8,7 +8,7 @@ import './Template.css';
 
 export default () => {
     const user = useUser();
-    const [posts, postNum, postsLoading, getPosts] = usePosts(15);
+    const [posts, postNum, thumbs, postsLoading, getPosts] = usePosts(15);
     const [side, sideLoading, getSide] = useUserSide(3);
 
     useEffect(() => {

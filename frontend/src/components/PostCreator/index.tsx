@@ -57,6 +57,7 @@ export default withRouter((props: PostCreaterProps) => {
                 };
 
                 api.post.create(data).then((response) => {
+                    console.log(response);
                     if (response.status === 201) {
                         console.log(response);
                         setLoading(false);

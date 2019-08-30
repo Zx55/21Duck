@@ -66,12 +66,19 @@ class PostingViewSet(CacheResponseMixin, ModelViewSet):
             })
 
     def retrieve(self, request, *args, **kwargs):
-        category_id = request.GET.get('category_id')
+        category = request.GET.get('category_id')
+        user = request.GET.get('user_id')
+        is_thumb = False
         instance = self.get_object()
 
-        if instance.category_id == int(category_id):
+        if instance.category_id == int(category):
+            if ThumbPosting.objects.filter(posting_id=instance.posting_id, user_id=user):
+                is_thumb = True
             serializer = self.get_serializer(instance)
-            return Response(serializer.data)
+            return Response({
+                    'posting' : serializer.data,
+                    'thumb' : is_thumb
+                    })
         else:
             return Response(False)
 
@@ -126,7 +133,6 @@ class CategoryViewSet(CacheResponseMixin, ModelViewSet):
     serializer_class = CategorySerializer
 
 
-
 @csrf_exempt
 def login(request):
     if request.method == 'POST':
@@ -178,9 +184,16 @@ def agreement(request):
     if request.method == 'GET':
         text = str(urlopen(url).read(), 'utf-8').encode("utf-8").decode("utf-8")
         return JsonResponse({'content':text})
-    # elif request.method == 'POST':
-    #     new_content = request.POST.get('content')
-    #     urlopen(url).write(new_content)
-    #     return JsonResponse({'update_status':'success'})
-    # else:
-    #     return JsonResponse({'agreement_operation':'failed'})
+
+@csrf_exempt
+def password(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        new_password = request.POST.get('new_password')
+        old_password = request.POST.get('old_password')
+
+        if User.objects.filter(user_id=username, password=encrypt_md5(old_password)):
+            User.objects.filter(user_id=username).update(password=encrypt_md5(new_password))
+            return JsonResponse({'success':True})
+        else:
+            return JsonResponse({'success':False})

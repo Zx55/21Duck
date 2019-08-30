@@ -13,6 +13,7 @@ export interface PostListProps {
     posts: Array<IPost>;
     loading: boolean;
     postNum: number;
+    thumbs: Array<boolean>;
     getPosts: (page: string) => void;
 };
 
@@ -29,12 +30,13 @@ export default (props: PostListProps) => {
             className='post-list'
             itemLayout='horizontal'
             dataSource={props.posts}
-            renderItem={(post) => (
+            renderItem={(post, index) => (
                 <li>
                     <Post
                         post={post}
                         loading={props.loading}
                         detail={false}
+                        thumb={props.thumbs[index]}
                     />
                 </li>
             )}
