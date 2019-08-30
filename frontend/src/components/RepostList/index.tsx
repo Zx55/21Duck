@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { List, Empty } from 'antd';
+import { List, Empty, Card } from 'antd';
 
 import Repost from '../Repost';
 
@@ -31,9 +31,9 @@ export default (props: RepostListProps) => {
 
     return (
         props.reposts.length===0 ? 
-        <div className='no-post'>        
+        <Card className='no-post'>        
             <Empty />
-        </div> :
+        </Card> :
         <List
             className='repost-list'
             itemLayout='horizontal'
