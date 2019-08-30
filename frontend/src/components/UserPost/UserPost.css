@@ -1,6 +1,11 @@
 .user-post {
     background: white;
+    margin:5px auto;
+}
 
+.user-post:hover {
+    box-shadow: 0px 0px 5px #bbbbbb;
+    margin:5px auto;
 }
 
 .user-nickname {

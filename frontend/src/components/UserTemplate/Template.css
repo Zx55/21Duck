@@ -22,6 +22,10 @@
     margin-top: 60px;
 }
 
+.user-center-side-card {
+    margin: 2px 0 10px 0;
+}
+
 .user-center-go-to-top-button {
     position: fixed;
     left: 90%;

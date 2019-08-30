@@ -21,6 +21,7 @@ export default (props: PostProps) => (
     <Card
         className={cx('user-post', props.detail && 'post-detail')}
         hoverable
+        bordered={false}
         bodyStyle={{padding:"10px 20px"}}
         >
         <Skeleton
@@ -31,9 +32,6 @@ export default (props: PostProps) => (
                 {props.post.theme}
             </Link>
             <span style={{ float: "right" }}>
-                <span className='user-nickname'>
-                    {props.post.user_nickname}
-                </span>
                 <Tooltip className='post-created-time' title={props.post.formated_posting_time}>
                     <span>
                         {moment(props.post.formated_posting_time,

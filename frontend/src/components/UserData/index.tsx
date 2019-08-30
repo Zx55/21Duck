@@ -9,7 +9,8 @@ import { registerAsync } from '../../actions';
 import { RouteComponentProps } from 'react-router-dom';
 import { WrappedFormUtils } from 'antd/lib/form/Form';
 
-import Vcode from '../VerifyCode'
+import Vcode from '../VerifyCode';
+import UserAvatar from '../UserAvatar';
 
 import './UserDataForm.css';
 
@@ -88,115 +89,101 @@ const UserDataForm = (props: UserDataFormProps) => {
 
     return (
         <Card>
-            <Col span={18}>
-                <Form onSubmit={handleSubmit} className='user-data-form'>
-                    <Form.Item label="手机号">
-                        <div>
-                            {getFieldDecorator('username', {
-                                rules: [{
-                                    required: true, message: '请输入正确手机号!', whitespace: true,
-                                    pattern: new RegExp("^(1[3-9])\\d{9}$")
-                                }],
-                            })(
-                                <Input
-                                    prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                    placeholder="手机号"
-                                />
-                            )}
-                        </div>
-                    </Form.Item>
-                    <Form.Item label="昵称">
-                        {getFieldDecorator('nickname', {
-                            rules: [{ required: true, message: '请输入昵称!', whitespace: true }],
+            <Form onSubmit={handleSubmit} className='user-data-form'>
+                <Form.Item className="user-avatar-wrapper">
+                    <div>
+                        <UserAvatar />
+                    </div>
+                </Form.Item>
+                <Form.Item label="手机号">
+                    <div>
+                        {getFieldDecorator('username', {
+                            rules: [{
+                                required: false, message: '请输入正确手机号!', whitespace: true,
+                                pattern: new RegExp("^(1[3-9])\\d{9}$")
+                            }],
                         })(
                             <Input
-                                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                placeholder="昵称"
+                                prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                placeholder="手机号"
                             />
                         )}
-                    </Form.Item>
-                    <Form.Item label="密码" hasFeedback>
-                        {getFieldDecorator('password', {
-                            rules: [{
-                                required: true,
-                                message: '请输入密码!',
-                            }, {
-                                validator: validateToNextPassword,
-                            },
-                            ],
-                        })(
-                            <Input.Password
-                                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                type="password"
-                                placeholder="密码"
-                            />
-                        )}
-                    </Form.Item>
-                    <Form.Item label="确认密码" hasFeedback>
-                        {getFieldDecorator('confirm', {
-                            rules: [{
-                                required: true,
-                                message: '请确认密码!',
-                            }, {
-                                validator: compareToFirstPassword,
-                            },
-                            ],
-                        })(
-                            <Input.Password
-                                onBlur={handleConfirmBlur}
-                                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                type="password"
-                                placeholder="确认密码"
-                            />
-                        )}
-                    </Form.Item>
-                    <div id="user-data-verify-form">
-                        <div id="user-data-verify-text">
-                            <Form.Item label="验证码">
-                                {getFieldDecorator('verifycode', {
-                                    rules: [{ required: true, message: '请输入验证码' },
-                                    {
-                                        validator: compareToVerifyCode,
-                                    },],
-                                })(
-                                    <Input
-                                        prefix={<Icon type="check-circle" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                        placeholder="验证码"
-                                    />,
-                                )}
-                            </Form.Item>
-                        </div>
-                        <div id="user-data-verify-vcode">
-                            <Vcode width={115} height={32} onChange={(v: any) => {
-                                console.log('当前的验证码值：', v)
-                                setverifycodeValue(v);
-                            }}></Vcode>
-                        </div>
                     </div>
-                    <Form.Item>
-                        <Button className="user-data-button" type="primary" htmlType="submit">
-                            修改
-                </Button>
-                    </Form.Item>
-                </Form>
-            </Col>
-            <Col span={6}>
-                <div>
-                <Avatar 
-                    src={'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'}
-                    size={150}
-                    style={{
-                        margin: "20px"
-                    }} />
-                <Button
-                    style={{
-                        width: "80%",
-                        margin: "20px"
-                    }}>
-                    修改头像
-                </Button>
+                </Form.Item>
+                <Form.Item label="昵称">
+                    {getFieldDecorator('nickname', {
+                        rules: [{ required: false, message: '请输入昵称!', whitespace: true }],
+                    })(
+                        <Input
+                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            placeholder="昵称"
+                        />
+                    )}
+                </Form.Item>
+                <Form.Item label="密码" hasFeedback>
+                    {getFieldDecorator('password', {
+                        rules: [{
+                            required: false,
+                            message: '请输入密码!',
+                        }, {
+                            validator: validateToNextPassword,
+                        },
+                        ],
+                    })(
+                        <Input.Password
+                            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            type="password"
+                            placeholder="密码"
+                        />
+                    )}
+                </Form.Item>
+                <Form.Item label="确认密码" hasFeedback>
+                    {getFieldDecorator('confirm', {
+                        rules: [{
+                            required: false,
+                            message: '请确认密码!',
+                        }, {
+                            validator: compareToFirstPassword,
+                        },
+                        ],
+                    })(
+                        <Input.Password
+                            onBlur={handleConfirmBlur}
+                            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            type="password"
+                            placeholder="确认密码"
+                        />
+                    )}
+                </Form.Item>
+                <div id="user-data-verify-form">
+                    <div id="user-data-verify-text">
+                        <Form.Item label="验证码">
+                            {getFieldDecorator('verifycode', {
+                                rules: [{ required: false, message: '请输入验证码' },
+                                {
+                                    validator: compareToVerifyCode,
+                                },],
+                            })(
+                                <Input
+                                    prefix={<Icon type="check-circle" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                    placeholder="验证码"
+                                />,
+                            )}
+                        </Form.Item>
+                    </div>
+                    <div id="user-data-verify-vcode">
+                        <Vcode width={115} height={32} onChange={(v: any) => {
+                            console.log('当前的验证码值：', v)
+                            setverifycodeValue(v);
+                        }}></Vcode>
+                    </div>
                 </div>
-            </Col>
+                <Form.Item className="user-data-button-wrapper">
+                    <Button className="user-data-button" type="primary" htmlType="submit">
+                        修改
+                    </Button>
+                </Form.Item>
+            </Form>
         </Card>
     )
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BackTop, Tabs, Icon } from 'antd';
+import { BackTop, Tabs, Icon, Card } from 'antd';
 
 import UserCard from './UserCard';
 import UserPostList from '../UserPostList';
@@ -47,14 +47,16 @@ export default (props: MainFrameProps) => {
                     }
                     key='1'
                 >
-                    <div className='user-center-list-wrapper'>
+                    <Card 
+                        bodyStyle={{padding:"0px 1px 10px 1px"}}
+                        className='user-center-list-wrapper'>
                         <UserPostList
                             posts={props.posts}
                             loading={props.postsLoading}
                             postNum={props.postNum}
                             getPosts={props.getPosts}
                         />
-                    </div>
+                    </Card>
                 </TabPane>
                 <TabPane
                     tab={
