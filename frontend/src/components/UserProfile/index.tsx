@@ -12,6 +12,7 @@ import UserAvatar from '../UserAvatar';
 import './UserDataForm.css';
 
 
+const { TextArea } = Input;
 export interface UserDataFormProps extends RouteComponentProps {
     form: WrappedFormUtils;
 };
@@ -89,21 +90,6 @@ const UserDataForm = (props: UserDataFormProps) => {
                         <UserAvatar />
                     </div>
                 </Form.Item>
-                <Form.Item label="手机号">
-                    <div>
-                        {getFieldDecorator('username', {
-                            rules: [{
-                                required: false, message: '请输入正确手机号!', whitespace: true,
-                                pattern: new RegExp("^(1[3-9])\\d{9}$")
-                            }],
-                        })(
-                            <Input
-                                prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                placeholder="手机号"
-                            />
-                        )}
-                    </div>
-                </Form.Item>
                 <Form.Item label="昵称">
                     {getFieldDecorator('nickname', {
                         rules: [{ required: false, message: '请输入昵称!', whitespace: true }],
@@ -114,39 +100,31 @@ const UserDataForm = (props: UserDataFormProps) => {
                         />
                     )}
                 </Form.Item>
-                <Form.Item label="密码" hasFeedback>
-                    {getFieldDecorator('password', {
-                        rules: [{
-                            required: false,
-                            message: '请输入密码!',
-                        }, {
-                            validator: validateToNextPassword,
-                        },
-                        ],
+                <Form.Item label="年龄">
+                    {getFieldDecorator('age', {
+                        rules: [{ required: false, message: '请输入年龄!', whitespace: true }],
                     })(
-                        <Input.Password
-                            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            type="password"
-                            placeholder="密码"
+                        <Input
+                            prefix={<Icon type="clock-circle" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            placeholder="年龄"
                         />
                     )}
                 </Form.Item>
-                <Form.Item label="确认密码" hasFeedback>
-                    {getFieldDecorator('confirm', {
-                        rules: [{
-                            required: false,
-                            message: '请确认密码!',
-                        }, {
-                            validator: compareToFirstPassword,
-                        },
-                        ],
+                <Form.Item label="学校">
+                    {getFieldDecorator('school', {
+                        rules: [{ required: false, message: '请输入学校!', whitespace: true }],
                     })(
-                        <Input.Password
-                            onBlur={handleConfirmBlur}
-                            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            type="password"
-                            placeholder="确认密码"
+                        <Input
+                            prefix={<Icon type="bank" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            placeholder="学校"
                         />
+                    )}
+                </Form.Item>
+                <Form.Item label="个人简介">
+                    {getFieldDecorator('nickname', {
+                        rules: [{ required: false, message: '请输入个人简介!', whitespace: true }],
+                    })(
+                        <TextArea placeholder="在此处输入个人简介" />
                     )}
                 </Form.Item>
                 <div id="user-data-verify-form">

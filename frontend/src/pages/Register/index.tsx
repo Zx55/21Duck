@@ -40,10 +40,15 @@ export default withRouter((props: RouteComponentProps) => {
         <div className='register-root'>
             <RegisterForm />
             <Modal
+                wrapClassName="notice"
                 title="新手上路"
                 visible={visible}
                 centered
                 closable={false}
+                width="70%"
+                style={{
+                    margin:"10% 0"
+                }}
                 footer={[
                     <Button
                         key='submit'
@@ -53,7 +58,10 @@ export default withRouter((props: RouteComponentProps) => {
                     >确认</Button>
                 ]}
             >
-                <div
+                <div style={{
+                    overflow: "auto",
+                    maxHeight: 400
+                }}
                     dangerouslySetInnerHTML={{
                         __html: marked(content)
                     }}
