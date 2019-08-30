@@ -55,10 +55,13 @@ export default (props: NavigatorProps) => {
                 <Link to='/problems'>AK我的OJ题</Link>
             </Item>
             <Item key='courses'>
-                <Link to='/courses'>课程资源</Link>
+                <Link to='/courses'>课程推荐</Link>
             </Item>
             <Item key='campus'>
                 <Link to='/campus'>校园周边</Link>
+            </Item>
+            <Item key='resourses'>
+                <Link to='/resources'>资源分享</Link>
             </Item>
             {user.identity === 0 ? (
                 <Item

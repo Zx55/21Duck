@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import marked from 'marked';
 import { withRouter } from 'react-router-dom';
 
-import RegisterForm from '../../components/RegisterForm';
-import SuccessInfo from '../../components/SuccessInfo';
+import { Modal, Checkbox, Button } from 'antd';
+
+import api from '../../api';
 import { useUser } from '../../hooks';
+import RegisterForm from '../../components/RegisterForm';
 
 import { RouteComponentProps } from 'react-router-dom';
 
@@ -12,22 +15,56 @@ import './Register.css';
 
 export default withRouter((props: RouteComponentProps) => {
     const user = useUser();
+    const [visible, setVisible] = useState(true);
+    const [confirm, setConfirm] = useState(false);
+    const [content, setContent] = useState('加载中');
 
-    const userRegisterSuccess = () => {
-        const clock = setTimeout(() => props.history.goBack(), 3000);
-        return (
-            <SuccessInfo
-                user={user}
-                prefix='注册成功'
-                clock={clock}
-            />
-        );
-    };
+    const onOkClick = () => {
+        console.log('close');
+        setVisible(false);
+        props.history.push('/explore');
+    }
+
+    useEffect(() => {
+        api.agreement.retreive().then((response) => {
+            const data: string = response.data.content;
+            setContent(data);
+        });
+    }, []);
+
+    useEffect(() => {
+        setVisible(true);
+    }, [user.identity])
 
     return (
         <div className='register-root'>
-            {user.identity === 0 ?
-                <RegisterForm /> : userRegisterSuccess()}
+            <RegisterForm />
+            <Modal
+                title="新手上路"
+                visible={visible}
+                centered
+                closable={false}
+                footer={[
+                    <Button
+                        key='submit'
+                        disabled={!confirm}
+                        type='primary'
+                        onClick={onOkClick}
+                    >确认</Button>
+                ]}
+            >
+                <div
+                    dangerouslySetInnerHTML={{
+                        __html: marked(content)
+                    }}
+                />
+                <Checkbox
+                    checked={confirm}
+                    onChange={() => setConfirm(confirm => !confirm)}
+                >
+                    已经阅读用户协议
+                </Checkbox>
+            </Modal>
         </div>
     );
 });

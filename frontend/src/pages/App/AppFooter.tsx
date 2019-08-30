@@ -7,6 +7,6 @@ const { Footer } = Layout;
 
 export default () => (
     <Footer className='app-footer'>
-        footer
+
     </Footer>
 );

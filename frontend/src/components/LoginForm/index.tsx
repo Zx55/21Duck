@@ -136,9 +136,7 @@ const LoginForm = (props: LoginFormProps) => {
                 </Form.Item>
             </div>
         </Form>
-
-
     );
-}
+};
 
 export default Form.create({ name: 'normal_login' })(LoginForm);

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { Carousel } from 'antd';
 
-import { usePosts, useCategorySide } from '../../hooks';
+import { usePosts, useCategorySide, useUser } from '../../hooks';
 import MainFrame from './MainFrame';
 
 import './Template.css';
@@ -29,11 +29,16 @@ export interface PageListTemplateProps {
 };
 
 export default (props: PageListTemplateProps) => {
+    const user = useUser();
     const [posts, postNum, postsLoading, getPosts] = usePosts(15);
     const [side, sideLoading, getSide] = useCategorySide(3);
 
     useEffect(() => {
-        getPosts({ page: '0', category_id: props.category });
+        getPosts({
+            page: '0',
+            category_id: props.category,
+            user_id: '123456',
+        });
         getSide(props.category);
     }, []);
 
@@ -58,8 +63,10 @@ export default (props: PageListTemplateProps) => {
                 posts={posts}
                 postNum={postNum}
                 getPosts={
-                    (page: string) => getPosts({ page: page,
-                        category: props.category
+                    (page: string) => getPosts({
+                        page: page,
+                        category_id: props.category,
+                        user_id: '123456',
                     })
                 }
                 postsLoading={postsLoading}

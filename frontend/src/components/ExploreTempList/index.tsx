@@ -36,11 +36,12 @@ export default (props: UserTemplateProps ) => {
         const params: Param = {
             page: page,
             category_id: props.category,
+            user_id: '123456',
         };
 
         api.post.list(params).then((response) => {
-            const posts: Array<IPost> = response.data;
-            setPostNum(posts[0].posting_num);
+            const posts: Array<IPost> = response.data[0];
+            setPostNum(response.data[1]);
             setPosts(posts.slice(0,4));
             setPostsLoading(false);
 
@@ -63,14 +64,14 @@ export default (props: UserTemplateProps ) => {
             renderItem={(post) => (
                 <li>
                     <ExploreCard
-                    category={props.category}
+                        category={props.category}
                         post={post}
                         loading={postsLoading}
                         detail={false}
                     />
                 </li>
             )}
-            
+
         />
     );
 };

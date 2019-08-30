@@ -16,6 +16,7 @@ export default class API<T> {
     private detailUrl = (id: string, params?: Param): string => {
         if (params) {
             const paramString = '?' + qs.stringify(params);
+            console.log(this.baseUrl + this.name + '/' + id + '/' + paramString)
             return this.baseUrl + this.name + '/' + id + '/' + paramString;
         }
         return this.baseUrl + this.name + '/' + id + '/';

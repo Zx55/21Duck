@@ -28,9 +28,11 @@ const usePosts = (num: number): [
         setLoading(true);
 
         api.post.list(params).then((response) => {
-            const data: Array<IPost> = response.data;
-            setPosts(data);
-            setPostNum(data[0].posting_num);
+            const data: Array<any> = response.data;
+            const posts: Array<IPost> = data[0];
+
+            setPosts(posts);
+            setPostNum(data[1]);
             setLoading(false);
         }).catch((err) => console.log(err));
     }
@@ -55,15 +57,14 @@ const useReposts = (num: number): [
         setLoading(true);
 
         api.repost.list(params).then((response) => {
-            const data: RepostItems | boolean = response.data;
+            const data: Array<any> | boolean = response.data;
 
             if (data as boolean === false) {
                 setNotFound(true);
             } else {
-                const repostsData = data as RepostItems;
-                setReposts(repostsData);
-                setRepostNum(repostsData.length === 0
-                    ? 0 : repostsData[0].reposting_num);
+                const repostsData = data as Array<any>;
+                setReposts(repostsData[0]);
+                setRepostNum(repostsData[1]);
                 setLoading(false);
             }
         }).catch(err => console.log(err));

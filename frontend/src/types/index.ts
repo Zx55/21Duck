@@ -52,7 +52,6 @@ export interface IResponseUser{
 // 接受后端相应的接口
 export class IPost {
     posting_id: number = -1;                    // postId
-    posting_num: number = 15;                   // totalPost
     posting_user: string = '';                  // userId
     user_nickname: string = '';                 // userNickname
     user_head: string = '';                     // userHead
@@ -67,7 +66,6 @@ export class IPost {
 
 export class IRepost {
     reposting_id: number = -1;                  // repostId
-    reposting_num: number = 15;                 // TotalRepost
     reposting_user: string = '';                // userId
     user_nickname: string = '';                 // userNickname
     user_head: string = '';                     // userHead

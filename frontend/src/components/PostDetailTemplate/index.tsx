@@ -30,6 +30,7 @@ export default withRouter((props: PageDetailTemplate) => {
             page: '0',
             posting_id: postId,
             category_id: props.category,
+            user_id: '123456',
         });
     }, []);
 
@@ -49,6 +50,7 @@ export default withRouter((props: PageDetailTemplate) => {
                             page: page,
                             posting_id: postId,
                             category_id: props.category,
+                            user_id: '123456',
                         })
                     }
                     postLoading={postLoading}

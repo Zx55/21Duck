@@ -12,6 +12,7 @@ const Chat = lazy(() => import('../Chat'));
 const Problems = lazy(() => import('../Problems'));
 const Courses = lazy(() => import('../Courses'));
 const Campus = lazy(() => import('../Campus'));
+const Resources = lazy(() => import('../Resources'));
 const PostDetail = lazy(() => import('../../components/PostDetailTemplate'));
 const User = lazy(() => import('../User'));
 const Admin = lazy(() => import('../Admin'))
@@ -37,6 +38,7 @@ export default () => (
             <Route exact path='/campus/:postId' render={() =>
                 <PostDetail category='4'/>}
             />
+            <Route exact path='/resources' component={Resources} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/register' component={Register} />
             <Route exact path='/user' component={User} />
