@@ -43,10 +43,12 @@ export default () => (
         <div>
             <div className="container">
                 <div className="subtitle">闲聊栈</div>
-                <ExploreCardList  name="problem" category='2'/>
+                <ExploreCardList  name="problem" category='1'/>
                 <div className="subtitle">AK我的oj题</div>
-                <ExploreCardList  name="problem" category='3'/>
+                <ExploreCardList  name="problem" category='2'/>
                 <div className="subtitle">课程资源</div>
+                <ExploreCardList  name="problem" category='3'/>
+                <div className="subtitle">校园周边</div>
                 <ExploreCardList  name="problem" category='4'/>
             </div>
             

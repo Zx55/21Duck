@@ -12,17 +12,26 @@ import { Link } from 'react-router-dom';
 
 const { Meta } = Card;
 
-
+const categoryMap={
+    1:"xhat",
+    2:"problems",
+    3:"courses",
+    4:"campus"
+}
 export interface PostProps {
+    category:String;
     post: IPost;
     loading: boolean;
     detail: boolean;
 };
 
 export default (props: PostProps) => (
+    
+    <Link to={`/problems/${props.post.posting_id}`}>
     <Card
         className={cx('cardgroup')}
         hoverable
+        size="small"
         title={props.post.theme}
         
     >
@@ -30,20 +39,19 @@ export default (props: PostProps) => (
             loading={props.loading}
             active
         >
-            <Link to={`/problems/${props.post.posting_id}`}>
-                {props.post.theme}
-            </Link>
-            
-                <p className='user-nickname'>
+                <span className='user-nickname'>
                     {props.post.user_nickname}
-                </p>
+                </span>
+                <span>
                 <Tooltip className='post-created-time' title={props.post.formated_posting_time}>
                     <p>
                         {moment(props.post.formated_posting_time,
                             'YYYY-MM-DD HH:mm:ss').fromNow()}
                     </p>
                 </Tooltip>
+                </span>
             
         </Skeleton>
     </Card>
+    </Link>
 );

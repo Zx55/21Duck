@@ -10,7 +10,6 @@
 
 .post-created-time {
     font-size: 12px;
-    padding-left: 15px;
     color: rgba(0.6, 0.6, 0.6, 0.5);
 }
 
@@ -85,8 +84,8 @@
 }
 .cardgroup{
     width: 24%;
-    
     margin: 0px 0 0 0;
     float:left;
     display:inline;
+    padding: 6px 6px 6px 6px;
 }

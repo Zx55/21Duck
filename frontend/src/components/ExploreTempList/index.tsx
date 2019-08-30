@@ -6,7 +6,7 @@ import ExploreCard  from '../ExploreTemp';
 
 import { IPost, Param } from '../../types';
 
-import './UserPostList.css';
+import './ExploreTempList.css';
 export interface UserTemplateProps {
     name: string;
     category: string;
@@ -41,7 +41,7 @@ export default (props: UserTemplateProps ) => {
         api.post.list(params).then((response) => {
             const posts: Array<IPost> = response.data;
             setPostNum(posts[0].posting_num);
-            setPosts(posts);
+            setPosts(posts.slice(0,4));
             setPostsLoading(false);
 
         }).catch(err => console.log(err));
@@ -63,6 +63,7 @@ export default (props: UserTemplateProps ) => {
             renderItem={(post) => (
                 <li>
                     <ExploreCard
+                    category={props.category}
                         post={post}
                         loading={postsLoading}
                         detail={false}
