@@ -41,7 +41,7 @@ export default (props: MainFrameProps) => {
                 <TabPane
                     tab={
                         <span>
-                            <Icon type='apple' />
+                            <Icon type='form' />
                             我的主帖
                         </span>
                     }
@@ -61,7 +61,7 @@ export default (props: MainFrameProps) => {
                 <TabPane
                     tab={
                         <span>
-                            <Icon type='android' />
+                            <Icon type='edit' />
                                 我的回帖
                         </span>
                     }
@@ -77,7 +77,7 @@ export default (props: MainFrameProps) => {
                 <TabPane
                     tab={
                         <span>
-                            <Icon type='windows' />
+                            <Icon type='profile' />
                                 修改资料
                         </span>
                     }
