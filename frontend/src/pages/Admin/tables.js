@@ -56,7 +56,7 @@ const UserTable =() => {
         key: 'operation',
         dataIndex: 'user_operation',
         width: 100,
-        render: (text, record) => <Popconfirm title={"确认操作?"} onConfirm={() => handleBlock(record.key)}>
+        render: (text, record) => <Popconfirm title={"确认操作?"} onConfirm={() => handleBlock(record.key,record.user_id)}>
         <a>禁言/解禁</a>
       </Popconfirm>,
       },
@@ -66,7 +66,7 @@ const UserTable =() => {
 
 
     const[dataSource,setDataSource] = useState([]);
-    const[flag,setFlag] = useState(false);
+    const[rawData,setRawData] = useState(false);
     
     useEffect(()=>{
       api.user.list().then((response) => {
@@ -86,13 +86,15 @@ const UserTable =() => {
           });
         }
         setDataSource(initdataSource);
+        setRawData(response.data);
         console.log("hello-user");
       })
     },[])
 
     
-    const handleBlock = (key) => {
+    const handleBlock = (key,id) => {
       let tempRow = dataSource.filter(item => item.key === key);
+      let newData = rawData.filter(item => item.user_id === id);
       let tempData = dataSource.filter(item => item.key !== key);
       if(tempRow[0]['blocktime'] === 0){
         tempData.splice(key,0,{
@@ -102,9 +104,14 @@ const UserTable =() => {
           school: tempRow[0]['school'],
           age: tempRow[0]['age'],
           userprofile: tempRow[0]['userprofile'],
-          blocktime: 1,
+          blocktime: 24,
           status: <Badge text='禁言' status='error'></Badge>
         });
+        newData[0]['blocktime'] = 24;
+        console.log(newData);
+        api.user.update(tempRow[0]['user_id'],newData[0]).then((response) => {
+          console.log(response);
+        }).catch(err => console.log(err));
       }else{
         tempData.splice(key,0,{
           user_id: tempRow[0]['user_id'],
@@ -117,8 +124,12 @@ const UserTable =() => {
           status: <Badge text='正常' status='success'></Badge>
         });
       }
+      newData[0]['blocktime'] = 0;
+      console.log(newData);
+      api.user.update(tempRow[0]['user_id'],newData[0]).then((response) => {
+        console.log(response);
+      }).catch(err => console.log(err));
       setDataSource(tempData);
-      console.log(dataSource);
     };
     
 
@@ -214,10 +225,9 @@ const ChatTable =({myCategory_id}) => {
 };
   
   const handleDelete = (key) => {
-    //console.log(dataSource);
     console.log(key);
     setDataSource(dataSource.filter(item => item.posting_id !== key));
-    //console.log(dataSource);
+    api.post.remove(key).then((response) => {console.log(response)}).catch(err => console.log(err));
   };
   
 
@@ -321,10 +331,8 @@ const ProblemTable =({myCategory_id}) => {
 };
   
   const handleDelete = (key) => {
-    //console.log(dataSource);
-    console.log(key);
     setDataSource(dataSource.filter(item => item.posting_id !== key));
-    //console.log(dataSource);
+    api.post.remove(key).then((response) => {console.log(response)}).catch(err => console.log(err));
   };
   
 
@@ -429,10 +437,10 @@ const CourseTable =({myCategory_id}) => {
 };
   
   const handleDelete = (key) => {
-    //console.log(dataSource);
     console.log(key);
     setDataSource(dataSource.filter(item => item.posting_id !== key));
-    //console.log(dataSource);
+    api.post.remove(key).then((response) => {console.log(response)}).catch(err => console.log(err));
+  
   };
   
 
@@ -537,10 +545,9 @@ const CampusTable =({myCategory_id}) => {
   };
     
     const handleDelete = (key) => {
-      //console.log(dataSource);
-      console.log(key);
       setDataSource(dataSource.filter(item => item.posting_id !== key));
-      //console.log(dataSource);
+      api.post.remove(key).then((response) => {console.log(response)}).catch(err => console.log(err));
+  
     };
     
   
