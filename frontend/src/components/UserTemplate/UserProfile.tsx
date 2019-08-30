@@ -7,9 +7,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { WrappedFormUtils } from 'antd/lib/form/Form';
 
 import Vcode from '../VerifyCode';
-import UserAvatar from '../UserAvatar';
-
-import './UserDataForm.css';
+import AvatarUploader from './AvatarUploader';
 
 
 const { TextArea } = Input;
@@ -86,9 +84,7 @@ const UserDataForm = (props: UserDataFormProps) => {
         <Card>
             <Form onSubmit={handleSubmit} className='user-data-form'>
                 <Form.Item className="user-avatar-wrapper">
-                    <div>
-                        <UserAvatar />
-                    </div>
+                    <AvatarUploader />
                 </Form.Item>
                 <Form.Item label="昵称">
                     {getFieldDecorator('nickname', {
@@ -121,7 +117,7 @@ const UserDataForm = (props: UserDataFormProps) => {
                     )}
                 </Form.Item>
                 <Form.Item label="个人简介">
-                    {getFieldDecorator('nickname', {
+                    {getFieldDecorator('profile', {
                         rules: [{ required: false, message: '请输入个人简介!', whitespace: true }],
                     })(
                         <TextArea placeholder="在此处输入个人简介" />

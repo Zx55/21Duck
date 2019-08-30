@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import marked from 'marked';
 
 import { Card, Skeleton, Comment, Tooltip, Icon, Avatar, Mentions } from 'antd';
@@ -24,10 +24,12 @@ export default (props: PostProps) => {
     const [liked, setLiked] = useState(props.thumb);
     const [likeNum, setLikeNum] = useState(props.repost.reposting_thumb_num);
 
-    console.log('repost thumb:',props.thumb);
+    useEffect(()=>{
+        setLikeNum(props.repost.reposting_thumb_num);
+        setLiked(props.thumb);
+    },[props.thumb])
 
     const like = () => {
-        console.log('in:',liked,likeNum);
         if (liked) {
             const newRepost = {
                 reposting_user: props.repost.reposting_user,
@@ -55,7 +57,6 @@ export default (props: PostProps) => {
                 setLiked(!liked);
             });
         }
-        console.log('out:',liked,likeNum);
     };
 
     const report = () => {

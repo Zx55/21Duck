@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { List } from 'antd';
+import { List, Empty, Card } from 'antd';
 
 import Repost from '../Repost';
 
@@ -27,9 +27,16 @@ export default (props: RepostListProps) => {
         props.getReposts((page - 1).toString());
     };
 
-    //console.log("repost thumb:",props.thumbs);
-
     return (
+        props.reposts.length===0 ?
+        <Card className='no-repost'>
+            <Empty
+                image={Empty.PRESENTED_IMAGE_SIMPLE}
+                description={
+                    <span>暂无回帖</span>
+                }
+            />
+        </Card> :
         <List
             className='repost-list'
             itemLayout='horizontal'

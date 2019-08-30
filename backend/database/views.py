@@ -1,6 +1,6 @@
 from urllib.request import urlopen
 
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.viewsets import ModelViewSet
 from rest_framework_extensions.cache.mixins import CacheResponseMixin
@@ -132,7 +132,6 @@ class CategoryViewSet(CacheResponseMixin, ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
-
 @csrf_exempt
 def login(request):
     if request.method == 'POST':
@@ -197,3 +196,33 @@ def password(request):
             return JsonResponse({'success':True})
         else:
             return JsonResponse({'success':False})
+
+@csrf_exempt
+def thumbposting(request):
+    if request.method == 'POST':
+        user = request.POST.get('user_id')
+        posting = request.POST.get('posting_id')
+        ThumbPosting.objects.create(user_id=user, posting_id=posting)
+        return JsonResponse({'create':'success'})
+    elif request.method == 'DELETE':
+        user = request.GET.get('user_id')
+        posting = request.GET.get('posting_id')
+        ThumbPosting.objects.filter(user_id=user, posting_id=posting).delete()
+        return JsonResponse({'delete':'success'})
+    else:
+        return JsonResponse({'operation':False})
+
+@csrf_exempt
+def thumbreposting(request):
+    if request.method == 'POST':
+        user = request.POST.get('user_id')
+        reposting = request.POST.get('reposting_id')
+        ThumbReposting.objects.create(user_id=user, reposting_id=reposting)
+        return JsonResponse({'create': 'success'})
+    elif request.method == 'DELETE':
+        user = request.GET.get('user_id')
+        reposting = request.GET.get('reposting_id')
+        ThumbReposting.objects.filter(user_id=user, reposting_id=reposting).delete()
+        return JsonResponse({'delete': 'success'})
+    else:
+        return JsonResponse({'operation':False})

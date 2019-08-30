@@ -16,5 +16,7 @@ urlpatterns += [
     path('login',views.login),
     path('register',views.register),
     path('agreement',views.agreement),
-    path('password',views.password)
+    path('password',views.password),
+    path('posting/thumb',views.thumbposting),
+    path('reposting/thumb',views.thumbreposting)
 ]
