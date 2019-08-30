@@ -211,7 +211,7 @@ def thumbposting(request):
         ThumbPosting.objects.filter(user_id=user, posting_id=posting).delete()
         return JsonResponse({'delete':'success'})
     else:
-        return JsonResponse(False)
+        return JsonResponse({'operation':False})
 
 @csrf_exempt
 def thumbreposting(request):
@@ -226,4 +226,4 @@ def thumbreposting(request):
         ThumbReposting.objects.filter(user_id=user, reposting_id=reposting).delete()
         return JsonResponse({'delete': 'success'})
     else:
-        return JsonResponse(False)
+        return JsonResponse({'operation':False})
