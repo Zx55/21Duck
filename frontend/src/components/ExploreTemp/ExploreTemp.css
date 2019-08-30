@@ -8,8 +8,9 @@
     color: rgba(0.6, 0.6, 0.6, 0.5);
 }
 
-.post-created-time {
+.post-created-time-explore {
     font-size: 12px;
+    padding-left: 0px;
     color: rgba(0.6, 0.6, 0.6, 0.5);
 }
 
