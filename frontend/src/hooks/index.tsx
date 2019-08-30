@@ -9,7 +9,7 @@ import api from '../api';
 import { getRelativeTime, newArrayWithItems } from '../utils';
 
 import { IUser, IPost, IRepost, ICategory, INotFound, Param,
-    IResponseUser, IResponsePost, IResponseRepost } from '../types';
+    IResponseUser, IResponsePost, IResponseRepost, IResponseDetailPost } from '../types';
 import { CardItem } from '../components/SideBar';
 
 
@@ -169,14 +169,16 @@ const useDetailPost = (sideNum: number): [
         setSideLoading(true);
 
         api.post.retreive(postId, { category_id: category}).then((response) => {
-            const data: IPost | INotFound | boolean = response.data;
+            const data: IResponseDetailPost | INotFound | boolean = response.data;
+            console.log(data);
 
             if ((data as boolean) === false
                 || (data as INotFound).detail === 'Not found') {
                 setNotFound(true);
             } else {
-                const postData = data as IPost;
-                setPost(postData);
+                const responseDetailPost = data as IResponseDetailPost;
+
+                setPost(responseDetailPost.posting);
                 setPostLoading(false);
 
                 api.category.retreive(category).then((response) => {
@@ -192,20 +194,20 @@ const useDetailPost = (sideNum: number): [
                                 <span style={keyStyle}>发帖人</span>,
                             value:
                                 <span style={valueStyle}>
-                                    {postData.user_nickname}
+                                    {responseDetailPost.posting.user_nickname}
                                 </span>,
                         }, {
                             key: <span style={keyStyle}>本帖回复数</span>,
                             value:
                                 <span style={valueStyle}>
-                                    {postData.reply_num}
+                                    {responseDetailPost.posting.reply_num}
                                 </span>,
                         }, {
                             key: <span style={keyStyle}>最后回复时间</span>,
                             value:
                                 <span style={valueStyle}>
-                                    <Tooltip title={postData.formated_reply_time}>
-                                        {getRelativeTime(postData.formated_reply_time)}
+                                    <Tooltip title={responseDetailPost.posting.formated_reply_time}>
+                                        {getRelativeTime(responseDetailPost.posting.formated_reply_time)}
                                     </Tooltip>
                                 </span>,
                         }],

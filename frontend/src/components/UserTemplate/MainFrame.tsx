@@ -6,7 +6,7 @@ import UserCard from './UserCard';
 import UserPostList from '../UserPostList';
 import SideBar, { CardItem } from '../SideBar';
 import UserProfile from '../UserProfile'
-import ChangePassword from '../ChangePassword';
+import PwChanger from './PwChanger';
 
 import { IPost } from '../../types';
 
@@ -95,7 +95,7 @@ export default (props: MainFrameProps) => {
                     }
                     key='4'
                 >
-                    <ChangePassword />
+                    <PwChanger />
                 </TabPane>
             </Tabs>
             <SideBar

@@ -65,6 +65,11 @@ export interface IResponseRepost {
     thumbs: Array<boolean>;
 };
 
+export interface IResponseDetailPost {
+    posting: IPost,
+    thumb: boolean;
+};
+
 export class IPost {
     posting_id: number = -1;                    // postId
     posting_user: string = '';                  // userId
