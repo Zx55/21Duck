@@ -85,47 +85,67 @@ const UserDataForm = (props: UserDataFormProps) => {
     return (
         <Card>
             <Form onSubmit={handleSubmit} className='user-data-form'>
-            <Form.Item 
-                label="新密码"
-                hasFeedback
-            >
-                {getFieldDecorator('password', {
-                    rules: [{
-                        required: true,
-                        message: '请输入密码!',
-                    }, {
-                        validator: validateToNextPassword,
-                    },
-                    ],
-                })(
-                    <Input.Password
-                        prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />}
-                        type='password'
-                        placeholder='密码'
-                    />
-                )}
-            </Form.Item>
-            <Form.Item 
-                label="确认新密码"
-                hasFeedback
-            >
-                {getFieldDecorator('confirm', {
-                    rules: [{
-                        required: true,
-                        message: '请确认密码!',
-                    }, {
-                        validator: compareToFirstPassword,
-                    },
-                    ],
-                })(
-                    <Input.Password
-                        onBlur={handleConfirmBlur}
-                        prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />}
-                        type='password'
-                        placeholder='确认密码'
-                    />
-                )}
-            </Form.Item>
+            <Form.Item
+                    label="旧密码"
+                    hasFeedback
+                >
+                    {getFieldDecorator('old-password', {
+                        rules: [{
+                            required: true,
+                            message: '请输入旧密码!',
+                        }, {
+                            validator: validateToNextPassword,
+                        },
+                        ],
+                    })(
+                        <Input.Password
+                            prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            type='password'
+                            placeholder='旧密码'
+                        />
+                    )}
+                </Form.Item>
+                <Form.Item
+                    label="新密码"
+                    hasFeedback
+                >
+                    {getFieldDecorator('password', {
+                        rules: [{
+                            required: true,
+                            message: '请输入新密码!',
+                        }, {
+                            validator: validateToNextPassword,
+                        },
+                        ],
+                    })(
+                        <Input.Password
+                            prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            type='password'
+                            placeholder='新密码'
+                        />
+                    )}
+                </Form.Item>
+                <Form.Item
+                    label="确认新密码"
+                    hasFeedback
+                >
+                    {getFieldDecorator('confirm', {
+                        rules: [{
+                            required: true,
+                            message: '请确认新密码!',
+                        }, {
+                            validator: compareToFirstPassword,
+                        },
+                        ],
+                    })(
+                        <Input.Password
+                            onBlur={handleConfirmBlur}
+                            prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            type='password'
+                            placeholder='确认新密码'
+                        />
+                    )}
+                </Form.Item>
                 <div id="change-password-verify-form">
                     <div id="change-password-verify-text">
                         <Form.Item label="验证码">
