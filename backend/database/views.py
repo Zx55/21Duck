@@ -35,11 +35,15 @@ class PostingViewSet(CacheResponseMixin, ModelViewSet):
                     self.queryset = Posting.objects.filter(category_id=category).order_by("-reply_time")[page * EACH_PAGE : (page + 1) * EACH_PAGE]
                 else:
                     self.queryset = Posting.objects.all().order_by("-reply_time")[page * EACH_PAGE : (page + 1) * EACH_PAGE]
-                for posting in self.queryset:
-                    if ThumbPosting.objects.filter(posting_id=posting.posting_id, user_id=user):
-                        is_thumb_list.append(True)
-                    else:
-                        is_thumb_list.append(False)
+                if user == '-1':
+                    is_thumb_list = [False for _ in range(EACH_PAGE)]
+                else:
+                    is_thumb_list = []
+                    for posting in self.queryset:
+                        if ThumbPosting.objects.filter(posting_id=posting.posting_id, user_id=user):
+                            is_thumb_list.append(True)
+                        else:
+                            is_thumb_list.append(False)
             elif page and user:
                 page = int(page)
                 number = Posting.objects.filter(posting_user=user).count()
@@ -81,21 +85,24 @@ class RepostingViewSet(CacheResponseMixin, ModelViewSet):
             posting = request.GET.get('posting_id')
             category = request.GET.get('category_id')
             user = request.GET.get('user_id')
+            EACH_PAGE = 15
             if page and posting and category and user:
                 if Posting.objects.get(posting_id=posting).category_id != int(category):
                     return Response(False)
                 else:
                     number = Posting.objects.get(posting_id=posting).reply_num
-                    is_thumb_list = []
-                    EACH_PAGE = 15
-                    page = int(page)
-                    posting = int(posting)
-                    self.queryset = Reposting.objects.filter(main_posting=posting).order_by("-reposting_time")[page * EACH_PAGE : (page + 1) * EACH_PAGE]
-                    for reposting in self.queryset:
-                        if ThumbReposting.objects.filter(reposting_id=reposting.reposting_id, user_id=user):
-                            is_thumb_list.append(True)
-                        else:
-                            is_thumb_list.append(False)
+                    if user == '-1':
+                        is_thumb_list = [False for _ in range(EACH_PAGE)]
+                    else:
+                        is_thumb_list = []
+                        page = int(page)
+                        posting = int(posting)
+                        self.queryset = Reposting.objects.filter(main_posting=posting).order_by("-reposting_time")[page * EACH_PAGE : (page + 1) * EACH_PAGE]
+                        for reposting in self.queryset:
+                            if ThumbReposting.objects.filter(reposting_id=reposting.reposting_id, user_id=user):
+                                is_thumb_list.append(True)
+                            else:
+                                is_thumb_list.append(False)
             else:
                 return Response(False)
 

@@ -5,8 +5,11 @@
 #   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
-from datetime import timezone
+import datetime
+from datetime import timedelta
 from django.db import models
+from django.utils import timezone
+
 
 class Administration(models.Model):
     user = models.ForeignKey('User', models.DO_NOTHING)
@@ -23,7 +26,7 @@ class Category(models.Model):
     category_content = models.CharField(max_length=16384)
     posting_num = models.IntegerField()
     reposting_num = models.IntegerField()
-    new_reply_time = models.DateTimeField()
+    new_reply_time = models.DateTimeField(default= timezone.now() + timedelta(hours=8))
 
     class Meta:
         managed = False
@@ -45,8 +48,8 @@ class Notify(models.Model):
 class Posting(models.Model):
     posting_id = models.AutoField(primary_key=True)
     posting_user = models.ForeignKey('User', models.DO_NOTHING)
-    posting_time = models.DateTimeField()
-    reply_time = models.DateTimeField()
+    posting_time = models.DateTimeField(default= timezone.now() + timedelta(hours=8))
+    reply_time = models.DateTimeField(default= timezone.now() + timedelta(hours=8))
     reply_num = models.IntegerField(default=0)
     theme = models.CharField(max_length=256)
     posting_content = models.CharField(max_length=16384)
@@ -64,7 +67,7 @@ class Reposting(models.Model):
     reply_id = models.IntegerField(default=-1)
     main_posting = models.ForeignKey('Posting', models.DO_NOTHING)
     reposting_user = models.ForeignKey('User', models.DO_NOTHING)
-    reposting_time = models.DateTimeField(blank=True, null=True)
+    reposting_time = models.DateTimeField(blank=True, null=True, default= timezone.now() + timedelta(hours=8))
     reposting_content = models.CharField(max_length=16384)
     reposting_thumb_num = models.IntegerField(default=0)
     floor = models.IntegerField(default=0)
