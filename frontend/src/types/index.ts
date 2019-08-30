@@ -50,6 +50,18 @@ export interface IResponseUser{
 };
 
 // 接受后端相应的接口
+export interface IResponsePost {
+    postings: Array<IPost>;
+    posting_num: number;
+    thumbs: Array<boolean>;
+};
+
+export interface IResponseRepost {
+    repostings: Array<IRepost>;
+    reposting_num: number;
+    thumbs: Array<boolean>;
+};
+
 export class IPost {
     posting_id: number = -1;                    // postId
     posting_user: string = '';                  // userId

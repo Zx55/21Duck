@@ -8,7 +8,8 @@ import { Tooltip } from 'antd';
 import api from '../api';
 import { getRelativeTime, newArrayWithItems } from '../utils';
 
-import { IUser, IPost, IRepost, ICategory, INotFound, Param, IResponseUser } from '../types';
+import { IUser, IPost, IRepost, ICategory, INotFound, Param,
+    IResponseUser, IResponsePost, IResponseRepost } from '../types';
 import { CardItem } from '../components/SideBar';
 
 
@@ -28,11 +29,10 @@ const usePosts = (num: number): [
         setLoading(true);
 
         api.post.list(params).then((response) => {
-            const data: Array<any> = response.data;
-            const posts: Array<IPost> = data[0];
+            const data: IResponsePost = response.data;
 
-            setPosts(posts);
-            setPostNum(data[1]);
+            setPosts(data.postings);
+            setPostNum(data.posting_num);
             setLoading(false);
         }).catch((err) => console.log(err));
     }
@@ -41,8 +41,6 @@ const usePosts = (num: number): [
         posts, postNum, loading, getPosts
     ];
 };
-
-type RepostItems = Array<IRepost>;
 
 const useReposts = (num: number): [
     Array<IRepost>, number, boolean, boolean, (params: Param) => void
@@ -57,14 +55,14 @@ const useReposts = (num: number): [
         setLoading(true);
 
         api.repost.list(params).then((response) => {
-            const data: Array<any> | boolean = response.data;
+            const data: IResponseRepost | boolean = response.data;
 
             if (data as boolean === false) {
                 setNotFound(true);
             } else {
-                const repostsData = data as Array<any>;
-                setReposts(repostsData[0]);
-                setRepostNum(repostsData[1]);
+                const responseRepost = data as IResponseRepost;
+                setReposts(responseRepost.repostings);
+                setRepostNum(responseRepost.reposting_num);
                 setLoading(false);
             }
         }).catch(err => console.log(err));

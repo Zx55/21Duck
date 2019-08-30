@@ -55,7 +55,11 @@ class PostingViewSet(CacheResponseMixin, ModelViewSet):
                 return self.get_paginated_response(serializer.data)
 
             serializer = self.get_serializer(queryset, many=True)
-            return Response((serializer.data, number, is_thumb_list))
+            return Response({
+                'postings': serializer.data,
+                'posting_num': number,
+                'thumbs': is_thumb_list
+            })
 
     def retrieve(self, request, *args, **kwargs):
         category_id = request.GET.get('category_id')
@@ -104,7 +108,11 @@ class RepostingViewSet(CacheResponseMixin, ModelViewSet):
 
             serializer = self.get_serializer(queryset, many=True)
 
-            return Response((serializer.data, number, is_thumb_list))
+            return Response({
+                'repostings': serializer.data,
+                'reposting_num': number,
+                'thumbs': is_thumb_list
+            })
 
 class CategoryViewSet(CacheResponseMixin, ModelViewSet):
     queryset = Category.objects.all()
