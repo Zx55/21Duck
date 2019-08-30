@@ -14,7 +14,7 @@ export default withRouter((props: RouteComponentProps) => {
     const user = useUser();
 
     const userRegisterSuccess = () => {
-        const clock = setTimeout(() => props.history.push('/explore'), 3000);
+        const clock = setTimeout(() => props.history.goBack(), 3000);
         return (
             <SuccessInfo
                 user={user}

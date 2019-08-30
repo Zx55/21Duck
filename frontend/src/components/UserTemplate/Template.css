@@ -2,8 +2,6 @@
     height: 10px;
 }
 
-
-
 #user-card {
     margin:10px auto;
 }
@@ -25,7 +23,7 @@
 }
 
 .user-center-side-card {
-    box-shadow: 1px 1px 5px #bbbbbb;
+    margin: 2px 0 10px 0;
 }
 
 .user-center-go-to-top-button {

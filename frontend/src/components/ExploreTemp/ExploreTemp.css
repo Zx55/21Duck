@@ -1,11 +1,6 @@
 .user-post {
     background: white;
-    margin:5px auto;
-}
 
-.user-post:hover {
-    box-shadow: 0px 0px 5px #bbbbbb;
-    margin:5px auto;
 }
 
 .user-nickname {
@@ -15,7 +10,6 @@
 
 .post-created-time {
     font-size: 12px;
-    padding-left: 15px;
     color: rgba(0.6, 0.6, 0.6, 0.5);
 }
 
@@ -25,7 +19,7 @@
 }
 
 .post-footer {
-    padding-left: 45px;
+    padding-left: 5px;
 }
 
 .like-button {
@@ -87,4 +81,11 @@
 
 .anticon.anticon-select.read-more-button-icon.button-component-icon {
     margin-right: 4px;
+}
+.cardgroup{
+    width: 24%;
+    margin: 0px 0 0 0;
+    float:left;
+    display:inline;
+    padding: 6px 6px 6px 6px;
 }

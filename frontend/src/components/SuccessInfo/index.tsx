@@ -45,7 +45,7 @@ export default (props: SuccessInfoProps) => {
                         <Link to='/User'>个人中心</Link>
                     </Button>
                     <Button key="return" onClick={onClick}>
-                        <Link to='/explore'>返回首页</Link>
+                        <Link to='/explore'>返回</Link>
                     </Button>
                 </div>
             ]}

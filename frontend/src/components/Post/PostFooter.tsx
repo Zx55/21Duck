@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
+import CopyToClipboard from "react-copy-to-clipboard";
 
-import Button from '../Button';
+import { message } from 'antd';
+
+import MiniButton from './MiniButton';
+import host from '../../api/host';
 
 import { RouteComponentProps } from 'react-router-dom';
 
@@ -9,48 +13,80 @@ import { RouteComponentProps } from 'react-router-dom';
 export interface PostFooterProps extends RouteComponentProps {
     postId: number;
     like: number;
-    detail: boolean;
     replyNum: number;
+    detail: boolean;
 };
 
-export default withRouter((props: PostFooterProps) => (
-    <div className='post-footer'>
-        <span className='interaction-bar'>
-            <Button
-                name='like'
-                icon='like'
-                text={props.like.toString()}
-                onClick={(e) => console.log('like')}
-            />
-            <Button
-                name='share'
-                icon='export'
-                text='分享'
-                onClick={(e) => console.log('share')}
-            />
-            <Button
-                name='favorite'
-                icon='star'
-                text='收藏'
-                onClick={(e) => console.log('favorite')}
-            />
-            <Button
-                name='report'
-                icon='exclamation-circle'
-                text='举报'
-                onClick={(e) => console.log('report')}
-            />
-        </span>
-        <span className='post-reply-num'>{props.replyNum} 条回复</span>
-        {props.detail ? null :
-            <span className='read-more-bar'>
-                <Button
-                    name='read-more'
-                    icon='select'
-                    text='更多'
-                    onClick={(e) => props.history.push(`${props.match.path}/${props.postId}`)}
+export default withRouter((props: PostFooterProps) => {
+    const [liked, setLiked] = useState(false);
+    const [likeNum, setLikeNum] = useState(props.like);
+
+    const onLikeClick = () => {
+        if (liked) {
+            setLikeNum(num => num - 1);
+        } else {
+            setLikeNum(num => num + 1);
+        }
+        setLiked(liked => !liked);
+    };
+
+    const onShareClick = () => {
+        message.config({ top: 75 });
+        message.success('链接复制成功');
+    };
+
+    const onCollectClick = () => {
+        console.log('collect');
+    };
+
+    const onReportClick = () => {
+        console.log('report');
+    };
+
+    return (
+        <div className='post-footer'>
+            <span className='interaction-bar'>
+                <MiniButton
+                    name='like'
+                    icon='like'
+                    filled={liked ? true : false}
+                    text={likeNum.toString()}
+                    onClick={onLikeClick}
+                />
+                <CopyToClipboard
+                    text={host + props.match.url}
+                    onCopy={onShareClick}>
+                    <MiniButton
+                        name='share'
+                        icon='export'
+                        text='分享'
+                        onClick={() => 0}
+                    />
+                </CopyToClipboard>
+                <MiniButton
+                    name='favorite'
+                    icon='star'
+                    text='收藏'
+                    onClick={onCollectClick}
+                />
+                <MiniButton
+                    name='report'
+                    icon='exclamation-circle'
+                    text='举报'
+                    onClick={onReportClick}
                 />
             </span>
-        }
-    </div>
-));
+            {props.detail ? null :
+                <span className='read-more-bar'>
+                    <MiniButton
+                        name='read-more'
+                        icon='select'
+                        text='更多'
+                        onClick={() => props.history.push(`${props.match.path}/${props.postId}`)}
+                    />
+                </span>
+            }
+            <span className='post-reply-num'>{props.replyNum} 条回复</span>
+        </div>
+    );
+});

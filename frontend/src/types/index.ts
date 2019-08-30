@@ -36,6 +36,19 @@ export interface IRequestRepost {
     reply_id?: number;
 };
 
+export interface IResponseUser{
+    age: number;
+    blocktime: number;
+    head: string;
+    identify: number;
+    nickname: string;
+    profile: string;
+    register: number;
+    school: string;
+    scores: number;
+    user_id: string;
+};
+
 // 接受后端相应的接口
 export class IPost {
     posting_id: number = -1;                    // postId
@@ -119,7 +132,20 @@ export class IUser {
     }
 };
 
+export class CategoryAdmin {
+    user_id: string = '';
+    nickname: string = '';
+    head: string = '';
+};
 
+export class ICategory {
+    category_id: number = -1;
+    category_content: string = '';
+    posting_num: number = -1;
+    reposting_num: number = -1;
+    formated_new_reply_time: string = '';
+    manager: Array<CategoryAdmin> = [];
+};
 
 export type IState = {
     user: IUser;

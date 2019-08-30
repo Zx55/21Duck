@@ -1,10 +1,11 @@
 import React from 'react';
 
-import { BackTop, Tabs, Icon } from 'antd';
+import { BackTop, Tabs, Icon, Card } from 'antd';
 
 import UserCard from './UserCard';
 import UserPostList from '../UserPostList';
-import SideBar from '../SideBar';
+import SideBar, { CardItem } from '../SideBar';
+import UserData from '../UserData';
 
 import { IPost } from '../../types';
 
@@ -19,12 +20,12 @@ const userInfo = {
 };
 
 export interface MainFrameProps {
-    name: string;
     posts: Array<IPost>;
     postNum: number;
     postsLoading: boolean;
-    sideLoading: boolean;
     getPosts: (page: string) => void;
+    side: Array<CardItem>;
+    sideLoading: boolean;
 };
 
 export default (props: MainFrameProps) => {
@@ -36,33 +37,35 @@ export default (props: MainFrameProps) => {
                 user_nickname={userInfo.user_nickname}
                 user_profile={userInfo.user_profile}
             />
-            <Tabs defaultActiveKey="2">
+            <Tabs defaultActiveKey='1'>
                 <TabPane
                     tab={
                         <span>
-                            <Icon type="apple" />
-                            我的主贴
+                            <Icon type='form' />
+                            我的主帖
                         </span>
                     }
-                    key="1"
+                    key='1'
                 >
-                    <div className='user-center-list-wrapper'>
+                    <Card 
+                        bodyStyle={{padding:"0px 1px 10px 1px"}}
+                        className='user-center-list-wrapper'>
                         <UserPostList
                             posts={props.posts}
                             loading={props.postsLoading}
                             postNum={props.postNum}
                             getPosts={props.getPosts}
                         />
-                    </div>
+                    </Card>
                 </TabPane>
                 <TabPane
                     tab={
                         <span>
-                            <Icon type="android" />
-                                我的回复
+                            <Icon type='edit' />
+                                我的回帖
                         </span>
                     }
-                    key="2"
+                    key='2'
                 >
                     <UserPostList
                         posts={props.posts}
@@ -71,11 +74,23 @@ export default (props: MainFrameProps) => {
                         getPosts={props.getPosts}
                     />
                 </TabPane>
+                <TabPane
+                    tab={
+                        <span>
+                            <Icon type='profile' />
+                                修改资料
+                        </span>
+                    }
+                    key='3'
+                >
+                    <UserData />
+                </TabPane>
             </Tabs>
             <SideBar
                 loading={props.sideLoading}
                 userCenter={true}
                 offsetTop={75}
+                items={props.side}
             />
             <BackTop className='user-center-go-to-top-button' />
         </div>

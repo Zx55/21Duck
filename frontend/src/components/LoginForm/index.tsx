@@ -59,15 +59,18 @@ const LoginForm = (props: LoginFormProps) => {
     const { getFieldDecorator } = props.form;
 
     return (
-        
-        
-        <Form onSubmit={handleSubmit} className="login-form">
-           
-           <div  className="ducklogo" ><img   src="https://dpsv7g.ch.files.1drv.com/y4mKc5CDaj_ClT3q8_-pb-VeDLGL36szTIUX4X0rrtX3VdCyy-91B2kI3yVYewGR5k_Aehp8si78fLnxd-ieMVR3yzrcusYyNdFD-gOBASqIJSYB6OhWkZc_isaJAXLQFwOHNMRd6_00iUmL-QuCxg2HuQszC9wXjdoCmazs-zRO_YMrBzwVTNWD8FPxgc2PHLPaU17sn0RV6Y0-0GWzQth0w?width=660&height=248&cropmode=none" width="165" height="62" /></div>
-            
-           
+
+
+        <Form onSubmit={handleSubmit} className='login-form'>
+            <div  className='ducklogo'>
+                <img
+                    src='https://dpsv7g.ch.files.1drv.com/y4mKc5CDaj_ClT3q8_-pb-VeDLGL36szTIUX4X0rrtX3VdCyy-91B2kI3yVYewGR5k_Aehp8si78fLnxd-ieMVR3yzrcusYyNdFD-gOBASqIJSYB6OhWkZc_isaJAXLQFwOHNMRd6_00iUmL-QuCxg2HuQszC9wXjdoCmazs-zRO_YMrBzwVTNWD8FPxgc2PHLPaU17sn0RV6Y0-0GWzQth0w?width=660&height=248&cropmode=none'
+                    width='165'
+                    height='62'
+                    alt=''
+                />
+            </div>
             <Form.Item>
-           
                 {getFieldDecorator('username', {
                     rules: [{ required: true, message: '请输入手机号' }],
                 })(
@@ -105,10 +108,11 @@ const LoginForm = (props: LoginFormProps) => {
                     </Form.Item>
                 </div>
                 <div id="verify-vcode">
-                    <Vcode width={115} height={32} onChange={(v: any) => {
-                        console.log('当前的验证码值：', v)
-                        setverifycodeValue(v);
-                    }}></Vcode>
+                    <Vcode
+                        width={115}
+                        height={32}
+                        onChange={(v: any) => setverifycodeValue(v)}
+                    />
                 </div>
             </div>
             <div id="register-form-bottom">
@@ -132,8 +136,8 @@ const LoginForm = (props: LoginFormProps) => {
                 </Form.Item>
             </div>
         </Form>
-    
-        
+
+
     );
 }
 

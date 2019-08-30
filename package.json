@@ -1,0 +1,19 @@
+{
+  "name": "21duck",
+  "version": "1.0.0",
+  "description": "A web forum based on react, antd and django-rest-framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zx55/21Duck.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Zx55/21Duck/issues"
+  },
+  "homepage": "https://github.com/Zx55/21Duck#readme"
+}

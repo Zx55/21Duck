@@ -110,6 +110,7 @@ create trigger insertreposting after insert
         where new.main_posting_id=posting_id;
     end;
 
+
 create trigger addrepostingfloor before insert
     on reposting for each row
     begin
@@ -154,7 +155,18 @@ create trigger deleteposting after delete
         update category set posting_num=posting_num-1 where category.category_id = old.category_id;
     end;
 
+create trigger editrepostingtime before insert
+    on reposting for each row
+    begin
+        set new.reposting_time = now();
+    end;
 
+create trigger editpostingtime before insert
+    on posting for each row
+    begin
+        set new.posting_time = now();
+        set  new.reply_time = now();
+    end;
 
 #测试
 select * from user;

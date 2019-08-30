@@ -6,6 +6,7 @@ import Login from '../Login';
 import Register from '../Register';
 import NotFound from '../../components/NotFound';
 
+
 const Explore = lazy(() => import('../Explore'));
 const Chat = lazy(() => import('../Chat'));
 const Problems = lazy(() => import('../Problems'));
@@ -40,6 +41,7 @@ export default () => (
             <Route exact path='/register' component={Register} />
             <Route exact path='/user' component={User} />
             <Route exact path='/admin' component={Admin} />
+            <Route exact path='/loading' component={Loading} />
             <Route component={NotFound} />
         </Switch>
     </Suspense>

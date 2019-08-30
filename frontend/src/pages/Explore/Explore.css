@@ -1,3 +1,15 @@
 .banner {
-    padding: 0 30% 0 0;
+    width: 70%;
+    float: left;
+}
+.cardgroup{
+    width: 24%;
+   
+    margin: 0px 1% 0 0;
+    float:left;
+    display:inline;
+}
+.subtitle{
+    margin: 20px 0 20px 0;
+    font-size: 40px;
 }

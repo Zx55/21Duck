@@ -7,38 +7,51 @@ import { Card, Skeleton, Tooltip } from 'antd';
 import { IPost } from '../../types';
 
 
-import './UserPost.css';
+import './ExploreTemp.css';
 import { Link } from 'react-router-dom';
 
+const { Meta } = Card;
 
+const categoryMap={
+    1:"xhat",
+    2:"problems",
+    3:"courses",
+    4:"campus"
+}
 export interface PostProps {
+    category:String;
     post: IPost;
     loading: boolean;
     detail: boolean;
 };
 
 export default (props: PostProps) => (
+    
+    <Link to={`/problems/${props.post.posting_id}`}>
     <Card
-        className={cx('user-post', props.detail && 'post-detail')}
+        className={cx('cardgroup')}
         hoverable
-        bordered={false}
-        bodyStyle={{padding:"10px 20px"}}
-        >
+        size="small"
+        title={props.post.theme}
+        
+    >
         <Skeleton
             loading={props.loading}
             active
         >
-            <Link to={`/problems/${props.post.posting_id}`}>
-                {props.post.theme}
-            </Link>
-            <span style={{ float: "right" }}>
+                <span className='user-nickname'>
+                    {props.post.user_nickname}
+                </span>
+                <span>
                 <Tooltip className='post-created-time' title={props.post.formated_posting_time}>
-                    <span>
+                    <p>
                         {moment(props.post.formated_posting_time,
                             'YYYY-MM-DD HH:mm:ss').fromNow()}
-                    </span>
+                    </p>
                 </Tooltip>
-            </span>
+                </span>
+            
         </Skeleton>
     </Card>
+    </Link>
 );
