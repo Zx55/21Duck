@@ -9,10 +9,10 @@ from .models import *
 class UserSerializer(PartialUpdateSerializerMixin, ModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'
+        exclude = ['password']
 
 class PostingSerializer(PartialUpdateSerializerMixin, ModelSerializer):
-    posting_num = serializers.SerializerMethodField(label='posting_number')
+    # posting_num = serializers.SerializerMethodField(label='posting_number')
     # relative_posting_time = serializers.SerializerMethodField(label='relative_posting_time')
     # relative_reply_time = serializers.SerializerMethodField(label='relative_reply_time')
     formated_posting_time = serializers.SerializerMethodField(label='formated_posting_time')
@@ -23,7 +23,7 @@ class PostingSerializer(PartialUpdateSerializerMixin, ModelSerializer):
 
     class Meta:
         model = Posting
-        fields = ['posting_id', 'user_head','posting_num', 'posting_user', 'user_nickname',
+        fields = ['posting_id', 'user_head', 'posting_user', 'user_nickname',
                   'reply_num','theme', 'posting_content', 'category_id',
                   'posting_thumb_num', 'formated_posting_time', 'formated_reply_time']
 
@@ -33,8 +33,8 @@ class PostingSerializer(PartialUpdateSerializerMixin, ModelSerializer):
     def get_formated_reply_time(self, obj):
         return obj.reply_time.strftime("%Y-%m-%d %H:%M:%S")
 
-    def get_posting_num(self, obj):
-        return Posting.objects.filter(category_id=obj.category_id).count()
+    # def get_posting_num(self, obj):
+    #     return Posting.objects.filter(category_id=obj.category_id).count()
 
     # def get_relative_posting_time(self, obj):
     #     return calculate_relative_time(obj.posting_time)
@@ -49,7 +49,7 @@ class PostingSerializer(PartialUpdateSerializerMixin, ModelSerializer):
         return obj.posting_user.head
 
 class RepostingSerializer(PartialUpdateSerializerMixin, ModelSerializer):
-    reposting_num = serializers.SerializerMethodField(label='reposting_number')
+    # reposting_num = serializers.SerializerMethodField(label='reposting_number')
     # relative_reposting_time = serializers.SerializerMethodField(label='relative_reposting_time')
     user_nickname = serializers.SerializerMethodField(label='user_nickname')
     user_head = serializers.SerializerMethodField(label='user_head')
@@ -59,15 +59,15 @@ class RepostingSerializer(PartialUpdateSerializerMixin, ModelSerializer):
     class Meta:
         model = Reposting
         fields = ['reposting_id', 'reposting_user',
-                  'reposting_content', 'reposting_thumb_num', 'reposting_num',
+                  'reposting_content', 'reposting_thumb_num',
                   'user_nickname', 'user_head', 'reply_posting', 'floor', 'reply_id',
                   'formated_reposting_time', 'main_posting']
 
     def get_formated_reposting_time(self, obj):
         return obj.reposting_time.strftime("%Y-%m-%d %H:%M:%S")
 
-    def get_reposting_num(self, obj):
-        return Posting.objects.filter(posting_id=obj.main_posting.posting_id)[0].reply_num
+    # def get_reposting_num(self, obj):
+    #     return Posting.objects.filter(posting_id=obj.main_posting.posting_id)[0].reply_num
 
     # def get_relative_reposting_time(self, obj):
     #     return calculate_relative_time(obj.reposting_time)

@@ -12,7 +12,8 @@ create table user(
     identify int not null,
     blocktime int not null,
     scores int not null default 0,
-    register int
+    register int,
+    cover varchar(128)
 )
 
 
@@ -66,6 +67,17 @@ create table administration(
     user_id varchar(20) not null
 )
 
+CREATE TABLE thumb_posting (
+	thumb_posting_id INT PRIMARY KEY AUTO_INCREMENT,
+    posting_id INT NOT NULL,
+    user_id VARCHAR(20) NOT NULL
+)
+
+CREATE TABLE thumb_reposting (
+	thumb_reposting_id INT PRIMARY KEY AUTO_INCREMENT ,
+    reposting_id INT NOT NULL,
+    user_id VARCHAR(20) NOT NULL
+)
 
 #foreign key
 alter table posting add foreign key (posting_user_id) references user(user_id);
@@ -77,6 +89,12 @@ alter table administration add foreign key (user_id) references user(user_id);
 
 alter table posting change max_floor max_floor int not null default 0;
 alter table reposting change floor floor int not null default 1;
+
+alter table thumb_posting add foreign key (posting_id) references posting(posting_id);
+ALTER TABLE thumb_posting add FOREIGN KEY (user_id) REFERENCES `user`(user_id);
+
+alter table thumb_reposting add foreign key (reposting_id) references reposting(reposting_id);
+ALTER TABLE thumb_reposting add FOREIGN KEY (user_id) REFERENCES `user`(user_id);
 #triggers
 
 #drop trigger insertreposting;

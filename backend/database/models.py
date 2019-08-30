@@ -5,10 +5,8 @@
 #   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
-
-from django.utils import timezone
+from datetime import timezone
 from django.db import models
-
 
 class Administration(models.Model):
     user = models.ForeignKey('User', models.DO_NOTHING)
@@ -47,8 +45,8 @@ class Notify(models.Model):
 class Posting(models.Model):
     posting_id = models.AutoField(primary_key=True)
     posting_user = models.ForeignKey('User', models.DO_NOTHING)
-    posting_time = models.DateTimeField(default=timezone.now)
-    reply_time = models.DateTimeField(default=timezone.now)
+    posting_time = models.DateTimeField()
+    reply_time = models.DateTimeField()
     reply_num = models.IntegerField(default=0)
     theme = models.CharField(max_length=256)
     posting_content = models.CharField(max_length=16384)
@@ -66,7 +64,7 @@ class Reposting(models.Model):
     reply_id = models.IntegerField(default=-1)
     main_posting = models.ForeignKey('Posting', models.DO_NOTHING)
     reposting_user = models.ForeignKey('User', models.DO_NOTHING)
-    reposting_time = models.DateTimeField(blank=True, null=True, default=timezone.now)
+    reposting_time = models.DateTimeField(blank=True, null=True)
     reposting_content = models.CharField(max_length=16384)
     reposting_thumb_num = models.IntegerField(default=0)
     floor = models.IntegerField(default=0)
@@ -82,14 +80,34 @@ class User(models.Model):
     nickname = models.CharField(max_length=64)
     age = models.IntegerField(blank=True, null=True)
     school = models.CharField(max_length=128, blank=True, null=True)
-    head = models.CharField(max_length=128, blank=True, null=True,
-                            default=r'https://b-ssl.duitang.com/uploads/item/201805/31/20180531220859_wufxi.jpg')
+    head = models.CharField(max_length=128, blank=True, null=True)
     profile = models.CharField(max_length=256, blank=True, null=True)
     identify = models.IntegerField(default=1)
     blocktime = models.IntegerField(default=0)
     scores = models.IntegerField(default=0)
     register = models.IntegerField(blank=True, null=True, default=0)
+    cover = models.CharField(max_length=128, blank=True, null=True)
+
 
     class Meta:
         managed = False
         db_table = 'user'
+
+class ThumbPosting(models.Model):
+    thumb_posting_id = models.AutoField(primary_key=True)
+    posting = models.ForeignKey(Posting, models.DO_NOTHING)
+    user = models.ForeignKey('User', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'thumb_posting'
+
+
+class ThumbReposting(models.Model):
+    thumb_reposting_id = models.AutoField(primary_key=True)
+    reposting = models.ForeignKey(Reposting, models.DO_NOTHING)
+    user = models.ForeignKey('User', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'thumb_reposting'

@@ -14,5 +14,6 @@ router.register('category', views.CategoryViewSet, base_name='category')
 urlpatterns = router.urls
 urlpatterns += [
     path('login',views.login),
-    path('register',views.register)
+    path('register',views.register),
+    path('agreement',views.agreement)
 ]
