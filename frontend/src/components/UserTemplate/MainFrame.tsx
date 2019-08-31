@@ -68,12 +68,16 @@ export default (props: MainFrameProps) => {
                     }
                     key='2'
                 >
-                    <UserPostList
-                        posts={props.posts}
-                        loading={props.postsLoading}
-                        postNum={props.postNum}
-                        getPosts={props.getPosts}
-                    />
+                    <Card
+                        bodyStyle={{padding:"0px 1px 10px 1px"}}
+                        className='user-center-list-wrapper'>
+                        <UserPostList
+                            posts={props.posts}
+                            loading={props.postsLoading}
+                            postNum={props.postNum}
+                            getPosts={props.getPosts}
+                        />
+                    </Card>
                 </TabPane>
                 <TabPane
                     tab={
