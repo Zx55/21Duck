@@ -4,7 +4,7 @@ import api from '../api';
 
 import { IAction, ActionTypes } from '../types';
 
-import {message} from 'antd'
+import { message } from 'antd'
 
 
 export interface RegisterData {
@@ -31,7 +31,7 @@ function* registerAsync(action: IAction) {
                     userId: userId,
                     nickName: userNickname,
                     userHead: 'https://c-ssl.duitang.com/uploads/item/201711/10/20171110225150_ym2jw.jpeg',
-                    identity: 1,
+                    identity: 3,
                     blocktime: 0,
                     scores: 0,
                     register: 0,
@@ -39,7 +39,7 @@ function* registerAsync(action: IAction) {
             });
         }
         else {
-            message.config({top: 75});
+            message.config({ top: 75 });
             message.error('该手机号已被注册');
         }
     } catch (err) {

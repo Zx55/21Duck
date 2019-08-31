@@ -4,7 +4,7 @@ import api from '../api';
 
 import { IAction, ActionTypes } from '../types';
 
-import {message} from 'antd'
+import { message } from 'antd'
 
 
 export interface LoginData {
@@ -37,7 +37,7 @@ function* loginAsync(action: IAction) {
             });
         }
         else {
-            message.config({top: 75});
+            message.config({ top: 75 });
             message.error('密码或用户名错误');
         }
     } catch (err) {

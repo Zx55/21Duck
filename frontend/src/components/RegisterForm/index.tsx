@@ -39,7 +39,7 @@ const RegisterForm = (props: RegisterFormProps) => {
             message.error('验证码错误');
             return;
         }
-        e.preventDefault();
+
         props.form.validateFieldsAndScroll((err: any, values: RegisterValue) => {
             if (!err) {
                 dispatch(registerAsync(

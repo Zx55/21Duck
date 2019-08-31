@@ -10,6 +10,16 @@
     display:inline;
 }
 .subtitle{
-    margin: 20px 0 20px 0;
+   
     font-size: 40px;
+}
+.toPage{
+    padding-right: 10px;
+    padding-top:40px;
+    float:right;
+    font-size: 14px;
+}
+.subtitlecon{
+    margin: 0px 0 10px 0;
+    
 }

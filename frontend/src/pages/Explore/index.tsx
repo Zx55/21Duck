@@ -1,9 +1,8 @@
 import React from 'react';
-
-import { Carousel, Card } from 'antd';
-
+import { Icon, Carousel, Card, Divider } from 'antd';
+import { Link } from 'react-router-dom';
 import Banner from '../../components/ExploreBanner'
-import ExploreCardList from  '../../components/ExploreTempList'
+import ExploreCardList from '../../components/ExploreTempList'
 import './Explore.css';
 
 export interface BannerProps {
@@ -41,17 +40,55 @@ export default () => (
             </Carousel>
         </div>
         <div>
+        <Divider/>
             <div className="container">
-                <div className="subtitle">闲聊栈</div>
-                <ExploreCardList  name="problem" category='1'/>
-                <div className="subtitle">AK我的oj题</div>
-                <ExploreCardList  name="problem" category='2'/>
-                <div className="subtitle">课程资源</div>
-                <ExploreCardList  name="problem" category='3'/>
-                <div className="subtitle">校园周边</div>
-                <ExploreCardList  name="problem" category='4'/>
+                <div className="subtitlecon">
+                    <span className="subtitle">闲聊栈</span>
+                    <span className="toPage">
+                        <Link to='/chat'>
+                            <Icon type="export" />
+                            更多
+                    </Link>
+                    </span>
+                </div>
+
+                <ExploreCardList name="problem" category='1' />
+                <Divider/>
+                <div className="subtitlecon">
+                    <span className="subtitle">AK我的oj题</span>
+                    <span className="toPage">
+                        <Link to='/problems'>
+                            <Icon type="export" />
+                            更多
+                    </Link>
+                    </span>
+                </div>
+                <ExploreCardList name="problem" category='2' />
+                <Divider/>
+                <div className="subtitlecon">
+                    <span className="subtitle">课程资源</span>
+                    <span className="toPage">
+                        <Link to='/courses'>
+                            <Icon type="export" />
+                            更多
+                    </Link>
+                    </span>
+                </div>
+                <ExploreCardList name="problem" category='3' />
+                <Divider/>
+                <div className="subtitlecon">
+                    <span className="subtitle">校园周边</span>
+                    <span className="toPage">
+                        <Link to='/campus'>
+                            <Icon type="export" />
+                            更多
+                    </Link>
+                    </span>
+                </div>
+                <ExploreCardList name="problem" category='4' />
+                
             </div>
-            
+
         </div>
     </div >
 );
