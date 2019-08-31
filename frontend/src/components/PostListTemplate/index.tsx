@@ -59,6 +59,7 @@ export default (props: PageListTemplateProps) => {
             <Carousel
                 autoplay
                 effect='fade'
+                className="sidecar1"
             >
                 {items.map((item: BannerItem) => renderBanner(item))}
             </Carousel>

@@ -2,25 +2,25 @@
     min-height: 100vh;
 }
 
-.ant-carousel .slick-slide {
+.sidecar1 .slick-slide {
     text-align: center;
     height: 30vh;
     overflow: hidden;
     margin-top: 10px;
 }
 
-.ant-carousel .slick-slide img {
+.sidecar1 .slick-slide img {
     position: absolute;
     top: -20vh;
     width: 100%;
     height: auto;
 }
 
-.ant-carousel .slick-slide:hover {
+.sidecar1 .slick-slide:hover {
     cursor: pointer;
 }
 
-.ant-carousel .slick-slide h3 {
+.sidecar1 .slick-slide h3 {
     position: absolute;
     color: #fff;
     padding-top: 10vh;
@@ -28,7 +28,7 @@
     width: 100%;
 }
 
-.ant-carousel .slick-slide span {
+.sidecar1 .slick-slide span {
     position: absolute;
     left: 0;
     color: #fff;

@@ -11,14 +11,15 @@
     display:inline;
 }
 .subtitle{
-   
+  
     font-size: 40px;
 }
 .toPage{
     padding-right: 10px;
-    padding-top:40px;
+    padding-top:25px;
     float:right;
-    font-size: 14px;
+    font-size: 20px;
+    color:#0099ff;
 }
 .subtitlecon{
     margin: 0px 0 10px 0;
@@ -27,41 +28,32 @@
 .bar-padding{
 padding:6px 0px 0 6px;
 }
-.sideexplore{
-float:center;
-position: absolute  
-}
-.ant-carousel .slick-slide {
-    text-align: center;
-    height: 30vh;
-    overflow: hidden;
-    margin-top: 10px;
-}
 
-.ant-carousel .slick-slide img {
+.sidecar2 .slick-slide {
     position: absolute;
-    top: -20vh;
-    width: 100%;
-    height: auto;
+    text-align: center;
+    height: 50vh;
+    overflow: hidden;
+    
 }
 
-.ant-carousel .slick-slide:hover {
+.sidecar2 .slick-slide img {
+    position: absolute;
+
+    width: auto;
+    height: 100%;
+ 
+}
+
+.sidecar2 .slick-slide:hover {
     cursor: pointer;
 }
 
-.ant-carousel .slick-slide h3 {
+.sidecar2 .slick-slide h3 {
     position: absolute;
     color: #fff;
-    padding-top: 10vh;
-    font-size: 28px;
+    padding: 10vh 3vh 5vh 3vh;
+    font-size: 24px;
     width: 100%;
 }
 
-.ant-carousel .slick-slide span {
-    position: absolute;
-    left: 0;
-    color: #fff;
-    padding-top: 16vh;
-    font-size: 18px;
-    width: 100%;
-}

@@ -29,6 +29,7 @@ export default (props: PostProps) => (
             hoverable
             size="small"
             title={props.post.theme}
+            cover={<img src="https://dpsv7g.ch.files.1drv.com/y4mKc5CDaj_ClT3q8_-pb-VeDLGL36szTIUX4X0rrtX3VdCyy-91B2kI3yVYewGR5k_Aehp8si78fLnxd-ieMVR3yzrcusYyNdFD-gOBASqIJSYB6OhWkZc_isaJAXLQFwOHNMRd6_00iUmL-QuCxg2HuQszC9wXjdoCmazs-zRO_YMrBzwVTNWD8FPxgc2PHLPaU17sn0RV6Y0-0GWzQth0w?width=1247&height=468&cropmode=none"></img>}
 
         >
             <Skeleton
