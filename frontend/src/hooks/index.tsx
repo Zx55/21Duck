@@ -182,8 +182,6 @@ const useDetailPost = (sideNum: number): [
                 setPostLoading(false);
                 setThumb(responseDetailPost.thumb);
 
-                //console.log(thumb);
-
                 api.category.retreive(category).then((response) => {
                     const categoryData: ICategory = response.data;
 
@@ -241,10 +239,11 @@ const useDetailPost = (sideNum: number): [
 };
 
 const useUserSide = (num: number): [
-    Array<CardItem>, boolean, (userId: string) => void
+    IResponseUser, Array<CardItem>, boolean, (userId: string) => void
 ] => {
     const [sideItems, setSideItems] =
         useState(newArrayWithItems<CardItem>(num, new CardItem()));
+    const [userInfo, setUserInfo] = useState<IResponseUser>()
     const [loading, setLoading] = useState(false);
 
     const getSide = (userId: string): void => {
@@ -298,12 +297,14 @@ const useUserSide = (num: number): [
             };
 
             setSideItems([info, rule]);
+            setUserInfo(data);
             setLoading(false);
+            console.log('userInfo',userInfo);
         });
     };
 
     return [
-        sideItems, loading, getSide
+        userInfo as IResponseUser, sideItems, loading, getSide
     ]
 };
 

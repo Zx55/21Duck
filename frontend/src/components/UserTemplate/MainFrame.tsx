@@ -8,7 +8,7 @@ import SideBar, { CardItem } from '../SideBar';
 import UserProfile from './UserProfile'
 import PwChanger from './PwChanger';
 
-import { IPost } from '../../types';
+import { IPost, IResponseUser } from '../../types';
 
 const { TabPane } = Tabs;
 
@@ -21,6 +21,7 @@ const userInfo = {
 };
 
 export interface MainFrameProps {
+    userInfo: IResponseUser;
     posts: Array<IPost>;
     postNum: number;
     postsLoading: boolean;
@@ -30,6 +31,8 @@ export interface MainFrameProps {
 };
 
 export default (props: MainFrameProps) => {
+
+
     return (
         <div className='user-template-main-frame'>
             <UserCard

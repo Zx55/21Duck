@@ -9,16 +9,20 @@ import './Template.css';
 export default () => {
     const user = useUser();
     const [posts, postNum, thumbs, postsLoading, getPosts] = usePosts(15);
-    const [side, sideLoading, getSide] = useUserSide(3);
+    const [userInfo, side, sideLoading, getSide] = useUserSide(3);
 
     useEffect(() => {
         getPosts({ page: '0', user_id: user.userId });
-        getSide(user.userId);
     }, []);
+
+    useEffect(()=>{
+        getSide(user.userId);
+    },[posts])
 
     return (
         <div className={`user-template-root`}>
             <MainFrame
+                userInfo={userInfo}
                 posts={posts}
                 postNum={postNum}
                 postsLoading={postsLoading}

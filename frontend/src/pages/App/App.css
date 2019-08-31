@@ -38,7 +38,8 @@ body {
 
 .app-content {
     margin-top: 64px;
-    padding: 3 3%;
+    padding-top: 3px;
+    padding-bottom: 3px;
     height: 100%;
     padding-left: 15%;
     padding-right: 15%;

@@ -67,6 +67,7 @@ export interface IResponseUser{
     school: string;
     scores: number;
     user_id: string;
+    cover: string;
 };
 
 export interface IResponsePost {
