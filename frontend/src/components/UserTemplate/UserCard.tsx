@@ -25,6 +25,7 @@ export default (props: UserCardProps) => {
                         style={{ height: 250, objectFit: "cover" }}
                     />
                 }
+                
             >
                 <Meta
                     avatar={<Avatar src={props.user_head} />}
