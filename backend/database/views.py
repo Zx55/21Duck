@@ -94,6 +94,7 @@ class RepostingViewSet(CacheResponseMixin, ModelViewSet):
             category = request.GET.get('category_id')
             user = request.GET.get('user_id')
             EACH_PAGE = 15
+            is_thumb_list = []
             if page and posting and category and user:
                 if Posting.objects.get(posting_id=posting).category_id != int(category):
                     return Response(False)
@@ -112,6 +113,10 @@ class RepostingViewSet(CacheResponseMixin, ModelViewSet):
                                 is_thumb_list.append(True)
                             else:
                                 is_thumb_list.append(False)
+            elif page and user:
+                page = int(page)
+                number = Reposting.objects.filter(reposting_user=user).count()
+                self.queryset = Reposting.objects.filter(reposting_user=user).order_by("-reposting_time")[page * EACH_PAGE : (page + 1) * EACH_PAGE]
             else:
                 return Response(False)
 
@@ -228,3 +233,16 @@ def thumbreposting(request):
         return JsonResponse({'delete': 'success'})
     else:
         return JsonResponse({'operation':False})
+
+@csrf_exempt
+def head(request):
+    if request.method == 'POST':
+        field = request.FILES.get('avatar')
+        user = request.POST.get('user_id')
+        t = request.POST.get('file_type')
+        FILE_PATH = '/usr/local/source_server/head/' + user + '.' + t
+        url = 'http://114.115.204.217:7500/head/' + user + '.' + t
+        with open(FILE_PATH, 'wb') as f:
+            f.write(field.read())
+        User.objects.filter(user_id=user).update(head=url)
+        return JsonResponse({'upload':'success'})
