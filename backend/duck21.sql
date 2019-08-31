@@ -79,6 +79,13 @@ CREATE TABLE thumb_reposting (
     user_id VARCHAR(20) NOT NULL
 )
 
+CREATE TABLE resource(
+    resource_id INT NOT NULL AUTO_INCREMENT,
+    posting_id INT NOT NULL,
+    title VARCHAR(255) DEFAULT NULL,
+    name VARCHAR(255) DEFAULT NULL
+)
+
 #foreign key
 alter table posting add foreign key (posting_user_id) references user(user_id);
 alter table reposting add foreign key (reposting_user_id) references user(user_id);

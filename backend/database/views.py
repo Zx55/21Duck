@@ -1,7 +1,6 @@
-import os
 from urllib.request import urlopen
 
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.viewsets import ModelViewSet
 from rest_framework_extensions.cache.mixins import CacheResponseMixin
@@ -237,12 +236,36 @@ def thumbreposting(request):
 @csrf_exempt
 def head(request):
     if request.method == 'POST':
-        field = request.FILES.get('avatar')
+        file = request.FILES.get('avatar')
         user = request.POST.get('user_id')
         t = request.POST.get('file_type')
         FILE_PATH = '/usr/local/source_server/head/' + user + '.' + t
         url = 'http://114.115.204.217:7500/head/' + user + '.' + t
         with open(FILE_PATH, 'wb') as f:
-            f.write(field.read())
+            f.write(file.read())
         User.objects.filter(user_id=user).update(head=url)
         return JsonResponse({'upload':'success'})
+
+
+@csrf_exempt
+def resource(request):
+    if request.method == 'POST':
+        file = request.FILES.get('avatar')
+        posting = request.POST.get('posting_id')
+        t = request.POST.get('file_type')
+        title = request.POST.get('title')
+        FILE_PATH = '/usr/local/source_server/source/' + str(posting) + '.' + t
+        url = 'http://114.115.204.217:7500/source/' + str(posting) + '.' + t
+        with open(FILE_PATH, 'wb') as f:
+            f.write(file.read())
+        Resource.objects.create(posting_id=posting,title=title,name=url)
+        return JsonResponse({'upload': 'success'})
+    elif request.method == 'GET':
+        posting = request.GET.get('posting_id')
+        source = Resource.objects.get(posting_id=posting)
+        return JsonResponse({
+            'url' : source.name,
+            'title' : source.title
+        })
+    else:
+        return JsonResponse({'operation':False})
