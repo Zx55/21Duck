@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import marked from 'marked';
 import { Link } from 'react-router-dom'
 
 import { Card, Skeleton, Tooltip } from 'antd';
@@ -23,14 +24,26 @@ export default (props: PostProps) => {
             className='user-post'
             hoverable
             bordered={false}
-            bodyStyle={{ padding: "10px 20px" }}
+            bodyStyle={{
+                padding: "10px 20px"
+            }}
             >
             <Skeleton
                 loading={props.loading}
                 active
             >
                 <Link to={props.route}>
-                    {props.content}
+                    <div
+                        style={{
+                            float: 'left',
+                            overflow: 'hidden',
+                            height: '25px',
+                            width: '700px',
+                        }}
+                        dangerouslySetInnerHTML={{
+                            __html: marked(props.content)
+                        }}
+                    />
                 </Link>
                 <span style={{ float: "right" }}>
                     <Tooltip className='post-created-time' title={props.formatedTime}>

@@ -66,11 +66,13 @@ export default (props: MainFrameProps) => {
 
     const onRepostClick = (id: string, page: string) => {
         message.config({ top: 75 });
+        console.log(id);
         api.repost.remove(id).then((response) => {
+            console.log(response);
             message.success('删除成功');
             getReposts({ page: page, user_id: user.userId });
         }).catch((err) => {
-            message.error('删除成功');
+            message.error('删除失败');
             console.log(err);
         });
     }
@@ -78,11 +80,14 @@ export default (props: MainFrameProps) => {
     const onTabChange = (key: string) => {
         switch (key) {
             case 'post': {
-                console.log('post');
+                props.getPosts('0');
                 break;
             }
             case 'repost': {
-                console.log('repost');
+                getReposts({
+                    page: '0',
+                    user_id: user.userId,
+                });
                 break;
             }
         }
