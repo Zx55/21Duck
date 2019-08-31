@@ -24,14 +24,10 @@ export default withRouter((props: PostFooterProps) => {
     const [likeNum, setLikeNum] = useState(props.post.posting_thumb_num);
     const user = useUser();
 
-    console.log("post thumb:",props.thumb);
-
-    console.log('b4:',likeNum,liked);
-
     useEffect(()=>{
         setLiked(props.thumb);
     },[props.thumb])
-    
+
 
     const onLikeClick = () => {
         console.log('in:',liked,likeNum);
@@ -53,7 +49,7 @@ export default withRouter((props: PostFooterProps) => {
             setLiked(!liked);
         }
         console.log('out:',liked,likeNum);
-    
+
     };
 
     const onShareClick = () => {

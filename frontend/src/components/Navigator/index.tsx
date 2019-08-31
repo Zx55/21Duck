@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { History } from 'history';
@@ -25,22 +25,22 @@ export default (props: NavigatorProps) => {
     const user = useUser();
     const dispatch = useDispatch();
 
-    const handleClick = (e: ClickParam) => {
-        if (e.key !== 'notify') {
-            setKey(e.key);
+    useEffect(() => {
+        const regex = '/([\\w]+)(/.+)?';
+        const key = (props.history.location.pathname.match(regex) as RegExpMatchArray)[1];
+        if (key !== 'notify') {
+            setKey(key);
         }
-    }
+    }, [props.history.location.pathname])
 
     return (
         <Menu
             className='navigator'
             theme='light'
             mode='horizontal'
-            defaultSelectedKeys={['explore']}
             selectedKeys={[menuKey]}
-            onClick={handleClick}
         >
-            <Item key='duck'>
+            <Item key='explore'>
                 <Link to='/explore'>
                     <span>
                         <img className='logo' src='./duckv2.ico' alt='' />
@@ -66,7 +66,7 @@ export default (props: NavigatorProps) => {
             {user.identity === 0 ? (
                 <Item
                     className='user'
-                    key='user'
+                    key='login'
                 >
                     <Link to='/login'>
                         <Icon type='user' />
@@ -80,16 +80,16 @@ export default (props: NavigatorProps) => {
                             <span >
                                 <Icon type='user' />
                                 用户
-                        </span>
+                            </span>
                         }
                     >
-                        <Item key='user-center'>
+                        <Item key='user'>
                             <Link to='/user'>个人中心</Link>
                         </Item>
-                        {user.identity === 2 ? <Item key='admin-board'>
+                        {user.identity === 2 ? <Item key='admin'>
                             <Link to='/admin'>管理面板</Link>
                         </Item> : null}
-                        <Item key='logout' onClick={() => {
+                        <Item onClick={() => {
                             dispatch(logout());
                             message.config({ top: 75 });
                             message.success('注销成功');

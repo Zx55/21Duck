@@ -36,7 +36,6 @@ const usePosts = (num: number): [
             setPostNum(data.posting_num);
             setThumbs(data.thumbs);
             setLoading(false);
-            console.log("post after setting:",thumbs);
         }).catch((err) => console.log(err));
     }
 
@@ -60,12 +59,10 @@ const useReposts = (num: number): [
 
         api.repost.list(params).then((response) => {
             const data: IResponseRepost | boolean = response.data;
-            console.log("hooks:",response);
             if (data as boolean === false) {
                 setNotFound(true);
             } else {
                 const responseRepost = data as IResponseRepost;
-                console.log("I'm in",response.data);
                 setReposts(responseRepost.repostings);
                 setRepostNum(responseRepost.reposting_num);
                 setThumbs(responseRepost.thumbs);
@@ -169,12 +166,11 @@ const useDetailPost = (sideNum: number): [
         setPostLoading(true);
         setSideLoading(true);
 
-        api.post.retreive(postId, { 
+        api.post.retreive(postId, {
             user_id: userId,
             category_id: category}
         ).then((response) => {
             const data: IResponseDetailPost | INotFound | boolean = response.data;
-            console.log(data);
 
             if ((data as boolean) === false
                 || (data as INotFound).detail === 'Not found') {
