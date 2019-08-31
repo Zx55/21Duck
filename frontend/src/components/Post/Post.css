@@ -8,6 +8,11 @@
     cursor: default;
 }
 
+.list-post-title:hover {
+    cursor: pointer;
+    color: #0099FF;
+}
+
 .user-nickname {
     font-size: 12px;
     color: rgba(0.6, 0.6, 0.6, 0.5);

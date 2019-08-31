@@ -45,7 +45,7 @@ export default (props: DetailSideButtonsProps) => {
                 size='large'
                 onClick={props.onReturnClick}
             />
-            <BackTop className='go-to-top-button' />
+            <BackTop className='detail-go-to-top-button' />
         </div>
     );
 };

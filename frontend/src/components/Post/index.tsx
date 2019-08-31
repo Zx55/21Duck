@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter, Link, RouteComponentProps } from 'react-router-dom'
 import marked from 'marked';
 import cx from 'classnames';
 
@@ -14,17 +15,17 @@ import './Post.css';
 const { Meta } = Card;
 
 
-export interface PostProps {
+export interface PostProps extends RouteComponentProps {
     post: IPost;
     loading: boolean;
     detail: boolean;
     thumb: boolean;
 };
 
-export default (props: PostProps) => {
+export default withRouter((props: PostProps) => {
     marked.setOptions({
         highlight: function(code) {
-          return require('highlight.js').highlightAuto(code).value;
+            return require('highlight.js').highlightAuto(code).value;
         },
         pedantic: false,
         gfm: true,
@@ -34,7 +35,14 @@ export default (props: PostProps) => {
         smartLists: true,
         smartypants: false,
         xhtml: false
-      });
+    });
+
+    const handleTitleClick = () => {
+        if (!props.detail) {
+            props.history.push(`${props.match.path}/${props.post.posting_id}`);
+        }
+    }
+
     return (
         <Card
             className={cx('post', props.detail && 'post-detail')}
@@ -47,7 +55,14 @@ export default (props: PostProps) => {
             >
                 <Meta
                     avatar={<Avatar src={props.post.user_head} />}
-                    title={props.post.theme}
+                    title={
+                        <div
+                            className={cx(!props.detail && 'list-post-title')}
+                            onClick={handleTitleClick}
+                        >
+                            {props.post.theme}
+                        </div>
+                    }
                 />
                 <span className='user-nickname'>
                     {props.post.user_nickname}
@@ -57,7 +72,7 @@ export default (props: PostProps) => {
                         {getRelativeTime(props.post.formated_posting_time)}
                     </span>
                 </Tooltip>
-                <div 
+                <div
                     className='post-content'
                     dangerouslySetInnerHTML={{
                         __html: marked(props.post.posting_content)
@@ -67,8 +82,10 @@ export default (props: PostProps) => {
                     post={props.post}
                     detail={props.detail}
                     thumb={props.thumb}
+                    history={props.history}
+                    match={props.match}
                 />
             </Skeleton>
         </Card>
     );
-};
+});
