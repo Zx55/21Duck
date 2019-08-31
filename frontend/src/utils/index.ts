@@ -11,3 +11,10 @@ export function newArrayWithItems<T>(num: number, item: T): Array<T> {
     }
     return array;
 };
+
+export function sleep(delay: number) {
+    const start = (new Date()).getTime();
+    while ((new Date()).getTime() - start < delay) {
+      continue;
+    }
+};

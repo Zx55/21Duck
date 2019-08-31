@@ -11,6 +11,8 @@ export enum ActionTypes {
     LOGOUT = 'LOGOUT',
     UPDATE_PROFILE = 'UPDATE_PROFILE',
     UPDATE_PROFILE_ASYNC = 'UPDATE_PROFILE_ASYNC',
+    AGREE = 'AGREE',
+    AGREE_ASYNC = 'AGREE_ASYNC',
 };
 
 export interface IPayload {

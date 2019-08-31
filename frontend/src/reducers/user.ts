@@ -23,6 +23,12 @@ export default (state: IUser = initialState, action: IAction): IUser => {
                 nickName: userNickname,
             };
         }
+        case ActionTypes.AGREE: {
+            return {
+                ...state,
+                identity: 1,
+            };
+        }
         default:
             return state;
     }

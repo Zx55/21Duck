@@ -1,3 +1,4 @@
+import * as H from 'history';
 import { ActionTypes, IAction } from '../types';
 
 
@@ -40,6 +41,16 @@ export function updateProfileAsync(userId: string, userNickname: string,
             userAge,
             userSchool,
             userProfile,
+        }
+    };
+};
+
+export function agreeAsync(userId: string, history: H.History): IAction {
+    return {
+        type: ActionTypes.AGREE_ASYNC,
+        payload: {
+            userId,
+            history,
         }
     };
 };
