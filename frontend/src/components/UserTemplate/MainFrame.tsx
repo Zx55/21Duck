@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { BackTop, Tabs, Icon, Card } from 'antd';
+import { BackTop, Tabs, Icon, Card, message } from 'antd';
 
 import UserCard from './UserCard';
 import UserPostList from '../UserPostList';
@@ -9,6 +9,9 @@ import UserProfile from './UserProfile'
 import PwChanger from './PwChanger';
 
 import { IPost, IResponseUser } from '../../types';
+import { Item } from '../UserPostList';
+import api from '../../api';
+import { useReposts, useUser } from '../../hooks';
 
 const { TabPane } = Tabs;
 
@@ -24,6 +27,67 @@ export interface MainFrameProps {
 };
 
 export default (props: MainFrameProps) => {
+    const user = useUser();
+    const [postItems, setPosts] = useState(new Array<Item>());
+    const [repostItems, setReposts] = useState(new Array<Item>());
+    const [reposts, repostNum, thumbs, repostsLoading, notFound, getReposts] = useReposts(15);
+
+    useEffect(() => {
+        const items: Array<Item> = props.posts.map((post) => ({
+            id: post.posting_id.toString(),
+            category: post.category_id,
+            formatedTime: post.formated_posting_time,
+            content: post.theme,
+        }));
+        setPosts(items);
+    }, [props.posts]);
+
+    useEffect(() => {
+        console.log('repost');
+        const items: Array<Item> = reposts.map((repost) => ({
+            id: repost.main_posting.toString(),
+            category: repost.category_id,
+            formatedTime: repost.formated_reposting_time,
+            content: repost.reposting_content,
+        }));
+        setReposts(items);
+    }, [reposts]);
+
+    const onPostClick = (id: string, page: string) => {
+        message.config({ top: 75 });
+        api.post.remove(id).then((response) => {
+            message.success('删除成功');
+            props.getPosts(page);
+        }).catch((err) => {
+            message.error('删除失败');
+            console.log(err);
+        });
+    };
+
+    const onRepostClick = (id: string, page: string) => {
+        message.config({ top: 75 });
+        api.repost.remove(id).then((response) => {
+            message.success('删除成功');
+            getReposts({ page: page, user_id: user.userId });
+        }).catch((err) => {
+            message.error('删除成功');
+            console.log(err);
+        });
+    }
+
+    const onTabChange = (key: string) => {
+        switch (key) {
+            case 'post': {
+                console.log('post');
+                break;
+            }
+            case 'repost': {
+                console.log('repost');
+                break;
+            }
+        }
+    };
+
     return (
         <div className='user-template-main-frame'>
             <UserCard
@@ -32,7 +96,14 @@ export default (props: MainFrameProps) => {
                 user_nickname={props.userInfo.nickname}
                 user_profile={props.userInfo.profile}
             />
-            <Tabs defaultActiveKey='1'>
+            <Tabs
+                defaultActiveKey='1'
+                animated={{
+                    inkBar: true,
+                    tabPane: false
+                }}
+                onChange={onTabChange}
+            >
                 <TabPane
                     tab={
                         <span>
@@ -40,16 +111,17 @@ export default (props: MainFrameProps) => {
                             我的主帖
                         </span>
                     }
-                    key='1'
+                    key='post'
                 >
                     <Card
                         bodyStyle={{padding:"0px 1px 10px 1px"}}
                         className='user-center-list-wrapper'>
                         <UserPostList
-                            posts={props.posts}
+                            items={postItems}
                             loading={props.postsLoading}
-                            postNum={props.postNum}
-                            getPosts={props.getPosts}
+                            itemNum={props.postNum}
+                            getItems={props.getPosts}
+                            onClick={onPostClick}
                         />
                     </Card>
                 </TabPane>
@@ -60,16 +132,20 @@ export default (props: MainFrameProps) => {
                                 我的回帖
                         </span>
                     }
-                    key='2'
+                    key='repost'
                 >
                     <Card
                         bodyStyle={{padding:"0px 1px 10px 1px"}}
                         className='user-center-list-wrapper'>
                         <UserPostList
-                            posts={props.posts}
-                            loading={props.postsLoading}
-                            postNum={props.postNum}
-                            getPosts={props.getPosts}
+                            items={repostItems}
+                            loading={repostsLoading}
+                            itemNum={repostNum}
+                            getItems={(page: string) => getReposts({
+                                page: page,
+                                user_id: user.userId,
+                            })}
+                            onClick={onRepostClick}
                         />
                     </Card>
                 </TabPane>
@@ -80,7 +156,7 @@ export default (props: MainFrameProps) => {
                                 修改资料
                         </span>
                     }
-                    key='3'
+                    key='user-profile'
                 >
                     <UserProfile />
                 </TabPane>
@@ -91,7 +167,7 @@ export default (props: MainFrameProps) => {
                                 修改密码
                         </span>
                     }
-                    key='4'
+                    key='pw-changer'
                 >
                     <PwChanger />
                 </TabPane>

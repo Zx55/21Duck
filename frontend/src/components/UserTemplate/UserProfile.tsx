@@ -151,7 +151,6 @@ const UserProfile = (props: UserProfileProps) => {
                     </div>
                     <div id="user-data-verify-vcode">
                         <Vcode width={115} height={32} onChange={(v: any) => {
-                            console.log('当前的验证码值：', v)
                             setverifycodeValue(v);
                         }}></Vcode>
                     </div>

@@ -175,7 +175,6 @@ const PwChanger = (props: PwChangerProps) => {
                 </div>
                 <div id="change-password-verify-vcode">
                     <Vcode width={115} height={32} onChange={(v: any) => {
-                        console.log('当前的验证码值：', v)
                         setverifycodeValue(v);
                     }}></Vcode>
                 </div>

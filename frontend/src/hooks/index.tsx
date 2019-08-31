@@ -67,7 +67,6 @@ const useReposts = (num: number): [
                 setRepostNum(responseRepost.reposting_num);
                 setThumbs(responseRepost.thumbs);
                 setLoading(false);
-                //console.log("repost after setting:",thumbs);
             }
         }).catch(err => console.log(err));
     };
@@ -299,7 +298,6 @@ const useUserSide = (num: number): [
             setSideItems([info, rule]);
             setUserInfo(data);
             setLoading(false);
-            console.log('userInfo',userInfo);
         });
     };
 

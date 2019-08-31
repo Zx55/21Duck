@@ -112,6 +112,7 @@ export class IRepost {
     reply_posting: null | Array<string> = [];   // replyPointer
     floor: number = -1;                         // repostFloor
     main_posting: number = -1;                  // postId
+    category_id: number = -1;                   // postCategoryId
 };
 
 export interface INotFound {

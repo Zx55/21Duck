@@ -1,49 +1,26 @@
 import React from 'react';
 import moment from 'moment';
-import cx from 'classnames';
-import {withRouter, RouteComponentProps} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-import { Card, Skeleton, Tooltip, message } from 'antd';
+import { Card, Skeleton, Tooltip } from 'antd';
 
-import { IPost } from '../../types';
-
+import MiniButton from '../Post/MiniButton';
 
 import './UserPost.css';
-import { Link } from 'react-router-dom';
-import MiniButton from '../Post/MiniButton';
-import api from '../../api';
 
-
-export interface PostProps extends RouteComponentProps {
-    post: IPost;
-    loading: boolean;
-    detail: boolean;
-    getPost: (page: string)=>void;
-    page: string;
+export class PostProps {
+    formatedTime: string = '';
+    content: string = '';
+    route: string = '';
+    loading: boolean = true;
+    onClick: () => void = () => 1;
 };
 
-export default withRouter((props: PostProps) => {
-    const getCategory = (categoryId: number) => {
-        console.log(categoryId);
-        switch (categoryId) {
-            case 1:
-                return 'chat';
-            case 2:
-                return 'problems';
-            case 3:
-                return 'courses';
-            case 4:
-                return 'campus';
-            case 5:
-                return 'resources';
-            default:
-                return '';
-        }
-    };
+export default (props: PostProps) => {
 
     return (
         <Card
-            className={cx('user-post', props.detail && 'post-detail')}
+            className='user-post'
             hoverable
             bordered={false}
             bodyStyle={{ padding: "10px 20px" }}
@@ -52,13 +29,13 @@ export default withRouter((props: PostProps) => {
                 loading={props.loading}
                 active
             >
-                <Link to={`/${getCategory(props.post.category_id)}/${props.post.posting_id}`}>
-                    {props.post.theme}
+                <Link to={props.route}>
+                    {props.content}
                 </Link>
                 <span style={{ float: "right" }}>
-                    <Tooltip className='post-created-time' title={props.post.formated_posting_time}>
+                    <Tooltip className='post-created-time' title={props.formatedTime}>
                         <span>
-                            {moment(props.post.formated_posting_time,
+                            {moment(props.formatedTime,
                                 'YYYY-MM-DD HH:mm:ss').fromNow()}
                         </span>
                     </Tooltip>
@@ -68,16 +45,7 @@ export default withRouter((props: PostProps) => {
                                 name='delete'
                                 icon='delete'
                                 text=''
-                                onClick={
-                                    ()=>{
-                                        api.post.remove(props.post.posting_id.toString()).then((response) => {
-                                            console.log('page:',props.page)
-                                            message.success('删除成功!');
-                                            //const url = props.match.url;
-                                            props.getPost(props.page)
-                                        }).catch(err => console.log(err));
-                                    }
-                                }
+                                onClick={props.onClick}
                             />
                         </span>
                     </Tooltip>
@@ -85,4 +53,4 @@ export default withRouter((props: PostProps) => {
             </Skeleton>
         </Card>
     );
-});
+};
