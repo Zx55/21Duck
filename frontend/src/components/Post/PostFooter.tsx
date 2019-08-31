@@ -14,7 +14,7 @@ import { match } from 'react-router-dom';
 import * as H from 'history';
 import { IPost } from '../../types';
 
-import Download from '../Download';
+
 import axios from 'axios';
 
 

@@ -1,10 +1,11 @@
 import React from 'react';
-import { Icon, Carousel, Card, Divider } from 'antd';
+import { Icon, Carousel, Card, Divider, Tabs } from 'antd';
 import { Link } from 'react-router-dom';
 import Banner from '../../components/ExploreBanner'
 import ExploreCardList from '../../components/ExploreTempList'
 import './Explore.css';
 import SideBar from '../../components/SideBar';
+
 
 export interface BannerProps {
     className: string;
@@ -14,6 +15,7 @@ export interface BannerItem {
     title: string,
 
 };
+const { TabPane } = Tabs;
 const items: BannerItem[] = [{
     img: 'https://ch3302files.storage.live.com/y4p8V0WSEVZhW7x9hkA4HTuxm85eviUC4UH6MeKyPREyNsyXOrVDCsSHLnS1t1cS2T8L8bbh_t6nx5uPo38BtDI0c2A3O_yYyzM8zXx7F7LdEUt_5g0Ag_0TXbOrCkjZQBAekCq6HXyGt8FQj4D9naUbaUa4hG_M27yiGAxba_WjSayT3ka8W7lLholPNghGSbP/duckv2.png?psid=1&width=1920&height=721',
     title: '21duck团队出品',
@@ -22,7 +24,7 @@ const items: BannerItem[] = [{
     img: 'https://ionicframework.com/blog/wp-content/uploads/2019/02/react-beta.png',
     title: '前端 react+redux+react-router '
 }
-, {
+    , {
     img: 'https://joshuaavalon.io/static/b9ed8524d4fc3d0e0879cbd4d21419ea/94286/cover.png',
     title: '整体设计 ant design'
 }];
@@ -34,7 +36,7 @@ const items2: BannerItem[] = [{
     img: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2239144230,720408640&fm=11&gp=0.jpg',
     title: '通信 axios 部署 nginx+uwsgi+serve'
 }
-, {
+    , {
     img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9abiAwZw9mROnPsH1aP7CskXPDLjQHpGwzYbGdIGlwBu1LN95',
     title: 'huaweicloud 云平台支持'
 }];
@@ -51,6 +53,7 @@ const renderBanner = (item: BannerItem) => (
 
 export default () => (
     <div>
+
         <div className='banner'>
             <Banner className='switch-banner' />
         </div>
@@ -60,7 +63,7 @@ export default () => (
                     autoplay
                     style={{
 
-                        
+
                         height: "222px",
                         background: "#ffffff",
                         overflow: "hidden",
@@ -95,63 +98,58 @@ export default () => (
 
 
 
-            <Divider />
             <div className="container">
-                <div className="subtitlecon">
-                    <span className="subtitle"><Icon type="message" />  闲聊栈</span>
-                    <span className="toPage">
-                        <Link to='/chat'>
-                            <Icon type="export" />
-                            更多
-                    </Link>
-                    </span>
-                </div>
 
-                <ExploreCardList name="problem" category='1' />
-                <Divider />
-                <div className="subtitlecon">
-                    <span className="subtitle"><Icon type="code" />  AK我的oj题</span>
-                    <span className="toPage">
-                        <Link to='/problems'>
-                            <Icon type="export" />
-                            更多
-                    </Link>
-                    </span>
-                </div>
-                <ExploreCardList name="problem" category='2' />
-                <Divider />
-                <div className="subtitlecon">
-                    <span className="subtitle"><Icon type="book" />  课程资源</span>
-                    <span className="toPage">
-                        <Link to='/courses'>
-                            <Icon type="export" />
-                            更多
-                    </Link>
-                    </span>
-                </div>
-                <ExploreCardList name="problem" category='3' />
-                <Divider />
-                <div className="subtitlecon">
-                    <span className="subtitle"><Icon type="laptop" />  校园周边</span>
-                    <span className="toPage">
-                        <Link to='/campus'>
-                            <Icon type="export" />
-                            更多
-                    </Link>
-                    </span>
-                </div>
-                <ExploreCardList name="problem" category='4' />
-                <Divider />
-                <div className="subtitlecon">
-                    <span className="subtitle"><Icon type="folder-open" />  资源分享</span>
-                    <span className="toPage">
-                        <Link to='/resources'>
-                            <Icon type="export" />
-                            更多
-                    </Link>
-                    </span>
-                </div>
-                <ExploreCardList name="problem" category='5' />
+                <Tabs>
+                    <TabPane
+                        tab={
+                            <Link to='/problems'>
+                                <Icon type='form' />
+                                闲聊栈
+                            </Link>
+                        }
+                    >
+                        <ExploreCardList name="problem" category='1' />
+                    </TabPane>
+                </Tabs>
+                
+                <Tabs>
+                    <TabPane
+                        tab={
+                            <Link to='/problems' className="linktitile"><Icon type="code" />  AK我的oj题</Link>
+                        }
+                    >
+                        <ExploreCardList name="problem" category='2' />
+                    </TabPane>
+                </Tabs>
+                <Tabs>
+                    <TabPane
+                        tab={
+                            <Link to='/courses' className="linktitile"><Icon type="book" />  课程推荐</Link>
+                        }
+                    >
+                        <ExploreCardList name="problem" category='3' />
+                    </TabPane>
+                </Tabs>
+                <Tabs>
+                    <TabPane
+                        tab={
+                            <Link to='/campus' className="linktitile" ><Icon type="laptop" />  校园周边</Link>
+                        }
+                    >
+                        <ExploreCardList name="problem" category='4' />
+                    </TabPane>
+                </Tabs>
+                <Tabs>
+                    <TabPane
+                        tab={
+                            <Link to='/resources' className="linktitile"><Icon type="folder-open" />  资源分享</Link>
+                        }
+                    >
+                        <ExploreCardList name="problem" category='5' />
+                    </TabPane>
+                </Tabs>
+                
 
             </div>
 

@@ -55,7 +55,7 @@ export default (props: UserTemplateProps ) => {
             className='post-list'
             itemLayout='vertical'
             dataSource={posts}
-            grid={{gutter:16,column:4}}
+            
             renderItem={(post) => (
                 <li>
                     <ExploreCard

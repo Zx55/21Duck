@@ -12,14 +12,16 @@
 }
 .subtitle{
   
-    font-size: 40px;
+    font-size: 14px;
+    color:#333;
+    line-height: 24px;
 }
 .toPage{
     padding-right: 10px;
     padding-top:25px;
     float:right;
     font-size: 20px;
-    color:#0099ff;
+    color:default;
 }
 .subtitlecon{
     margin: 0px 0 10px 0;
@@ -28,18 +30,22 @@
 .bar-padding{
 padding:6px 0px 0 6px;
 }
+.sidecar2{
+    border-radius: 0.8ch;
+}
 
 .sidecar2 .slick-slide {
     position: absolute;
     text-align: center;
     height: 50vh;
     overflow: hidden;
+    border-radius: 0.8ch;
     
 }
 
 .sidecar2 .slick-slide img {
     position: absolute;
-
+    padding-top:-20px;
     width: auto;
     height: 100%;
  
@@ -57,3 +63,6 @@ padding:6px 0px 0 6px;
     width: 100%;
 }
 
+.linktitile{
+       
+}
