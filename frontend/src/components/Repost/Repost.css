@@ -8,6 +8,17 @@
     cursor: default;
 }
 
+.repost-content ul{
+    list-style: outside;
+}
+
+.repost-content img{
+    width:auto;
+    height:auto;
+    max-width:90%;
+    max-height:90%;
+}
+
 .ant-comment-content-detail {
     padding-top: 4px;
 }

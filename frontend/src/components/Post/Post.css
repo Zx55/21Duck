@@ -28,6 +28,13 @@
     list-style: outside;
 }
 
+.post-content img{
+    width:auto;
+    height:auto;
+    max-width:90%;
+    max-height:90%;
+}
+
 .post-footer {
     padding-left: 45px;
 }
