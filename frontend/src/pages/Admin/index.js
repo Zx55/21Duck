@@ -3,7 +3,7 @@ import './Admin.css';
 import { Menu, Icon, Table, Badge } from 'antd';
 import { Input, Button, Popconfirm, Form } from 'antd';
 import api from '../../api';
-import {UserTable,ChatTable, ProblemTable, CourseTable, CampusTable} from './tables'
+import {UserTable,ChatTable, ProblemTable, CourseTable, CampusTable, ResourcesTable} from './tables'
 
 
 export default()=>{
@@ -24,6 +24,8 @@ export default()=>{
         return (<CourseTable myCategory_id='3'></CourseTable>)
       }else if(myKey === "campus"){
         return (<CampusTable myCategory_id='4'></CampusTable>)
+      }else if(myKey === "resources"){
+        return (<ResourcesTable myCategory_id='5'></ResourcesTable>)
       }
 
     }
@@ -58,7 +60,7 @@ export default()=>{
                     <Menu.Item key="courses">课程资源</Menu.Item>
                     <Menu.Item key="campus">校园周边</Menu.Item>
                     </SubMenu>
-                    <Menu.Item>
+                    <Menu.Item key='resources'>
                         <Icon type="folder-open" />
                         资源管理
                     </Menu.Item>

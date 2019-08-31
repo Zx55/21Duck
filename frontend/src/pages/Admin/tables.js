@@ -577,4 +577,112 @@ const CampusTable =({myCategory_id}) => {
     );
   }
 
-export {UserTable,ChatTable, ProblemTable, CourseTable, CampusTable}
+  const ResourcesTable =({myCategory_id}) => {
+  
+    const columns = [
+      {
+        title: '帖子号',
+        align: 'center',
+        width: 100,
+        dataIndex: 'posting_id',
+      },
+      {
+        title: '发帖人',
+        align: 'center',
+        width: 100,
+        dataIndex: 'user_nickname',
+      },
+      {
+          title: '发帖账号',
+          align: 'center',
+          width: 100,
+          dataIndex: 'posting_user',
+      },
+      {
+        title: '发帖日期',
+        align: 'center',
+        dataIndex: 'formated_posting_time',
+        width: 150,
+      },
+      {
+        title: '简介',
+        align: 'center',
+        dataIndex: 'theme',
+        width: 150,
+      },
+      {
+        title: '操作',
+        align: 'center',
+        dataIndex: 'operation',
+        width: 100,
+        render: (text, record) =>
+          (
+            <Popconfirm title="确认删除?" onConfirm={() => handleDelete(record.posting_id)}>
+              <a>删除</a>
+            </Popconfirm>
+          )
+        
+      }
+    ];
+  
+      const [postNum, setPostNum] = useState([]);
+  
+      const [current, setCurrent] = useState(1);
+  
+      const[dataSource,setDataSource] = useState([]);
+  
+      const getPosts = (page,category) => {
+
+        const params = {
+            user_id: '123456',
+            page: page,
+            category_id: category,
+        };
+
+        api.post.list(params).then((response) => {
+            console.log(response.data);
+            setDataSource(response.data['postings']);
+            setPostNum(response.data['posting_num'])
+        }).catch(err => console.log(err));
+    };
+  
+      useEffect(() => {
+          getPosts('0',myCategory_id);
+      }, []);
+  
+  
+    const handlePageChange = (page) => {
+      setCurrent(page);
+      getPosts((page - 1).toString(),'1');
+  };
+    
+    const handleDelete = (key) => {
+      setDataSource(dataSource.filter(item => item.posting_id !== key));
+      api.post.remove(key).then((response) => {console.log(response)}).catch(err => console.log(err));
+  
+    };
+    
+  
+  
+    return (
+      <div>
+        <Table
+          dataSource={dataSource}
+          columns={columns}
+          scroll={{ x: 600, y: 500 }}
+          pagination={{
+              current: current,
+              defaultPageSize: 15,
+              size: 'small',
+              total: postNum,
+              hideOnSinglePage: true,
+              showQuickJumper: true,
+              onChange: (page) => handlePageChange(page),
+              position: 'bottom'
+          }}
+        />
+      </div>
+    );
+  }
+
+export {UserTable,ChatTable, ProblemTable, CourseTable, CampusTable, ResourcesTable}
