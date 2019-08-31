@@ -43,7 +43,7 @@ export default withRouter((props: PostCreaterProps) => {
             showErr('标题不能为空');
         } else if (content === '') {
             showErr('内容不能为空');
-        } else if (content.length > 1000) {
+        } else if (content.length > 4000) {
             showErr('发布内容太长');
         } else {
             setLoading(true);
