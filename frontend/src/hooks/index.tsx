@@ -243,7 +243,7 @@ const useUserSide = (num: number): [
 ] => {
     const [sideItems, setSideItems] =
         useState(newArrayWithItems<CardItem>(num, new CardItem()));
-    const [userInfo, setUserInfo] = useState<IResponseUser>()
+    const [userInfo, setUserInfo] = useState(new IResponseUser());
     const [loading, setLoading] = useState(false);
 
     const getSide = (userId: string): void => {
@@ -290,7 +290,7 @@ const useUserSide = (num: number): [
                     value:
                         <div
                             dangerouslySetInnerHTML={{
-                                __html: marked(data.profile == undefined ? '暂无' : data.profile)
+                                __html: marked(data.profile == '' ? '暂无' : data.profile)
                             }}
                         />
                 }]
