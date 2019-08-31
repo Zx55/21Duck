@@ -1,6 +1,7 @@
 .banner {
     width: 70%;
     float: left;
+    padding:6px 6px 0 0 ;
 }
 .cardgroup{
     width: 24%;
@@ -22,4 +23,45 @@
 .subtitlecon{
     margin: 0px 0 10px 0;
     
+}
+.bar-padding{
+padding:6px 0px 0 6px;
+}
+.sideexplore{
+float:center;
+position: absolute  
+}
+.ant-carousel .slick-slide {
+    text-align: center;
+    height: 30vh;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.ant-carousel .slick-slide img {
+    position: absolute;
+    top: -20vh;
+    width: 100%;
+    height: auto;
+}
+
+.ant-carousel .slick-slide:hover {
+    cursor: pointer;
+}
+
+.ant-carousel .slick-slide h3 {
+    position: absolute;
+    color: #fff;
+    padding-top: 10vh;
+    font-size: 28px;
+    width: 100%;
+}
+
+.ant-carousel .slick-slide span {
+    position: absolute;
+    left: 0;
+    color: #fff;
+    padding-top: 16vh;
+    font-size: 18px;
+    width: 100%;
 }
