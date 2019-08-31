@@ -28,11 +28,18 @@
     list-style: outside;
 }
 
-.post-content img{
+.post-content img {
+    animation-name: zoom;
+	animation-duration: 0.6s;
     width:auto;
     height:auto;
     max-width:90%;
     max-height:90%;
+}
+
+@keyframes zoom {
+    from {transform: scale(0.1)}
+    to {transform: scale(1)}
 }
 
 .post-footer {
