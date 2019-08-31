@@ -33,7 +33,7 @@ export default () => {
 
         if (info.file.status === 'done') {
             // Get this url from response in real world.
-            getBase64(info.file.originFileObj, (imageUrl: any) => {
+            getBase64(info.file.originFileObj as Blob, (imageUrl: any) => {
                 setImageUrl(imageUrl);
                 setLoading(false);
             });
