@@ -28,6 +28,7 @@ export default withRouter((props: MainFrameProps) => {
     const [visible, setVisible] = useState(false);
     const [redirect, setRedirect] = useState(false);
     const [replyRepostId, setId] = useState(-1);
+    const [uploadVisible,setUploadVisible] = useState(false);
 
     return (
         <div className='detail-template-main-frame'>
@@ -56,6 +57,8 @@ export default withRouter((props: MainFrameProps) => {
                 title={false}
                 visible={visible}
                 setVisible={setVisible}
+                uploadVisible={uploadVisible}
+                setUploadVisible={setUploadVisible}
                 repostId={replyRepostId}
                 postId={props.post.posting_id}
             />

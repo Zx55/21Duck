@@ -23,6 +23,8 @@ export interface MainFrameProps {
 export default (props: MainFrameProps) => {
     const [visible, setVisible] = useState(false);
     const [redirect, setRedirect] = useState(false);
+    const [replyRepostId, setId] = useState(-1);
+    const [uploadVisible,setUploadVisible] = useState(false);
 
     return (
         <div className='list-template-main-frame'>
@@ -40,6 +42,8 @@ export default (props: MainFrameProps) => {
                 title={true}
                 visible={visible}
                 setVisible={setVisible}
+                uploadVisible={uploadVisible}
+                setUploadVisible={setUploadVisible}
                 categoryId={Number.parseInt(props.category)}
             />
             {redirect && <Redirect to='/login' />}

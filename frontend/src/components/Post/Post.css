@@ -56,6 +56,11 @@
     padding-right: 5px;
 };
 
+.react-download-container{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
 .like-button {
     margin-right: 8px;
 }
@@ -99,7 +104,16 @@
     margin-right: 3px;
 }
 
+.report-button{
+    margin-right: 8px;
+}
+
 .report-button:hover {
+    cursor: pointer;
+    color: #0099FF;
+}
+
+.download-button:hover{
     cursor: pointer;
     color: #0099FF;
 }

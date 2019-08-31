@@ -39,6 +39,9 @@ export default () => (
                 <PostDetail category='4'/>}
             />
             <Route exact path='/resources' component={Resources} />
+            <Route exact path='/resources/:postId' render={() =>
+                <PostDetail category='5' />}
+            />
             <Route exact path='/login' component={Login} />
             <Route exact path='/register' component={Register} />
             <Route exact path='/user' component={User} />

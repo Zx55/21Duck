@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { withRouter, Link, RouteComponentProps } from 'react-router-dom'
 import marked from 'marked';
 import cx from 'classnames';
@@ -23,6 +23,9 @@ export interface PostProps extends RouteComponentProps {
 };
 
 export default withRouter((props: PostProps) => {
+
+    console.log(props.post);
+
     marked.setOptions({
         highlight: function(code) {
             return require('highlight.js').highlightAuto(code).value;

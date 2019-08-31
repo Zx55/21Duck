@@ -24,8 +24,21 @@
     padding-bottom: 5px;
 }
 
+.upload{
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    margin: 0px 10px 15px 10px;
+}
+
+.upload-word{
+    padding-bottom: 5px;
+}
+
 .editor{
     padding-bottom: 5px;
+    margin: 0px 10px 0px 10px
 }
 
 .editor-square{

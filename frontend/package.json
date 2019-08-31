@@ -27,6 +27,7 @@
     "redux-saga": "^1.0.5"
   },
   "devDependencies": {
+    "@axetroy/react-download": "^1.1.1",
     "@types/classnames": "^2.2.9",
     "@types/jest": "24.0.17",
     "@types/marked": "^0.6.5",

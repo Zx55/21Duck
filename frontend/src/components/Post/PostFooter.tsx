@@ -14,6 +14,9 @@ import { match } from 'react-router-dom';
 import * as H from 'history';
 import { IPost } from '../../types';
 
+import Download from '../Download';
+import axios from 'axios';
+
 
 export interface PostFooterProps {
     post: IPost;
@@ -100,6 +103,26 @@ export default (props: PostFooterProps) => {
                     text='举报'
                     onClick={onReportClick}
                 />
+                {props.post.category_id===5 &&
+                    <MiniButton
+                        name='download'
+                        icon='download'
+                        text='下载'
+                        onClick={() => {
+                            axios.get("http://114.115.204.217:8000/api/resource?posting_id="+props.post.posting_id).then((response)=>{
+                                console.log('dw:',response.data.url);
+                                const aLink=document.createElement('a');//创建a链接
+                                aLink.style.display='none';
+                                aLink.href=response.data.url;
+                                aLink.download='download';
+                                document.body.appendChild(aLink);
+                                aLink.click();
+                                document.body.removeChild(aLink);//点击完成后记得删除创建的链接 
+                                
+                            })
+                        }}
+                    />
+                }
             </span>
             {props.detail ? null :
                 <span className='read-more-bar'>

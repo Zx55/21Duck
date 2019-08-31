@@ -28,6 +28,7 @@ export default (props: NavigatorProps) => {
     useEffect(() => {
         const regex = '/([\\w]+)(/.+)?';
         const key = (props.history.location.pathname.match(regex) as RegExpMatchArray)[1];
+        console.log('key:',key);
         if (key !== 'notify') {
             setKey(key);
         }
@@ -60,7 +61,7 @@ export default (props: NavigatorProps) => {
             <Item key='campus'>
                 <Link to='/campus'>校园周边</Link>
             </Item>
-            <Item key='resourses'>
+            <Item key='resources'>
                 <Link to='/resources'>资源分享</Link>
             </Item>
             {user.identity === 0 ? (
