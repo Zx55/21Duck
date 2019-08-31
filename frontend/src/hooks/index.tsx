@@ -153,22 +153,26 @@ const useCategorySide = (num: number): [
 };
 
 const useDetailPost = (sideNum: number): [
-    IPost, boolean, boolean, Array<CardItem>, boolean,
-    (postId: string, category: string) => void
+    IPost, boolean, boolean, Array<CardItem>, boolean, boolean,
+    (postId: string, category: string, userId: string) => void
 ] => {
     const [post, setPost] = useState(new IPost());
     const [postLoading, setPostLoading] = useState(true);
     const [notFound, setNotFound] = useState(false);
+    const [thumb,setThumb] = useState(false);
 
     const [sideItems, setSideItems] =
         useState(newArrayWithItems<CardItem>(sideNum, new CardItem()));
     const [sideLoading, setSideLoading] = useState(true);
 
-    const getPost = (postId: string, category: string): void => {
+    const getPost = (postId: string, category: string, userId: string): void => {
         setPostLoading(true);
         setSideLoading(true);
 
-        api.post.retreive(postId, { category_id: category}).then((response) => {
+        api.post.retreive(postId, { 
+            user_id: userId,
+            category_id: category}
+        ).then((response) => {
             const data: IResponseDetailPost | INotFound | boolean = response.data;
             console.log(data);
 
@@ -180,6 +184,9 @@ const useDetailPost = (sideNum: number): [
 
                 setPost(responseDetailPost.posting);
                 setPostLoading(false);
+                setThumb(responseDetailPost.thumb);
+
+                //console.log(thumb);
 
                 api.category.retreive(category).then((response) => {
                     const categoryData: ICategory = response.data;
@@ -233,7 +240,7 @@ const useDetailPost = (sideNum: number): [
     };
 
     return [
-        post, postLoading, notFound, sideItems, sideLoading, getPost
+        post, postLoading, notFound, sideItems, sideLoading, thumb, getPost
     ];
 };
 

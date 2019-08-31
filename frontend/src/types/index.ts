@@ -116,7 +116,7 @@ export interface INotFound {
 };
 
 export class IUser {
-    public userId: string = '';
+    public userId: string = '0';
     public nickName: string = '';
     public userHead: string = '';
     public identity: number = 0;
@@ -129,7 +129,7 @@ export class IUser {
         if (userId) {
             this.userId = userId;
         } else {
-            this.userId = '';
+            this.userId = '0';
         }
         if (nickName) {
             this.nickName = nickName;

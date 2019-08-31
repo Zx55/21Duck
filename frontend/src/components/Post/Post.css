@@ -24,6 +24,10 @@
     padding-left: 48px;
 }
 
+.post-content ul{
+    list-style: outside;
+}
+
 .post-footer {
     padding-left: 45px;
 }

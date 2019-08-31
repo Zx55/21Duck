@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Carousel } from 'antd';
 
@@ -32,15 +32,19 @@ export default (props: PageListTemplateProps) => {
     const user = useUser();
     const [posts, postNum, thumbs, postsLoading, getPosts] = usePosts(15);
     const [side, sideLoading, getSide] = useCategorySide(3);
+    let judge = 0;
 
     useEffect(() => {
+        console.log('user',user);
+        if(user.identity == 0 || user.identity == 3) judge = 1;
         getPosts({
             page: '0',
             category_id: props.category,
-            user_id: '123456',
+            user_id: judge == 1 ? '0': user.userId,
         });
         getSide(props.category);
     }, []);
+
 
     const renderBanner = (item: BannerItem) => (
         <div onClick={() => console.log(item.title)}>
@@ -66,7 +70,7 @@ export default (props: PageListTemplateProps) => {
                     (page: string) => getPosts({
                         page: page,
                         category_id: props.category,
-                        user_id: '123456',
+                        user_id: judge == 1 ? '0': user.userId,
                     })
                 }
                 postsLoading={postsLoading}

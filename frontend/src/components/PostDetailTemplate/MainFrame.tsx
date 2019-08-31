@@ -21,6 +21,7 @@ export interface MainFrameProps extends RouteComponentProps {
     sideItems: Array<CardItem>;
     getReposts: (page: string) => void;
     thumbs: Array<boolean>;
+    thumb: boolean;
 };
 
 export default withRouter((props: MainFrameProps) => {
@@ -35,7 +36,7 @@ export default withRouter((props: MainFrameProps) => {
                     post={props.post}
                     loading={props.postLoading}
                     detail={true}
-                    thumb={false}
+                    thumb={props.thumb}
                 />
             </div>
             <div className='detail-repost-wrapper'>
