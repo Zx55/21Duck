@@ -167,3 +167,4 @@ const UserProfile = (props: UserProfileProps) => {
 }
 
 export default Form.create({ name: 'user-data' })(UserProfile);
+
