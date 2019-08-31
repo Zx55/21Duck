@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+
+import { message } from 'antd';
 
 import { useUser } from '../../hooks';
 import { agreeAsync } from '../../actions';
-import SuccessInfo from './SuccessInfo';
 import LoginForm from '../../components/LoginForm';
 import Agreement from '../../components/Agreement';
 
@@ -17,17 +18,6 @@ export default withRouter((props: LoginProps) => {
     const user = useUser();
     const dispatch = useDispatch();
     const [visible, setVisible] = useState(false);
-
-    const userLoginSuccess = () => {
-        const clock = setTimeout(() => props.history.push('/explore'), 3000);
-        return (
-            <SuccessInfo
-                user={user}
-                prefix='欢迎回来'
-                clock={clock}
-            />
-        );
-    };
 
     const onOkClick = () => {
         setVisible(false);
@@ -43,12 +33,17 @@ export default withRouter((props: LoginProps) => {
         } else {
             setVisible(false);
         }
+
+        if (user.identity === 1 || user.identity === 2) {
+            setTimeout(() => props.history.push('/explore'), 300);
+            message.config({ top: 75 });
+            message.info('登录成功！返回首页');
+        }
     }, [user.identity]);
 
     return (
         <div className='login-root'>
-            {(user.identity === 1 || user.identity === 2) && userLoginSuccess()}
-            {(user.identity === 0 || user.identity === 3) && <LoginForm />}
+            <LoginForm />
             <Agreement
                 visible={visible}
                 onOkClick={onOkClick}

@@ -56,17 +56,18 @@ export interface IRequestUser {
 }
 
 // 接受后端相应的接口
-export interface IResponseUser{
-    age: number;
-    blocktime: number;
-    head: string;
-    identify: number;
-    nickname: string;
-    profile: string;
-    register: number;
-    school: string;
-    scores: number;
-    user_id: string;
+export class IResponseUser{
+    age: number = 0;
+    blocktime: number = 0;
+    head: string = '';
+    identify: number = 0;
+    nickname: string = '';
+    profile: string = '';
+    register: number = 0;
+    school: string = '';
+    scores: number = 0;
+    user_id: string = '';
+    cover: string = '';
 };
 
 export interface IResponsePost {

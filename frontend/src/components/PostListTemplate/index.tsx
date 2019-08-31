@@ -35,7 +35,6 @@ export default (props: PageListTemplateProps) => {
     let judge = 0;
 
     useEffect(() => {
-        console.log('user',user);
         if(user.identity == 0 || user.identity == 3) judge = 1;
         getPosts({
             page: '0',

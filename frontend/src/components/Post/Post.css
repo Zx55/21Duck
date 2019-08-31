@@ -8,6 +8,11 @@
     cursor: default;
 }
 
+.list-post-title:hover {
+    cursor: pointer;
+    color: #0099FF;
+}
+
 .user-nickname {
     font-size: 12px;
     color: rgba(0.6, 0.6, 0.6, 0.5);
@@ -26,6 +31,20 @@
 
 .post-content ul{
     list-style: outside;
+}
+
+.post-content img {
+    animation-name: zoom;
+	animation-duration: 0.6s;
+    width:auto;
+    height:auto;
+    max-width:90%;
+    max-height:90%;
+}
+
+@keyframes zoom {
+    from {transform: scale(0.1)}
+    to {transform: scale(1)}
 }
 
 .post-footer {

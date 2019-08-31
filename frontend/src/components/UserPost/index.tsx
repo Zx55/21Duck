@@ -1,23 +1,28 @@
 import React from 'react';
 import moment from 'moment';
 import cx from 'classnames';
+import {withRouter, RouteComponentProps} from 'react-router-dom'
 
-import { Card, Skeleton, Tooltip } from 'antd';
+import { Card, Skeleton, Tooltip, message } from 'antd';
 
 import { IPost } from '../../types';
 
 
 import './UserPost.css';
 import { Link } from 'react-router-dom';
+import MiniButton from '../Post/MiniButton';
+import api from '../../api';
 
 
-export interface PostProps {
+export interface PostProps extends RouteComponentProps {
     post: IPost;
     loading: boolean;
     detail: boolean;
+    getPost: (page: string)=>void;
+    page: string;
 };
 
-export default (props: PostProps) => {
+export default withRouter((props: PostProps) => {
     const getCategory = (categoryId: number) => {
         console.log(categoryId);
         switch (categoryId) {
@@ -57,8 +62,27 @@ export default (props: PostProps) => {
                                 'YYYY-MM-DD HH:mm:ss').fromNow()}
                         </span>
                     </Tooltip>
+                    <Tooltip className='post-delete' title='删除'>
+                        <span style={{marginLeft: 15}}>
+                            <MiniButton
+                                name='delete'
+                                icon='delete'
+                                text=''
+                                onClick={
+                                    ()=>{
+                                        api.post.remove(props.post.posting_id.toString()).then((response) => {
+                                            console.log('page:',props.page)
+                                            message.success('删除成功!');
+                                            //const url = props.match.url;
+                                            props.getPost(props.page)
+                                        }).catch(err => console.log(err));
+                                    }
+                                }
+                            />
+                        </span>
+                    </Tooltip>
                 </span>
             </Skeleton>
         </Card>
     );
-};
+});

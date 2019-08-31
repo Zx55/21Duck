@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
 import CopyToClipboard from "react-copy-to-clipboard";
 
 import { message } from 'antd';
@@ -7,31 +6,31 @@ import { message } from 'antd';
 import MiniButton from './MiniButton';
 import host from '../../api/host';
 
-import { RouteComponentProps } from 'react-router-dom';
+
 import api from '../../api';
 import { useUser } from '../../hooks';
+
+import { match } from 'react-router-dom';
+import * as H from 'history';
 import { IPost } from '../../types';
 
 
-export interface PostFooterProps extends RouteComponentProps {
+export interface PostFooterProps {
     post: IPost;
     detail: boolean;
     thumb: boolean;
+    history: H.History;
+    match: match;
 };
 
-export default withRouter((props: PostFooterProps) => {
+export default (props: PostFooterProps) => {
     const [liked, setLiked] = useState(props.thumb);
     const [likeNum, setLikeNum] = useState(props.post.posting_thumb_num);
     const user = useUser();
 
-    console.log("post thumb:",props.thumb);
-
-    console.log('b4:',likeNum,liked);
-
     useEffect(()=>{
         setLiked(props.thumb);
     },[props.thumb])
-    
 
     const onLikeClick = () => {
         console.log('in:',liked,likeNum);
@@ -53,7 +52,7 @@ export default withRouter((props: PostFooterProps) => {
             setLiked(!liked);
         }
         console.log('out:',liked,likeNum);
-    
+
     };
 
     const onShareClick = () => {
@@ -115,4 +114,4 @@ export default withRouter((props: PostFooterProps) => {
             <span className='post-reply-num'>{props.post.reply_num} 条回复</span>
         </div>
     );
-});
+};

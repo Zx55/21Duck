@@ -115,7 +115,7 @@ export default (props: PostProps) => {
                                     readOnly
                                     placeholder={`引用 @${props.repost.reply_posting[0]} 的回复: ${props.repost.reply_posting[1]}`}
                                 />}
-                            <div
+                            <div className='repost-content'
                                 dangerouslySetInnerHTML={{
                                     __html: marked(props.repost.reposting_content)
                                 }}

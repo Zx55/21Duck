@@ -35,6 +35,8 @@ export default (props: PostListProps) => {
                         post={post}
                         loading={props.loading}
                         detail={false}
+                        getPost={props.getPosts}
+                        page={(current-1).toString()}
                     />
                 </li>
             )}
