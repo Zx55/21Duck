@@ -6,6 +6,7 @@ import { getBase64 } from '../../utils';
 import { UploadChangeParam } from 'antd/lib/upload';
 
 
+
 export default () => {
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState('');

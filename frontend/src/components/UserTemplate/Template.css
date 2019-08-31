@@ -77,6 +77,13 @@
     text-align: center;
 }
 
+.user-avatar-wrapper img{
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
 .user-data-button {
     width: 50%;
 }
