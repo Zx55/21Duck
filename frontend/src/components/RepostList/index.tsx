@@ -17,6 +17,7 @@ export interface RepostListProps {
     getReposts: (page: string) => void;
     setReplyRepostId: (id: number) => void;
     setVisible: (visible: boolean) => void;
+    setRedirect: (redirect: boolean) => void;
 };
 
 export default (props: RepostListProps) => {
@@ -48,6 +49,7 @@ export default (props: RepostListProps) => {
                         loading={props.loading}
                         setReplyRepostId={props.setReplyRepostId}
                         setVisible={props.setVisible}
+                        setRedirect={props.setRedirect}
                         thumb={props.thumbs[index]}
                     />
                 </li>

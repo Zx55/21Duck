@@ -289,7 +289,7 @@ const useUserSide = (num: number): [
                     value:
                         <div
                             dangerouslySetInnerHTML={{
-                                __html: marked(data.profile == '' ? '暂无' : data.profile)
+                                __html: marked(data.profile == undefined ? '暂无' : data.profile)
                             }}
                         />
                 }]

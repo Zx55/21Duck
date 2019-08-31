@@ -47,6 +47,7 @@ export default withRouter((props: MainFrameProps) => {
                     getReposts={props.getReposts}
                     setReplyRepostId={setId}
                     setVisible={setVisible}
+                    setRedirect={setRedirect}
                     thumbs={props.thumbs}
                 />
             </div>

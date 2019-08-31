@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import marked from 'marked';
 
-import { Card, Skeleton, Comment, Tooltip, Icon, Avatar, Mentions } from 'antd';
+import { Card, Skeleton, Comment, Tooltip, Icon, Avatar, Mentions, message } from 'antd';
 
 import { getRelativeTime } from '../../utils';
 
@@ -19,6 +19,7 @@ export interface PostProps {
     thumb: boolean;
     setReplyRepostId: (id: number) => void;
     setVisible: (visible: boolean) => void;
+    setRedirect: (redirect: boolean) => void;
 };
 
 export default (props: PostProps) => {
@@ -55,9 +56,29 @@ export default (props: PostProps) => {
         console.log('report');
     };
 
+    const warning = (msg: string) => {
+        message.config({ top: 75 });
+        message.warning(msg);
+    };
+
+    const error = (msg: string) => {
+        message.config({ top: 75 });
+        message.error(msg);
+    };
+
     const replyToRepost = () => {
-        props.setReplyRepostId(props.repost.reposting_id);
-        props.setVisible(true);
+        if (user.identity === 0) {
+            warning('游客请先登录或注册');
+            props.setRedirect(true);
+        } else if (user.identity === 3) {
+            warning('请先阅读新手上路');
+            props.setRedirect(true);
+        } else if (user.blocktime !== 0) {
+            error('你已被禁言！请联系管理员');
+        } else {
+            props.setReplyRepostId(props.repost.reposting_id);
+            props.setVisible(true);
+        }
     };
 
     const actions = [

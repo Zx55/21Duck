@@ -14,15 +14,25 @@ export interface DetailSideButtonsProps {
 export default (props: DetailSideButtonsProps) => {
     const user = useUser();
 
-    const warning = () => {
+    const warning = (msg: string) => {
         message.config({ top: 75 });
-        message.warning("游客请先登录或注册");
+        message.warning(msg);
+    };
+
+    const error = (msg: string) => {
+        message.config({ top: 75 });
+        message.error(msg);
     };
 
     const onAddClick = () => {
         if (user.identity === 0) {
-            warning();
+            warning('游客请先登录或注册');
             props.setRedirect(true);
+        } else if (user.identity === 3) {
+            warning('请先阅读新手上路');
+            props.setRedirect(true);
+        } else if (user.blocktime !== 0) {
+            error('你已被禁言！请联系管理员');
         } else {
             props.setVisible(true);
         }
