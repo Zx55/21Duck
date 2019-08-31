@@ -37,7 +37,7 @@ class PostingViewSet(CacheResponseMixin, ModelViewSet):
                 else:
                     self.queryset = Posting.objects.all().order_by("-reply_time")[page * EACH_PAGE : (page + 1) * EACH_PAGE]
                 if user == '0':
-                    is_thumb_list = [False for _ in range(EACH_PAGE)]
+                    is_thumb_list = [False for _ in range(number)]
                 else:
                     is_thumb_list = []
                     for posting in self.queryset:
@@ -99,12 +99,13 @@ class RepostingViewSet(CacheResponseMixin, ModelViewSet):
                     return Response(False)
                 else:
                     number = Posting.objects.get(posting_id=posting).reply_num
+                    page = int(page)
+                    posting = int(posting)
                     if user == '0':
-                        is_thumb_list = [False for _ in range(EACH_PAGE)]
+                        is_thumb_list = [False for _ in range(number)]
+                        self.queryset = Reposting.objects.filter(main_posting=posting).order_by("-reposting_time")[page * EACH_PAGE : (page + 1) * EACH_PAGE]
                     else:
                         is_thumb_list = []
-                        page = int(page)
-                        posting = int(posting)
                         self.queryset = Reposting.objects.filter(main_posting=posting).order_by("-reposting_time")[page * EACH_PAGE : (page + 1) * EACH_PAGE]
                         for reposting in self.queryset:
                             if ThumbReposting.objects.filter(reposting_id=reposting.reposting_id, user_id=user):
