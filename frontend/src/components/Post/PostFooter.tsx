@@ -27,36 +27,30 @@ export default withRouter((props: PostFooterProps) => {
     console.log("post thumb:",props.thumb);
 
     console.log('b4:',likeNum,liked);
+
+    useEffect(()=>{
+        setLiked(props.thumb);
+    },[props.thumb])
     
 
     const onLikeClick = () => {
         console.log('in:',liked,likeNum);
         if (liked) {
-            const newPost = {
-                posting_user: user.userId,
-                theme: props.post.theme,
-                posting_content: props.post.posting_content,
-                category_id: props.post.category_id,
-                posting_thumb_num: likeNum-1
+            const newThumb = {
+                posting_id: props.post.posting_id.toString(),
+                user_id: user.userId
             };
-            api.post.update(props.post.posting_id.toString(),newPost).then((response)=>{
-                console.log(response);
-                setLikeNum(likeNum - 1);
-                setLiked(!liked);
-            });
+            api.post.thumbDown(newThumb);
+            setLikeNum(likeNum - 1);
+            setLiked(!liked);
         } else {
-            const newPost = {
-                posting_user: user.userId,
-                theme: props.post.theme,
-                posting_content: props.post.posting_content,
-                category_id: props.post.category_id,
-                posting_thumb_num: likeNum+1
+            const newThumb = {
+                posting_id: props.post.posting_id.toString(),
+                user_id: user.userId
             };
-            api.post.update(props.post.posting_id.toString(),newPost).then((response)=>{
-                console.log(response);
-                setLikeNum(likeNum + 1);
-                setLiked(!liked);
-            });
+            api.post.thumbUp(newThumb);
+            setLikeNum(likeNum + 1);
+            setLiked(!liked);
         }
         console.log('out:',liked,likeNum);
     

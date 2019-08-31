@@ -22,6 +22,19 @@ export interface PostProps {
 };
 
 export default (props: PostProps) => {
+    marked.setOptions({
+        highlight: function(code) {
+          return require('highlight.js').highlightAuto(code).value;
+        },
+        pedantic: false,
+        gfm: true,
+        tables: true,
+        breaks: false,
+        sanitize: false,
+        smartLists: true,
+        smartypants: false,
+        xhtml: false
+      });
     return (
         <Card
             className={cx('post', props.detail && 'post-detail')}
@@ -44,7 +57,7 @@ export default (props: PostProps) => {
                         {getRelativeTime(props.post.formated_posting_time)}
                     </span>
                 </Tooltip>
-                <div
+                <div 
                     className='post-content'
                     dangerouslySetInnerHTML={{
                         __html: marked(props.post.posting_content)

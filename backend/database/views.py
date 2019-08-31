@@ -1,3 +1,4 @@
+import os
 from urllib.request import urlopen
 
 from django.http import JsonResponse, HttpResponse
@@ -35,7 +36,7 @@ class PostingViewSet(CacheResponseMixin, ModelViewSet):
                     self.queryset = Posting.objects.filter(category_id=category).order_by("-reply_time")[page * EACH_PAGE : (page + 1) * EACH_PAGE]
                 else:
                     self.queryset = Posting.objects.all().order_by("-reply_time")[page * EACH_PAGE : (page + 1) * EACH_PAGE]
-                if user == '-1':
+                if user == '0':
                     is_thumb_list = [False for _ in range(EACH_PAGE)]
                 else:
                     is_thumb_list = []
@@ -47,7 +48,7 @@ class PostingViewSet(CacheResponseMixin, ModelViewSet):
             elif page and user:
                 page = int(page)
                 number = Posting.objects.filter(posting_user=user).count()
-                self.queryset = Posting.objects.filter(posting_user=user).order_by("reply_time")[page * EACH_PAGE : (page + 1) * EACH_PAGE]
+                self.queryset = Posting.objects.filter(posting_user=user).order_by("-reply_time")[page * EACH_PAGE : (page + 1) * EACH_PAGE]
             else:
                 return Response(False)
 
@@ -98,7 +99,7 @@ class RepostingViewSet(CacheResponseMixin, ModelViewSet):
                     return Response(False)
                 else:
                     number = Posting.objects.get(posting_id=posting).reply_num
-                    if user == '-1':
+                    if user == '0':
                         is_thumb_list = [False for _ in range(EACH_PAGE)]
                     else:
                         is_thumb_list = []

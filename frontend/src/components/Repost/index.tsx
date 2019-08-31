@@ -10,6 +10,7 @@ import { IRepost } from '../../types';
 import './Repost.css';
 
 import api from '../../api';
+import { useUser } from '../../hooks';
 
 
 export interface PostProps {
@@ -23,6 +24,7 @@ export interface PostProps {
 export default (props: PostProps) => {
     const [liked, setLiked] = useState(props.thumb);
     const [likeNum, setLikeNum] = useState(props.repost.reposting_thumb_num);
+    const user = useUser();
 
     useEffect(()=>{
         setLikeNum(props.repost.reposting_thumb_num);
@@ -31,31 +33,21 @@ export default (props: PostProps) => {
 
     const like = () => {
         if (liked) {
-            const newRepost = {
-                reposting_user: props.repost.reposting_user,
-                main_posting: props.repost.main_posting,
-                reposting_content: props.repost.reposting_content,
-                reposting_thumb_num: likeNum-1,
-                reply_id : props.repost.reply_posting === null ? -1:Number.parseInt(props.repost.reply_posting[2])
+            const newThumb = {
+                reposting_id: props.repost.reposting_id.toString(),
+                user_id: user.userId
             };
-            api.repost.update(props.repost.reposting_id.toString(),newRepost).then((response)=>{
-                console.log(response);
-                setLikeNum(likeNum - 1);
-                setLiked(!liked);
-            });
+            api.repost.thumbDown(newThumb);
+            setLikeNum(likeNum - 1);
+            setLiked(!liked);
         } else {
-            const newRepost = {
-                reposting_user: props.repost.reposting_user,
-                main_posting: props.repost.main_posting,
-                reposting_content: props.repost.reposting_content,
-                reposting_thumb_num: likeNum+1,
-                reply_id : props.repost.reply_posting === null ? -1:Number.parseInt(props.repost.reply_posting[2])
+            const newThumb = {
+                reposting_id: props.repost.reposting_id.toString(),
+                user_id: user.userId
             };
-            api.repost.update(props.repost.reposting_id.toString(),newRepost).then((response)=>{
-                console.log(response);
-                setLikeNum(likeNum + 1);
-                setLiked(!liked);
-            });
+            api.repost.thumbUp(newThumb);
+            setLikeNum(likeNum + 1);
+            setLiked(!liked);
         }
     };
 
