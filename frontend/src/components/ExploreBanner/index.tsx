@@ -11,14 +11,13 @@ import './Banner.css';
 const Element = BannerAnim.Element;
 
 const textData = {
-    content: 'Taiwan called motorcycle, motor bike [1] or a motorcycle,' +
-        ' the motorcycle referred to in the mainland, ' +
-        'Hong Kong and Southeast Asia known as motorcycles [2], ' +
-        'is a driven by the engine, ' +
-        'operated by a hand or two directions three-wheeled vehicles, is a means of transport. ' +
-        'In some military or police applications, will add a side compartment and a secondary wheel, ' +
-        'become a special three-wheeled motorcycle, mobility Zheyi common plug-in auxiliary wheels.',
-    title: 'Motorcycle',
+    content: '21 Duck来源于 1721谐音“一起二鸭”, 是1721大班的代称,' +
+        ' 而21Duck论坛是一个最初面向1721大班学生所搭建的网络平台, ' +
+        '在平台上大家可以进行相关活动宣传,兴趣探讨以及一起刷题 ' +
+        '这个平台灵感来自另一个知识讨论论坛-知乎, ' +
+        '希望通过这个平台, 能够让1721的同学更好的于平台交流学习 ' +
+        '114514 1919810',
+    title: '21 Duck故事',
 };
 
 let dataArray = [{
