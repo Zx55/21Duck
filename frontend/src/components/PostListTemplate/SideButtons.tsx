@@ -24,6 +24,7 @@ export default (props: ListSideButtonsProps) => {
     };
 
     const onAddClick = () => {
+        console.log(user);
         if (user.identity === 0) {
             warning('游客请先登录或注册');
             props.setRedirect(true);

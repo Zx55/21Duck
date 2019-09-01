@@ -10,6 +10,7 @@ import Agreement from '../../components/Agreement';
 import { RouteComponentProps } from 'react-router-dom';
 
 import './Register.css';
+import { message } from 'antd';
 
 
 export default withRouter((props: RouteComponentProps) => {
@@ -31,11 +32,17 @@ export default withRouter((props: RouteComponentProps) => {
         } else {
             setVisible(false);
         }
+
+        if (user.identity === 1 || user.identity === 2) {
+            message.config({ top: 75 });
+            message.success('欢迎使用21Duck论坛');
+            setTimeout(() => props.history.push('/explore'), 300);
+        }
     }, [user.identity])
 
     return (
         <div className='register-root'>
-            {(user.identity === 1 || user.identity === 2) && <Redirect to='explore' />}
+
             <RegisterForm />
             <Agreement
                 visible={visible}

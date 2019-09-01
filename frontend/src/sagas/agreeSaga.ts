@@ -21,7 +21,6 @@ function* agreeAsync(action: IAction) {
                 type: ActionTypes.AGREE,
                 payload: {}
             });
-            history.push('/explore');
         } else {
             message.config({ top: 75 });
             message.error('网络异常！请稍后重试');
