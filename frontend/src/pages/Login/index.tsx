@@ -39,6 +39,8 @@ export default withRouter((props: LoginProps) => {
             message.config({ top: 75 });
             message.info('登录成功！返回首页');
         }
+
+
     }, [user.identity]);
 
     return (

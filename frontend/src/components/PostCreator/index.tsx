@@ -190,7 +190,7 @@ export default withRouter((props: PostCreaterProps) => {
                     <Editor content={content} setContent={setContent} />
                 </div>
             </Modal>
-            <Modal
+            {props.categoryId===5 && (<Modal
                 title={props.header}
                 width="90%"
                 centered
@@ -201,7 +201,7 @@ export default withRouter((props: PostCreaterProps) => {
                 cancelText="取消"
                 confirmLoading={loading}
             >
-                {props.categoryId===5 && (<div className='upload'>
+                <div className='upload'>
                     <div className='upload-word'>上传资源</div>
                     <Input
                         style={{marginBottom:5}}
@@ -218,8 +218,8 @@ export default withRouter((props: PostCreaterProps) => {
                         <Icon type="upload" /> Click to Upload
                         </Button>
                     </Upload>
-                </div>)}
-            </Modal>
+                </div>
+            </Modal>)}
         </div>
     );
 });
