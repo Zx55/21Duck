@@ -57,44 +57,7 @@ export default () => (
         <div className='banner'>
             <Banner className='switch-banner' />
         </div>
-        <div className='side-banner'>
-            <div className='bar-padding'>
-                <Carousel className="sidecar2"
-                    autoplay
-                    style={{
-
-
-                        height: "222px",
-                        background: "#ffffff",
-                        overflow: "hidden",
-
-                    }}
-                    effect="fade"
-                >
-                    {items.map((item: BannerItem) => renderBanner(item))}
-
-                </Carousel>
-            </div>
-            <div className='bar-padding'>
-                <Carousel className="sidecar2"
-                    autoplay
-                    style={{
-
-                        textAlign: "center",
-                        height: "222px",
-                        background: "#ffffff",
-                        overflow: "hidden",
-
-                    }}
-                    effect="fade"
-                >
-                    {items2.map((item: BannerItem) => renderBanner(item))}
-
-                </Carousel>
-            </div>
-        </div>
-
-        <div>
+       
 
 
 
@@ -154,5 +117,5 @@ export default () => (
             </div>
 
         </div>
-    </div >
+   
 );
