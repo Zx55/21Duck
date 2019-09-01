@@ -138,7 +138,17 @@ export default (props: PostFooterProps) => {
                         name='read-more'
                         icon='select'
                         text='更多'
-                        onClick={() => props.history.push(`${props.match.path}/${props.post.posting_id}`)}
+                        onClick={() => {
+                            if(user.identity === 0){
+                                message.error('游客请先登录')
+                            }else if(user.identity === 3){
+                                message.error('请先阅读新手上路')
+                            }else if(user.blocktime !== 0){
+                                message.error('你已被禁言!请联系管理员')
+                            }else{
+                                props.history.push(`${props.match.path}/${props.post.posting_id}`)
+                            }
+                        }}
                     />
                 </span>
             }

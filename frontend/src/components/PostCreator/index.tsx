@@ -131,7 +131,7 @@ export default withRouter((props: PostCreaterProps) => {
     const beforeUpload = (file: { name: string; type: string; size: number; }) => {
         const index = file.name.lastIndexOf('.');
         setFileType(file.name.slice(index+1));
-        console.log(fileType);
+        console.log('ft:',fileType);
         return true;
     }
 
