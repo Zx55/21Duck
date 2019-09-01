@@ -3,7 +3,10 @@
     
 }
 
-.post-list {
+.post-list1 {
     border-radius: 0.8ch;
+    width:100%;
+}
+.ant-tabs.ant-tabs-top.ant-tabs-line {
     width:100%;
 }

@@ -52,7 +52,7 @@ export default (props: UserTemplateProps ) => {
 
     return (
         <List
-            className='post-list'
+            className='post-list1'
             itemLayout='vertical'
             dataSource={posts}
             
