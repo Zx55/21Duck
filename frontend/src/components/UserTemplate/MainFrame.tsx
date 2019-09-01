@@ -45,7 +45,7 @@ export default (props: MainFrameProps) => {
     useEffect(() => {
         console.log('repost');
         const items: Array<Item> = reposts.map((repost) => ({
-            id: repost.main_posting.toString(),
+            id: repost.reposting_id.toString(),
             category: repost.category_id,
             formatedTime: repost.formated_reposting_time,
             content: repost.reposting_content,

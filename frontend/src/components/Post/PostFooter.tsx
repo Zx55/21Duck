@@ -118,11 +118,11 @@ export default (props: PostFooterProps) => {
                                 message.error('你已被禁言!请联系管理员')
                             }else{
                                 axios.get("http://114.115.204.217:8000/api/resource?posting_id="+props.post.posting_id).then((response)=>{
-                                console.log('dw:',response.data.url);
+                                console.log('dw:',response.data);
                                 const aLink=document.createElement('a');//创建a链接
-                                aLink.style.display='none';
+                                //aLink.style.display='none';
                                 aLink.href=response.data.url;
-                                aLink.download='download';
+                                aLink.download=response.data.title;
                                 document.body.appendChild(aLink);
                                 aLink.click();
                                 document.body.removeChild(aLink);//点击完成后记得删除创建的链接 
