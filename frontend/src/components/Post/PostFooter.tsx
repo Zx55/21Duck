@@ -16,6 +16,7 @@ import { IPost } from '../../types';
 
 
 import axios from 'axios';
+import { resetWarningCache } from 'prop-types';
 
 
 export interface PostFooterProps {
@@ -109,7 +110,14 @@ export default (props: PostFooterProps) => {
                         icon='download'
                         text='下载'
                         onClick={() => {
-                            axios.get("http://114.115.204.217:8000/api/resource?posting_id="+props.post.posting_id).then((response)=>{
+                            if(user.identity === 0){
+                                message.error('游客请先登录')
+                            }else if(user.identity === 3){
+                                message.error('请先阅读新手上路')
+                            }else if(user.blocktime !== 0){
+                                message.error('你已被禁言!请联系管理员')
+                            }else{
+                                axios.get("http://114.115.204.217:8000/api/resource?posting_id="+props.post.posting_id).then((response)=>{
                                 console.log('dw:',response.data.url);
                                 const aLink=document.createElement('a');//创建a链接
                                 aLink.style.display='none';
@@ -118,8 +126,8 @@ export default (props: PostFooterProps) => {
                                 document.body.appendChild(aLink);
                                 aLink.click();
                                 document.body.removeChild(aLink);//点击完成后记得删除创建的链接 
-                                
                             })
+                            }
                         }}
                     />
                 }
