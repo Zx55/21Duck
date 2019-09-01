@@ -103,7 +103,7 @@ export default () => (
                 <Tabs>
                     <TabPane
                         tab={
-                            <Link to='/problems'>
+                            <Link to='/chat'>
                                 <Icon type='form' />
                                 闲聊栈
                             </Link>
