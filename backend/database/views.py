@@ -241,11 +241,10 @@ def head(request):
         user = request.POST.get('user_id')
         t = request.POST.get('file_type')
         FILE_PATH = '/usr/local/source_server/head/' + user + '_' + str(datetime.now()) + '.' + t
-        url = 'http://114.115.204.217:7500/head/' + user + '.' + t
+        url = 'http://114.115.204.217:7500/head/' + user + '_' + str(datetime.now()) + '.' + t
         with open(FILE_PATH, 'wb') as f:
             f.write(file.read())
-        User.objects.filter(user_id=user).update(head=url)
-        return JsonResponse({'upload':'success'})
+        return JsonResponse({'upload':url})
 
 
 @csrf_exempt
