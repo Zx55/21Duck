@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.viewsets import ModelViewSet
 from rest_framework_extensions.cache.mixins import CacheResponseMixin
 from rest_framework.response import Response
+from datetime import datetime
 
 from .serializers import *
 from .myfuncs import *
@@ -239,7 +240,7 @@ def head(request):
         file = request.FILES.get('avatar')
         user = request.POST.get('user_id')
         t = request.POST.get('file_type')
-        FILE_PATH = '/usr/local/source_server/head/' + user + '.' + t
+        FILE_PATH = '/usr/local/source_server/head/' + user + '_' + str(datetime.now()) + '.' + t
         url = 'http://114.115.204.217:7500/head/' + user + '.' + t
         with open(FILE_PATH, 'wb') as f:
             f.write(file.read())
