@@ -1,8 +1,6 @@
-# 21Duck
+# 21Duck **!!deprecated!!**
 
-**!!This repo is deprecated!!**
-
-**See [new repo](https://github.com/21Duck/21Duck)**
+2019 BUAA SoftwareEnginering Practice
 
 A web forum based on typescript, react, antd and django-rest-framework
 
