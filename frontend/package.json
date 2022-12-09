@@ -11,7 +11,7 @@
     "highlight.js": "^9.15.10",
     "marked": "^0.7.0",
     "moment": "^2.24.0",
-    "qs": "^6.8.0",
+    "qs": "^6.8.3",
     "rc-banner-anim": "^2.3.0",
     "rc-queue-anim": "^1.7.0",
     "rc-tween-one": "^2.6.0",
